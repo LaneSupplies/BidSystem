@@ -1,0 +1,33 @@
+﻿@{
+    var scopeTypeId = (string)ViewData["ScopeTypeId"];
+    var name = (string)ViewData["Name"];
+    var code = (string) ViewData["Code"];
+
+}
+
+@using (Html.BeginForm("ScopeType", "Admin", FormMethod.Post, new {@id = "ScopeTypeForm", enctype = "multipart/form-data"}))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <input type="hidden" id="Scope_Type_ID" name="Scope_Type_ID" value="@scopeTypeId" />
+        <div class="divLabel">
+            <label>ID</label>
+            @scopeTypeId
+        </div>
+
+        <div class="divLabel">
+            <label>Name</label>
+            @Html.TextBox("Name", name)
+        </div>
+
+        <div class="divLabel">
+            <label>Code</label>
+            @Html.TextBox("Code", code)
+        </div>
+
+        <p>
+            <input type="submit" value="Submit" />
+        </p>
+    </fieldset>
+}

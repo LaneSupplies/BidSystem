@@ -1,0 +1,33 @@
+﻿
+@{
+    var bidTypeId = (string) ViewData["BidTypeId"];
+    var name = (string) ViewData["Name"];
+    var code = (string)ViewData["Code"];
+}
+
+@using (Html.BeginForm("BidTypes", "Admin", FormMethod.Post, new { @id="BidTypeForm", enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <input type="hidden" id="Bid_Type_ID" name="Bid_Type_ID" value="@bidTypeId" />
+        <div class="divLabel">
+            <label>ID</label>
+            @bidTypeId
+        </div>
+
+        <div class="divLabel">
+            <label>Name</label>
+            @Html.TextBox("Name", name)
+        </div>
+        
+        <div class="divLabel">
+            <label>Code</label>
+            @Html.TextBox("Code", code)
+        </div>
+
+        <p>
+            <input type="submit" value="Submit" />
+        </p>
+    </fieldset>
+}

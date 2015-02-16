@@ -1,0 +1,27 @@
+﻿@{
+    var columnTypeId = (string)ViewData["ColumnTypeId"];
+    var name = (string)ViewData["Name"];
+
+}
+
+@using (Html.BeginForm("ColumnTypes", "Admin", FormMethod.Post, new { @id = "ColumnTypeForm", enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <input type="hidden" id="Column_Type_ID" name="Column_Type_ID" value="@columnTypeId" />
+        <div class="divLabel">
+            <label>ID</label>
+            @columnTypeId
+        </div>
+
+        <div class="divLabel">
+            <label>Name</label>
+            @Html.TextBox("Name", name)
+        </div>
+
+        <p>
+            <input type="submit" value="Submit" />
+        </p>
+    </fieldset>
+}

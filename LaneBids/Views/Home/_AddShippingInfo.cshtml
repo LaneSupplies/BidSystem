@@ -1,0 +1,80 @@
+﻿@model LaneBids.Models.ShippingInfoDetails
+
+<div class="divPartial">
+    <div class="label divLabelOnly"><label>Shipping Info:</label></div>
+    <div class="label divDropDown">
+        @Html.DropDownListFor(model => model.ShippingId, Model.ShippingList)
+        @Html.ValidationMessageFor(v => v.ShippingId, null, new { @class = "errorMessage" })
+    </div>
+    <div class="label divAddButton"><a href="#" id="AddShippingLink" class="addImage"></a></div>
+</div>
+
+<div id="divAddShipping" style="display: none" title="Add Shipping Info">
+
+    <div class="divLabel">
+        <label>Shipping Name</label>
+        @Html.TextBoxFor(m => m.ShippingName, new { @id = "ShippingName" })
+    </div>
+    <div class="divLabel">
+        <label>Address Line 1</label>
+        @Html.TextBoxFor(m => m.AddressLine1, new { @id = "ShippingAddress1" })
+    </div>
+    <div class="divLabel">
+        <label>Address Line 2</label>
+        @Html.TextBoxFor(m => m.AddressLine2, new { @id = "ShippingAddress2" })
+    </div>
+    <div class="divLabel">
+        <label>City</label>
+        @Html.TextBoxFor(m => m.City, new { @id = "ShippingCity" })
+    </div>
+    <div class="divLabel">
+        <label>State</label>
+        @Html.DropDownListFor(m => m.State, Model.StateList, new { @id = "ShippingState" })
+    </div>
+    <div class="divLabel">
+        <label>Zip</label>
+        @Html.TextBoxFor(m => m.Zip, new { @id = "ShippingZip" })
+    </div>
+    <input type="button" id="SubmitShipping" name="SubmitShipping" value="Submit" />
+
+</div>
+
+<script>
+    $(document).ready(function() {
+        var newOption = "<option value='0' selected > -- Select Shipping --</option>";
+        $("#ShippingId").append(newOption);
+    });
+
+    $("#AddShippingLink").on("click", function () {
+        $("#divAddShipping").dialog({
+            width: 500,
+            height: 430
+        });
+    });
+
+    $("#SubmitShipping").on("click", function () {
+        $.ajax({
+            url: "/Home/AddShipping",
+            type: "POST",
+            dataType: "text",
+            data: {
+                ShippingName: $("#ShippingName").val(),
+                AddressLine1: $("#ShippingAddress1").val(),
+                AddressLine2: $("#ShippingAddress2").val(),
+                City: $("#ShippingCity").val(),
+                State: $("#ShippingState").val(),
+                Zip: $("#ShippingZip").val()
+            }
+        }).success(function (response) {
+            //alert("Added SalesPerson: " + response);
+            var value = response.split('|');
+            var newOption = "<option value='" + value[0] +"' selected >" + value[1] + "</option>";
+            $("#ShippingId").append(newOption);
+            $("#divAddShipping").dialog("close");
+        }).error(function (xhr, textStatus, errorThrown) {
+            alert("Failure to add customer (Response: " + xhr.responseText + " | Status: " + textStatus + " | ErrorMessage: " + errorThrown + ")");
+            $("#divAddShipping").dialog("close");
+        });
+
+    });
+</script>

@@ -1,0 +1,27 @@
+﻿@{
+    var drainageId = (string)ViewData["DrainageId"];
+    var name = (string)ViewData["Name"];
+
+}
+
+@using (Html.BeginForm("Drainage", "Admin", FormMethod.Post, new { @id = "DrainageForm", enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <input type="hidden" id="Drainage_Type_ID" name="Drainage_Type_ID" value="@drainageId" />
+        <div class="divLabel">
+            <label>ID</label>
+            @drainageId
+        </div>
+
+        <div class="divLabel">
+            <label>Name</label>
+            @Html.TextBox("Name", name)
+        </div>
+
+        <p>
+            <input type="submit" value="Submit" />
+        </p>
+    </fieldset>
+}

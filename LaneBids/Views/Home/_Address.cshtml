@@ -1,0 +1,22 @@
+﻿@model LaneBids.Models.AddressModel
+<input type="hidden" id="AddressId" name="AddressId" value="@Model.AddressId" />
+<div class="divLabel">
+    <label>Address Line 1</label>
+    @Html.TextBoxFor(m => m.AddressLine1)
+</div>
+<div class="divLabel">
+    <label>Address Line 2</label>
+    @Html.TextBoxFor(m => m.AddressLine2)
+</div>
+<div class="divLabel">
+    <label>City</label>
+    @Html.TextBoxFor(m => m.City)
+</div>
+<div class="divLabel">
+    <label>State</label>
+    @Html.DropDownListFor(m => m.State, Model.StateList)
+</div>
+<div class="divLabel">
+    <label>Zip</label>
+    @Html.TextBoxFor(m => m.Zip)
+</div>

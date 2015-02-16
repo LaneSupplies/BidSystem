@@ -1,0 +1,5 @@
+﻿@model LaneBids.Models.PhoneContacts
+<div class="divLabel">
+    @Html.DropDownListFor(m => m.ContactId, Model.ContactTypeList)
+    @Html.TextBoxFor(m => m.PhoneNumber)
+</div>

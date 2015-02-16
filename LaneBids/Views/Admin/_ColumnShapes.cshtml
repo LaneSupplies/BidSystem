@@ -1,0 +1,27 @@
+﻿@{
+    var columnShapesId = (string)ViewData["ColumnShapesId"];
+    var name = (string)ViewData["Name"];
+
+}
+
+@using (Html.BeginForm("ColumnShapes", "Admin", FormMethod.Post, new { @id = "ColumnShapesForm", enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <input type="hidden" id="Column_Shape_ID" name="Column_Shape_ID" value="@columnShapesId" />
+        <div class="divLabel">
+            <label>ID</label>
+            @columnShapesId
+        </div>
+
+        <div class="divLabel">
+            <label>Name</label>
+            @Html.TextBox("Name", name)
+        </div>
+
+        <p>
+            <input type="submit" value="Submit" />
+        </p>
+    </fieldset>
+}

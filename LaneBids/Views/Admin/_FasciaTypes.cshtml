@@ -1,0 +1,27 @@
+﻿@{
+    var fasciaTypesId = (string)ViewData["FasciaTypesId"];
+    var name = (string)ViewData["Name"];
+
+}
+
+@using (Html.BeginForm("FasciaTypes", "Admin", FormMethod.Post, new { @id = "FasciaTypesForm", enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <input type="hidden" id="Fascia_Type_ID" name="Fascia_Type_ID" value="@fasciaTypesId" />
+        <div class="divLabel">
+            <label>ID</label>
+            @fasciaTypesId
+        </div>
+
+        <div class="divLabel">
+            <label>Name</label>
+            @Html.TextBox("Name", name)
+        </div>
+
+        <p>
+            <input type="submit" value="Submit" />
+        </p>
+    </fieldset>
+}

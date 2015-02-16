@@ -1,0 +1,126 @@
+@model LaneBids.Models.BidDetails
+
+@{
+    
+}
+
+<h2>Bid - @Model.BidFunctionType</h2>
+
+@using (Html.BeginForm("Bid", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @id="bidForm", @name="bidForm" }))
+{
+    @*@Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)*@
+
+<fieldset>
+    @Html.HiddenFor(m => m.BidFunctionType)
+    @Html.HiddenFor(m => m.BidId)
+    @Html.HiddenFor(m => m.CanopyId)
+    <div class="divLabelLong">
+        <label>Revision Number:</label>
+        @Html.TextBoxFor(model => model.RevisionNumber, new { @class= "numberOnly" })
+    </div>
+
+    <div class="divLabel">
+        <label>Bid Type:</label>
+        @Html.DropDownListFor(d => d.BidTypeId, Model.BidTypeList)
+    </div>
+
+    <div class="divLabel">
+        <label>Bid Status:</label>
+        @Html.DropDownListFor(model => model.BidStatusId, Model.BidStatusList)
+    </div>
+
+    <div class="divLabel">
+        <label>Job Type:</label>
+        @Html.DropDownListFor(model => model.JobTypeId, Model.JobTypeList)
+    </div>
+
+    <div class="divLabel">
+        <label>Scope Types:</label>
+        @Html.DropDownListFor(model => model.ScopeTypeId, Model.ScopeTypeList)
+    </div>
+
+    <div class="divLabel">
+        <label>Bio Types:</label>
+        @Html.DropDownListFor(model => model.BioTypeId, Model.BioTypeList)
+    </div>
+@*
+     <div>
+         <div class="label divLabelOnly"><label>Customer:</label></div>
+         <div class="label divDropDown">@Html.DropDownListFor(model => model.CustomerId, Model.CustomerList)</div>
+         <div class="label divAddButton"><a href="#" id="AddCustomerLink" class="addImage"></a></div>
+     </div>
+     <br/><br/>
+    <div id="addCustomer" title="Add Customer" style="display: none">
+         @Html.Partial("_AddCustomer", Model.AddCustomerInfo, new ViewDataDictionary(ViewData)
+             {
+                 { "TargetId", "CustomerId" }
+             })
+     </div>*@
+
+    <div class="divLabel">
+        <label>Sales Person:</label>
+        @Html.DropDownListFor(model => model.SalesPersonId, Model.SalesPeople)
+    </div>
+
+    <div class="divLabel">
+        <label>Sites:</label>
+        @Html.DropDownListFor(model => model.SiteId, Model.SiteList)
+    </div>
+
+    <div class="divLabelLong">
+        <label>Shipping Address:</label>
+        @Html.DropDownListFor(model => model.ShippingId, Model.AddressesList)
+    </div>
+
+    <div class="divLabel">
+        <label>Bid Notes:</label>
+        @Html.TextAreaFor(model => model.BidNotesText)
+    </div>
+
+    <div class="divLabel">
+        <label>Create By:</label>
+        @if (String.IsNullOrEmpty(Model.CreatedBy))
+            {
+            @User.Identity.Name
+            } else {
+            @Model.CreatedBy
+            }
+    </div>
+
+    <div class="divLabel">
+        <label>Last Modfied By:</label>
+        @if (String.IsNullOrEmpty(Model.CreatedBy))
+            {
+            @User.Identity.Name
+            } else {
+            @Model.ModifiedBy
+            }
+    </div>
+
+    <br />
+    <p>
+        <input type="submit" value="Create"  />
+    </p>
+</fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    $("#AddCustomerLink").click(function () {
+        $("#addCustomer").dialog({
+            width: 550,
+            dialogClass: "ui-dialog-osx",
+            modal: true
+            });
+        return false;
+    });
+
+    function SubmitBid() {
+        alert("Submit Bid");
+        $("#bidForm").submit();
+    }
+</script>

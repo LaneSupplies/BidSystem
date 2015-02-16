@@ -1,0 +1,80 @@
+﻿@model LaneBids.Models.SiteDetails
+
+<div class="divPartial">
+    <div class="label divLabelOnly"><label>Site:</label></div>
+    <div class="label divDropDown">
+        @Html.DropDownListFor(model => model.SiteId, Model.SiteList)
+        @Html.ValidationMessageFor(v => v.SiteId, null, new { @class = "errorMessage" })
+    </div>
+    <div class="label divAddButton"><a href="#" id="AddSiteLink" class="addImage"></a></div>
+</div>
+
+<div id="divAddSite" style="display: none" title="Add Site">
+
+    <div class="divLabel">
+        <label>Site Name</label>
+        @Html.TextBoxFor(m => m.SiteName, new { @id = "SiteName" })
+    </div>
+    <div class="divLabel">
+        <label>Address Line 1</label>
+        @Html.TextBoxFor(m => m.Address.AddressLine1, new { @id = "SiteAddress1" })
+    </div>
+    <div class="divLabel">
+        <label>Address Line 2</label>
+        @Html.TextBoxFor(m => m.Address.AddressLine2, new { @id = "SiteAddress2" })
+    </div>
+    <div class="divLabel">
+        <label>City</label>
+        @Html.TextBoxFor(m => m.Address.City, new { @id = "SiteCity" })
+    </div>
+    <div class="divLabel">
+        <label>State</label>
+        @Html.DropDownListFor(m => m.Address.State, Model.Address.StateList, new { @id = "SiteState" })
+    </div>
+    <div class="divLabel">
+        <label>Zip</label>
+        @Html.TextBoxFor(m => m.Address.Zip, new { @id = "SiteZip" })
+    </div>
+    <input type="button" id="SubmitSite" name="SubmitSite" value="Submit" />
+
+</div>
+
+<script>
+    $(document).ready(function() {
+        var newOption = "<option value='0' selected > -- Select Site --</option>";
+        $("#SiteId").append(newOption);
+    });
+
+    $("#AddSiteLink").on("click", function () {
+        $("#divAddSite").dialog({
+            width: 500,
+            height: 430
+        });
+    });
+
+    $("#SubmitSite").on("click", function () {
+        $.ajax({
+            url: "/Home/AddSite",
+            type: "POST",
+            dataType: "text",
+            data: {
+                SiteName: $("#SiteName").val(),
+                AddressLine1: $("#SiteAddress1").val(),
+                AddressLine2: $("#SiteAddress2").val(),
+                City: $("#SiteCity").val(),
+                State: $("#SiteState").val(),
+                Zip: $("#SiteZip").val()
+            }
+        }).success(function (response) {
+            //alert("Added SalesPerson: " + response);
+            var value = response.split('|');
+            var newOption = "<option value='" + value[0] +"' selected >" + value[1] + "</option>";
+            $("#SiteId").append(newOption);
+            $("#divAddSite").dialog("close");
+        }).error(function (xhr, textStatus, errorThrown) {
+            alert("Failure to add customer (Response: " + xhr.responseText + " | Status: " + textStatus + " | ErrorMessage: " + errorThrown + ")");
+            $("#divAddSite").dialog("close");
+        });
+
+    });
+</script>

@@ -1,0 +1,91 @@
+﻿@model LaneBids.Models.SalesPersonDetails
+
+<div class="divPartial">
+    <div class="label divLabelOnly"><label>Sales Person:</label></div>
+    <div class="label divDropDown">
+        @Html.DropDownListFor(model => model.SalesPersonId, Model.SalesPersonList)
+        @Html.ValidationMessageFor(v => v.SalesPersonId, null, new { @class = "errorMessage" })
+    </div>
+    <div class="label divAddButton"><a href="#" id="AddSalesPersonLink" class="addImage"></a></div>
+</div>
+
+<div id="divAddSalesPerson" style="display: none" title="Add Sales Person">
+
+    <div class="divLabel">
+        <label>First Name</label>
+        @Html.TextBoxFor(m => m.FirstName, new { @id="SalesFirstName"})
+    </div>
+    <div class="divLabel">
+        <label>Last Name</label>
+        @Html.TextBoxFor(m => m.LastName, new { @id = "SalesLastName" })
+    </div>
+    <div class="divLabel">
+        <label>Address Line 1</label>
+        @Html.TextBoxFor(m => m.Address.AddressLine1, new { @id = "SalesAddress1" })
+    </div>
+    <div class="divLabel">
+        <label>Address Line 2</label>
+        @Html.TextBoxFor(m => m.Address.AddressLine2, new { @id = "SalesAddress2" })
+    </div>
+    <div class="divLabel">
+        <label>City</label>
+        @Html.TextBoxFor(m => m.Address.City, new { @id = "SalesCity" })
+    </div>
+    <div class="divLabel">
+        <label>State</label>
+        @Html.DropDownListFor(m => m.Address.State, Model.Address.StateList, new { @id = "SalesState" })
+    </div>
+    <div class="divLabel">
+        <label>Zip</label>
+        @Html.TextBoxFor(m => m.Address.Zip, new { @id = "SalesZip" })
+    </div>
+    <div class="divLabel">
+        @Html.DropDownListFor(m => m.PhoneContacts.ContactId, Model.PhoneContacts.ContactTypeList, new { @id = "SalesContactType" })
+        @Html.TextBoxFor(m => m.PhoneContacts.PhoneNumber, new { @id = "SalesContact" })
+    </div>
+    <input type="button" id="SubmitSalesPerson" name="SubmitSalesPerson" value="Submit" />
+
+</div>
+
+<script>
+    $(document).ready(function() {
+        var newOption = "<option value='0' selected > -- Select Sales Person --</option>";
+        $("#SalesPersonId").append(newOption);
+    });
+
+    $("#AddSalesPersonLink").on("click", function () {
+        $("#divAddSalesPerson").dialog({
+            width: 500,
+            height: 550
+        });
+    });
+
+    $("#SubmitSalesPerson").on("click", function () {
+        $.ajax({
+            url: "/Home/SalesPersonAdd",
+            type: "POST",
+            dataType: "text",
+            data: {
+                FirstName: $("#SalesFirstName").val(),
+                LastName: $("#SalesLastName").val(),
+                AddressLine1: $("#SalesAddress1").val(),
+                AddressLine2: $("#SalesAddress2").val(),
+                City: $("#SalesCity").val(),
+                State: $("#SalesState").val(),
+                Zip: $("#SalesZip").val(),
+                PhoneNumber: $("#SalesContact").val(),
+                ContactId: $("#SalesContactType").val()
+            }
+        }).success(function (response) {
+            //alert("Added SalesPerson: " + response);
+            var value = response.split('|');
+            var newOption = "<option value='" + value[0] +"' selected >" + value[1] + "</option>";
+            $("#SalesPersonId").append(newOption);
+            $("#divAddSalesPerson").dialog("close");
+        }).error(function (xhr, textStatus, errorThrown) {
+            alert("Failure to add customer (Response: " + xhr.responseText + " | Status: " + textStatus + " | ErrorMessage: " + errorThrown + ")");
+            $("#divAddSalesPerson").dialog("close");
+        });
+
+    });
+</script>

@@ -1,0 +1,267 @@
+﻿@model LaneBids.Models.CanopyDetails
+@{
+    ViewBag.Title = "Canopy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Canopy</h2>
+@using (Html.BeginForm("Canopy", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        @Html.HiddenFor(m => m.BidFunctionType)
+        @Html.HiddenFor(m => m.BidId)
+        <div id="Quantity" class="divLabel">
+            <label>Quantity:</label>
+            <label>@Html.TextBoxFor(t => t.Quantity, new { @class = "numberOnly" })</label>
+        </div>
+        <br />
+        <div id="Size">
+            <div class="divLabel">
+                <label>Size Height:</label>
+                <div class="measurementLabel">
+                    @Html.TextBoxFor(t => t.SizeHeightFeet) Feet
+                    @Html.TextBoxFor(t => t.SizeHeightInches) Inches
+                </div>
+            </div>
+            <div class="divLabel">
+                <label>Size Width:</label>
+                <div class="measurementLabel">
+                    @Html.TextBoxFor(t => t.SizeWidthFeet) Feet
+                    @Html.TextBoxFor(t => t.SizeWidthInches) Inches
+                </div>
+            </div>
+        </div>
+        <div id="Clearance" class="divLabel">
+            <label>Clearance:</label>
+            <div class="measurementLabel">@Html.TextBoxFor(t => t.ClearanceFeet) Feet @Html.TextBoxFor(t => t.ClearanceInches) Inches</div>
+        </div>
+        <div id="ColumnInfo">
+            <h3>Column Info</h3>
+            <div class="divLabel">
+                <label>Quantity:</label>
+                <label>@Html.TextBoxFor(t => t.ColumnQuantity, new { @class = "numberOnly" })</label>
+            </div>
+            <br />
+            <div class="divLabel">
+                <label>Type:</label>
+                <label>@Html.DropDownListFor(t => t.ColumnTypeId, Model.ColumnTypeList)</label>
+            </div><br />
+            <div class="divLabel">
+                <label>Size:</label>
+                <div class="measurementLabel">@Html.TextBoxFor(t => t.ColumnSizeFeet) Feet @Html.TextBoxFor(t => t.ColumnSizeInches) Inches</div>
+            </div>
+            <div class="divLabel">
+                <label>Shape:</label>
+                <label>@Html.DropDownListFor(d => d.ColumnShapeId, Model.ColumnShapeList)</label>
+            </div><br />
+        </div>
+        <br />
+        <div id="ColumnSpacing">
+            <h3>Column Spacing</h3><br />
+
+            <div id="ColumnLengh">
+                <div class="divColumnAddButton">
+                    <a href="#" id="AddColumnLengthLink" class="addLength">Add New Length Column</a><a href="#" id="AddSameColumnLengthLink" class="addLength">Add Same Length Column</a>
+                </div>
+                <div class="measurementList">
+                    <div class="labelColumns">Column Spacing Length(s):</div>
+                    <div id="LengthColumns" class="ColumnSpacing">
+                        <div class="measurementListColumn">
+                            @Html.TextBox("CSLengthFeet1") Feet @Html.TextBox("CSLengthInches1") Inches
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div id="ColumnWidth">
+                <div class="divColumnAddButton">
+                    <a href="#" id="AddColumnWidthLink" class="addLength">Add New Width Column</a><a href="#" id="AddSameColumnWidthLink" class="addLength">Add Same Width Column</a>
+                </div>
+                <div class="measurementList">
+                    <div class="labelColumns">Column Spacing Width(s):</div>
+                    <div id="WidthColumns" class="ColumnSpacing">
+                        <div class="measurementListColumn">
+                            @Html.TextBox("CSWidthFeet1") Feet @Html.TextBox("CSWidthInches1") Inches
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div id="ColumnNotes" class="divLabel">
+                <label>Column Spacing Notes:</label>
+                <div>@Html.TextAreaFor(t => t.ColumnSpacingNotes)</div>
+            </div>
+        </div>
+        <br />
+        <div id="Designs">
+            <h3>Design Loads</h3><br />
+            <div class="divLabel">
+                <label>Design Load Live PSF:</label>@Html.TextBoxFor(t => t.DesignLoadsLivePsf, new { @class = "numberOnly" })
+            </div>
+            <div class="divLabel">
+                <label>Design Load Wind PSF:</label>@Html.TextBoxFor(t => t.DesignLoadWindPsf, new { @class = "numberOnly" })
+            </div>
+            <div class="divLabel">
+                <label>Design Load Wind MPH:</label>@Html.TextBoxFor(t => t.DesignLoadWindMph, new { @class = "numberOnly" })
+            </div>
+            <div class="divLabel">
+                <label>Design Load Notes:</label>@Html.TextAreaFor(t => t.DesignLoadNotes)
+            </div>
+        </div> 
+        <br />
+        <div id="DeckInfo" class="divLabel">
+            <label>Deck Style:</label>
+            @Html.DropDownListFor(d => d.DeckStyleId, Model.DeckStyleList)
+        </div>
+        <br />
+        <div id="ImageFascia">
+            <h3>Fascia Info</h3>
+            <div>
+                @Html.Partial("_AddFaciaColor")
+            </div>
+            <div class="divLabel">
+                <label>Fascia Image:</label>
+                <input type="file" name="ImagePath" id="ImagePath" />
+            </div>
+            <div class="divLabel">
+                <label>Fascia Height:</label>
+                <div class="measurementLabel">
+                    @Html.TextBoxFor(t => t.FasciaHeightFeet) Feet @Html.TextBoxFor(t => t.FasciaHeightInches) Inches
+                </div>
+            </div>
+            <div class="divLabel">
+                <label>Fascia Type:</label>
+                @Html.DropDownListFor(d => d.FasciaTypeId, Model.FasciaTypeList)
+            </div>
+        </div>
+        <br />
+        <div id="Drainage" class="divLabel">
+            <label>Drainage:</label>
+            @Html.DropDownListFor(d => d.DrainageTypeId, Model.DrainageList)
+        </div>
+        <br />
+        <div id="Drawings">
+            <label style="width: 150px;">Engineered Sealed?</label>
+            <span style="width: 100px;">
+                <input type="radio" name="DrawingSealed" id="DrawingSealedNo" value="No" checked="checked" style="width: 50px" />No
+                <input type="radio" name="DrawingSealed" id="DrawingSealedYes" value="Yes" style="width: 50px" />Yes
+            </span>
+        </div>
+        <br />
+        <div id="OtherNotes" class="divLabel">
+            <label>Other Notes:</label>@Html.TextAreaFor(t => t.OtherNotes)
+        </div>
+        <br />
+        <div id="SpecificInclusions" class="divLabel">
+            <label>Specific Inclusions:</label>
+            @Html.TextAreaFor(t => t.InclusionNotes)
+        </div>
+        <br />
+        <div id="SpecificExclusions" class="divLabel">
+            <label>Specific Exclusions:</label>
+            @Html.TextAreaFor(t => t.ExclusionNotes)
+        </div>
+        <br />
+        <div id="GeneralInclusions" class="divLabel">
+            <label>General Inclusions:</label>
+            @Html.TextAreaFor(t => t.GeneralInclusionNotes)
+        </div>
+        <br />
+        <div id="GeneralExclusions" class="divLabel">
+            <label>General Exclusions:</label>
+            @Html.TextAreaFor(t => t.GeneralExclusionNotes)
+        </div>
+        <br />
+        <div id="BasePrice" class="divLabel">
+            <label>Material Cost:</label>
+            @Html.TextBoxFor(t => t.MaterialPrice, new { @class = "Currency" })<br />
+            <label>Labor:</label>
+            @Html.TextBoxFor(t => t.LaborPrice, new { @class = "Currency" })<br />
+            <label>Freight:</label>
+            @Html.TextBoxFor(t => t.FreightPrice, new { @class = "Currency" })<br />
+            <label>Tax:</label>
+            @Html.TextBoxFor(t => t.TaxPrice, new { @class = "Currency" })<br />
+            <label>Total:</label>
+            @Html.TextBoxFor(t => t.TotalPrice, new { @class = "Currency" })
+        </div>
+        <br />
+        <div id="SubmitForm" class="divLabel">
+            <input type="submit" value="Submit" />
+        </div>
+    </fieldset>
+}
+
+@section Scripts {
+    <script type="text/javascript" src="/scripts/jquery.formatCurrency-1.4.0.min.js"></script>
+    <script>
+        $(".Currency").blur(function () {
+            $(".Currency").formatCurrency();
+        });
+
+        //Add new column Length
+        $("#AddColumnLengthLink").on("click", function () {
+            var inputCount = 0;
+            $("#LengthColumns :input").each(function () {
+                inputCount++;
+            });
+
+            var nextInputCount = (inputCount / 2) + 1;
+            var addLength = "<div class='measurementListColumn'><input type='text' id='CSLengthFeet" + nextInputCount + "' />&nbsp;Feet&nbsp;" +
+                            "<input type='text' id='CSLengthInches" + nextInputCount + "' />&nbsp;Inches</div>";
+
+            $("#LengthColumns").append(addLength);
+        });
+
+        //Add same column Length
+        $("#AddSameColumnLengthLink").on("click", function () {
+            var inputCount = 0;
+            $("#LengthColumns :input").each(function () {
+                inputCount++;
+            });
+
+            var lastLengthNumber = (inputCount / 2);
+            var feet = $("#CSLengthFeet" + lastLengthNumber).val();
+            var inches = $("#CSLengthInches" + lastLengthNumber).val();
+            var nextInputCount = lastLengthNumber + 1;
+            
+            var addLength = "<div class='measurementListColumn'><input type='text' id='CSLengthFeet" + nextInputCount + "' value='" + feet + "' />&nbsp;Feet&nbsp;" +
+                            "<input type='text' id='CSLengthInches" + nextInputCount + "' value='" + inches + "' />&nbsp;Inches</div>";
+
+            $("#LengthColumns").append(addLength);
+        });
+
+        //Add new column Width
+        $("#AddColumnWidthLink").on("click", function () {
+            var inputCount = 0;
+            $("#WidthColumns :input").each(function () {
+                inputCount++;
+            });
+
+            var nextInputCount = (inputCount / 2) + 1;
+            var addWidth = "<div class='measurementListColumn'><input type='text' id='CSLengthFeet" + nextInputCount + "' />&nbsp;Feet&nbsp;" +
+                            "<input type='text' id='CSLengthInches" + nextInputCount + "' />&nbsp;Inches</div>";
+
+            $("#WidthColumns").append(addWidth);
+        });
+
+        //Add same column Width
+        $("#AddSameColumnWidthLink").on("click", function () {
+            var inputCount = 0;
+            $("#WidthColumns :input").each(function () {
+                inputCount++;
+            });
+
+            var lastLengthNumber = (inputCount / 2);
+            var feet = $("#CSLengthFeet" + lastLengthNumber).val();
+            var inches = $("#CSLengthInches" + lastLengthNumber).val();
+            var nextInputCount = lastLengthNumber + 1;
+
+            var addWidth = "<div class='measurementListColumn'><input type='text' id='CSLengthFeet" + nextInputCount + "' value='" + feet + "' />&nbsp;Feet&nbsp;" +
+                            "<input type='text' id='CSLengthInches" + nextInputCount + "' value='" + inches + "' />&nbsp;Inches</div>";
+
+            $("#WidthColumns").append(addWidth);
+        });
+    </script>
+}

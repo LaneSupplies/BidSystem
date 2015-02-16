@@ -1,0 +1,26 @@
+﻿@{
+    var bidStatusId = (string)ViewData["BidStatus"];
+    var name = (string)ViewData["Name"];
+}
+
+@using (Html.BeginForm("BidStatus", "Admin", FormMethod.Post, new { @id = "BidStatusForm", enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <input type="hidden" id="Bid_Status_ID" name="Bid_Status_ID" value="@bidStatusId" />
+        <div class="divLabel">
+            <label>ID</label>
+            @bidStatusId
+        </div>
+
+        <div class="divLabel">
+            <label>Name</label>
+            @Html.TextBox("Status", name)
+        </div>
+
+        <p>
+            <input type="submit" value="Submit" />
+        </p>
+    </fieldset>
+}

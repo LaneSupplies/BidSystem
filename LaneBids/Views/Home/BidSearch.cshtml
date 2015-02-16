@@ -1,0 +1,73 @@
+﻿@model LaneBids.Models.BidSearchModel
+@{
+    ViewBag.Title = "Search";
+    
+ 
+    ViewBag.Title = "Search";
+    //Bid Types
+    var gridSearchList = new WebGrid(Model.SearchResultsList, canPage: true, rowsPerPage: 20,
+        selectionFieldName: "selectedSearchResultsRow", ajaxUpdateContainerId: "gridSearchResultsContent");
+    gridSearchList.Pager(WebGridPagerModes.NextPrevious);
+}
+
+<h2>Search Bids</h2>
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <div class="divLabel">
+            <label>Bid ID:</label>
+            @Html.TextBoxFor(m => m.BidId, new { @class="numberOnly"})
+        </div>
+        <div class="divLabel">
+            <label>Revision Number:</label>
+            @Html.TextBoxFor(m => m.RevisionNumber, new { @class = "numberOnly" })
+        </div>
+        <div>
+            <label>Bid Status:</label>
+            @Html.DropDownListFor(m => m.BidStatusId, Model.BidStatusList)
+        </div>
+        <div class="divLabel">
+            <label>Bid Type:</label>
+            @Html.DropDownListFor(m => m.BidTypeId, Model.BidTypesList)
+        </div>
+        <div class="divLabel">
+            <label>Structure Type:</label>
+            @Html.DropDownListFor(m => m.StructureTypeId, Model.StructureTypeList)
+        </div>
+        <div class="divLabel">
+            <label>Job Type</label>
+            @Html.DropDownListFor(m => m.JobTypeId, Model.JobTypesList)
+        </div>
+        <div class="divLabel">
+            <label>Site</label>
+            @Html.DropDownListFor(m => m.SiteId, Model.SiteList)
+        </div>
+        <div class="divLabel">
+            <label>Sales Person</label>
+            @Html.DropDownListFor(m => m.SalesPersonId, Model.SalesPersonList)
+        </div>
+        <input type="submit" value="Submit"/>
+    </fieldset>
+}
+
+@if (gridSearchList.Rows != null && gridSearchList.Rows.Count > 0)
+{
+    @gridSearchList.GetHtml(tableStyle: "webGrid",
+        headerStyle: "header",
+        alternatingRowStyle: "alt",
+        selectedRowStyle: "select",
+        columns: gridSearchList.Columns(
+        gridSearchList.Column("Bid_ID", "Bid_ID"),
+        gridSearchList.Column("Structure_Type_Name", "Structure"),
+        gridSearchList.Column("Bid_Status_Name", "Bid_Status_Name"),
+        gridSearchList.Column("Job_Type_Name", "Job Name"),
+        gridSearchList.Column("Site_Name", "Site Name"),
+        gridSearchList.Column("Edit", header: null, format: @<text>@item.GetSelectLink("Edit")</text>)
+            ))
+
+    if (gridSearchList.HasSelection)
+    {
+        var viewBid = gridSearchList.SelectedRow;
+    }
+}

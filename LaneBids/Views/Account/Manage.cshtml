@@ -1,0 +1,38 @@
+﻿@model LaneBids.Models.RegisterModel
+@{
+    ViewBag.Title = "Manage Account";
+}
+
+<p class="message-success">@ViewBag.StatusMessage</p>
+
+<p>You're logged in as <strong>@Model.FirstName @Model.LastName</strong></p>
+
+@using (Html.BeginForm("Manage", "Account"))
+{
+    <input type="hidden" id="UserId" name="UserId" value="@Model.UserId" />
+    <div class="divLabel">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName)
+    </div>
+    <div class="divLabel">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName)
+    </div>
+    <div class="divLabel">
+        @Html.LabelFor(m => m.UserName)
+        @Html.TextBoxFor(m => m.UserName)
+    </div>
+    <div class="divLabel">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+    </div>
+
+    <input type="submit" value="Update User Info" />
+}
+
+@Html.Partial("_ChangePasswordPartial")
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,35 @@
+﻿@{
+    var jobTypesId = (string)ViewData["JobTypeId"];
+    var name = (string)ViewData["Name"];
+    var code = (string) ViewData["Code"];
+    
+}
+
+@using (Html.BeginForm("JobTypes", "Admin", FormMethod.Post, new {@id = "JobTypeForm", enctype = "multipart/form-data"}))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        
+
+        <div class="divLabel">
+            <label>ID</label>
+            <input type="hidden" id="Job_Type_ID" name="Job_Type_ID" value="@jobTypesId" />
+            @jobTypesId
+        </div>
+
+        <div class="divLabel">
+            <label>Name</label>
+            @Html.TextBox("Name", name)
+        </div>
+        
+        <div class="divLabel">
+            <label>Code</label>
+            @Html.TextBox("Code", code)
+        </div>
+
+        <p>
+            <input type="submit" value="Submit" />
+        </p>
+    </fieldset>
+}

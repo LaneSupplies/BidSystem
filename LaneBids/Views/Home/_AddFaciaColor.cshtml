@@ -1,0 +1,58 @@
+﻿@model LaneBids.Models.ColorModel
+
+<div class="divPartial">
+    <div class="label divLabelOnly"><label>Facia Color:</label></div>
+    <div class="label divDropDown">
+        @Html.ValidationSummary(true)
+        @Html.DropDownListFor(model => model.ColorId, Model.FasciaColorList)
+    </div>
+    <div class="label divAddButton"><a href="#" id="AddFaciaColorLink" class="addImage"></a></div>
+</div>
+
+<div id="divAddColor" style="display: none" title="Add Color">
+    <div class="divLabel">
+        <label>Color Name</label>
+        <input style="width:100px;" id="colorName" class="colorPicker evo-cp0" />
+    </div>
+
+    <div class="divLabel">
+        <label>Color</label>
+        <input style="width:100px;" id="colorText" class="colorPicker evo-cp0" />
+    </div>
+    <input type="button" id="SubmitCustomer" name="SubmitCustomer" value="Submit" />
+</div>
+
+<script>
+    $(document).ready(function() {
+        var newOption = "<option value='None' selected > -- Select Color --</option>";
+        $("#ColorId").append(newOption);
+    });
+
+    $("#AddFaciaColorLink").on("click", function () {
+        $("#divAddColor").dialog({
+            width: 500,
+            height: 650
+        });
+    });
+
+    $("#SubmitCustomer").on("click", function () {
+        $.ajax({
+            url: "/Home/ColorAdd",
+            type: "POST",
+            dataType: "text",
+            data: {
+                ColorName: $("#colorName").val(),
+                ColorText: $("#colorText").val()
+            }
+        }).success(function (response) {
+            //alert("Added Customer: " + response);
+            var value = response.split('|');
+            var newOption = "<option value='" + value[0] +"' selected >" + value[1] + "</option>";
+            $("#ColorId").append(newOption);
+            $("#divAddColor").dialog("close");
+        }).error(function (xhr, textStatus, errorThrown) {
+            alert("Failure to add color (Response: " + xhr.responseText + " | Status: " + textStatus + " | ErrorMessage: " + errorThrown + ")");
+        });
+
+    });
+</script>
