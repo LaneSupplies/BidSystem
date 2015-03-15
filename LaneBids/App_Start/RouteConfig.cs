@@ -15,6 +15,12 @@ namespace LaneBids
 
             routes.MapRoute(
                 name: "Default",
+                url: "{controller}/{action}",
+                defaults: new { controller = "Home", action = "Index" }
+            );
+
+            routes.MapRoute(
+                name: "Canopy",
                 url: "{controller}/{action}/{type}",
                 defaults: new { controller = "Home", action = "Index", type = UrlParameter.Optional }
             );

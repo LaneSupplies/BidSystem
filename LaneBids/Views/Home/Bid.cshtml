@@ -6,7 +6,7 @@
 
 <h2>Add Bid</h2>
 
-@using (Html.BeginForm("Bid", "Home"))
+@using (Html.BeginForm("Canopy", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)

@@ -97,69 +97,76 @@ namespace LaneBids.Controllers
             return RedirectToAction("Canopy", bidDetails);
         }
 
+        [HttpPost]
         public ActionResult Canopy(BidDetails bidDetails)
         {
             ViewBag.Title = "Canopy";
-            var entities = new LaneEntities();
-            var canopyInfo = new CanopyDetails();
-            canopyInfo.BidId = bidDetails.BidId;
-            
-            canopyInfo.ColorList = entities.Colors.ToList().Select(x => new SelectListItem
-                {
-                    Value = x.Color_ID.ToString(),
-                    Text = x.Name
-                }).ToList();
-            canopyInfo.ColorList.Add(new SelectListItem { Selected = true, Text = " -- Select Color -- ", Value = "0" });
+            //if (ModelState.IsValid)
+            //{
+            //    var bidServices = new BidServices();
+            //    var entities = new LaneEntities();
+            //    var newBid = new Bid();
+            //    newBid.Bid_Status_ID = bidDetails.BidStatusId;
+            //    newBid.Bid_Type_ID = bidDetails.BidTypeId;
+            //    newBid.Scope_Type_ID = bidDetails.ScopeTypeId;
+            //    newBid.Job_Type_ID = bidDetails.JobTypeId;
+            //    newBid.Structure_Type_ID = bidDetails.StructureId;
+            //    newBid.Created_By = WebSecurity.CurrentUserId;
+            //    newBid.Create_Date = DateTime.Now;
 
-            canopyInfo.ColumnShapeList = entities.Column_Shapes.ToList().Select(x => new SelectListItem
-                {
-                    Value = x.Column_Shape_ID.ToString(),
-                    Text = x.Name
-                }).ToList();
-            canopyInfo.ColumnShapeList.Add(new SelectListItem { Selected = true, Text = " -- Select -- ", Value = "0" });
-            
-            canopyInfo.FasciaTypeList = entities.Fascia_Types.ToList().Select(x => new SelectListItem
-                {
-                    Value = x.Fascia_Type_ID.ToString(),
-                    Text = x.Name
-                }).ToList();
-            canopyInfo.FasciaTypeList.Add(new SelectListItem { Selected = true, Text = " -- Select -- ", Value = "0" });
-            
-            canopyInfo.ColumnTypeList = entities.Column_Types.ToList().Select(x => new SelectListItem
-                {
-                    Value = x.Column_Type_ID.ToString(),
-                    Text = x.Name
-                }).ToList();
-            canopyInfo.ColumnTypeList.Add(new SelectListItem { Selected = true, Text = " -- Select -- ", Value = "0" });
-            
-            canopyInfo.ImageList = entities.Images.ToList().Select(x => new SelectListItem
-                {
-                    Value = x.Image_ID.ToString(),
-                    Text = x.Image_Path
-                }).ToList();
-            canopyInfo.ImageList.Add(new SelectListItem { Selected = true, Text = " -- Select -- ", Value = "0" });
-            
-            canopyInfo.DeckStyleList = entities.Deck_Styles.ToList().Select(x => new SelectListItem
-                {
-                    Value = x.Deck_Style_ID.ToString(),
-                    Text = x.Name
-                }).ToList();
-            canopyInfo.DeckStyleList.Add(new SelectListItem { Selected = true, Text = " -- Select -- ", Value = "0" });
-            
-            canopyInfo.DrainageList = entities.Drainage_Types.ToList().Select(x => new SelectListItem
-                {
-                    Value = x.Drainage_Type_ID.ToString(),
-                    Text = x.Name
-                }).ToList();
-            canopyInfo.DrainageList.Add(new SelectListItem { Selected = true, Text = " -- Select -- ", Value = "0" });
-            
-            canopyInfo.ColorList
+            //    if (bidDetails.CustomerId == "None")
+            //    {
+            //        ModelState.AddModelError("CustomerId", "Please choose a Customer");
+            //        return View("Bid", bidServices.BidDetailInfo(bidDetails.CanopyId.ToString()));
+            //    }
+            //    newBid.Customer_ID = new Guid(bidDetails.CustomerId);
 
+            //    if (bidDetails.SalesPersonId == 0)
+            //    {
+            //        ModelState.AddModelError("SalesPersonId", "Please choose a Sales Person");
+            //        return View("Bid", bidServices.BidDetailInfo(bidDetails.CanopyId.ToString()));
+            //    }
+            //    newBid.Sales_Person_ID = bidDetails.SalesPersonId;
+
+            //    if (bidDetails.ShippingId == 0)
+            //    {
+            //        ModelState.AddModelError("ShippingId", "Please choose a Shipping Address");
+            //        return View("Bid", bidServices.BidDetailInfo(bidDetails.CanopyId.ToString()));
+            //    }
+            //    newBid.Shipping_ID = bidDetails.ShippingId;
+
+            //    if (bidDetails.SiteId == 0)
+            //    {
+            //        ModelState.AddModelError("SiteId", "Please choose a Site");
+            //        return View("Bid", bidServices.BidDetailInfo(bidDetails.CanopyId.ToString()));
+            //    }
+            //    newBid.Site_ID = bidDetails.SiteId;
+
+            //    entities.Bids.Add(newBid);
+            //    //entities.SaveChanges();
+
+            //    if (!String.IsNullOrEmpty(bidDetails.BidNotesText))
+            //    {
+            //        var bidNote = new Bid_Notes();
+            //        bidNote.Notes = bidDetails.BidNotesText;
+            //        bidNote.Create_Date = DateTime.Now;
+            //        bidNote.Created_By = WebSecurity.CurrentUserId;
+            //        entities.Bid_Notes.Add(bidNote);
+            //        entities.SaveChanges();
+
+            //        newBid.Bid_Note_ID = bidNote.Bid_Note_ID;
+            //        //entities.SaveChanges();
+            //    }
+            //}
+
+            var canopyService = new CanopyServices();
+            var canopyInfo = canopyService.CanopyLoadData(bidDetails);
+            
             return View(canopyInfo);
         }
 
         [HttpPost]
-        public ActionResult Canopy(CanopyDetails canopyDetails)
+        public ActionResult InsertCanopy(CanopyDetails canopyDetails)
         {
             var entities = new LaneEntities();
 
@@ -374,6 +381,19 @@ namespace LaneBids.Controllers
             entities.SaveChanges();
 
             return Content(newShipping.Shipping_ID + "|" + newShipping.Name);
+        }
+
+        [HttpPost]
+        public ActionResult ColorAdd(ColorModel color)
+        {
+            var entities = new LaneEntities();
+            var addColor = new Color();
+            addColor.Name = color.ColorName;
+            addColor.ColorText = color.ColorText;
+            entities.Colors.Add(addColor);
+            entities.SaveChanges();
+
+            return Content(addColor.Color_ID + "|" + addColor.Name);
         }
     }
 }

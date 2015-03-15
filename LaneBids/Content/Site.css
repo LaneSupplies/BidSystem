@@ -1052,6 +1052,16 @@ a.addImage, a.addImage:visited {
     height: 15px;
     width: 15px;
     margin-top: 2px;
+    cursor: pointer;
+}
+
+addImage {
+    background: url("../Images/blueAdd.png") no-repeat;
+    display: block;
+    height: 15px;
+    width: 15px;
+    margin-top: 2px;
+    cursor: pointer;
 }
 
 /* Column Spacing */

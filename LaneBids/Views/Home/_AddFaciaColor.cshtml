@@ -6,20 +6,20 @@
         @Html.ValidationSummary(true)
         @Html.DropDownListFor(model => model.ColorId, Model.FasciaColorList)
     </div>
-    <div class="label divAddButton"><a href="#" id="AddFaciaColorLink" class="addImage"></a></div>
+    <div class="label divAddButton"><span id="AddFaciaColorLink" class="addImage"></span></div>
 </div>
 
 <div id="divAddColor" style="display: none" title="Add Color">
     <div class="divLabel">
         <label>Color Name</label>
-        <input style="width:100px;" id="colorName" class="colorPicker evo-cp0" />
+        @Html.TextBoxFor(m => m.ColorName, new { @id = "FaciaColorName"})
     </div>
 
     <div class="divLabel">
         <label>Color</label>
-        <input style="width:100px;" id="colorText" class="colorPicker evo-cp0" />
+        @Html.TextBoxFor(m => m.ColorText, new { @id = "FaciaColorText" })
     </div>
-    <input type="button" id="SubmitCustomer" name="SubmitCustomer" value="Submit" />
+    <input type="button" id="SubmitColor" name="SubmitColor" value="Submit" />
 </div>
 
 <script>
@@ -30,12 +30,12 @@
 
     $("#AddFaciaColorLink").on("click", function () {
         $("#divAddColor").dialog({
-            width: 500,
-            height: 650
+            width: 300,
+            height: 300
         });
     });
 
-    $("#SubmitCustomer").on("click", function () {
+    $("#SubmitColor").on("click", function () {
         $.ajax({
             url: "/Home/ColorAdd",
             type: "POST",

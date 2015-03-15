@@ -24,6 +24,7 @@ namespace LaneBids.Models
         public string Name { get; set; }
         public Nullable<int> Created_By { get; set; }
         public Nullable<System.DateTime> Create_Date { get; set; }
+        public string ColorText { get; set; }
     
         public virtual ICollection<Canopy> Canopies { get; set; }
         public virtual ICollection<Canopy> Canopies1 { get; set; }

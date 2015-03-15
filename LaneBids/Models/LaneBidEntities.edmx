@@ -166,6 +166,7 @@
           <Property Name="Name" Type="varchar" MaxLength="40" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
+          <Property Name="ColorText" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Column_Shapes">
           <Key>
@@ -1191,6 +1192,7 @@
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Canopies" Relationship="Self.FK_Colors_Canopy_1" FromRole="Colors" ToRole="Canopies" />
           <NavigationProperty Name="Canopies1" Relationship="Self.FK_Colors_Canopy_2" FromRole="Colors" ToRole="Canopies" />
+          <Property Name="ColorText" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Column_Shapes">
           <Key>
@@ -2068,6 +2070,7 @@
           <EntitySetMapping Name="Colors">
             <EntityTypeMapping TypeName="LaneModel.Color">
               <MappingFragment StoreEntitySet="Colors">
+                <ScalarProperty Name="ColorText" ColumnName="ColorText" />
                 <ScalarProperty Name="Color_ID" ColumnName="Color_ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />

@@ -89,40 +89,38 @@ namespace LaneBids.Sources
             });
 
             //Customer Data
-            bid.AddCustomerInfo = new CustomerDetails();
-            bid.AddCustomerInfo.Address = new AddressModel();
-            bid.AddCustomerInfo.Address.StateList = AddressService.States;
-            bid.AddCustomerInfo.PhoneContacts = new PhoneContacts();
-            bid.AddCustomerInfo.PhoneContacts.ContactTypeList = contactTypeList;
-
-            bid.AddCustomerInfo.CustomerList = entities.Customers.OrderBy(x => x.Last_Name).ToList().Select(x => new SelectListItem
+            bid.AddCustomerInfo = new CustomerDetails
             {
-                Value = x.Customer_ID.ToString(),
-                Text = x.First_Name + " " + x.Last_Name
-            }).ToList();
+                Address = new AddressModel {StateList = AddressService.States},
+                PhoneContacts = new PhoneContacts {ContactTypeList = contactTypeList},
+                CustomerList = entities.Customers.OrderBy(x => x.Last_Name).ToList().Select(x => new SelectListItem
+                {
+                    Value = x.Customer_ID.ToString(),
+                    Text = x.First_Name + " " + x.Last_Name
+                }).ToList()
+            };
 
             //Sales Person Data
-            bid.AddSalesPersonDetails = new SalesPersonDetails();
-            bid.AddSalesPersonDetails.Address = new AddressModel();
-            bid.AddSalesPersonDetails.Address.StateList = AddressService.States;
-            bid.AddSalesPersonDetails.PhoneContacts = new PhoneContacts();
-            bid.AddSalesPersonDetails.PhoneContacts.ContactTypeList = contactTypeList;
-
-            bid.AddSalesPersonDetails.SalesPersonList =
-                                entities.Sales_Persons.ToList().Select(x => new SelectListItem
-                                {
-                                    Value = x.Sales_Person_ID.ToString(),
-                                    Text = x.First_Name + " " + x.Last_Name
-                                }).ToList();
-
-            bid.AddSiteDetails = new SiteDetails();
-            bid.AddSiteDetails.Address = new AddressModel();
-            bid.AddSiteDetails.Address.StateList = AddressService.States;
-            bid.AddSiteDetails.SiteList = entities.Sites.ToList().Select(x => new SelectListItem
+            bid.AddSalesPersonDetails = new SalesPersonDetails
             {
-                Value = x.Site_ID.ToString(),
-                Text = x.Name
-            }).ToList();
+                Address = new AddressModel {StateList = AddressService.States},
+                PhoneContacts = new PhoneContacts {ContactTypeList = contactTypeList},
+                SalesPersonList = entities.Sales_Persons.ToList().Select(x => new SelectListItem
+                {
+                    Value = x.Sales_Person_ID.ToString(),
+                    Text = x.First_Name + " " + x.Last_Name
+                }).ToList()
+            };
+
+            bid.AddSiteDetails = new SiteDetails
+            {
+                Address = new AddressModel {StateList = AddressService.States},
+                SiteList = entities.Sites.ToList().Select(x => new SelectListItem
+                {
+                    Value = x.Site_ID.ToString(),
+                    Text = x.Name
+                }).ToList()
+            };
 
             bid.AddShippingInfoDetails = new ShippingInfoDetails();
             bid.AddShippingInfoDetails.StateList = AddressService.States;

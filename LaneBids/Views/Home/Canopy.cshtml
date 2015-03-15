@@ -5,7 +5,7 @@
 }
 
 <h2>Canopy</h2>
-@using (Html.BeginForm("Canopy", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("InsertCanopy", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <fieldset>
         @Html.HiddenFor(m => m.BidFunctionType)
@@ -119,7 +119,7 @@
         <div id="ImageFascia">
             <h3>Fascia Info</h3>
             <div>
-                @Html.Partial("_AddFaciaColor")
+                @Html.Partial("_AddFaciaColor", Model.FaciaColors)
             </div>
             <div class="divLabel">
                 <label>Fascia Image:</label>
