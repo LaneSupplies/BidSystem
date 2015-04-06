@@ -4,6 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Styles {
+    @Styles.Render("~/Content/themes/base/css")
+}
+
 <h2>Canopy</h2>
 @using (Html.BeginForm("InsertCanopy", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {

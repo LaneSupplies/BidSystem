@@ -332,7 +332,14 @@
       <LastGenOutput>LaneBidEntities.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
+    <Content Include="Scripts\angular.min.js.map">
+      <DependentUpon>angular.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js">
+      <DependentUpon>angular.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.js" />

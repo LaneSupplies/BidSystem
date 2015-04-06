@@ -1055,7 +1055,7 @@ a.addImage, a.addImage:visited {
     cursor: pointer;
 }
 
-addImage {
+.addImage {
     background: url("../Images/blueAdd.png") no-repeat;
     display: block;
     height: 15px;

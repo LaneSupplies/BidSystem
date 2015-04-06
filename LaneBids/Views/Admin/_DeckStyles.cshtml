@@ -1,27 +1,74 @@
 ﻿@{
-    var deckStylesId = (string)ViewData["DeckStylesId"];
-    var name = (string)ViewData["Name"];
+    //Deck Styles
+    var gridDeckStyles = new WebGrid(Model.DeckStylesList, canPage: true, rowsPerPage: 20,
+        selectionFieldName: "selectedDeckStypesRow", ajaxUpdateContainerId: "gridDeckStyhpesContent");
+    gridDeckStyles.Pager(WebGridPagerModes.NextPrevious);
+    
+    var deckStylesId = "";
+    var name = "";
 
 }
 
-@using (Html.BeginForm("DeckStyles", "Admin", FormMethod.Post, new { @id = "DeckStylesForm", enctype = "multipart/form-data" }))
-{
-    @Html.ValidationSummary(true)
+<!-- Deck Styles -->
+<div id="DeckStyles">
+    <h3>Deck Styles</h3>
+    @gridDeckStyles.GetHtml(tableStyle: "webGrid",
+            headerStyle: "header",
+            alternatingRowStyle: "alt",
+            selectedRowStyle: "select",
+            columns: gridDeckStyles.Columns(
+                gridDeckStyles.Column("Deck_Style_ID", "ID"),
+                gridDeckStyles.Column("Name", "Name"),
+                gridDeckStyles.Column("Create_Date", "Date Created"),
+                gridDeckStyles.Column("FullName", "Created By"),
+                gridDeckStyles.Column("Edit", header: null, format: @<text>@item.GetSelectLink("Edit")</text>)))
+    <span class="AddNewLink" onclick="AddDeckStyles()">Add New</span>
+    <div id="DeckStylesUpdate">
+        @if (gridDeckStyles.HasSelection)
+        {
+            var DeckStyles = gridDeckStyles.SelectedRow;
+            deckStylesId = DeckStyles["Deck_Style_ID"].ToString();
+            name = DeckStyles["Name"].ToString();
+            <script>
+                $(document).ready(function () {
+                    $("#DeckStylesNew").css("display", "block");
+                });
+            </script>
+        }
+    </div>
+    <div id="DeckStylesNew" style="display: none">
+        @using (Html.BeginForm("DeckStyles", "Admin", FormMethod.Post, new { @id = "DeckStylesForm", enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true)
 
-    <fieldset>
-        <input type="hidden" id="Deck_Style_ID" name="Deck_Style_ID" value="@deckStylesId" />
-        <div class="divLabel">
-            <label>ID</label>
-            @deckStylesId
-        </div>
+            <fieldset>
+                <input type="hidden" id="Deck_Style_ID" name="Deck_Style_ID" value="@deckStylesId" />
+                <div class="divLabel">
+                    <label>ID</label>
+                    @deckStylesId
+                </div>
 
-        <div class="divLabel">
-            <label>Name</label>
-            @Html.TextBox("Name", name)
-        </div>
+                <div class="divLabel">
+                    <label>Name</label>
+                    @Html.TextBox("Name", name)
+                </div>
 
-        <p>
-            <input type="submit" value="Submit" />
-        </p>
-    </fieldset>
-}
+                <p>
+                    <input type="submit" value="Submit" />
+                </p>
+            </fieldset>
+        }
+    </div>
+</div>
+
+<script>
+    function AddDeckStyles() {
+        if ($("#DeckStylesNew").is(":visible")) {
+            $("#DeckStylesUpdate").css("display", "none");
+            $("#DeckStylesNew").css("display", "none");
+        } else {
+            $("#DeckStylesUpdate").css("display", "none");
+            $("#DeckStylesNew").css("display", "block");
+        }
+    }
+</script>
