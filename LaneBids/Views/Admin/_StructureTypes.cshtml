@@ -1,77 +1,66 @@
-﻿
-@{
-    //Bio Types
-    var gridStructureTypes = new WebGrid(Model.StructureTypeList, canPage: true, rowsPerPage: 20,
-        selectionFieldName: "selectedStructureTypesRow", ajaxUpdateContainerId: "gridStructureTypesContent");
-    gridStructureTypes.Pager(WebGridPagerModes.NextPrevious);
-    
-    var structureTypeId = "";
-    var name = "";
-}
+﻿@using GridMvc.Html
+@using GridMvc.Sorting
+@model LaneBids.Models.AdminMaintenance
 
 <!-- Structure Types -->
 <div id="StructureType">
-    <h3>Structure Types</h3>
-    @gridStructureTypes.GetHtml(tableStyle: "webGrid",
-        headerStyle: "header",
-        alternatingRowStyle: "alt",
-        selectedRowStyle: "select",
-        columns: gridStructureTypes.Columns(
-            gridStructureTypes.Column("Structure_Type_ID", "ID"),
-            gridStructureTypes.Column("Name", " Name"),
-            gridStructureTypes.Column("Create_Date", "Date Created"),
-            gridStructureTypes.Column("FullName", "Created By"),
-            gridStructureTypes.Column("Edit", header: null, format: @<text>@item.GetSelectLink("Edit")</text>),
-            gridStructureTypes.Column("Delete", header: null, format: @<text>@item.GetSelectLink("Delete")</text>)))
-    <span class="AddNewLink" onclick="AddStructureType()">Add New</span>
-    <div id="StructureTypeUpdate">
-        @if (gridStructureTypes.HasSelection)
-        {
-            var structureType = gridStructureTypes.SelectedRow;
+    <h4>Structure Types</h4>
+    @Html.Grid(Model.StructureTypeList).Columns(col =>
+    {
+        col.Add(c => c.Name);
+        col.Add(c => c.Create_Date);
+        col.Add(c => c.FullName);
+        col.Add(c => c.ID).Sanitized(false).Encoded(false).RenderValueAs(e => @Html.ActionLink("Edit", "StructureTypeEdit", new {@id = e.ID}, new {@class = "structure-modal"}));
+    }).Named("structureTypes")
 
-            structureTypeId = structureType["Structure_Type_ID"].ToString();
-            name = structureType["Name"].ToString();
-            <script>
-                $(document).ready(function() {
-                    $("#StructureTypeNew").css("display", "block");
-                });
-            </script>
-        }
-    </div>
-    <div id="StructureTypeNew" style="display: none">
-        @using (Html.BeginForm("StructureTypes", "Admin", FormMethod.Post, new { @id = "StructureTypeForm", enctype = "multipart/form-data" }))
-        {
-            @Html.ValidationSummary(true)
+    <span class="AddNewLink" onclick="Add()">Add New</span>
 
-            <fieldset>
-                <input type="hidden" id="Structure_Type_ID" name="Structure_Type_ID" value="@structureTypeId" />
-                <div class="divLabel">
-                    <label>ID</label>
-                    @structureTypeId
-                </div>
-
-                <div class="divLabel">
-                    <label>Name</label>
-                    @Html.TextBox("Name", name)
-                </div>
-
-                <p>
-                    <input type="submit" value="Submit" />&nbsp;
-                    <input type="button" value="Cancel" />
-                </p>
-            </fieldset>
-        }
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Modal header</h3>
+        </div>
+        <div class="modal-body">
+            <p>Loading…</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+        </div>
     </div>
 </div>
 
 <script>
-    function AddStructureType() {
-        if ($("#StructureTypeNew").is(":visible")) {
-            $("#StructureTypeUpdate").css("display", "none");
-            $("#StructureTypeNew").css("display", "none");
-        } else {
-            $("#StructureTypeUpdate").css("display", "none");
-            $("#StructureTypeNew").css("display", "block");
-        }
+    $(function() {
+        $(".structure-modal").click(function (event) {
+            event.preventDefault();
+            $('#myModal').removeData("modal");
+            $('#myModal').modal({ remote: event.currentTarget.href });
+        });
+    });
+
+    $("#submitStructure").click(function(ev) {
+        ev.preventDefault();
+
+        $.ajax({
+            url: '/Admin/StructureTypeEdit',
+            data: ev.id,
+            dataType: 'html',
+            success: function (data) {
+                alert(data);
+            }
+        });
+
+        $("#New").toggleClass("hide");
+    });
+
+    $("#cancel").click(function(ev) {
+        ev.preventDefault();
+        $("#New").toggleClass("hide");
+    });
+
+    function Add(ev) {
+        $("#New").toggleClass("hide");
     }
 </script>

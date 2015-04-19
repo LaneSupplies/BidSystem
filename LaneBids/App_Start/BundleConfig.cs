@@ -21,6 +21,12 @@ namespace LaneBids
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                         "~/Scripts/angular*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/gridajax").Include(
+                        "~/Scripts/gridmvc.js",
+                        "~/Scripts/gridmvc-ext.js",
+                        "~/Scripts/ladda-bootstrap/ladda.min.js",
+                        "~/Scripts/ladda-bootstrap/spin.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
 
@@ -48,6 +54,12 @@ namespace LaneBids
                         "~/Content/themes/base/datepicker.css",
                         "~/Content/themes/base/progressbar.css",
                         "~/Content/themes/base/theme.css"));
+
+            bundles.Add(new StyleBundle("~/Content/gridmvc")
+                   .Include("~/Content/Gridmvc.css",
+                            "~/Content/gridmvc.datepicker.css",
+                            "~/Content/ladda-bootstrap/ladda-themeless.min.css",
+                            "~/Content/bootstrap.css"));
         }
 
         public static void AddDefaultIgnorePatterns(IgnoreList ignoreList)
@@ -58,7 +70,7 @@ namespace LaneBids
             ignoreList.Ignore("*-vsdoc.js");
             ignoreList.Ignore("*.debug.js", OptimizationMode.WhenEnabled);
             //ignoreList.Ignore("*.min.js", OptimizationMode.WhenDisabled);
-            ignoreList.Ignore("*.min.css", OptimizationMode.WhenDisabled);
+            //ignoreList.Ignore("*.min.css", OptimizationMode.WhenDisabled);
             ignoreList.Ignore("*.min.js.map", OptimizationMode.WhenDisabled);
         }
     }

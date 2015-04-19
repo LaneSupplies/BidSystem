@@ -6,9 +6,10 @@
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/gridmvc")
         @RenderSection("Styles", required: false)
         @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/angular")
+        @Scripts.Render("~/bundles/gridajax")
         @Scripts.Render("~/bundles/jqueryui")
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/Misc")
@@ -130,6 +131,7 @@
                         $el.find('.menu-submenu').not($next).slideUp().parent().removeClass('open');
                     };
                 }
+
 
                 var accordion = new Accordion($('#accordion'), false);
             });

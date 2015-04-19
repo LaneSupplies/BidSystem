@@ -673,7 +673,7 @@ input[type="checkbox"].input-validation-error {
 
 /* tables
 ----------------------------------------------------------*/
-table {
+/*table {
     border-collapse: collapse;
     border-spacing: 0;
     margin-top: 0.75em;
@@ -724,13 +724,13 @@ th {
         }
 
 td {
-    /*padding: 0.25em 2em 0.25em 0em;*/
+    padding: 0.25em 2em 0.25em 0em;
     border: 0 none;
 }
 
 tr.pager td {
     padding: 0 0.25em 0 0;
-}
+}*/
 
 
 /********************
@@ -925,9 +925,9 @@ ol.AdminLinks li {
     padding-left: 0;
 }
 
-    ol.AdminLinks li.AdminLink {
+    /*ol.AdminLinks li.AdminLink {
         background: url("../Images/bullet.png") no-repeat;
-    }
+    }*/
 
 .price-error {
     box-shadow: 0 0 1px 3px #e74c3c;
@@ -1105,3 +1105,8 @@ a.addImage, a.addImage:visited {
     float: left;
     height: auto;
 }
+
+.hide {
+    display: none;
+}
+

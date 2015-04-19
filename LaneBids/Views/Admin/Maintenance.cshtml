@@ -29,19 +29,3 @@
 @Html.Partial("_Drainage")
 
 <br /><br />
-@section Scripts
-{
-    <script type="text/javascript">
-        
-        function AddBioTypes() {
-            if ($("#BioTypeNew").is(":visible")) {
-                $("#BioTypeUpdate").css("display", "none");
-                $("#BioTypeNew").css("display", "none");
-            } else {
-                $("#BioTypeUpdate").css("display", "none");
-                $("#BioTypeNew").css("display", "block");
-            }
-        }
-        
-    </script>
-}

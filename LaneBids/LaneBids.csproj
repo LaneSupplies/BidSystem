@@ -39,6 +39,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Grid.Mvc.Ajax">
+      <HintPath>..\packages\Grid.Mvc.Ajax.1.0.26\lib\Grid.Mvc.Ajax.dll</HintPath>
+    </Reference>
+    <Reference Include="GridMvc, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Grid.Mvc.Redux.1.0.3\lib\GridMvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -169,6 +176,7 @@
     <Compile Include="Models\Address.cs">
       <DependentUpon>LaneBidEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin\StructureTypeModel.cs" />
     <Compile Include="Models\Bid.cs">
       <DependentUpon>LaneBidEntities.tt</DependentUpon>
     </Compile>
@@ -277,6 +285,26 @@
     <Compile Include="Sources\UserServices.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-responsive.css" />
+    <Content Include="Content\bootstrap-responsive.min.css">
+      <DependentUpon>bootstrap-responsive.css</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css">
+      <DependentUpon>bootstrap.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\gridmvc.datepicker.css" />
+    <Content Include="Content\gridmvc.datepicker.min.css">
+      <DependentUpon>gridmvc.datepicker.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Gridmvc.min.css">
+      <DependentUpon>Gridmvc.css</DependentUpon>
+    </Content>
+    <Content Include="Content\ladda-bootstrap\ladda-themeless.min.css" />
+    <Content Include="Content\Site.min.css">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -331,15 +359,24 @@
       <DependentUpon>LaneBidEntities.edmx</DependentUpon>
       <LastGenOutput>LaneBidEntities.cs</LastGenOutput>
     </Content>
+    <Content Include="Grid.mvc.readme" />
+    <Content Include="Grid.Mvc.Ajax.readme" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <Content Include="Scripts\angular.min.js.map">
       <DependentUpon>angular.min.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\gridmvc-ext.js" />
+    <Content Include="Scripts\gridmvc.customwidgets.js" />
+    <Content Include="Scripts\gridmvc.lang.fr.js" />
+    <Content Include="Scripts\gridmvc.min.js.map" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js">
       <DependentUpon>angular.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.js" />
@@ -359,11 +396,14 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\ladda-bootstrap\ladda.min.js" />
+    <Content Include="Scripts\ladda-bootstrap\spin.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\scrollsaver.js" />
     <Content Include="Scripts\scrollsaver.min.js">
       <DependentUpon>scrollsaver.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\URI.js" />
     <Content Include="Views\Admin\_StructureTypes.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -429,6 +469,11 @@
     <Content Include="Views\Home\_AddSite.cshtml" />
     <Content Include="Views\Home\_AddShippingInfo.cshtml" />
     <Content Include="Views\Home\_AddFaciaColor.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Views\Shared\_AjaxGridPager.cshtml" />
+    <Content Include="Views\Admin\Modal\_StructureType.cshtml" />
+    <Content Include="Views\Admin\DisplayTemplate\StructureTypeModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

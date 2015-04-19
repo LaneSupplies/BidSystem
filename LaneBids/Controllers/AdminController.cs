@@ -6,6 +6,7 @@ using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
 using LaneBids.Models;
+using LaneBids.Models.Admin;
 using LaneBids.Sources;
 using Microsoft.Ajax.Utilities;
 using WebMatrix.WebData;
@@ -85,90 +86,83 @@ namespace LaneBids.Controllers
         {
             ViewBag.Title = "Admin Maintenance";
             var entities = new LaneEntities();
-            var adminMaint = new AdminMaintenance();
 
-            adminMaint.StructureTypeList = entities.Structure_Types.ToList().Select(type => new
-                                           {
-                                              type.Structure_Type_ID,
-                                              type.Name,
-                                              type.Create_Date,
-                                              FullName = UserServices.ConvertUserId(type.Created_By)
-                                           });
-
-            adminMaint.BidTypesList = entities.Bid_Types.ToList().Select(type => new 
-                                      {
-                                          type.Bid_Type_ID,
-                                          type.Name,
-                                          type.Code,
-                                          type.Create_Date,
-                                          FullName = UserServices.ConvertUserId(type.Created_By)
-                                      });
-
-            adminMaint.BidStatusList = entities.Bid_Statuses.ToList().Select(type => new
-                                       {
-                                           type.Bid_Status_ID,
-                                           type.Status,
-                                           type.Create_Date,
-                                           FullName = UserServices.ConvertUserId(type.Created_By)
-                                       });
-
-            adminMaint.JobTypesList = entities.Job_Types.ToList().Select(type => new
-                                      {
-                                          type.Job_Type_ID,
-                                          type.Name,
-                                          type.Code,
-                                          type.Create_Date,
-                                          FullName = UserServices.ConvertUserId(type.Created_By)
-                                      });
-
-            adminMaint.ScopeTypesList = entities.Scope_Types.ToList().Select(type => new
-                                        {
-                                            type.Scope_Type_ID,
-                                            type.Name,
-                                            type.Code,
-                                            type.Create_Date,
-                                            FullName = UserServices.ConvertUserId(type.Created_By)
-                                        });
-
-            adminMaint.ColumnTypesList = entities.Column_Types.ToList().Select(type => new
-                                         {
-                                             type.Column_Type_ID,
-                                             type.Name,
-                                             type.Create_Date,
-                                             FullName = UserServices.ConvertUserId(type.Created_By)
-                                         });
-
-            adminMaint.ColumnShapesList = entities.Column_Shapes.ToList().Select(type => new
-                                          {
-                                              type.Column_Shape_ID,
-                                              type.Name,
-                                              type.Create_Date,
-                                              FullName = UserServices.ConvertUserId(type.Created_By)
-                                          });
-
-            adminMaint.DeckStylesList = entities.Deck_Styles.ToList().Select(type => new
-                                        {
-                                            type.Deck_Style_ID,
-                                            type.Name,
-                                            type.Create_Date,
-                                            FullName = UserServices.ConvertUserId(type.Created_By)
-                                        });
-
-            adminMaint.FasciaTypesList = entities.Fascia_Types.ToList().Select(type => new
-                                        {
-                                            type.Fascia_Type_ID,
-                                            type.Name,
-                                            type.Create_Date,
-                                            FullName = UserServices.ConvertUserId(type.Created_By)
-                                        });
-
-            adminMaint.DrainageList = entities.Drainage_Types.ToList().Select(type => new
-                                      {
-                                          type.Drainage_Type_ID,
-                                          type.Name,
-                                          type.Create_Date,
-                                          FullName = UserServices.ConvertUserId(type.Created_By)
-                                      });
+            var adminMaint = new AdminMaintenance
+            {
+                StructureTypeList = entities.Structure_Types.ToList().Select(type => new StructureTypeModel
+                {
+                    ID = type.Structure_Type_ID,
+                    Name = type.Name,
+                    Create_Date = type.Create_Date,
+                    FullName = UserServices.ConvertUserId(type.Created_By)
+                }),
+                BidTypesList = entities.Bid_Types.ToList().Select(type => new
+                {
+                    type.Bid_Type_ID,
+                    type.Name,
+                    type.Code,
+                    type.Create_Date,
+                    FullName = UserServices.ConvertUserId(type.Created_By)
+                }),
+                BidStatusList = entities.Bid_Statuses.ToList().Select(type => new
+                {
+                    type.Bid_Status_ID,
+                    type.Status,
+                    type.Create_Date,
+                    FullName = UserServices.ConvertUserId(type.Created_By)
+                }),
+                JobTypesList = entities.Job_Types.ToList().Select(type => new
+                {
+                    type.Job_Type_ID,
+                    type.Name,
+                    type.Code,
+                    type.Create_Date,
+                    FullName = UserServices.ConvertUserId(type.Created_By)
+                }),
+                ScopeTypesList = entities.Scope_Types.ToList().Select(type => new
+                {
+                    type.Scope_Type_ID,
+                    type.Name,
+                    type.Code,
+                    type.Create_Date,
+                    FullName = UserServices.ConvertUserId(type.Created_By)
+                }),
+                ColumnTypesList = entities.Column_Types.ToList().Select(type => new
+                {
+                    type.Column_Type_ID,
+                    type.Name,
+                    type.Create_Date,
+                    FullName = UserServices.ConvertUserId(type.Created_By)
+                }),
+                ColumnShapesList = entities.Column_Shapes.ToList().Select(type => new
+                {
+                    type.Column_Shape_ID,
+                    type.Name,
+                    type.Create_Date,
+                    FullName = UserServices.ConvertUserId(type.Created_By)
+                }),
+                DeckStylesList = entities.Deck_Styles.ToList().Select(type => new
+                {
+                    type.Deck_Style_ID,
+                    type.Name,
+                    type.Create_Date,
+                    FullName = UserServices.ConvertUserId(type.Created_By)
+                }),
+                FasciaTypesList = entities.Fascia_Types.ToList().Select(type => new
+                {
+                    type.Fascia_Type_ID,
+                    type.Name,
+                    type.Create_Date,
+                    FullName = UserServices.ConvertUserId(type.Created_By)
+                }),
+                DrainageList = entities.Drainage_Types.ToList().Select(type => new
+                {
+                    type.Drainage_Type_ID,
+                    type.Name,
+                    type.Create_Date,
+                    FullName = UserServices.ConvertUserId(type.Created_By)
+                })
+            };
 
             return View(adminMaint);
         }
@@ -264,11 +258,14 @@ namespace LaneBids.Controllers
             return RedirectToAction("Maintenance");
         }
 
+        #region Structure Types
+        
         [HttpPost]
-        public ActionResult StructureTypes(Structure_Types structureTypes)
+        public JsonResult StructureTypeAdd(StructureTypeModel structureTypes)
         {
             var entities = new LaneEntities();
-            var structure = entities.Structure_Types.FirstOrDefault(x => x.Structure_Type_ID == structureTypes.Structure_Type_ID);
+            var structure = entities.Structure_Types
+                .FirstOrDefault(x => x.Structure_Type_ID == structureTypes.ID);
             if (structure != null)
             {
                 structure.Name = structureTypes.Name;
@@ -278,13 +275,36 @@ namespace LaneBids.Controllers
             }
             else
             {
-                structureTypes.Create_Date = DateTime.Now;
-                structureTypes.Created_By = WebSecurity.CurrentUserId;
-                entities.Structure_Types.Add(structureTypes);
+                entities.Structure_Types.Add(new Structure_Types
+                {
+                    Name = structureTypes.Name,
+                    Create_Date = structureTypes.Create_Date,
+                    Created_By = WebSecurity.CurrentUserId
+                });
                 entities.SaveChanges();
             }
-            return RedirectToAction("Maintenance");
+            return null;
         }
+
+        public JsonResult StructureTypeAll()
+        {
+            var entities = new LaneEntities();
+            var data = entities.Structure_Types.AsQueryable();
+            var ajaxGridFactory = new Grid.Mvc.Ajax.GridExtensions.AjaxGridFactory();
+            var grid = ajaxGridFactory.CreateAjaxGrid(data, 1, true);
+            return Json(grid);
+        }
+
+        public PartialViewResult StructureTypeEdit(int id)
+        {
+            var entities = new LaneEntities();
+            var data = entities.Structure_Types.Where(x => x.Structure_Type_ID == id);
+            //var ajaxGridFactory = new Grid.Mvc.Ajax.GridExtensions.AjaxGridFactory();
+            //var grid = ajaxGridFactory.CreateAjaxGrid(data, page, true);
+            return PartialView("Modal/_StructureType", data);
+        }
+
+        #endregion
 
         [HttpPost]
         public ActionResult ColumnTypes(Column_Types columnTypes)
