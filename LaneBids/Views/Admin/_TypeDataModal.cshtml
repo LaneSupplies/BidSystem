@@ -1,0 +1,10 @@
+﻿@model LaneBids.Models.Admin.TypeDataModel
+@using (Html.BeginForm("TypeDataUpdate", "Admin", FormMethod.Post, new {@id = "update-type-modal-form"}))
+{
+    @Html.EditorFor(m => Model)
+
+    <div class="button-list">
+        <input type="submit" id="update-type-modal" value="Update" />&nbsp;&nbsp;
+        <input type="button" id="cancel-type-modal" value="Cancel" />
+    </div>
+}

@@ -89,13 +89,16 @@ namespace LaneBids.Controllers
 
             var adminMaint = new AdminMaintenance
             {
-                StructureTypeList = entities.Structure_Types.ToList().Select(type => new StructureTypeModel
+                StructureTypeList = new TypeDataListModel{
+                    GridTitle = "Structure Type",
+                    TypeDataEnum = TypeDataEnum.StructureType,
+                    Types = entities.Structure_Types.ToList().Select(type => new TypeDataModel
                 {
                     ID = type.Structure_Type_ID,
                     Name = type.Name,
                     Create_Date = type.Create_Date,
                     FullName = UserServices.ConvertUserId(type.Created_By)
-                }),
+                })},
                 BidTypesList = entities.Bid_Types.ToList().Select(type => new
                 {
                     type.Bid_Type_ID,
@@ -165,6 +168,38 @@ namespace LaneBids.Controllers
             };
 
             return View(adminMaint);
+        }
+
+        [HttpPost]
+        public ActionResult TypeDataEdit(string id, string typeName)
+        {
+            var entities = new LaneEntities();
+            var model = new TypeDataModel();
+
+            var type = (TypeDataEnum) Enum.Parse(typeof (TypeDataEnum), typeName);
+            var intId = Convert.ToInt32(id);
+
+            switch (type)
+            {
+                case TypeDataEnum.StructureType:
+                    model = entities.Structure_Types.Where(x => x.Structure_Type_ID == intId).ToList().Select(t => new TypeDataModel
+                    {
+                        ID = t.Structure_Type_ID,
+                        Name = t.Name,
+                        Create_Date = t.Create_Date,
+                        FullName = UserServices.ConvertUserId(t.Created_By),
+                        TypeDataEnum = type
+                    }).FirstOrDefault();
+                    break;
+            }
+
+            return PartialView("_TypeDataModal", model);
+        }
+
+        [HttpPost]
+        public ActionResult TypeDataUpdate(TypeDataModel model)
+        {
+            return Content("Success");
         }
 
         [HttpPost]
@@ -261,7 +296,7 @@ namespace LaneBids.Controllers
         #region Structure Types
         
         [HttpPost]
-        public JsonResult StructureTypeAdd(StructureTypeModel structureTypes)
+        public JsonResult StructureTypeAdd(TypeDataModel structureTypes)
         {
             var entities = new LaneEntities();
             var structure = entities.Structure_Types

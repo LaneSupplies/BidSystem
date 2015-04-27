@@ -176,7 +176,8 @@
     <Compile Include="Models\Address.cs">
       <DependentUpon>LaneBidEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Admin\StructureTypeModel.cs" />
+    <Compile Include="Models\Admin\TypeDataCodeModel.cs" />
+    <Compile Include="Models\Admin\TypeDataModel.cs" />
     <Compile Include="Models\Bid.cs">
       <DependentUpon>LaneBidEntities.tt</DependentUpon>
     </Compile>
@@ -275,6 +276,7 @@
     <Compile Include="Models\Structure_Types.cs">
       <DependentUpon>LaneBidEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TypeEnum.cs" />
     <Compile Include="Models\UserLoginProfile.cs">
       <DependentUpon>LaneBidEntities.tt</DependentUpon>
     </Compile>
@@ -362,6 +364,7 @@
     <Content Include="Grid.mvc.readme" />
     <Content Include="Grid.Mvc.Ajax.readme" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
+    <Content Include="Scripts\admin.js" />
     <Content Include="Scripts\angular.min.js.map">
       <DependentUpon>angular.min.js</DependentUpon>
     </Content>
@@ -472,8 +475,12 @@
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\Shared\_AjaxGridPager.cshtml" />
-    <Content Include="Views\Admin\Modal\_StructureType.cshtml" />
-    <Content Include="Views\Admin\DisplayTemplate\StructureTypeModel.cshtml" />
+    <Content Include="Views\Admin\DisplayTemplates\TypeDataCodeListModel.cshtml" />
+    <Content Include="Views\Admin\DisplayTemplates\TypeDataListModel.cshtml" />
+    <Content Include="Views\Admin\_TypeDataModal.cshtml" />
+    <Content Include="Views\Admin\_TypeDataCodeLayout.cshtml" />
+    <Content Include="Views\Admin\EditorTemplates\TypeDataModel.cshtml" />
+    <Content Include="Views\Admin\EditorTemplates\TypeDataCodeModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

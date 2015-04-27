@@ -1110,3 +1110,6 @@ a.addImage, a.addImage:visited {
     display: none;
 }
 
+.button-list {
+    margin: 10px;
+}
