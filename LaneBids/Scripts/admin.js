@@ -22,25 +22,28 @@
 
         //$('#divTypeDataModal').dialog();
     });
-
-    $("#update-type-modal").click(function (ev) {
-        ev.preventDefault();
-        var form = $("update-type-modal-form");
-
-        $.ajax({
-            url: '/Admin/TypeDataUpdate',
-            data: form.serialize,
-            dataType: 'html',
-            success: function (data) {
-                alert("Updated");
-            }
-        });
-
-    });
-
-    $("#cancel-type-modal").click(function (ev) {
-        $("#divTypeDataModal").dialog("close");
-    });
 });
 
+$("#update-type-modal").click(function (ev) {
+    ev.preventDefault();
+    alert("Before Update");
+    var form = $("#update-type-modal-form");
 
+    alert(form.serialize());
+
+    $.ajax({
+        url: '/Admin/TypeDataUpdate',
+        type: 'POST',
+        data: form.serialize(),
+        dataType: 'html',
+        success: function (data) {
+            alert("Success Updated");
+            alert(data);
+        }
+    });
+
+});
+
+$("#cancel-type-modal").click(function (ev) {
+    $("#divTypeDataModal").dialog("close");
+});

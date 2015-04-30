@@ -199,6 +199,19 @@ namespace LaneBids.Controllers
         [HttpPost]
         public ActionResult TypeDataUpdate(TypeDataModel model)
         {
+            var entities = new LaneEntities();
+            
+            switch (model.TypeDataEnum)
+            {
+                case TypeDataEnum.StructureType:
+                    var item = entities.Structure_Types.FirstOrDefault(x => x.Structure_Type_ID == model.ID);
+                    item.Name = model.Name;
+                    item.Create_Date = DateTime.Now;
+                    item.Created_By = WebSecurity.CurrentUserId;
+                    break;
+            }
+
+            entities.SaveChanges();
             return Content("Success");
         }
 
