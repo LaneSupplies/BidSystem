@@ -26,18 +26,14 @@
 
 $("#update-type-modal").click(function (ev) {
     ev.preventDefault();
-    alert("Before Update");
     var form = $("#update-type-modal-form");
-
-    alert(form.serialize());
 
     $.ajax({
         url: '/Admin/TypeDataUpdate',
         type: 'POST',
         data: form.serialize(),
-        dataType: 'html',
+        dataType: 'json',
         success: function (data) {
-            alert("Success Updated");
             alert(data);
         }
     });
