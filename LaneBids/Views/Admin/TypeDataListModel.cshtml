@@ -1,0 +1,16 @@
+﻿
+<div id="Type">
+    <h4>@Model.GridTitle</h4>
+    @Html.Grid(Model.Types).Columns(col =>
+    {
+        col.Add(c => c.Name);
+        col.Add(c => c.Create_Date);
+        col.Add(c => c.FullName);
+        col.Add(c => c.ID)
+           .Sanitized(false)
+           .Encoded(false)
+           .RenderValueAs(e => @Html.ActionLink("Edit", "TypeDataEdit",
+               new { id = e.ID, typeName = Model.TypeDataEnum },
+               new { @class = "type-modal" }));
+    })
+</div>

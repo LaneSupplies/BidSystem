@@ -12,43 +12,38 @@ namespace LaneBids
             bundles.IgnoreList.Clear();
             AddDefaultIgnorePatterns(bundles.IgnoreList);
         
-            bundles.Add(new ScriptBundle("~/bundles/Misc").Include(
-                        "~/Scripts/scrollsaver.min.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+            bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
                         "~/Scripts/angular*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/gridajax").Include(
-                        "~/Scripts/gridmvc.js",
-                        "~/Scripts/gridmvc-ext.js",
-                        "~/Scripts/ladda-bootstrap/ladda.min.js",
-                        "~/Scripts/ladda-bootstrap/spin.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/respond.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/mantenance-js").Include("~/Scripts/admin.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/local-misc").Include("~/Scripts/app.js",
+                "~/Scripts/local-http.js"));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css",
+                "~/Content/bootstrap.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").IncludeDirectory(
                         "~/Content/themes/base", "*.css", true));
 
-            bundles.Add(new StyleBundle("~/Content/gridmvc")
-                   .Include("~/Content/Gridmvc.css",
-                            "~/Content/gridmvc.datepicker.css",
-                            "~/Content/ladda-bootstrap/ladda-themeless.min.css",
-                            "~/Content/bootstrap.css"));
+            bundles.Add(new StyleBundle("~/Content/angulargrid").Include(
+                        "~/Content/ui-grid-unstable.css"));
         }
 
         public static void AddDefaultIgnorePatterns(IgnoreList ignoreList)

@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Angular Base - Özgür Kara</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a href="#/" class="navbar-brand">Angbase</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/">Home</a></li>
+                    <li><a href="#/home/about">About</a></li>
+                    <li><a href="#/home/contact">Contact</a></li>
+                    <li><a href="#/home/directive">Directive</a></li>
+                    <li><a href="#/home/filter">Filter</a></li>
+                    <li><a href="#/home/requiredDirective">Required Directive&Filter</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/account/register">Register</a></li>
+                    <li><a href="#/account/login">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div ng-view>
+
+        </div>
+        <hr />
+        <footer>
+            <a href="http://koddestek.com">koddestek.com</a>
+        </footer>
+    </div>
+
+    <script src="lib/jquery-1.10.2.min.js"></script>
+    <script src="lib/require.js" data-main="js/main.js"></script>
+</body>
+</html>

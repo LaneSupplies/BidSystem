@@ -10,7 +10,9 @@
 
 <h2>Maintenance Page</h2>
 
-@Html.Partial("_StructureTypes")
+<div ng-controller="MaintenanceController">
+    <div id="grid1" ui-grid="{ data: myData }" class="grid"></div>
+</div>
 
 @Html.Partial("_BidStatus")
 
@@ -28,6 +30,9 @@
 
 @Html.Partial("_Drainage")
 
-<script src="~/Scripts/admin.js" ></script>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/mantenance-js")
+}
 
 <div id="divTypeDataModal"></div>
