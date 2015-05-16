@@ -171,6 +171,31 @@ namespace LaneBids.Controllers
         }
 
         [HttpPost]
+        public ActionResult TypeData(string type)
+        {
+            var entities = new LaneEntities();
+            var model = new List<TypeDataModel>();
+
+            var typeEnum = (TypeDataEnum)Enum.Parse(typeof(TypeDataEnum), type);
+
+            switch (typeEnum)
+            {
+                case TypeDataEnum.StructureType:
+                    model = entities.Structure_Types.Select(t => new TypeDataModel
+                    {
+                        ID = t.Structure_Type_ID,
+                        Name = t.Name,
+                        Create_Date = t.Create_Date,
+                        FullName = UserServices.ConvertUserId(t.Created_By),
+                        TypeDataEnum = typeEnum
+                    }).ToList();
+                    break;
+            }
+
+            return Json(model);
+        }
+
+        [HttpPost]
         public ActionResult TypeDataEdit(string id, string typeName)
         {
             var entities = new LaneEntities();
@@ -334,23 +359,23 @@ namespace LaneBids.Controllers
             return null;
         }
 
-        public JsonResult StructureTypeAll()
-        {
-            var entities = new LaneEntities();
-            var data = entities.Structure_Types.AsQueryable();
-            var ajaxGridFactory = new Grid.Mvc.Ajax.GridExtensions.AjaxGridFactory();
-            var grid = ajaxGridFactory.CreateAjaxGrid(data, 1, true);
-            return Json(grid);
-        }
+        //public JsonResult StructureTypeAll()
+        //{
+        //    var entities = new LaneEntities();
+        //    var data = entities.Structure_Types.AsQueryable();
+        //    var ajaxGridFactory = new Grid.Mvc.Ajax.GridExtensions.AjaxGridFactory();
+        //    var grid = ajaxGridFactory.CreateAjaxGrid(data, 1, true);
+        //    return Json(grid);
+        //}
 
-        public PartialViewResult StructureTypeEdit(int id)
-        {
-            var entities = new LaneEntities();
-            var data = entities.Structure_Types.Where(x => x.Structure_Type_ID == id);
-            //var ajaxGridFactory = new Grid.Mvc.Ajax.GridExtensions.AjaxGridFactory();
-            //var grid = ajaxGridFactory.CreateAjaxGrid(data, page, true);
-            return PartialView("Modal/_StructureType", data);
-        }
+        //public PartialViewResult StructureTypeEdit(int id)
+        //{
+        //    var entities = new LaneEntities();
+        //    var data = entities.Structure_Types.Where(x => x.Structure_Type_ID == id);
+        //    //var ajaxGridFactory = new Grid.Mvc.Ajax.GridExtensions.AjaxGridFactory();
+        //    //var grid = ajaxGridFactory.CreateAjaxGrid(data, page, true);
+        //    return PartialView("Modal/_StructureType", data);
+        //}
 
         #endregion
 

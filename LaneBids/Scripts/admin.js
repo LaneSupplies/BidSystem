@@ -1,28 +1,20 @@
-﻿var app = angular.module('app', ['ngTouch', 'ui.grid']);
+﻿var app = angular.module('localServiceViewer');
 
-app.controller('MaintenanceController', ['$scope', function ($scope) {
+app.controller('MaintenanceController', ['$scope, localService', function ($scope, localService) {
+    var onStructureTypeComplete = function(typeData) {
+        $scope.structureData = typeData;
+    }
 
-    $scope.myData = [
-      {
-          "firstName": "Cox",
-          "lastName": "Carney",
-          "company": "Enormo",
-          "employed": true
-      },
-      {
-          "firstName": "Lorraine",
-          "lastName": "Wise",
-          "company": "Comveyer",
-          "employed": false
-      },
-      {
-          "firstName": "Nancy",
-          "lastName": "Waters",
-          "company": "Fuelton",
-          "employed": false
-      }
-    ];
+    var onTypeError = function(reason) {
+        $scope.error = "Could not get Type Data";
+        console.log(reason);
+    }
+
+    localService.getTypeData("Structure").then(onStructureTypeComplete, onTypeError);
+
 }]);
+
+
 
 $(function () {
     $('#divTypeDataModal').dialog({

@@ -8,6 +8,10 @@
         @Styles.Render("~/Content/css")
         @Styles.Render("~/Content/themes/base/css")
         @RenderSection("Styles", required: false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/angularjs")
         @Scripts.Render("~/bundles/modernizr")
     </head>
     <body>
@@ -80,15 +84,16 @@
                 @if (User.IsInRole("Administrator"))
                 {
                     <div class="AdminFunctions">
-                        <label>Admin Links</label><br />
-                        <ol class="AdminLinks">
-                            <li class="AdminLink">
+                        <span class="label">Admin Links</span>
+                        <br />
+                        <ul class="AdminLinks">
+                            <li>
                                 <a href="/Admin/CreateUser">Create New User</a>
                             </li>
-                            <li class="AdminLink">
+                            <li>
                                 <a href="/Admin/Maintenance">Admin Maintenance</a>
                             </li>
-                        </ol>
+                        </ul>
                     </div>
                 }
             </div>
@@ -100,10 +105,7 @@
             </div>
         </section>
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/jqueryui")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/angularjs")
+       
         @Scripts.Render("~/bundles/local-misc")
         @RenderSection("Scripts", required: false)
         

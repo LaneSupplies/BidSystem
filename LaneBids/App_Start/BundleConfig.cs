@@ -16,7 +16,8 @@ namespace LaneBids
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
-                        "~/Scripts/angular*"));
+                        "~/Scripts/angular*",
+                        "~/Scripts/ui-grid-unstable.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
@@ -36,8 +37,7 @@ namespace LaneBids
             bundles.Add(new ScriptBundle("~/bundles/local-misc").Include("~/Scripts/app.js",
                 "~/Scripts/local-http.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css",
-                "~/Content/bootstrap.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").IncludeDirectory(
                         "~/Content/themes/base", "*.css", true));
@@ -53,8 +53,8 @@ namespace LaneBids
             ignoreList.Ignore("*.intellisense.js");
             ignoreList.Ignore("*-vsdoc.js");
             ignoreList.Ignore("*.debug.js", OptimizationMode.WhenEnabled);
-            //ignoreList.Ignore("*.min.js", OptimizationMode.WhenDisabled);
-            //ignoreList.Ignore("*.min.css", OptimizationMode.WhenDisabled);
+            ignoreList.Ignore("*.min.js", OptimizationMode.WhenDisabled);
+            ignoreList.Ignore("*.min.css", OptimizationMode.WhenDisabled);
             ignoreList.Ignore("*.min.js.map", OptimizationMode.WhenDisabled);
         }
     }
