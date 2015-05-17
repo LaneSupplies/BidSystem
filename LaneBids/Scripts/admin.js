@@ -1,20 +1,24 @@
-﻿var app = angular.module('localServiceViewer');
+﻿(function() {
+    
+    var app = angular.module('localServiceViewer');
 
-app.controller('MaintenanceController', ['$scope, localService', function ($scope, localService) {
-    var onStructureTypeComplete = function(typeData) {
-        $scope.structureData = typeData;
-    }
+    var MaintenanceController = function($scope, localService) {
+        '$scope, localService', function($scope, localService) {
+            var onStructureTypeComplete = function(typeData) {
+                $scope.structureData = typeData;
+            }
 
-    var onTypeError = function(reason) {
-        $scope.error = "Could not get Type Data";
-        console.log(reason);
-    }
+            var onTypeError = function(reason) {
+                $scope.error = "Could not get Type Data";
+                console.log(reason);
+            }
 
-    localService.getTypeData("Structure").then(onStructureTypeComplete, onTypeError);
+            localService.getTypeData("Structure").then(onStructureTypeComplete, onTypeError);
 
-}]);
+        }
+    };
 
-
+}());
 
 $(function () {
     $('#divTypeDataModal').dialog({

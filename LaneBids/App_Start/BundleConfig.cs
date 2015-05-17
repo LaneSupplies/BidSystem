@@ -16,7 +16,7 @@ namespace LaneBids
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
-                        "~/Scripts/angular*",
+                        "~/Scripts/angular.js",
                         "~/Scripts/ui-grid-unstable.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(

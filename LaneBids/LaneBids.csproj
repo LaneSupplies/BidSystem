@@ -396,35 +396,25 @@
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <Content Include="Scripts\admin.js" />
     <Content Include="Scripts\angular-animate.js" />
-    <Content Include="Scripts\angular-animate.min.js" />
-    <Content Include="Scripts\angular-cookies.js" />
-    <Content Include="Scripts\angular-cookies.min.js" />
-    <Content Include="Scripts\angular-loader.js" />
-    <Content Include="Scripts\angular-loader.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-resource.js" />
     <Content Include="Scripts\angular-resource.min.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
-    <Content Include="Scripts\angular-sanitize.js" />
-    <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular-touch.js" />
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.min.js.map">
       <DependentUpon>angular.min.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\angular-animate.min.js.map" />
-    <Content Include="Scripts\angular-cookies.min.js.map" />
-    <Content Include="Scripts\angular-loader.min.js.map" />
     <Content Include="Scripts\angular-resource.min.js.map" />
     <Content Include="Scripts\angular-route.min.js.map" />
-    <Content Include="Scripts\angular-sanitize.min.js.map" />
     <Content Include="Scripts\angular-touch.min.js.map" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js">
       <DependentUpon>angular.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
