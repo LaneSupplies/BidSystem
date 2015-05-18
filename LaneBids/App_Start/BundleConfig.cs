@@ -16,7 +16,7 @@ namespace LaneBids
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
-                        "~/Scripts/angular.js",
+                        "~/Scripts/angular*",
                         "~/Scripts/ui-grid-unstable.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
@@ -35,7 +35,7 @@ namespace LaneBids
             bundles.Add(new ScriptBundle("~/bundles/mantenance-js").Include("~/Scripts/admin.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/local-misc").Include("~/Scripts/app.js",
-                "~/Scripts/local-http.js"));
+                      "~/Scripts/local-http.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 

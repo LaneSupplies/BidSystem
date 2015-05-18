@@ -21,7 +21,7 @@ namespace LaneBids
 
             routes.MapRoute(
                 name: "Canopy",
-                url: "{controller}/{action}/{type}",
+                url: "{controller}/{action}/{typeData}",
                 defaults: new { controller = "Home", action = "Index", type = UrlParameter.Optional }
             );
         }

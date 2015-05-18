@@ -10,13 +10,13 @@
 
 <h2>Maintenance Page</h2>
 
-<div ng-controller="MaintenanceController">
-    <div id="structureType" ui-grid="{ data: structureData }" class="grid"></div>
+<div ng-controller="MaintController">
+    <div id="structureType" ui-grid="{ data: getTypeData }" class="typeGrid"></div>
 </div>
 
 @section Scripts
 {
-    @Scripts.Render("~/bundles/mantenance-js")
+    
 }
 
 <div id="divTypeDataModal"></div>

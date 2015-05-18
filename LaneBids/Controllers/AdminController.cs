@@ -9,6 +9,7 @@ using LaneBids.Models;
 using LaneBids.Models.Admin;
 using LaneBids.Sources;
 using Microsoft.Ajax.Utilities;
+using Newtonsoft.Json;
 using WebMatrix.WebData;
 
 namespace LaneBids.Controllers
@@ -170,8 +171,8 @@ namespace LaneBids.Controllers
             return View(adminMaint);
         }
 
-        [HttpPost]
-        public ActionResult TypeData(string type)
+        [HttpGet]
+        public JsonResult TypeData(string type)
         {
             var entities = new LaneEntities();
             var model = new List<TypeDataModel>();
@@ -181,7 +182,7 @@ namespace LaneBids.Controllers
             switch (typeEnum)
             {
                 case TypeDataEnum.StructureType:
-                    model = entities.Structure_Types.Select(t => new TypeDataModel
+                    model = entities.Structure_Types.ToList().Select(t => new TypeDataModel
                     {
                         ID = t.Structure_Type_ID,
                         Name = t.Name,
@@ -192,7 +193,7 @@ namespace LaneBids.Controllers
                     break;
             }
 
-            return Json(model);
+            return Json(JsonConvert.SerializeObject(model), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

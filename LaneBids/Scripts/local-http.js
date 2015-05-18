@@ -3,7 +3,7 @@
     var localService = function ($http) {
 
         var getTypeData = function (typeName) {
-            return $http.get("/Admin/TypeData/" + typeName)
+            return $http.get("/Admin/TypeData/?type=" + typeName)
                         .then(function (response) {
                             return response.data;
                         });

@@ -892,3 +892,7 @@ a.addImage, a.addImage:visited {
 .button-list {
     margin: 10px;
 }
+
+.typeGrid {
+    width: 500px;
+}
