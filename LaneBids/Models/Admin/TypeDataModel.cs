@@ -23,7 +23,7 @@ namespace LaneBids.Models.Admin
         [Display(Name = "Name")]
         public string Name { get; set; }
 
-        public DateTime? Create_Date { get; set; }
+        public string Create_Date { get; set; }
         public string FullName { get; set; }
 
         public TypeDataEnum TypeDataEnum { get; set; }

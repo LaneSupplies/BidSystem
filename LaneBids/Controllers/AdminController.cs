@@ -97,7 +97,7 @@ namespace LaneBids.Controllers
                 {
                     ID = type.Structure_Type_ID,
                     Name = type.Name,
-                    Create_Date = type.Create_Date,
+                    Create_Date = String.Format("{0:d}", type.Create_Date),
                     FullName = UserServices.ConvertUserId(type.Created_By)
                 })},
                 BidTypesList = entities.Bid_Types.ToList().Select(type => new
@@ -186,14 +186,14 @@ namespace LaneBids.Controllers
                     {
                         ID = t.Structure_Type_ID,
                         Name = t.Name,
-                        Create_Date = t.Create_Date,
+                        Create_Date = String.Format("{0:d}", t.Create_Date),
                         FullName = UserServices.ConvertUserId(t.Created_By),
                         TypeDataEnum = typeEnum
                     }).ToList();
                     break;
             }
 
-            return Json(JsonConvert.SerializeObject(model), JsonRequestBehavior.AllowGet);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -212,7 +212,7 @@ namespace LaneBids.Controllers
                     {
                         ID = t.Structure_Type_ID,
                         Name = t.Name,
-                        Create_Date = t.Create_Date,
+                        Create_Date = String.Format("{0:d}", t.Create_Date),
                         FullName = UserServices.ConvertUserId(t.Created_By),
                         TypeDataEnum = type
                     }).FirstOrDefault();
@@ -334,31 +334,31 @@ namespace LaneBids.Controllers
 
         #region Structure Types
         
-        [HttpPost]
-        public JsonResult StructureTypeAdd(TypeDataModel structureTypes)
-        {
-            var entities = new LaneEntities();
-            var structure = entities.Structure_Types
-                .FirstOrDefault(x => x.Structure_Type_ID == structureTypes.ID);
-            if (structure != null)
-            {
-                structure.Name = structureTypes.Name;
-                structure.Create_Date = DateTime.Now;
-                structure.Created_By = WebSecurity.CurrentUserId;
-                entities.SaveChanges();
-            }
-            else
-            {
-                entities.Structure_Types.Add(new Structure_Types
-                {
-                    Name = structureTypes.Name,
-                    Create_Date = structureTypes.Create_Date,
-                    Created_By = WebSecurity.CurrentUserId
-                });
-                entities.SaveChanges();
-            }
-            return null;
-        }
+        //[HttpPost]
+        //public JsonResult StructureTypeAdd(TypeDataModel structureTypes)
+        //{
+        //    var entities = new LaneEntities();
+        //    var structure = entities.Structure_Types
+        //        .FirstOrDefault(x => x.Structure_Type_ID == structureTypes.ID);
+        //    if (structure != null)
+        //    {
+        //        structure.Name = structureTypes.Name;
+        //        structure.Create_Date = DateTime.Now;
+        //        structure.Created_By = WebSecurity.CurrentUserId;
+        //        entities.SaveChanges();
+        //    }
+        //    else
+        //    {
+        //        entities.Structure_Types.Add(new Structure_Types
+        //        {
+        //            Name = structureTypes.Name,
+        //            Create_Date = String.Format("{0:d}", structureTypes.Create_Date),
+        //            Created_By = WebSecurity.CurrentUserId
+        //        });
+        //        entities.SaveChanges();
+        //    }
+        //    return null;
+        //}
 
         //public JsonResult StructureTypeAll()
         //{
@@ -487,6 +487,17 @@ namespace LaneBids.Controllers
                 entities.SaveChanges();
             }
             return RedirectToAction("Maintenance");
+        }
+
+        protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
+        {
+            return new JsonNetResult
+            {
+                Data = data,
+                ContentType = contentType,
+                ContentEncoding = contentEncoding,
+                JsonRequestBehavior = behavior
+            };
         }
     }
 }
