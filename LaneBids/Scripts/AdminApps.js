@@ -8,12 +8,35 @@
             $scope.getTypeData = data;
         };
 
-        var onTypeDataError = function(reason) {
+        var onTypeDataError = function (response) {
             $scope.error = "Could not get type data.";
         };
 
+        var onEditDataType = function(data) {
+            $("#divTypeDataModal").html(data);
+            $("#divTypeDataModal").dialog("open");
+        };
+
+        var onEditErrorDataType = function(response) {
+            $scope.error = "Could not Edit the type data";
+        }
+
+        var onUpdateDataType = function(response) {
+            localService.getTypeData("StructureType")
+                .then(onTypeDataComplete, onTypeDataError);
+        }
+
+        $scope.editTypeData = function(item) {
+            localService.editTypeData(item.ID, item.TypeDataEnum)
+                .then(onEditDataType, onEditErrorDataType);
+        }
+
+        $scope.updateTypeData = function (item) {
+            localService.updateTypeData(item)
+                .then(onUpdateDataType, onTypeDataError);
+        }
+
         localService.getTypeData("StructureType").then(onTypeDataComplete, onTypeDataError);
-        
     };
 
     app.controller("MaintController", MaintController);
@@ -51,15 +74,19 @@ $("#update-type-modal").click(function (ev) {
     var form = $("#update-type-modal-form");
 
     $.ajax({
-        url: '/Admin/TypeDataUpdate',
-        type: 'POST',
-        data: form.serialize(),
-        dataType: 'json',
-        success: function (data) {
-            alert(data);
-        }
-    });
+            url: '/Admin/TypeDataUpdate',
+            type: 'POST',
+            data: form.serialize(),
+            dataType: 'text'
+        })
+        .done(function(data) {
+            alert("Sucess:" + data);
+        })
+        .fail(function(data) {
+            alert("Error: " + data.response);
+        });
 
+    $("#divTypeDataModal").dialog("close");
 });
 
 $("#cancel-type-modal").click(function (ev) {

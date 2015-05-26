@@ -1,22 +1,51 @@
 ﻿@model LaneBids.Models.AdminMaintenance
-@using System.Activities.Expressions
-@using System.Data
-@using System.Web.UI.WebControls
-@using LaneBids.Models
 @{
     ViewBag.Title = "Maintenance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     
 }
 
 <h2>Maintenance Page</h2>
-
+<br/>
 <div ng-controller="MaintController">
-    <div id="structureType" ui-grid="{ data: getTypeData }" class="typeGrid"></div>
+    <!-- Structure Type Grid -->
+
+    <div class="caption">Structure Type</div>
+
+    <table class="typeTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Create Date</th>
+                <th>Created By</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="type in getTypeData">
+                <td>{{type.Name}}</td>
+                <td>{{type.Create_Date}}</td>
+                <td>{{type.FullName}}</td>
+                <td>
+                    <a href="#" ng-click="editTypeData(type)">Edit</a>
+                </td>
+                <td>
+                    <a href="#" ng-click="deleteTypeData(type)">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="divTypeDataModal"></div>
 </div>
 
-@section Scripts
-{
-    
+@section Scripts {
+    @Scripts.Render("~/bundles/angularjs")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/Admin")
 }
 
-<div id="divTypeDataModal"></div>
+
+
+

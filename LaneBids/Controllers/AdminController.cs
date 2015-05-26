@@ -196,7 +196,7 @@ namespace LaneBids.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult TypeDataEdit(string id, string typeName)
         {
             var entities = new LaneEntities();
@@ -234,6 +234,23 @@ namespace LaneBids.Controllers
                     item.Name = model.Name;
                     item.Create_Date = DateTime.Now;
                     item.Created_By = WebSecurity.CurrentUserId;
+                    break;
+            }
+
+            entities.SaveChanges();
+            return Content("Success");
+        }
+
+        [HttpPost]
+        public ActionResult TypeDataDelete(TypeDataModel model)
+        {
+            var entities = new LaneEntities();
+
+            switch (model.TypeDataEnum)
+            {
+                case TypeDataEnum.StructureType:
+                    var item = entities.Structure_Types.FirstOrDefault(x => x.Structure_Type_ID == model.ID);
+                    entities.Structure_Types.Remove(item);
                     break;
             }
 

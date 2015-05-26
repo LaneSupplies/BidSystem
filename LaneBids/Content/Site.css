@@ -538,9 +538,9 @@ label {
     float: left;
 }
 
-label.checkbox {
-    display: inline;
-}
+    label.checkbox {
+        display: inline;
+    }
 
 labelField {
     display: inline;
@@ -662,7 +662,7 @@ input[type="checkbox"].input-validation-error {
     vertical-align: top;
 }
 
-.validation-summary-errors ul{
+.validation-summary-errors ul {
     padding: 0 !important;
     margin: 0 !important;
 }
@@ -696,12 +696,12 @@ ol.AdminLinks li {
     padding-left: 0;
 }
 
-    /*ol.AdminLinks li.AdminLink {
+/*ol.AdminLinks li.AdminLink {
         background: url("../Images/bullet.png") no-repeat;
     }*/
 
 ul {
-    list-style-type: none;   
+    list-style-type: none;
 }
 
 li {
@@ -754,27 +754,27 @@ li {
     text-wrap: none;
 }
 
-.divLabel label {
-    width: 150px;
-    padding-right: 10px;
-}
+    .divLabel label {
+        width: 150px;
+        padding-right: 10px;
+    }
 
-.divLabel input[type=text] {
-    max-width: 200px;
-    border-color: #787878;
-}
+    .divLabel input[type=text] {
+        max-width: 200px;
+        border-color: #787878;
+    }
 
-.divLabel textarea {
-    border-color: #787878;
-}
+    .divLabel textarea {
+        border-color: #787878;
+    }
 
 .measurementLabel {
     width: 350px;
 }
 
-.measurementLabel input {
-    width: 30px;
-}
+    .measurementLabel input {
+        width: 30px;
+    }
 
 .measurementList label {
     width: 200px;
@@ -872,9 +872,9 @@ a.addImage, a.addImage:visited {
     float: left;
 }
 
-.measurementListColumn input {
-    width: 30px;
-}
+    .measurementListColumn input {
+        width: 30px;
+    }
 
 #ColumnLengh {
     height: auto;
@@ -893,6 +893,50 @@ a.addImage, a.addImage:visited {
     margin: 10px;
 }
 
-.typeGrid {
-    width: 500px;
+
+/* Type Table Layout */
+.caption {
+    text-align: left;
+    color: #4d4d4d;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px;
 }
+
+.typeTable {
+    border-collapse: collapse;
+}
+
+.typeTable thead {
+    background: SteelBlue;
+    color: white;
+}
+
+.typeTable th,
+.typeTable td {
+    padding: 5px 10px;
+    border: 1px solid black;
+}
+
+.typeTable tbody tr:nth-child(even) {
+    background: #cccccc;
+}
+
+.typeTable tbody tr td:nth-child(2) {
+    text-align: center;
+}
+
+.typeTable tbody tr td:nth-child(3),
+.typeTable tbody tr td:nth-child(4) {
+    text-align: right;
+}
+
+.typeTable tfoot {
+    background: SeaGreen;
+    color: white;
+    text-align: right;
+}
+
+    .typeTable tfoot tr th:last-child {
+        font-family: monospace;
+    }

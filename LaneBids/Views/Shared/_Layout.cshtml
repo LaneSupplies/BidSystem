@@ -1,144 +1,138 @@
 ﻿<!DOCTYPE html>
 <html lang="en" ng-app="localServiceViewer">
-<head>
-    <meta charset="utf-8" />
-    <title>@ViewBag.Title - Lane Supplies</title>
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width" />
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/themes/base/css")
-    @Styles.Render("~/Content/angulargrid")
-    @RenderSection("Styles", required: false)
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/angularjs")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <!--[if lt IE 9]>
-    <script> document.createElement("labelField"); </script>
-    <![endif]-->
-    <header>
-        <div class="content-wrapper">
-            <div class="float-left">
-                @Html.ActionLink(" ", "Index", "Home", null, new { @class = "Logo" })
-            </div>
-            <div class="float-right">
-                <section id="login">
-                    @Html.Partial("_LoginPartial")
-                </section>
-            </div>
-        </div>
-    </header>
-    <br />
-    <section id="sectionBody">
-        <div id="leftMenu">
-            <ul id="accordion" class="accordion">
-                <li>
-                    <div class="menu-link"><i class="fa fa-database"></i>Canopy<i class="fa fa-chevron-down"></i></div>
-                    <ul class="menu-submenu">
-                        <li><a href="/Home/Bid/Canopy">Add</a></li>
-                        <li><a href="/Home/BidSearch/Canopy">Change</a></li>
-                        <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
-                        <li><a href="/Home/Bid/Canopy/BidToOrder">Bid-To-Order</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="menu-link"><i class="fa fa-code"></i>Kiosk<i class="fa fa-chevron-down"></i></div>
-                    <ul class="menu-submenu">
-                        <li><a href="/Home/Bid/Kiosk">Add</a></li>
-                        <li><a href="/Home/BidSearch/Kiosk">Change</a></li>
-                        <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
-                        <li><a href="/Home/Bid/Kiosk/BidToOrder">Bid-To-Order</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="menu-link"><i class="fa fa-mobile"></i>CBSS<i class="fa fa-chevron-down"></i></div>
-                    <ul class="menu-submenu">
-                        <li><a href="/Home/Bid/CBSS">Add</a></li>
-                        <li><a href="/Home/BidSearch/CBSS">Change</a></li>
-                        <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
-                        <li><a href="/Home/Bid/CBSS/BidToOrder">Bid-To-Order</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="menu-link"><i class="fa fa-globe"></i>CBAC<i class="fa fa-chevron-down"></i></div>
-                    <ul class="menu-submenu">
-                        <li><a href="/Home/Bid/CBAC">Add</a></li>
-                        <li><a href="/Home/BidSearch/CBAC">Change</a></li>
-                        <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
-                        <li><a href="/Home/Bid/CBAC/BidToOrder">Bid-To-Order</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="menu-link"><i class="fa fa-globe"></i>Misc Other<i class="fa fa-chevron-down"></i></div>
-                    <ul class="menu-submenu">
-                        <li><a href="/Home/Bid/Misc">Add</a></li>
-                        <li><a href="/Home/BidSearch/Misc">Change</a></li>
-                        <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
-                        <li><a href="/Home/Bid/Misc/BidToOrder">Bid-To-Order</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <br /><br />
-            @if (User.IsInRole("Administrator"))
-            {
-                <div class="AdminFunctions">
-                    <span class="label">Admin Links</span>
-                    <br />
-                    <ul class="AdminLinks">
-                        <li>
-                            <a href="/Admin/CreateUser">Create New User</a>
-                        </li>
-                        <li>
-                            <a href="/Admin/Maintenance">Admin Maintenance</a>
-                        </li>
-                    </ul>
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Lane Supplies</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/themes/base/css")
+        @Styles.Render("~/Content/angulargrid")
+        @RenderSection("Styles", required: false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+    </head>
+    <body>
+        <!--[if lt IE 9]>
+            <script> document.createElement("labelField"); </script>
+        <![endif]-->
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    @Html.ActionLink(" ", "Index", "Home", null, new { @class = "Logo" })
                 </div>
-            }
-        </div>
-        <div id="divBody">
-            @RenderSection("featured", required: false)
-            <div class="main-body">
-                @RenderBody()
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                </div>
             </div>
-        </div>
-    </section>
+        </header>
+        <br />
+        <section id="sectionBody">
+            <div id="leftMenu">
+                <ul id="accordion" class="accordion">
+                    <li>
+                        <div class="menu-link"><i class="fa fa-database"></i>Canopy<i class="fa fa-chevron-down"></i></div>
+                        <ul class="menu-submenu">
+                            <li><a href="/Home/Bid/Canopy">Add</a></li>
+                            <li><a href="/Home/BidSearch/Canopy">Change</a></li>
+                            <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
+                            <li><a href="/Home/Bid/Canopy/BidToOrder">Bid-To-Order</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="menu-link"><i class="fa fa-code"></i>Kiosk<i class="fa fa-chevron-down"></i></div>
+                        <ul class="menu-submenu">
+                            <li><a href="/Home/Bid/Kiosk">Add</a></li>
+                            <li><a href="/Home/BidSearch/Kiosk">Change</a></li>
+                            <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
+                            <li><a href="/Home/Bid/Kiosk/BidToOrder">Bid-To-Order</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="menu-link"><i class="fa fa-mobile"></i>CBSS<i class="fa fa-chevron-down"></i></div>
+                        <ul class="menu-submenu">
+                            <li><a href="/Home/Bid/CBSS">Add</a></li>
+                            <li><a href="/Home/BidSearch/CBSS">Change</a></li>
+                            <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
+                            <li><a href="/Home/Bid/CBSS/BidToOrder">Bid-To-Order</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="menu-link"><i class="fa fa-globe"></i>CBAC<i class="fa fa-chevron-down"></i></div>
+                        <ul class="menu-submenu">
+                            <li><a href="/Home/Bid/CBAC">Add</a></li>
+                            <li><a href="/Home/BidSearch/CBAC">Change</a></li>
+                            <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
+                            <li><a href="/Home/Bid/CBAC/BidToOrder">Bid-To-Order</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="menu-link"><i class="fa fa-globe"></i>Misc Other<i class="fa fa-chevron-down"></i></div>
+                        <ul class="menu-submenu">
+                            <li><a href="/Home/Bid/Misc">Add</a></li>
+                            <li><a href="/Home/BidSearch/Misc">Change</a></li>
+                            <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
+                            <li><a href="/Home/Bid/Misc/BidToOrder">Bid-To-Order</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <br /><br />
+                @if (User.IsInRole("Administrator"))
+                {
+                    <div class="AdminFunctions">
+                        <span class="label">Admin Links</span>
+                        <br />
+                        <ul class="AdminLinks">
+                            <li>
+                                <a href="/Admin/CreateUser">Create New User</a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Maintenance">Admin Maintenance</a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div id="divBody">
+                @RenderSection("featured", required: false)
+                <div class="main-body">
+                    @RenderBody()
+                </div>
+            </div>
+        </section>
+
+        @RenderSection("Scripts", required: false)
+
+        <script>
+            $(function () {
+                var Accordion = function (el, multiple) {
+                    this.el = el || {};
+                    this.multiple = multiple || false;
+
+                    // Variables privadas
+                    var links = this.el.find('.menu-link');
+                    // Evento
+                    links.on('click', { el: this.el, multiple: this.multiple }, this.dropdown);
+                }
+
+                Accordion.prototype.dropdown = function (e) {
+                    var $el = e.data.el;
+                    $this = $(this),
+                        $next = $this.next();
+
+                    $next.slideToggle();
+                    $this.parent().toggleClass('open');
+
+                    if (!e.data.multiple) {
+                        $el.find('.menu-submenu').not($next).slideUp().parent().removeClass('open');
+                    };
+                }
 
 
-    @Scripts.Render("~/bundles/local-misc")
-    @RenderSection("Scripts", required: false)
-
-    <script>
-        $(function () {
-            var Accordion = function (el, multiple) {
-                this.el = el || {};
-                this.multiple = multiple || false;
-
-                // Variables privadas
-                var links = this.el.find('.menu-link');
-                // Evento
-                links.on('click', { el: this.el, multiple: this.multiple }, this.dropdown);
-            }
-
-            Accordion.prototype.dropdown = function (e) {
-                var $el = e.data.el;
-                $this = $(this),
-                    $next = $this.next();
-
-                $next.slideToggle();
-                $this.parent().toggleClass('open');
-
-                if (!e.data.multiple) {
-                    $el.find('.menu-submenu').not($next).slideUp().parent().removeClass('open');
-                };
-            }
-
-
-            var accordion = new Accordion($('#accordion'), false);
-        });
-    </script>
-</body>
+                var accordion = new Accordion($('#accordion'), false);
+            });
+        </script>
+    </body>
 </html>
-

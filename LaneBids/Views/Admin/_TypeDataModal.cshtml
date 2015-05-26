@@ -1,13 +1,12 @@
 ﻿@model LaneBids.Models.Admin.TypeDataModel
 
-@using (Html.BeginForm("TypeDataUpdate", "Admin", FormMethod.Post, new {@id = "update-type-modal-form"}))
-{
+<div ng-controller="MaintController">
     @Html.EditorFor(m => Model)
 
     <div class="button-list">
-        <input type="submit" id="update-type-modal" value="Update" />&nbsp;&nbsp;
-        <input type="button" id="cancel-type-modal" value="Cancel" />
+        <input type="button" ng-click="updateDataType" value="Update" />&nbsp;&nbsp;
+        <input type="button" ng-click="deleteDataType" value="Cancel" />
     </div>
-}
+</div>
 
-<script src="/Scripts/admin.js"></script>
+@Scripts.Render("~/bundles/Admin")
