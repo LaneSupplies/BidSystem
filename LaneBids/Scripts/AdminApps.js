@@ -24,6 +24,7 @@
         var onUpdateDataType = function(response) {
             localService.getTypeData("StructureType")
                 .then(onTypeDataComplete, onTypeDataError);
+            $("#divTypeDataModal").dialog("close");
         }
 
         $scope.editTypeData = function(item) {
@@ -32,6 +33,7 @@
         }
 
         $scope.updateTypeData = function (item) {
+            alert('Update Data');
             localService.updateTypeData(item)
                 .then(onUpdateDataType, onTypeDataError);
         }

@@ -1,11 +1,13 @@
 ﻿@model LaneBids.Models.Admin.TypeDataModel
 
-<div ng-controller="MaintController">
-    @Html.EditorFor(m => Model)
+<div ng-app="localServiceViewer">
+    <div ng-controller="MaintController">
+        @Html.EditorFor(m => Model)
 
-    <div class="button-list">
-        <input type="button" ng-click="updateDataType" value="Update" />&nbsp;&nbsp;
-        <input type="button" ng-click="deleteDataType" value="Cancel" />
+        <div class="button-list">
+            <input type="button" ng-click="updateDataType" value="Update" />&nbsp;&nbsp;
+            <input type="button" ng-click="deleteDataType" value="Cancel" />
+        </div>
     </div>
 </div>
 

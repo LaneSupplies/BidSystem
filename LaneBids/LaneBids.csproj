@@ -39,10 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Angular.Base, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Angular.Base.1.0.0.3\lib\net45\Angular.Base.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -285,38 +281,10 @@
     <Compile Include="Sources\UserServices.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\angbase\css\bootstrap.min.css" />
-    <Content Include="Content\angbase\css\Site.css" />
-    <Content Include="Content\angbase\index.html" />
-    <Content Include="Content\angbase\js\app.js" />
-    <Content Include="Content\angbase\js\controllers\accountController.js" />
-    <Content Include="Content\angbase\js\controllers\homeController.js" />
-    <Content Include="Content\angbase\js\directives\dateDirective.js" />
-    <Content Include="Content\angbase\js\factories\accountFactory.js" />
-    <Content Include="Content\angbase\js\factories\homeFactory.js" />
-    <Content Include="Content\angbase\js\filters\manyFilter.js" />
-    <Content Include="Content\angbase\js\main.js" />
-    <Content Include="Content\angbase\js\modules\directiveModule.js" />
-    <Content Include="Content\angbase\js\modules\filterModule.js" />
-    <Content Include="Content\angbase\lib\angular-resource.min.js" />
-    <Content Include="Content\angbase\lib\angular-route.min.js" />
-    <Content Include="Content\angbase\lib\angular.min.js" />
-    <Content Include="Content\angbase\lib\jquery-1.10.2.min.js" />
-    <Content Include="Content\angbase\lib\require.js" />
-    <Content Include="Content\angbase\views\account\login.html" />
-    <Content Include="Content\angbase\views\account\register.html" />
-    <Content Include="Content\angbase\views\home\about.html" />
-    <Content Include="Content\angbase\views\home\contact.html" />
-    <Content Include="Content\angbase\views\home\directive.html" />
-    <Content Include="Content\angbase\views\home\filter.html" />
-    <Content Include="Content\angbase\views\home\index.html" />
-    <Content Include="Content\angbase\views\home\requiredDirective.html" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css">
       <DependentUpon>bootstrap-responsive.css</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
@@ -353,13 +321,8 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
-    <Content Include="Content\ui-grid-unstable.css" />
-    <Content Include="Content\ui-grid-unstable.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\ui-grid.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Icon.png" />
     <Content Include="Images\BlueAdd.png" />
     <Content Include="Images\Logo.gif" />
     <EntityDeploy Include="Models\LaneBidEntities.edmx">
@@ -379,51 +342,10 @@
       <DependentUpon>LaneBidEntities.edmx</DependentUpon>
       <LastGenOutput>LaneBidEntities.cs</LastGenOutput>
     </Content>
-    <Content Include="Content\angbase\json\inbox.json" />
-    <Content Include="Content\angbase\json\detail.json" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="fonts\ui-grid.woff" />
-    <Content Include="fonts\ui-grid.ttf" />
-    <Content Include="fonts\ui-grid.eot" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <Content Include="Scripts\AdminApps.js" />
-    <Content Include="Scripts\angular-animate.js" />
-    <Content Include="Scripts\angular-animate.min.js" />
-    <Content Include="Scripts\angular-cookies.js" />
-    <Content Include="Scripts\angular-cookies.min.js" />
-    <Content Include="Scripts\angular-loader.js" />
-    <Content Include="Scripts\angular-loader.min.js" />
-    <Content Include="Scripts\angular-mocks.js" />
-    <Content Include="Scripts\angular-resource.js" />
-    <Content Include="Scripts\angular-resource.min.js" />
-    <Content Include="Scripts\angular-route.js" />
-    <Content Include="Scripts\angular-route.min.js" />
-    <Content Include="Scripts\angular-sanitize.js" />
-    <Content Include="Scripts\angular-sanitize.min.js" />
-    <Content Include="Scripts\angular-touch.js" />
-    <Content Include="Scripts\angular-touch.min.js" />
-    <Content Include="Scripts\angular.min.js.map">
-      <DependentUpon>angular.min.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\angular-resource.min.js.map" />
-    <Content Include="Scripts\angular-route.min.js.map" />
-    <Content Include="Scripts\angular-touch.min.js.map" />
-    <Content Include="Scripts\angular-animate.min.js.map" />
-    <Content Include="Scripts\angular-cookies.min.js.map" />
-    <Content Include="Scripts\angular-loader.min.js.map" />
-    <Content Include="Scripts\angular-sanitize.min.js.map" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
-    <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js">
-      <DependentUpon>angular.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\app_old.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.js" />
@@ -445,13 +367,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\local-http.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\scrollsaver.js" />
     <Content Include="Scripts\scrollsaver.min.js">
       <DependentUpon>scrollsaver.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\ui-grid-unstable.js" />
-    <Content Include="Scripts\ui-grid-unstable.min.js" />
     <Content Include="Views\Admin\_StructureTypes.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
