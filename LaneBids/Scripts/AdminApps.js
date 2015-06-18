@@ -38,6 +38,25 @@
                 .then(onUpdateDataType, onTypeDataError);
         }
 
+        $scope.open = function (item) {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'myModalTypeContent.html',
+                controller: 'localServiceViewer',
+                resolve: {
+                    item: function() {
+                        
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
         localService.getTypeData("StructureType").then(onTypeDataComplete, onTypeDataError);
     };
 
@@ -45,52 +64,71 @@
 
 }());
 
-$(function () {
-    $('#divTypeDataModal').dialog({
-        autoOpen: false,
-        height: 238,
-        width: 465,
-        resizable: false,
-        title: "Edit Type"
-    });
+angular.module('localServiceViewer').controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
 
-    $(".type-modal").click(function (event) {
-        event.preventDefault();
+    $scope.item = function(data) {
 
-        $.ajax({
-            url: event.currentTarget.href,
-            type: 'POST',
-            dataType: 'html',
-            success: function (data) {
-                $("#divTypeDataModal").html(data);
-                $("#divTypeDataModal").dialog("open");
-            }
-        });
+    };
 
-        //$('#divTypeDataModal').dialog();
-    });
+    $scope.selected = {
+        item: $scope.items[0]
+    };
+
+    $scope.ok = function () {
+        $modalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
 });
 
-$("#update-type-modal").click(function (ev) {
-    ev.preventDefault();
-    var form = $("#update-type-modal-form");
+//$(function () {
+//    $('#divTypeDataModal').dialog({
+//        autoOpen: false,
+//        height: 238,
+//        width: 465,
+//        resizable: false,
+//        title: "Edit Type"
+//    });
 
-    $.ajax({
-            url: '/Admin/TypeDataUpdate',
-            type: 'POST',
-            data: form.serialize(),
-            dataType: 'text'
-        })
-        .done(function(data) {
-            alert("Sucess:" + data);
-        })
-        .fail(function(data) {
-            alert("Error: " + data.response);
-        });
+//    $(".type-modal").click(function (event) {
+//        event.preventDefault();
 
-    $("#divTypeDataModal").dialog("close");
-});
+//        $.ajax({
+//            url: event.currentTarget.href,
+//            type: 'POST',
+//            dataType: 'html',
+//            success: function (data) {
+//                $("#divTypeDataModal").html(data);
+//                $("#divTypeDataModal").dialog("open");
+//            }
+//        });
 
-$("#cancel-type-modal").click(function (ev) {
-    $("#divTypeDataModal").dialog("close");
-});
+//        //$('#divTypeDataModal').dialog();
+//    });
+//});
+
+//$("#update-type-modal").click(function (ev) {
+//    ev.preventDefault();
+//    var form = $("#update-type-modal-form");
+
+//    $.ajax({
+//            url: '/Admin/TypeDataUpdate',
+//            type: 'POST',
+//            data: form.serialize(),
+//            dataType: 'text'
+//        })
+//        .done(function(data) {
+//            alert("Sucess:" + data);
+//        })
+//        .fail(function(data) {
+//            alert("Error: " + data.response);
+//        });
+
+//    $("#divTypeDataModal").dialog("close");
+//});
+
+//$("#cancel-type-modal").click(function (ev) {
+//    $("#divTypeDataModal").dialog("close");
+//});
