@@ -325,8 +325,11 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\ui-grid-unstable.css" />
+    <Content Include="Content\ui-grid-unstable.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\ui-grid.svg" />
     <Content Include="Global.asax" />
     <Content Include="Icon.png" />
     <Content Include="Images\BlueAdd.png" />
@@ -354,6 +357,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="fonts\ui-grid.woff" />
+    <Content Include="fonts\ui-grid.ttf" />
+    <Content Include="fonts\ui-grid.eot" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <Content Include="Scripts\AdminApps.js" />
     <Content Include="Scripts\angular-animate.js" />
@@ -1163,6 +1169,8 @@
     <Content Include="Scripts\scrollsaver.min.js">
       <DependentUpon>scrollsaver.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\ui-grid-unstable.js" />
+    <Content Include="Scripts\ui-grid-unstable.min.js" />
     <Content Include="Views\Admin\_StructureTypes.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

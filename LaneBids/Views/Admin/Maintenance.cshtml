@@ -37,31 +37,9 @@
         </tbody>
     </table>
 
-    <script type="text/ng-template" id="myModalTypeContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Update Type Data</h3>
-        </div>
-        @using (Html.BeginForm("TypeDataUpdate", "Admin"))
-        {
-            <div class="modal-body">
-                <input type="hidden" id="TypeDataEnum" value="{{ TypeDataEnum }}" />
-                <input type="hidden" id="ID" value="{{ ID }}" />
-                <div class="divLabel">
-                    <label>ID:</label>
-                    <div>{{ ID }}</div>
-                </div>
-
-                <div class="divLabel">
-                    <label>Name:</label>
-                    <input type="text" id="Name" value="{{ Name }}" />
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="ok()">Update</button>
-                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-            </div>
-        }
-    </script>
+    <!-- Modal -->
+    <div id="typeDataModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
+    </div>
 </div>
 
 @section Scripts {

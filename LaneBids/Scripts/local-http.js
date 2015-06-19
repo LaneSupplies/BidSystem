@@ -11,20 +11,22 @@
                     console.log("Type Data Error: ", response.status, response.data);
                 })
                 .finally(function() {
-                    console.log("Finished getting data.");
+                    console.log("Finished getting grid data.");
                 });
         };
 
         var editTypeData = function(id, typeName) {
             return $http.get("/Admin/TypeDataEdit/" + id + "/" + typeName)
                 .then(function(response) {
-                    return response.data;
+                    $("#typeDataModal").html(response.data);
+                    $("#typeDataModal").modal('show');
+                    //response.data;
                 })
                 .catch(function(response) {
                     console.log("Type Data Error: ", response.status, response.data);
                 })
                 .finally(function() {
-                    console.log("Finished getting data.");
+                    console.log("Finished getting edit data.");
                 });
         };
 

@@ -18,6 +18,7 @@ namespace LaneBids
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
                 "~/Scripts/angular.js",
                 "~/Scripts/angular-*",
+                "~/Scripts/ui-grid-unstable.js",
                 "~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
@@ -37,7 +38,11 @@ namespace LaneBids
                 "~/Scripts/local-http.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/site.css"));
+                "~/Content/site.css",
+                "~/Content/ui-grid-unstable.css",
+                "~/Content/bootstrap.css",
+                "~/Content/bootstrap-responsive.css",
+                "~/Content/bootstrap-theme.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").IncludeDirectory(
                 "~/Content/themes/base", "*.css", true));
