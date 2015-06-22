@@ -1,6 +1,6 @@
 ﻿(function() {
 
-    var app = angular.module('localServiceViewer', ['ngTouch', 'ui.grid']);
+    var app = angular.module('localServiceViewer', ['ngTouch', 'ui.grid' ]);
 
     var MaintController = function($scope, localService) {
 
@@ -12,9 +12,10 @@
             $scope.error = "Could not get type data.";
         };
 
-        var onEditDataType = function(data) {
-            $("#divTypeDataModal").html(data);
-            $("#divTypeDataModal").dialog("open");
+        var onEditDataType = function (response) {
+            $scope.typeData = response;
+            $('typeDataModalLabel').text(response.TypeName);
+            $("#typeDataModal").modal('show');
         };
 
         var onEditErrorDataType = function(response) {
@@ -32,103 +33,39 @@
                 .then(onEditDataType, onEditErrorDataType);
         }
 
-        $scope.updateTypeData = function (item) {
-            alert('Update Data');
-            localService.updateTypeData(item)
+        $scope.updateTypeData = function (typeData) {
+            localService.updateTypeData(typeData)
                 .then(onUpdateDataType, onTypeDataError);
         }
 
-        $scope.open = function (item) {
-
-            var modalInstance = $modal.open({
-                templateUrl: 'myModalTypeContent.html',
-                controller: 'localServiceViewer',
-                resolve: {
-                    item: function() {
-                        
-                    }
-                }
-            });
-
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        };
+        $scope.deleteTypeData = function (item) {
+            alert('Delete Data');
+            localService.deleteTypeData(item)
+                .then(onUpdateDataType, onTypeDataError);
+        }
 
         localService.getTypeData("StructureType").then(onTypeDataComplete, onTypeDataError);
     };
-
+    
     app.controller("MaintController", MaintController);
 
 }());
 
-angular.module('localServiceViewer').controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
+//angular.module('localServiceViewer').controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
 
-    $scope.item = function(data) {
+//    $scope.item = function(data) {
 
-    };
+//    };
 
-    $scope.selected = {
-        item: $scope.items[0]
-    };
+//    $scope.selected = {
+//        item: $scope.items[0]
+//    };
 
-    $scope.ok = function () {
-        $modalInstance.close($scope.selected.item);
-    };
+//    $scope.ok = function () {
+//        $modalInstance.close($scope.selected.item);
+//    };
 
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-});
-
-//$(function () {
-//    $('#divTypeDataModal').dialog({
-//        autoOpen: false,
-//        height: 238,
-//        width: 465,
-//        resizable: false,
-//        title: "Edit Type"
-//    });
-
-//    $(".type-modal").click(function (event) {
-//        event.preventDefault();
-
-//        $.ajax({
-//            url: event.currentTarget.href,
-//            type: 'POST',
-//            dataType: 'html',
-//            success: function (data) {
-//                $("#divTypeDataModal").html(data);
-//                $("#divTypeDataModal").dialog("open");
-//            }
-//        });
-
-//        //$('#divTypeDataModal').dialog();
-//    });
-//});
-
-//$("#update-type-modal").click(function (ev) {
-//    ev.preventDefault();
-//    var form = $("#update-type-modal-form");
-
-//    $.ajax({
-//            url: '/Admin/TypeDataUpdate',
-//            type: 'POST',
-//            data: form.serialize(),
-//            dataType: 'text'
-//        })
-//        .done(function(data) {
-//            alert("Sucess:" + data);
-//        })
-//        .fail(function(data) {
-//            alert("Error: " + data.response);
-//        });
-
-//    $("#divTypeDataModal").dialog("close");
-//});
-
-//$("#cancel-type-modal").click(function (ev) {
-//    $("#divTypeDataModal").dialog("close");
+//    $scope.cancel = function () {
+//        $modalInstance.dismiss('cancel');
+//    };
 //});

@@ -38,7 +38,37 @@
     </table>
 
     <!-- Modal -->
-    <div id="typeDataModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
+    <div id="typeDataModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document" ng-controller="MaintController">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="typeDataModalLabel">Edit Data</h4>
+                </div>
+
+                <div class="modal-body">
+                    <input type="hidden" id="TypeDataEnum" value="{{ typeData.TypeDataEnum }}" />
+                    <input type="hidden" id="ID" value="{{ typeData.ID }}" />
+
+                    <div class="divLabel">
+                        <label>ID:</label>
+                        <div>{{ typeData.ID }}</div>
+                    </div>
+
+                    <div class="divLabel">
+                        <label>Name:</label>
+                        <input type="text" id="Name" value="{{ typeData.Name }}" />
+                    </div>
+                </div>
+
+                <div class="modal-footer button-list">
+                    <button type="button" ng-click="updateTypeData(typeData)">Update</button>&nbsp;&nbsp;
+                    <button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

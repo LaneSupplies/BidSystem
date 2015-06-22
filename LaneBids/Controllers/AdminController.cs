@@ -219,7 +219,7 @@ namespace LaneBids.Controllers
                     break;
             }
 
-            return PartialView("_TypeDataModal", model);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
