@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    var localService = function ($http) {
+    var localService = function ($http, transformRequestAsFormPost) {
 
         var getTypeData = function(typeName) {
             return $http.get("/Admin/TypeData/?type=" + typeName)
@@ -153,5 +153,12 @@
 
     var module = angular.module("localServiceViewer", "transformRequestAsFormPost");
     module.factory("localService", localService);
+    module.factory("transformRequestAsFormPost", transformRequestAsFormPost);
+    module.value(
+        "$sanitize",
+        function(html) {
+            return (html);
+        }
+    );
 
 }());
