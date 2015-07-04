@@ -277,6 +277,7 @@
     <Compile Include="Sources\AddressService.cs" />
     <Compile Include="Sources\BidServices.cs" />
     <Compile Include="Sources\CanopyServices.cs" />
+    <Compile Include="Sources\EnumUtil.cs" />
     <Compile Include="Sources\JsonNetResults.cs" />
     <Compile Include="Sources\UserServices.cs" />
   </ItemGroup>

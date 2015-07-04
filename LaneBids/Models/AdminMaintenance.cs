@@ -8,7 +8,7 @@ namespace LaneBids.Models
 {
     public class AdminMaintenance
     {
-        public TypeDataListModel StructureTypeList { get; set; } 
+        public IEnumerable<object> StructureTypeList { get; set; } 
         public IEnumerable<object> BidTypesList { get; set; }
         public IEnumerable<object> BidStatusList { get; set; }
         public IEnumerable<object> JobTypesList { get; set; }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -86,113 +88,252 @@ namespace LaneBids.Controllers
         public ActionResult Maintenance()
         {
             ViewBag.Title = "Admin Maintenance";
-            var entities = new LaneEntities();
+            //var entities = new LaneEntities();
 
-            var adminMaint = new AdminMaintenance
-            {
-                StructureTypeList = new TypeDataListModel{
-                    GridTitle = "Structure Type",
-                    TypeDataEnum = TypeDataEnum.StructureType,
-                    Types = entities.Structure_Types.ToList().Select(type => new TypeDataModel
-                {
-                    ID = type.Structure_Type_ID,
-                    Name = type.Name,
-                    Create_Date = String.Format("{0:d}", type.Create_Date),
-                    FullName = UserServices.ConvertUserId(type.Created_By)
-                })},
-                BidTypesList = entities.Bid_Types.ToList().Select(type => new
-                {
-                    type.Bid_Type_ID,
-                    type.Name,
-                    type.Code,
-                    type.Create_Date,
-                    FullName = UserServices.ConvertUserId(type.Created_By)
-                }),
-                BidStatusList = entities.Bid_Statuses.ToList().Select(type => new
-                {
-                    type.Bid_Status_ID,
-                    type.Status,
-                    type.Create_Date,
-                    FullName = UserServices.ConvertUserId(type.Created_By)
-                }),
-                JobTypesList = entities.Job_Types.ToList().Select(type => new
-                {
-                    type.Job_Type_ID,
-                    type.Name,
-                    type.Code,
-                    type.Create_Date,
-                    FullName = UserServices.ConvertUserId(type.Created_By)
-                }),
-                ScopeTypesList = entities.Scope_Types.ToList().Select(type => new
-                {
-                    type.Scope_Type_ID,
-                    type.Name,
-                    type.Code,
-                    type.Create_Date,
-                    FullName = UserServices.ConvertUserId(type.Created_By)
-                }),
-                ColumnTypesList = entities.Column_Types.ToList().Select(type => new
-                {
-                    type.Column_Type_ID,
-                    type.Name,
-                    type.Create_Date,
-                    FullName = UserServices.ConvertUserId(type.Created_By)
-                }),
-                ColumnShapesList = entities.Column_Shapes.ToList().Select(type => new
-                {
-                    type.Column_Shape_ID,
-                    type.Name,
-                    type.Create_Date,
-                    FullName = UserServices.ConvertUserId(type.Created_By)
-                }),
-                DeckStylesList = entities.Deck_Styles.ToList().Select(type => new
-                {
-                    type.Deck_Style_ID,
-                    type.Name,
-                    type.Create_Date,
-                    FullName = UserServices.ConvertUserId(type.Created_By)
-                }),
-                FasciaTypesList = entities.Fascia_Types.ToList().Select(type => new
-                {
-                    type.Fascia_Type_ID,
-                    type.Name,
-                    type.Create_Date,
-                    FullName = UserServices.ConvertUserId(type.Created_By)
-                }),
-                DrainageList = entities.Drainage_Types.ToList().Select(type => new
-                {
-                    type.Drainage_Type_ID,
-                    type.Name,
-                    type.Create_Date,
-                    FullName = UserServices.ConvertUserId(type.Created_By)
-                })
-            };
+            //var adminMaint = new AdminMaintenance
+            //{
+            //    StructureTypeList = new TypeDataListModel{
+            //        GridTitle = "Structure Type",
+            //        TypeDataEnum = TypeDataEnum.StructureType,
+            //        Types = entities.Structure_Types.ToList().Select(type => new TypeDataModel
+            //    {
+            //        ID = type.Structure_Type_ID,
+            //        Name = type.Name,
+            //        Create_Date = String.Format("{0:d}", type.Create_Date),
+            //        FullName = UserServices.ConvertUserId(type.Created_By)
+            //    })},
+            //    BidTypesList = entities.Bid_Types.ToList().Select(type => new
+            //    {
+            //        type.Bid_Type_ID,
+            //        type.Name,
+            //        type.Code,
+            //        type.Create_Date,
+            //        FullName = UserServices.ConvertUserId(type.Created_By)
+            //    }),
+            //    BidStatusList = entities.Bid_Statuses.ToList().Select(type => new
+            //    {
+            //        type.Bid_Status_ID,
+            //        type.Status,
+            //        type.Create_Date,
+            //        FullName = UserServices.ConvertUserId(type.Created_By)
+            //    }),
+            //    JobTypesList = entities.Job_Types.ToList().Select(type => new
+            //    {
+            //        type.Job_Type_ID,
+            //        type.Name,
+            //        type.Code,
+            //        type.Create_Date,
+            //        FullName = UserServices.ConvertUserId(type.Created_By)
+            //    }),
+            //    ScopeTypesList = entities.Scope_Types.ToList().Select(type => new
+            //    {
+            //        type.Scope_Type_ID,
+            //        type.Name,
+            //        type.Code,
+            //        type.Create_Date,
+            //        FullName = UserServices.ConvertUserId(type.Created_By)
+            //    }),
+            //    ColumnTypesList = entities.Column_Types.ToList().Select(type => new
+            //    {
+            //        type.Column_Type_ID,
+            //        type.Name,
+            //        type.Create_Date,
+            //        FullName = UserServices.ConvertUserId(type.Created_By)
+            //    }),
+            //    ColumnShapesList = entities.Column_Shapes.ToList().Select(type => new
+            //    {
+            //        type.Column_Shape_ID,
+            //        type.Name,
+            //        type.Create_Date,
+            //        FullName = UserServices.ConvertUserId(type.Created_By)
+            //    }),
+            //    DeckStylesList = entities.Deck_Styles.ToList().Select(type => new
+            //    {
+            //        type.Deck_Style_ID,
+            //        type.Name,
+            //        type.Create_Date,
+            //        FullName = UserServices.ConvertUserId(type.Created_By)
+            //    }),
+            //    FasciaTypesList = entities.Fascia_Types.ToList().Select(type => new
+            //    {
+            //        type.Fascia_Type_ID,
+            //        type.Name,
+            //        type.Create_Date,
+            //        FullName = UserServices.ConvertUserId(type.Created_By)
+            //    }),
+            //    DrainageList = entities.Drainage_Types.ToList().Select(type => new
+            //    {
+            //        type.Drainage_Type_ID,
+            //        type.Name,
+            //        type.Create_Date,
+            //        FullName = UserServices.ConvertUserId(type.Created_By)
+            //    })
+            //};
 
-            return View(adminMaint);
+            return View();
         }
 
         [HttpGet]
-        public JsonResult TypeData(string type)
+        public JsonResult TypeData()
         {
             var entities = new LaneEntities();
-            var model = new List<TypeDataModel>();
-
-            var typeEnum = (TypeDataEnum)Enum.Parse(typeof(TypeDataEnum), type);
-
-            switch (typeEnum)
+            var model = new TypeDataAllModel {AllTypes = new List<TypeDataGridModel>()};
+            foreach (var type in EnumUtil.GetValues<TypeDataEnum>())
             {
-                case TypeDataEnum.StructureType:
-                    model = entities.Structure_Types.ToList().Select(t => new TypeDataModel
-                    {
-                        ID = t.Structure_Type_ID,
-                        Name = t.Name,
-                        Create_Date = String.Format("{0:d}", t.Create_Date),
-                        FullName = UserServices.ConvertUserId(t.Created_By),
-                        TypeDataEnum = typeEnum
-                    }).ToList();
-                    break;
+                var enumType = typeof (TypeDataEnum);
+                var memInfo = enumType.GetMember(type.ToString());
+                var attr = memInfo[0].GetCustomAttributes(typeof (DescriptionAttribute), false);
+                var displayName = ((DescriptionAttribute) attr[0]).Description;
+                var gridModel = new TypeDataGridModel();
+                switch (type)
+                {
+                    case TypeDataEnum.StructureType:
+                        gridModel = new TypeDataGridModel
+                        {
+                            Title = displayName,
+                            HasCode = false,
+                            DataTypes = entities.Structure_Types.ToList().Select(t => new TypeDataModel
+                            {
+                                ID = t.Structure_Type_ID,
+                                Name = t.Name,
+                                Code = "",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                FullName = UserServices.ConvertUserId(t.Created_By),
+                                TypeDataEnum = type
+                            }).ToList()
+                        };
+                        break;
+                    case TypeDataEnum.BidStatus:
+                        gridModel = new TypeDataGridModel
+                        {
+                            Title = displayName,
+                            HasCode = false,
+                            DataTypes = entities.Bid_Statuses.ToList().Select(t => new TypeDataModel
+                            {
+                                ID = t.Bid_Status_ID,
+                                Name = t.Status,
+                                Code = "",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                FullName = UserServices.ConvertUserId(t.Created_By),
+                                TypeDataEnum = type
+                            }).ToList()
+                        };
+                        break;
+                    case TypeDataEnum.BidType:
+                        gridModel = new TypeDataGridModel
+                        {
+                            Title = displayName,
+                            HasCode = true,
+                            DataTypes = entities.Bid_Types.ToList().Select(t => new TypeDataModel
+                            {
+                                ID = t.Bid_Type_ID,
+                                Name = t.Name,
+                                Code = t.Code,
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                FullName = UserServices.ConvertUserId(t.Created_By),
+                                TypeDataEnum = type
+                            }).ToList()
+                        };
+                        break;
+                    case TypeDataEnum.ColumnShapes:
+                        gridModel = new TypeDataGridModel
+                        {
+                            Title = displayName,
+                            HasCode = false,
+                            DataTypes = entities.Column_Shapes.ToList().Select(t => new TypeDataModel
+                            {
+                                ID = t.Column_Shape_ID,
+                                Name = t.Name,
+                                Code = "",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                FullName = UserServices.ConvertUserId(t.Created_By),
+                                TypeDataEnum = type
+                            }).ToList()
+                        };
+                        break;
+                    case TypeDataEnum.DeckStyles:
+                        gridModel = new TypeDataGridModel
+                        {
+                            Title = displayName,
+                            HasCode = false,
+                            DataTypes = entities.Deck_Styles.ToList().Select(t => new TypeDataModel
+                            {
+                                ID = t.Deck_Style_ID,
+                                Name = t.Name,
+                                Code = "",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                FullName = UserServices.ConvertUserId(t.Created_By),
+                                TypeDataEnum = type
+                            }).ToList()
+                        };
+                        break;
+                    case TypeDataEnum.Drainage:
+                        gridModel = new TypeDataGridModel
+                        {
+                            Title = displayName,
+                            HasCode = false,
+                            DataTypes = entities.Drainage_Types.ToList().Select(t => new TypeDataModel
+                            {
+                                ID = t.Drainage_Type_ID,
+                                Name = t.Name,
+                                Code = "",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                FullName = UserServices.ConvertUserId(t.Created_By),
+                                TypeDataEnum = type
+                            }).ToList()
+                        };
+                        break;
+                    case TypeDataEnum.FaciaTypes:
+                        gridModel = new TypeDataGridModel
+                        {
+                            Title = displayName,
+                            HasCode = false,
+                            DataTypes = entities.Fascia_Types.ToList().Select(t => new TypeDataModel
+                            {
+                                ID = t.Fascia_Type_ID,
+                                Name = t.Name,
+                                Code = "",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                FullName = UserServices.ConvertUserId(t.Created_By),
+                                TypeDataEnum = type
+                            }).ToList()
+                        };
+                        break;
+                    case TypeDataEnum.JobTypes:
+                        gridModel = new TypeDataGridModel
+                        {
+                            Title = displayName,
+                            HasCode = false,
+                            DataTypes = entities.Job_Types.ToList().Select(t => new TypeDataModel
+                            {
+                                ID = t.Job_Type_ID,
+                                Name = t.Name,
+                                Code = t.Code,
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                FullName = UserServices.ConvertUserId(t.Created_By),
+                                TypeDataEnum = type
+                            }).ToList()
+                        };
+                        break;
+                    case TypeDataEnum.ScopeTypes:
+                        gridModel = new TypeDataGridModel
+                        {
+                            Title = displayName,
+                            HasCode = false,
+                            DataTypes = entities.Scope_Types.ToList().Select(t => new TypeDataModel
+                            {
+                                ID = t.Scope_Type_ID,
+                                Name = t.Name,
+                                Code = t.Code,
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                FullName = UserServices.ConvertUserId(t.Created_By),
+                                TypeDataEnum = type
+                            }).ToList()
+                        };
+                        break;
+                }
+                model.AllTypes.Add(gridModel);
             }
-
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 

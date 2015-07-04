@@ -9,35 +9,41 @@
 <br/>
 <div ng-controller="MaintController">
     <!-- Structure Type Grid -->
+    
 
-    <div class="caption">Structure Type</div>
+    <div ng-repeat="gridModel in AllTypeData.AllTypes" class="maintenance-type">
+        <div class="caption">{{gridModel.Title}}</div>
 
-    <table class="typeTable">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Create Date</th>
-                <th>Created By</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="type in getTypeData">
-                <td>{{type.Name}}</td>
-                <td>{{type.Create_Date}}</td>
-                <td>{{type.FullName}}</td>
-                <td>
-                    <a href="#" ng-click="editTypeData(type)">Edit</a>
-                </td>
-                <td>
-                    <a href="#" ng-click="deleteTypeData(type)">Delete</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="typeTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th ng-show="gridModel.HasCode">Code</th>
+                    <th>Create Date</th>
+                    <th>Created By</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="DataType in gridModel.DataTypes">
+                    <td>{{DataType.Name}}</td>
+                    <td ng-show="gridModel.HasCode">{{DataType.Code}}</td>
+                    <td>{{DataType.Create_Date}}</td>
+                    <td>{{DataType.FullName}}</td>
+                    <td>
+                        <a href="#" ng-click="editTypeData(DataType)">Edit</a>
+                    </td>
+                    <td>
+                        <a href="#" ng-click="deleteTypeData(DataType)">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <!-- Modal -->
+    </div>
+
+        <!-- Modal -->
     <div id="typeDataModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document" ng-controller="MaintController">
             <div class="modal-content">
@@ -49,18 +55,20 @@
                 </div>
 
                 <div class="modal-body">
-                    <input type="hidden" id="TypeDataEnum" value="{{ typeData.TypeDataEnum }}" />
-                    <input type="hidden" id="ID" value="{{ typeData.ID }}" />
+                    <form novalidate>
+                        <input type="hidden" id="TypeDataEnum" ng-model="typeData.TypeDataEnum" value="{{ typeData.TypeDataEnum }}" />
+                        <input type="hidden" id="ID" ng-model="typeData.ID" value="{{ typeData.ID }}" />
 
-                    <div class="divLabel">
-                        <label>ID:</label>
-                        <div>{{ typeData.ID }}</div>
-                    </div>
+                        <div class="divLabel">
+                            <label>ID:</label>
+                            <div>{{ typeData.ID }}</div>
+                        </div>
 
-                    <div class="divLabel">
-                        <label>Name:</label>
-                        <input type="text" id="Name" value="{{ typeData.Name }}" />
-                    </div>
+                        <div class="divLabel">
+                            <label>Name:</label>
+                            <input type="text" id="Name" ng-model="typeData.Name" value="{{ typeData.Name }}" />
+                        </div>
+                    </form>
                 </div>
 
                 <div class="modal-footer button-list">
