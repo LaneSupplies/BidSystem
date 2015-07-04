@@ -1,35 +1,81 @@
 ﻿@{
-    var jobTypesId = (string)ViewData["JobTypeId"];
-    var name = (string)ViewData["Name"];
-    var code = (string) ViewData["Code"];
+    //Job Types
+    var gridJobTypes = new WebGrid(Model.JobTypesList, canPage: true, rowsPerPage: 20,
+        selectionFieldName: "selectedJobTypesRow", ajaxUpdateContainerId: "gridJobTypesContent");
+    gridJobTypes.Pager(WebGridPagerModes.NextPrevious);
     
+    var jobTypesId = "";
+    var name = "";
+    var code = "";
 }
 
-@using (Html.BeginForm("JobTypes", "Admin", FormMethod.Post, new {@id = "JobTypeForm", enctype = "multipart/form-data"}))
-{
-    @Html.ValidationSummary(true)
+<!-- Job Types -->
+<div id="JobType">
+    <h3>Job Types</h3>
+    @gridJobTypes.GetHtml(tableStyle: "webGrid",
+            headerStyle: "header",
+            alternatingRowStyle: "alt",
+            selectedRowStyle: "select",
+            columns: gridJobTypes.Columns(
+            gridJobTypes.Column("Job_Type_ID", "ID"),
+            gridJobTypes.Column("Name", "Name"),
+            gridJobTypes.Column("Code", "Code"),
+            gridJobTypes.Column("Create_Date", "Date Created"),
+            gridJobTypes.Column("FullName", "Created By"),
+            gridJobTypes.Column("Edit", header: null, format: @<text>@item.GetSelectLink("Edit")</text>)))
+    <span class="AddNewLink" onclick="AddJobTypes()">Add New</span>
+    <div id="JobTypeUpdate">
+        @if (gridJobTypes.HasSelection)
+        {
+            var jobTypes = gridJobTypes.SelectedRow;
+            jobTypesId = jobTypes["Job_Type_ID"].ToString();
+            name = jobTypes["Name"].ToString();
+            code = jobTypes["Code"].ToString();
+            <script>
+                $(document).ready(function () {
+                    $("#JobTypeNew").css("display", "block");
+                });
+            </script>
+        }
+    </div>
+    <div id="JobTypeNew" style="display: none">
+        @using (Html.BeginForm("JobTypes", "Admin", FormMethod.Post, new { @id = "JobTypeForm", enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true)
 
-    <fieldset>
-        
+            <fieldset>
+                <div class="divLabel">
+                    <label>ID</label>
+                    <input type="hidden" id="Job_Type_ID" name="Job_Type_ID" value="@jobTypesId" />
+                    @jobTypesId
+                </div>
 
-        <div class="divLabel">
-            <label>ID</label>
-            <input type="hidden" id="Job_Type_ID" name="Job_Type_ID" value="@jobTypesId" />
-            @jobTypesId
-        </div>
+                <div class="divLabel">
+                    <label>Name</label>
+                    @Html.TextBox("Name", name)
+                </div>
 
-        <div class="divLabel">
-            <label>Name</label>
-            @Html.TextBox("Name", name)
-        </div>
-        
-        <div class="divLabel">
-            <label>Code</label>
-            @Html.TextBox("Code", code)
-        </div>
+                <div class="divLabel">
+                    <label>Code</label>
+                    @Html.TextBox("Code", code)
+                </div>
 
-        <p>
-            <input type="submit" value="Submit" />
-        </p>
-    </fieldset>
-}
+                <p>
+                    <input type="submit" value="Submit" />
+                </p>
+            </fieldset>
+        }
+    </div>
+</div>
+
+<script>
+    function AddJobTypes() {
+        if ($("#JobTypeNew").is(":visible")) {
+            $("#JobTypeUpdate").css("display", "none");
+            $("#JobTypeNew").css("display", "none");
+        } else {
+            $("#JobTypeUpdate").css("display", "none");
+            $("#JobTypeNew").css("display", "block");
+        }
+    }
+</script>

@@ -1,27 +1,74 @@
 ﻿@{
-    var fasciaTypesId = (string)ViewData["FasciaTypesId"];
-    var name = (string)ViewData["Name"];
+    //Fascia Types
+    var gridFasciaTypes = new WebGrid(Model.FasciaTypesList, canPage: true, rowsPerPage: 20,
+        selectionFieldName: "selectedFasciaTyepsRow", ajaxUpdateContainerId: "gridFasciaTypesContent");
+    gridFasciaTypes.Pager(WebGridPagerModes.NextPrevious);
+    
+    var fasciaTypesId = "";
+    var name = "";
 
 }
 
-@using (Html.BeginForm("FasciaTypes", "Admin", FormMethod.Post, new { @id = "FasciaTypesForm", enctype = "multipart/form-data" }))
-{
-    @Html.ValidationSummary(true)
+<!-- Fascia Types -->
+<div id="FasciaTypes">
+    <h3>Fascia Types</h3>
+    @gridFasciaTypes.GetHtml(tableStyle: "webGrid",
+        headerStyle: "header",
+        alternatingRowStyle: "alt",
+        selectedRowStyle: "select",
+        columns: gridFasciaTypes.Columns(
+            gridFasciaTypes.Column("Fascia_Type_ID", "ID"),
+            gridFasciaTypes.Column("Name", "Name"),
+            gridFasciaTypes.Column("Create_Date", "Date Created"),
+            gridFasciaTypes.Column("FullName", "Created By"),
+            gridFasciaTypes.Column("Edit", header: null, format: @<text>@item.GetSelectLink("Edit")</text>)))
+    <span onclick="AddFasciaTypes()" class="AddNewLink">Add New</span>
+    <div id="FasciaTypesUpdate">
+        @if (gridFasciaTypes.HasSelection)
+        {
+            var FasciaTypes = gridFasciaTypes.SelectedRow;
+            fasciaTypesId = FasciaTypes["Fascia_Type_ID"].ToString();
+            name = FasciaTypes["Name"].ToString();
+            <script>
+                $(document).ready(function () {
+                    $("#FasciaTypesNew").css("display", "block");
+                });
+            </script>
+        }
+    </div>
+    <div id="FasciaTypesNew" style="display: none">
+        @using (Html.BeginForm("FasciaTypes", "Admin", FormMethod.Post, new { @id = "FasciaTypesForm", enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true)
 
-    <fieldset>
-        <input type="hidden" id="Fascia_Type_ID" name="Fascia_Type_ID" value="@fasciaTypesId" />
-        <div class="divLabel">
-            <label>ID</label>
-            @fasciaTypesId
-        </div>
+            <fieldset>
+                <input type="hidden" id="Fascia_Type_ID" name="Fascia_Type_ID" value="@fasciaTypesId" />
+                <div class="divLabel">
+                    <label>ID</label>
+                    @fasciaTypesId
+                </div>
 
-        <div class="divLabel">
-            <label>Name</label>
-            @Html.TextBox("Name", name)
-        </div>
+                <div class="divLabel">
+                    <label>Name</label>
+                    @Html.TextBox("Name", name)
+                </div>
 
-        <p>
-            <input type="submit" value="Submit" />
-        </p>
-    </fieldset>
-}
+                <p>
+                    <input type="submit" value="Submit" />
+                </p>
+            </fieldset>
+        }
+    </div>
+</div>
+
+<script>
+    function AddFasciaTypes() {
+        if ($("#FasciaTypesNew").is(":visible")) {
+            $("#FasciaTypesUpdate").css("display", "none");
+            $("#FasciaTypesNew").css("display", "none");
+        } else {
+            $("#FasciaTypesUpdate").css("display", "none");
+            $("#FasciaTypesNew").css("display", "block");
+        }
+    }
+</script>

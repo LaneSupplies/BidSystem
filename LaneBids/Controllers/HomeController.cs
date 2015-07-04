@@ -35,69 +35,6 @@ namespace LaneBids.Controllers
         }
 
         [HttpPost]
-        public ActionResult Bid(BidDetails bidDetails)
-        {
-            //if (ModelState.IsValid)
-            //{
-            //    var bidServices = new BidServices();
-            //    var entities = new LaneEntities();
-            //    var newBid = new Bid();
-            //    newBid.Bid_Status_ID = bidDetails.BidStatusId;
-            //    newBid.Bid_Type_ID = bidDetails.BidTypeId;
-            //    newBid.Scope_Type_ID = bidDetails.ScopeTypeId;
-            //    newBid.Job_Type_ID = bidDetails.JobTypeId;
-            //    newBid.Structure_Type_ID = bidDetails.StructureId;
-            //    newBid.Created_By = WebSecurity.CurrentUserId;
-            //    newBid.Create_Date = DateTime.Now;
-
-            //    if (bidDetails.CustomerId == "None")
-            //    {
-            //        ModelState.AddModelError("CustomerId", "Please choose a Customer");
-            //        return View(bidServices.BidDetailInfo(bidDetails.CanopyId.ToString()));
-            //    }    
-            //    newBid.Customer_ID = new Guid(bidDetails.CustomerId);
-                
-            //    if (bidDetails.SalesPersonId == 0)
-            //    {
-            //        ModelState.AddModelError("SalesPersonId", "Please choose a Sales Person");
-            //        return View(bidServices.BidDetailInfo(bidDetails.CanopyId.ToString()));
-            //    }
-            //    newBid.Sales_Person_ID = bidDetails.SalesPersonId;
-                
-            //    if (bidDetails.ShippingId == 0)
-            //    {
-            //        ModelState.AddModelError("ShippingId", "Please choose a Shipping Address");
-            //        return View(bidServices.BidDetailInfo(bidDetails.CanopyId.ToString()));
-            //    }
-            //    newBid.Shipping_ID = bidDetails.ShippingId;
-
-            //    if (bidDetails.SiteId == 0)
-            //    {
-            //        ModelState.AddModelError("SiteId", "Please choose a Site");
-            //        return View(bidServices.BidDetailInfo(bidDetails.CanopyId.ToString()));
-            //    }
-            //    newBid.Site_ID = bidDetails.SiteId;
-                
-            //    entities.Bids.Add(newBid);
-            //    //entities.SaveChanges();
-
-            //    if (!String.IsNullOrEmpty(bidDetails.BidNotesText))
-            //    {
-            //        var bidNote = new Bid_Notes();
-            //        bidNote.Notes = bidDetails.BidNotesText;
-            //        bidNote.Create_Date = DateTime.Now;
-            //        bidNote.Created_By = WebSecurity.CurrentUserId;
-            //        entities.Bid_Notes.Add(bidNote);
-            //        entities.SaveChanges();
-
-            //        newBid.Bid_Note_ID = bidNote.Bid_Note_ID;
-            //        //entities.SaveChanges();
-            //    }
-            //}
-            return RedirectToAction("Canopy", bidDetails);
-        }
-
-        [HttpPost]
         public ActionResult Canopy(BidDetails bidDetails)
         {
             ViewBag.Title = "Canopy";
@@ -387,9 +324,14 @@ namespace LaneBids.Controllers
         public ActionResult ColorAdd(ColorModel color)
         {
             var entities = new LaneEntities();
-            var addColor = new Color();
-            addColor.Name = color.ColorName;
-            addColor.ColorText = color.ColorText;
+            var addColor = new Color
+            {
+                Name = color.ColorName, 
+                ColorText = color.ColorText,
+                Create_Date = DateTime.Now,
+                Created_By = WebSecurity.CurrentUserId
+            };
+
             entities.Colors.Add(addColor);
             entities.SaveChanges();
 

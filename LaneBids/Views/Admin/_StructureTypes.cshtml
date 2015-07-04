@@ -1,26 +1,6 @@
-﻿@{
-    var structureTypeId = (string)ViewData["StructureTypeId"];
-    var name = (string)ViewData["Name"];
-}
+﻿@model LaneBids.Models.AdminMaintenance
 
-@using (Html.BeginForm("StructureTypes", "Admin", FormMethod.Post, new { @id = "StructureTypeForm", enctype = "multipart/form-data" }))
-{
-    @Html.ValidationSummary(true)
+<div>
+    @Html.DisplayFor(m => m.StructureTypeList)
+</div>
 
-    <fieldset>
-        <input type="hidden" id="Structure_Type_ID" name="Structure_Type_ID" value="@structureTypeId" />
-        <div class="divLabel">
-            <label>ID</label>
-            @structureTypeId
-        </div>
-
-        <div class="divLabel">
-            <label>Name</label>
-            @Html.TextBox("Name", name)
-        </div>
-
-        <p>
-            <input type="submit" value="Submit" />
-        </p>
-    </fieldset>
-}

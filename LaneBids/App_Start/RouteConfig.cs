@@ -14,16 +14,34 @@ namespace LaneBids
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}",
-                defaults: new { controller = "Home", action = "Index" }
-            );
+                name: "MaintenanceEdit",
+                url: "{controller}/{action}/{id}/{typeName}",
+                defaults: new
+                {
+                    controller = "Admin",
+                    action = "TypeDataEdit",
+                    id = UrlParameter.Optional,
+                    typeName = UrlParameter.Optional
+                }
+                );
 
             routes.MapRoute(
-                name: "Canopy",
+                name: "Maintenance",
                 url: "{controller}/{action}/{type}",
-                defaults: new { controller = "Home", action = "Index", type = UrlParameter.Optional }
-            );
+                defaults: new
+                {
+                    controller = "Admin",
+                    action = "TypeData",
+                    type = UrlParameter.Optional
+                }
+                );
+
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}",
+                defaults: new {controller = "Home", action = "Index"}
+                );
+
         }
     }
 }

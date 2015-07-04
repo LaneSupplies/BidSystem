@@ -1,33 +1,83 @@
 ﻿
 @{
-    var bidTypeId = (string) ViewData["BidTypeId"];
-    var name = (string) ViewData["Name"];
-    var code = (string)ViewData["Code"];
+    //Bid Types
+    var gridBidType = new WebGrid(Model.BidTypesList, canPage: true, rowsPerPage: 20,
+        selectionFieldName: "selectedBidTypeRow", ajaxUpdateContainerId: "gridBidtypeContent");
+    gridBidType.Pager(WebGridPagerModes.NextPrevious);
+    
+    var bidTypeId = "";
+    var name = "";
+    var code = "";
 }
 
-@using (Html.BeginForm("BidTypes", "Admin", FormMethod.Post, new { @id="BidTypeForm", enctype = "multipart/form-data" }))
-{
-    @Html.ValidationSummary(true)
+<!--Bid Types -->
+<div id="BioType">
+    <h3>Bid Types</h3>
+    @gridBidType.GetHtml(tableStyle: "webGrid",
+        headerStyle: "header",
+        alternatingRowStyle: "alt",
+        selectedRowStyle: "select",
+        columns: gridBidType.Columns(
+            gridBidType.Column("Bid_Type_ID", "ID"),
+            gridBidType.Column("Name", "Name"),
+            gridBidType.Column("Code", "Code"),
+            gridBidType.Column("Create_Date", "Date Created"),
+            gridBidType.Column("FullName", "Created By"),
+            gridBidType.Column("Edit", header: null, format: @<text>@item.GetSelectLink("Edit")</text>)))
+    <span class="AddNewLink" onclick="AddBidTypes()">Add New</span>
+    <div id="BidTypeUpdate">
+        @if (gridBidType.HasSelection)
+        {
+            var BioTypes = gridBidType.SelectedRow;
+            bidTypeId = BioTypes["Bid_Type_ID"].ToString();
+            name = BioTypes["Name"].ToString();
+            code = BioTypes["Code"].ToString();
+            <script>
+                $(document).ready(function () {
+                    $("#BidTypeNew").css("display", "block");
+                });
+            </script>
+        }
+    </div>
 
-    <fieldset>
-        <input type="hidden" id="Bid_Type_ID" name="Bid_Type_ID" value="@bidTypeId" />
-        <div class="divLabel">
-            <label>ID</label>
-            @bidTypeId
-        </div>
+    <div id="BidTypeNew" style="display: none">
+        @using (Html.BeginForm("BidTypes", "Admin", FormMethod.Post, new { @id = "BidTypeForm", enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true)
 
-        <div class="divLabel">
-            <label>Name</label>
-            @Html.TextBox("Name", name)
-        </div>
-        
-        <div class="divLabel">
-            <label>Code</label>
-            @Html.TextBox("Code", code)
-        </div>
+            <fieldset>
+                <input type="hidden" id="Bid_Type_ID" name="Bid_Type_ID" value="@bidTypeId" />
+                <div class="divLabel">
+                    <label>ID</label>
+                    @bidTypeId
+                </div>
 
-        <p>
-            <input type="submit" value="Submit" />
-        </p>
-    </fieldset>
-}
+                <div class="divLabel">
+                    <label>Name</label>
+                    @Html.TextBox("Name", name)
+                </div>
+
+                <div class="divLabel">
+                    <label>Code</label>
+                    @Html.TextBox("Code", code)
+                </div>
+
+                <p>
+                    <input type="submit" value="Submit" />
+                </p>
+            </fieldset>
+        }
+    </div>
+</div>
+
+<script>
+    function AddBidType() {
+        if ($("#BidTypeNew").is(":visible")) {
+            $("#BidTypeUpdate").css("display", "none");
+            $("#BidTypeNew").css("display", "none");
+        } else {
+            $("#BidTypeUpdate").css("display", "none");
+            $("#BidTypeNew").css("display", "block");
+        }
+    }
+</script>

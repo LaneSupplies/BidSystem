@@ -1,0 +1,13 @@
+﻿@model LaneBids.Models.Admin.TypeDataModel
+@Html.HiddenFor(m => m.TypeDataEnum)
+@Html.HiddenFor(m => m.ID)
+ 
+<div class="divLabel">
+    <label>ID:</label>
+    <div>@Model.ID</div>
+</div>
+
+<div class="divLabel">
+    <label>Name:</label>
+    <div>@Html.TextBoxFor(x => x.Name)</div>
+</div>

@@ -1,27 +1,74 @@
 ﻿@{
-    var columnShapesId = (string)ViewData["ColumnShapesId"];
-    var name = (string)ViewData["Name"];
+    //Column Shapes
+    var gridColumnShapes = new WebGrid(Model.ColumnShapesList, canPage: true, rowsPerPage: 20,
+        selectionFieldName: "selectedColumnShapesRow", ajaxUpdateContainerId: "gridColumnShapesContent");
+    gridColumnShapes.Pager(WebGridPagerModes.NextPrevious);
+
+    var columnShapesId = "";
+    var name = "";
 
 }
 
-@using (Html.BeginForm("ColumnShapes", "Admin", FormMethod.Post, new { @id = "ColumnShapesForm", enctype = "multipart/form-data" }))
-{
-    @Html.ValidationSummary(true)
+<!--Column Shapes -->
+<div id="ColumnShapes">
+    <h3>Column Shapes</h3>
+    @gridColumnShapes.GetHtml(tableStyle: "webGrid",
+            headerStyle: "header",
+            alternatingRowStyle: "alt",
+            selectedRowStyle: "select",
+            columns: gridColumnShapes.Columns(
+                gridColumnShapes.Column("Column_Shape_ID", "ID"),
+                gridColumnShapes.Column("Name", "Name"),
+                gridColumnShapes.Column("Create_Date", "Date Created"),
+                gridColumnShapes.Column("FullName", "Created By"),
+                gridColumnShapes.Column("Edit", header: null, format: @<text>@item.GetSelectLink("Edit")</text>)))
+    <span class="AddNewLink" onclick="AddColumnShapes()">Add New</span>
+    <div id="ColumnShapesUpdate">
+        @if (gridColumnShapes.HasSelection)
+        {
+            var ColumnShapes = gridColumnShapes.SelectedRow;
+            columnShapesId = ColumnShapes["Column_Shape_ID"].ToString();
+            name = ColumnShapes["Name"].ToString();
+            <script>
+                $(document).ready(function () {
+                    $("#ColumnShapesNew").css("display", "block");
+                });
+            </script>
+        }
+    </div>
+    <div id="ColumnShapesNew" style="display: none">
+        @using (Html.BeginForm("ColumnShapes", "Admin", FormMethod.Post, new { @id = "ColumnShapesForm", enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true)
 
-    <fieldset>
-        <input type="hidden" id="Column_Shape_ID" name="Column_Shape_ID" value="@columnShapesId" />
-        <div class="divLabel">
-            <label>ID</label>
-            @columnShapesId
-        </div>
+            <fieldset>
+                <input type="hidden" id="Column_Shape_ID" name="Column_Shape_ID" value="@columnShapesId" />
+                <div class="divLabel">
+                    <label>ID</label>
+                    @columnShapesId
+                </div>
 
-        <div class="divLabel">
-            <label>Name</label>
-            @Html.TextBox("Name", name)
-        </div>
+                <div class="divLabel">
+                    <label>Name</label>
+                    @Html.TextBox("Name", name)
+                </div>
 
-        <p>
-            <input type="submit" value="Submit" />
-        </p>
-    </fieldset>
-}
+                <p>
+                    <input type="submit" value="Submit" />
+                </p>
+            </fieldset>
+        }
+    </div>
+</div>
+
+<script>
+    function AddColumnShapes() {
+        if ($("#ColumnShapesNew").is(":visible")) {
+            $("#ColumnShapesUpdate").css("display", "none");
+            $("#ColumnShapesNew").css("display", "none");
+        } else {
+            $("#ColumnShapesUpdate").css("display", "none");
+            $("#ColumnShapesNew").css("display", "block");
+        }
+    }
+</script>

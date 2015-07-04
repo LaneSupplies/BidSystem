@@ -538,9 +538,9 @@ label {
     float: left;
 }
 
-label.checkbox {
-    display: inline;
-}
+    label.checkbox {
+        display: inline;
+    }
 
 labelField {
     display: inline;
@@ -662,7 +662,7 @@ input[type="checkbox"].input-validation-error {
     vertical-align: top;
 }
 
-.validation-summary-errors ul{
+.validation-summary-errors ul {
     padding: 0 !important;
     margin: 0 !important;
 }
@@ -671,235 +671,6 @@ input[type="checkbox"].input-validation-error {
 
 
 
-/* tables
-----------------------------------------------------------*/
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin-top: 0.75em;
-    border: 0 none;
-}
-
-th {
-    font-size: 1.2em;
-    text-align: left;
-    border: none 0px;
-    padding-left: 0;
-}
-
-    th a {
-        display: block;
-        position: relative;
-    }
-
-        th a:link, th a:visited, th a:active, th a:hover {
-            color: #333;
-            font-weight: 600;
-            text-decoration: none;
-            padding: 0;
-        }
-
-        th a:hover {
-            color: #000;
-        }
-
-    th.asc a, th.desc a {
-        margin-right: .75em;
-    }
-
-        th.asc a:after, th.desc a:after {
-            display: block;
-            position: absolute;
-            right: 0em;
-            top: 0;
-            font-size: 0.75em;
-        }
-
-        th.asc a:after {
-            content: '▲';
-        }
-
-        th.desc a:after {
-            content: '▼';
-        }
-
-td {
-    /*padding: 0.25em 2em 0.25em 0em;*/
-    border: 0 none;
-}
-
-tr.pager td {
-    padding: 0 0.25em 0 0;
-}
-
-
-/********************
-*   Mobile Styles   *
-********************/
-@media only screen and (max-width: 850px) {
-
-    /* header
-    ----------------------------------------------------------*/
-    header .float-left,
-    header .float-right {
-        float: none;
-    }
-
-    /* logo */
-    header .site-title {
-        margin: 10px;
-        text-align: center;
-    }
-
-    /* login */
-    #login {
-        font-size: .85em;
-        margin: 0 0 12px;
-        text-align: center;
-    }
-
-        #login ul {
-            margin: 5px 0;
-            padding: 0;
-        }
-
-        #login li {
-            display: inline;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        #login a {
-            background: none;
-            color: #999;
-            font-weight: 600;
-            margin: 2px;
-            padding: 0;
-        }
-
-            #login a:hover {
-                color: #333;
-            }
-
-    /* menu */
-    nav {
-        margin-bottom: 5px;
-    }
-
-    ul#menu {
-        margin: 0;
-        padding: 0;
-        text-align: center;
-    }
-
-        ul#menu li {
-            margin: 0;
-            padding: 0;
-        }
-
-
-    /* main layout
-    ----------------------------------------------------------*/
-    .main-content,
-    .featured + .main-content {
-        background-position: 10px 0;
-    }
-
-    .content-wrapper {
-        padding-right: 10px;
-        padding-left: 10px;
-    }
-
-    .featured .content-wrapper {
-        padding: 10px;
-    }
-
-    /* page content */
-    article, aside {
-        float: none;
-        width: 100%;
-    }
-
-    /* ordered list */
-    ol.round {
-        list-style-type: none;
-        padding-left: 0;
-    }
-
-        ol.round li {
-            padding-left: 10px;
-            margin: 25px 0;
-        }
-
-            ol.round li.zero,
-            ol.round li.one,
-            ol.round li.two,
-            ol.round li.three,
-            ol.round li.four,
-            ol.round li.five,
-            ol.round li.six,
-            ol.round li.seven,
-            ol.round li.eight,
-            ol.round li.nine {
-                background: none;
-            }
-
-    /* features */
-    section.feature {
-        float: none;
-        padding: 10px;
-        width: auto;
-    }
-
-        section.feature img {
-            color: #999;
-            content: attr(alt);
-            font-size: 1.5em;
-            font-weight: 600;
-        }
-
-    /* forms */
-    input {
-        width: 90%;
-    }
-
-    /* login page */
-    #loginForm {
-        border-right: none;
-        float: none;
-        width: auto;
-    }
-
-        #loginForm .validation-error {
-            display: block;
-            margin-left: 15px;
-        }
-
-    #socialLoginForm {
-        margin-left: 0;
-        float: none;
-        width: auto;
-    }
-
-
-    /* footer
-    ----------------------------------------------------------*/
-    footer .float-left,
-    footer .float-right {
-        float: none;
-    }
-
-    footer {
-        text-align: center;
-        height: auto;
-        /*padding: 10px 0;*/
-    }
-
-        footer p {
-            margin: 0;
-        }
-}
 
 /* Tyepe List */
 ol.BidTypes {
@@ -925,9 +696,17 @@ ol.AdminLinks li {
     padding-left: 0;
 }
 
-    ol.AdminLinks li.AdminLink {
+/*ol.AdminLinks li.AdminLink {
         background: url("../Images/bullet.png") no-repeat;
-    }
+    }*/
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    padding-left: 0;
+}
 
 .price-error {
     box-shadow: 0 0 1px 3px #e74c3c;
@@ -975,27 +754,27 @@ ol.AdminLinks li {
     text-wrap: none;
 }
 
-.divLabel label {
-    width: 150px;
-    padding-right: 10px;
-}
+    .divLabel label {
+        width: 150px;
+        padding-right: 10px;
+    }
 
-.divLabel input[type=text] {
-    max-width: 200px;
-    border-color: #787878;
-}
+    .divLabel input[type=text] {
+        max-width: 200px;
+        border-color: #787878;
+    }
 
-.divLabel textarea {
-    border-color: #787878;
-}
+    .divLabel textarea {
+        border-color: #787878;
+    }
 
 .measurementLabel {
     width: 350px;
 }
 
-.measurementLabel input {
-    width: 30px;
-}
+    .measurementLabel input {
+        width: 30px;
+    }
 
 .measurementList label {
     width: 200px;
@@ -1055,7 +834,7 @@ a.addImage, a.addImage:visited {
     cursor: pointer;
 }
 
-addImage {
+.addImage {
     background: url("../Images/blueAdd.png") no-repeat;
     display: block;
     height: 15px;
@@ -1093,9 +872,9 @@ addImage {
     float: left;
 }
 
-.measurementListColumn input {
-    width: 30px;
-}
+    .measurementListColumn input {
+        width: 30px;
+    }
 
 #ColumnLengh {
     height: auto;
@@ -1104,4 +883,64 @@ addImage {
 #ColumnWidth {
     float: left;
     height: auto;
+}
+
+.hide {
+    display: none;
+}
+
+.button-list {
+    margin: 10px;
+}
+
+
+/* Type Table Layout */
+.caption {
+    text-align: left;
+    color: #4d4d4d;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px;
+}
+
+.typeTable {
+    border-collapse: collapse;
+}
+
+.typeTable thead {
+    background: SteelBlue;
+    color: white;
+}
+
+.typeTable th,
+.typeTable td {
+    padding: 5px 10px;
+    border: 1px solid black;
+}
+
+.typeTable tbody tr:nth-child(even) {
+    background: #cccccc;
+}
+
+.typeTable tbody tr td:nth-child(2) {
+    text-align: center;
+}
+
+.typeTable tbody tr td:nth-child(3),
+.typeTable tbody tr td:nth-child(4) {
+    text-align: right;
+}
+
+.typeTable tfoot {
+    background: SeaGreen;
+    color: white;
+    text-align: right;
+}
+
+    .typeTable tfoot tr th:last-child {
+        font-family: monospace;
+    }
+
+.maintenance-type {
+    margin-bottom: 30px;
 }
