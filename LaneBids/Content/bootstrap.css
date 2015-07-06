@@ -109,7 +109,7 @@ samp {
   font-family: monospace, monospace;
   font-size: 1em;
 }
-button,
+/*button,
 input,
 optgroup,
 select,
@@ -120,7 +120,7 @@ textarea {
 }
 button {
   overflow: visible;
-}
+}*/
 button,
 select {
   text-transform: none;
@@ -249,9 +249,9 @@ th {
   .dropup > .btn > .caret {
     border-top-color: #000 !important;
   }
-  .label {
+  /*.label {
     border: 1px solid #000;
-  }
+  }*/
   .table {
     border-collapse: collapse !important;
   }
@@ -2500,12 +2500,12 @@ legend {
   border: 0;
   border-bottom: 1px solid #e5e5e5;
 }
-label {
+/*label {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 5px;
   font-weight: bold;
-}
+}*/
 input[type="search"] {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -4742,7 +4742,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   cursor: not-allowed;
   background-color: #fff;
 }
-.label {
+/*.label {
   display: inline;
   padding: .2em .6em .3em;
   font-size: 75%;
@@ -4808,7 +4808,7 @@ a.label:focus {
 .label-danger[href]:hover,
 .label-danger[href]:focus {
   background-color: #c9302c;
-}
+}*/
 .badge {
   display: inline-block;
   min-width: 10px;
@@ -5716,6 +5716,7 @@ button.close {
   background: transparent;
   border: 0;
 }
+
 .modal-open {
   overflow: hidden;
 }

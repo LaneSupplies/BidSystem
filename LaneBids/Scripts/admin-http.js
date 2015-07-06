@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    var localService = function ($http) {
+    var adminHttpService = function ($http) {
         var transform = function(data) {
             return $.param(data);
         };
@@ -69,8 +69,8 @@
         };
     };
 
-    var appHttp = angular.module("localServiceViewer");
-    appHttp.factory("localService", localService);
+    var appHttp = angular.module("AdminService");
+    appHttp.factory("adminHttpService", adminHttpService);
 
     appHttp.config(function($httpProvider) {
         $httpProvider.defaults.transformRequest = function(data) {
@@ -80,8 +80,4 @@
             return $.param(data);
         }
     });
-
-    //$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-
-
 }());

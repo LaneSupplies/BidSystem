@@ -363,44 +363,58 @@
     <Content Include="fonts\ui-grid.eot" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <Content Include="Scripts\AdminApps.js" />
-    <Content Include="Scripts\angular-animate.js" />
-    <Content Include="Scripts\angular-animate.min.js" />
-    <Content Include="Scripts\angular-aria.js" />
-    <Content Include="Scripts\angular-aria.min.js" />
-    <Content Include="Scripts\angular-cookies.js" />
-    <Content Include="Scripts\angular-cookies.min.js" />
-    <Content Include="Scripts\angular-csp.css" />
-    <Content Include="Scripts\angular-loader.js" />
-    <Content Include="Scripts\angular-loader.min.js" />
-    <Content Include="Scripts\angular-messages.js" />
-    <Content Include="Scripts\angular-messages.min.js" />
-    <Content Include="Scripts\angular-resource.js" />
-    <Content Include="Scripts\angular-resource.min.js" />
-    <Content Include="Scripts\angular-route.js" />
-    <Content Include="Scripts\angular-route.min.js" />
-    <Content Include="Scripts\angular-sanitize.js" />
-    <Content Include="Scripts\angular-sanitize.min.js" />
-    <Content Include="Scripts\angular-scenario.js" />
-    <Content Include="Scripts\angular-touch.js" />
-    <Content Include="Scripts\angular-touch.min.js" />
-    <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\errors.json" />
-    <Content Include="Scripts\angular-touch.min.js.map" />
-    <Content Include="Scripts\angular-sanitize.min.js.map" />
-    <Content Include="Scripts\angular-route.min.js.map" />
-    <Content Include="Scripts\angular-resource.min.js.map" />
-    <Content Include="Scripts\angular-messages.min.js.map" />
-    <Content Include="Scripts\angular-loader.min.js.map" />
-    <Content Include="Scripts\angular-cookies.min.js.map" />
-    <Content Include="Scripts\angular-aria.min.js.map" />
-    <Content Include="Scripts\angular-animate.min.js.map" />
-    <None Include="Scripts\jquery-1.11.1.intellisense.js" />
-    <Content Include="Scripts\angular-mocks.js" />
-    <Content Include="Scripts\app_old.js" />
+    <Content Include="Scripts\home-http.js" />
+    <Content Include="Scripts\vendor\angular-animate.js" />
+    <Content Include="Scripts\vendor\angular-animate.min.js" />
+    <Content Include="Scripts\vendor\angular-aria.js" />
+    <Content Include="Scripts\vendor\angular-aria.min.js" />
+    <Content Include="Scripts\vendor\angular-cookies.js" />
+    <Content Include="Scripts\vendor\angular-cookies.min.js" />
+    <Content Include="Scripts\vendor\angular-csp.css" />
+    <Content Include="Scripts\vendor\angular-loader.js" />
+    <Content Include="Scripts\vendor\angular-loader.min.js" />
+    <Content Include="Scripts\vendor\angular-messages.js" />
+    <Content Include="Scripts\vendor\angular-messages.min.js" />
+    <Content Include="Scripts\vendor\angular-mocks.js" />
+    <Content Include="Scripts\vendor\angular-resource.js" />
+    <Content Include="Scripts\vendor\angular-resource.min.js" />
+    <Content Include="Scripts\vendor\angular-route.js" />
+    <Content Include="Scripts\vendor\angular-route.min.js" />
+    <Content Include="Scripts\vendor\angular-sanitize.js" />
+    <Content Include="Scripts\vendor\angular-sanitize.min.js" />
+    <Content Include="Scripts\vendor\angular-scenario.js" />
+    <Content Include="Scripts\vendor\angular-touch.js" />
+    <Content Include="Scripts\vendor\angular-touch.min.js" />
+    <Content Include="Scripts\vendor\angular.js" />
+    <Content Include="Scripts\vendor\angular.min.js" />
+    <Content Include="Scripts\vendor\bootstrap.js" />
+    <Content Include="Scripts\HomeApps.js" />
+    <None Include="Scripts\vendor\jquery-1.11.1.intellisense.js" />
+    <Content Include="Scripts\vendor\jquery-1.11.1.js" />
+    <Content Include="Scripts\vendor\jquery-ui-1.11.2.js" />
+    <Content Include="Scripts\vendor\jquery.formatCurrency-1.4.0.js" />
+    <Content Include="Scripts\vendor\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\vendor\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\vendor\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\vendor\jquery.validate.js" />
+    <Content Include="Scripts\vendor\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\vendor\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\vendor\modernizr-2.6.2.js" />
+    <Content Include="Scripts\vendor\npm.js" />
+    <Content Include="Scripts\vendor\scrollsaver.js" />
+    <Content Include="Scripts\vendor\ui-grid-unstable.js" />
+    <Content Include="Scripts\vendor\angular.min.js.map" />
+    <Content Include="Scripts\vendor\bootstrap.min.js" />
+    <Content Include="Scripts\vendor\angular-route.min.js.map" />
+    <Content Include="Scripts\vendor\angular-animate.min.js.map" />
+    <Content Include="Scripts\vendor\angular-aria.min.js.map" />
+    <Content Include="Scripts\vendor\angular-cookies.min.js.map" />
+    <Content Include="Scripts\vendor\angular-loader.min.js.map" />
+    <Content Include="Scripts\vendor\angular-messages.min.js.map" />
+    <Content Include="Scripts\vendor\angular-resource.min.js.map" />
+    <Content Include="Scripts\vendor\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\vendor\angular-touch.min.js.map" />
+    <Content Include="Scripts\vendor\errors.json" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-et.js" />
@@ -1144,34 +1158,13 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
-    <Content Include="Scripts\jquery-1.11.1.js" />
-    <Content Include="Scripts\jquery-1.11.1.min.js" />
-    <Content Include="Scripts\jquery-ui-1.11.2.js" />
-    <Content Include="Scripts\jquery-ui-1.11.2.min.js" />
-    <Content Include="Scripts\jquery.formatCurrency-1.4.0.min.js.map">
-      <DependentUpon>jquery.formatCurrency-1.4.0.min.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\jquery-1.11.1.min.map" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.formatCurrency-1.4.0.js" />
-    <Content Include="Scripts\jquery.formatCurrency-1.4.0.min.js">
-      <DependentUpon>jquery.formatCurrency-1.4.0.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\local-http.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\npm.js" />
-    <Content Include="Scripts\scrollsaver.js" />
-    <Content Include="Scripts\scrollsaver.min.js">
-      <DependentUpon>scrollsaver.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\ui-grid-unstable.js" />
-    <Content Include="Scripts\ui-grid-unstable.min.js" />
+    <Content Include="Scripts\vendor\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\vendor\jquery-ui-1.11.2.min.js" />
+    <Content Include="Scripts\vendor\jquery-1.11.1.min.map" />
+    <Content Include="Scripts\vendor\jquery.validate.min.js" />
+    <Content Include="Scripts\admin-http.js" />
+    <Content Include="Scripts\vendor\ui-grid-unstable.min.js" />
+    <None Include="Scripts\vendor\_references.js" />
     <Content Include="Views\Admin\_StructureTypes.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1183,7 +1176,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\_references.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
@@ -1224,9 +1216,6 @@
     <Content Include="Views\Admin\_ColumnShapes.cshtml" />
     <Content Include="Views\Admin\_DeckStyles.cshtml" />
     <Content Include="Views\Admin\_FasciaTypes.cshtml" />
-    <Content Include="Scripts\scrollsaver.min.js.map">
-      <DependentUpon>scrollsaver.min.js</DependentUpon>
-    </Content>
     <Content Include="Views\Admin\_Drainage.cshtml" />
     <Content Include="Views\Home\BidSearch.cshtml" />
     <Content Include="Views\Home\_AddCustomer.cshtml" />
@@ -1243,7 +1232,8 @@
     <Content Include="Views\Admin\_TypeDataCodeLayout.cshtml" />
     <Content Include="Views\Admin\EditorTemplates\TypeDataModel.cshtml" />
     <Content Include="Views\Admin\EditorTemplates\TypeDataCodeModel.cshtml" />
-    <Content Include="Scripts\version.json" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Scripts\vendor\version.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

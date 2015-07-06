@@ -13,36 +13,38 @@ namespace LaneBids
             AddDefaultIgnorePatterns(bundles.IgnoreList);
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                "~/Scripts/jquery-{version}.js"));
+                "~/Scripts/vendor/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
-                "~/Scripts/angular.js",
-                "~/Scripts/angular-*",
-                "~/Scripts/ui-grid-unstable.js",
-                "~/Scripts/bootstrap.js"));
+                "~/Scripts/vendor/angular.js",
+                "~/Scripts/vendor/angular-*",
+                "~/Scripts/vendor/ui-grid-unstable.js",
+                "~/Scripts/vendor/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                "~/Scripts/jquery-ui-{version}.js"));
+                "~/Scripts/vendor/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                "~/Scripts/jquery.validate*"));
+                "~/Scripts/vendor/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                "~/Scripts/modernizr-*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/mantenance-js").Include(
-                "~/Scripts/admin.js"));
+                "~/Scripts/vendor/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/Admin").Include(
                 "~/Scripts/AdminApps.js",
-                "~/Scripts/local-http.js"));
+                "~/Scripts/admin-http.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/Home").Include(
+                "~/Scripts/HomeApps.js",
+                "~/Scripts/home-http.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/site.css",
-                "~/Content/ui-grid-unstable.css",
-                "~/Content/bootstrap.css",
-                "~/Content/bootstrap-responsive.css",
-                "~/Content/bootstrap-theme.css"));
+                "~/Content/ui-grid-unstable.css"
+                //,"~/Content/bootstrap.css"
+                //"~/Content/bootstrap-responsive.css",
+                //"~/Content/bootstrap-theme.css"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").IncludeDirectory(
                 "~/Content/themes/base", "*.css", true));

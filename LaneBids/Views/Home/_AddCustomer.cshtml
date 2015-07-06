@@ -1,101 +1,117 @@
 ﻿@model LaneBids.Models.CustomerDetails
 
-<div class="divPartial">
+<div class="divPartial" ng-controller="HomeController">
     <div class="label divLabelOnly"><label>Customer:</label></div>
     <div class="label divDropDown">
         @Html.ValidationSummary(true)
         @Html.DropDownListFor(model => model.CustomerId, Model.CustomerList)
         @Html.ValidationMessageFor(v => v.CustomerId, null, new { @class = "errorMessage" })
     </div>
-    <div class="label divAddButton"><a href="#" id="AddCustomerLink" class="addImage"></a></div>
+    <div class="label divAddButton"><a href="#" id="AddCustomerLink" class="addImage" ng-click="showAddCustomer()"></a></div>
 </div>
 
-<div id="divAddCustomer" style="display: none" title="Add Customer">
+<div id="divAddCustomer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
+    <div id="#customerModal" class="modal-dialog" role="document" ng-controller="HomeController" >
+        <div class=" modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="typeDataModalLabel">Add Customer</h4>
+            </div>
 
-    <div class="divLabel">
-        <label>First Name</label>
-        @Html.TextBoxFor(m => m.FirstName, new { @id = "CustomerFirstName" })
-    </div>
-    <div class="divLabel">
-        <label>Last Name</label>
-        @Html.TextBoxFor(m => m.LastName, new { @id = "CustomerLastName" })
-    </div>
-    <div class="divLabel">
-        <label>Email</label>
-        @Html.TextBoxFor(m => m.Email, new { @id = "CustomerEmail" })
-    </div>
-    <div class="divLabel">
-        <label>Company Name</label>
-        @Html.TextBoxFor(m => m.CompanyName, new { @id = "CustomerCompany" })
-    </div>
-    <div class="divLabel">
-        <label>Address Line 1</label>
-        @Html.TextBoxFor(m => m.Address.AddressLine1, new { @id = "CustomerAddress1" })
-    </div>
-    <div class="divLabel">
-        <label>Address Line 2</label>
-        @Html.TextBoxFor(m => m.Address.AddressLine2, new { @id = "CustomerAddress2" })
-    </div>
-    <div class="divLabel">
-        <label>City</label>
-        @Html.TextBoxFor(m => m.Address.City, new { @id = "CustomerCity" })
-    </div>
-    <div class="divLabel">
-        <label>State</label>
-        @Html.DropDownListFor(m => m.Address.State, Model.Address.StateList, new { @id = "CustomerState" })
-    </div>
-    <div class="divLabel">
-        <label>Zip</label>
-        @Html.TextBoxFor(m => m.Address.Zip, new { @id = "CustomerZip" })
-    </div>
-    <div class="divLabel">
-        @Html.DropDownListFor(m => m.PhoneContacts.ContactId, Model.PhoneContacts.ContactTypeList, new { @id = "CustomerContactType" })
-        @Html.TextBoxFor(m => m.PhoneContacts.PhoneNumber, new { @id = "CustomerContact" })
-    </div>
-    <input type="button" id="SubmitCustomer" name="SubmitCustomer" value="Submit" />
+            <div class="modal-body">
+                <form novalidate>
+                    <div class="divLabel">
+                        <label>First Name</label>
+                        <input type="text" id="custFirstName" ng-model="customer.FirstName" value="{{ customer.FirstName }}" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Last Name</label>
+                        <input type="text" id="custLastName" ng-model="customer.LastName" value=" {{ customer.LastName }} " />
+                    </div>
+                    <div class="divLabel">
+                        <label>Email</label>
+                        <input type="text" id="custEmail" ng-model="customer.Email" value="{{ customer.Email }}" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Company Name</label>
+                        <input type="text" id="custCompanyName" ng-model="customer.CompanyName" value="{{ customer.CompanyName }}" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Address Line 1</label>
+                        <input type="text" id="custAddressLine1" ng-model="customer.AddressLine1" value="{{ customer.AddressLine1 }}" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Address Line 2</label>
+                        <input type="text" id="custAddressLine2" ng-model="customer.AddressLine2" value="{{ customer.AddressLine2 }}" />
+                    </div>
+                    <div class="divLabel">
+                        <label>City</label>
+                        <input type="text" id="custCity" ng-model="customer.City" value="{{ customer.City }}" />
+                    </div>
+                    <div class="divLabel">
+                        <label>State</label>
+                        <input type="text" id="custState" ng-model="customer.State" value="{{ customer.State }}" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Zip</label>
+                        <input type="text" id="custZip" ng-model="customer.Zip" value="{{ customer.Zip }}" />
+                    </div>
+                    <div class="divLabel">
+                        <select id="contactId" ng-model="customer.contacts" ng-options="contact.Id as contact.Name for contact in contacts.contacts"></select>
+                        <input type="text" id="custZip" ng-model="customer.PhoneNumber" value="{{ customer.PhoneNumber }}" />
+                    </div>
+                </form>
+            </div>
 
+            <div class="modal-footer button-list">
+                <button type="button" ng-click="addCustomer(customer)">Add</button>&nbsp;&nbsp;
+                <button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        var newOption = "<option value='None' selected > -- Select Customer --</option>";
-        $("#CustomerId").append(newOption);
-    });
+<!--<script>
+    //$(document).ready(function () {
+    //    angular.element("#customerModal").scope.getContactList();
 
-    $("#AddCustomerLink").on("click", function() {
-        $("#divAddCustomer").dialog({
-            width: 500,
-            height: 650
-        });
-    });
+    //    var newOption = "<option value='None' selected > -- Select Customer --</option>";
+    //    $("#contactId").append(newOption);
+    //});
 
-    $("#SubmitCustomer").on("click", function () {
-        $.ajax({
-            url: "/Home/CustomerAdd",
-            type: "POST",
-            dataType: "text",
-            data: {
-                FirstName: $("#CustomerFirstName").val(),
-                LastName: $("#CustomerLastName").val(),
-                Email: $("#CustomerEmail").val(),
-                CompanyName: $("#CustomerCompany").val(),
-                AddressLine1: $("#CustomerAddress1").val(),
-                AddressLine2: $("#CustomerAddress2").val(),
-                City: $("#CustomerCity").val(),
-                State: $("#CustomerState").val(),
-                Zip: $("#CustomerZip").val(),
-                PhoneNumber: $("#CustomerContact").val(),
-                ContactId: $("#CustomerContactType").val()
-            }
-        }).success(function (response) {
-            //alert("Added Customer: " + response);
-            var value = response.split('|');
-            var newOption = "<option value='" + value[0] +"' selected >" + value[1] + "</option>";
-            $("#CustomerId").append(newOption);
-            $("#divAddCustomer").dialog("close");
-        }).error(function (xhr, textStatus, errorThrown) {
-            alert("Failure to add customer (Response: " + xhr.responseText + " | Status: " + textStatus + " | ErrorMessage: " + errorThrown + ")");
-        });
+    //$("#AddCustomerLink").on("click", function () {
+    //    $("#divAddCustomer").modal("show");
+    //});
 
-    });
-</script>
+    //$("#SubmitCustomer").on("click", function () {
+    //    $.ajax({
+    //        url: "/Home/CustomerAdd",
+    //        type: "POST",
+    //        dataType: "text",
+    //        data: {
+    //            FirstName: $("#CustomerFirstName").val(),
+    //            LastName: $("#CustomerLastName").val(),
+    //            Email: $("#CustomerEmail").val(),
+    //            CompanyName: $("#CustomerCompany").val(),
+    //            AddressLine1: $("#CustomerAddress1").val(),
+    //            AddressLine2: $("#CustomerAddress2").val(),
+    //            City: $("#CustomerCity").val(),
+    //            State: $("#CustomerState").val(),
+    //            Zip: $("#CustomerZip").val(),
+    //            PhoneNumber: $("#CustomerContact").val(),
+    //            ContactId: $("#CustomerContactType").val()
+    //        }
+    //    }).success(function (response) {
+    //        //alert("Added Customer: " + response);
+    //        var value = response.split('|');
+    //        var newOption = "<option value='" + value[0] + "' selected >" + value[1] + "</option>";
+    //        $("#CustomerId").append(newOption);
+    //        $("#divAddCustomer").dialog("close");
+    //    }).error(function (xhr, textStatus, errorThrown) {
+    //        alert("Failure to add customer (Response: " + xhr.responseText + " | Status: " + textStatus + " | ErrorMessage: " + errorThrown + ")");
+    //    });
+
+    //});
+</script>-->

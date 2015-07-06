@@ -205,6 +205,19 @@ namespace LaneBids.Controllers
             return View(searchData);
         }
 
+        [HttpGet]
+        public JsonResult ContactList()
+        {
+            var entities = new LaneEntities();
+            var contactList = entities.Contact_Types.Select(s => new
+            {
+                Id = s.Contact_Type_ID,
+                s.Name
+            });
+            return Json(contactList, JsonRequestBehavior.AllowGet);
+
+        }
+
         [HttpPost]
         public ActionResult CustomerAdd(CustomerDetails customer)
         {

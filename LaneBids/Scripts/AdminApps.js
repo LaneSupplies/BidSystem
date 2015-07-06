@@ -1,8 +1,8 @@
 ﻿(function() {
 
-    var app = angular.module('localServiceViewer', ['ngTouch', 'ui.grid' ]);
+    var app = angular.module('AdminService', ['ngTouch', 'ui.grid' ]);
 
-    var MaintController = function($scope, localService) {
+    var MaintController = function ($scope, adminHttpService) {
 
         $scope.AllTypeData = [];
 
@@ -25,7 +25,7 @@
         }
 
         var onUpdateDataType = function(response) {
-            localService.getTypeData("StructureType")
+            adminHttpService.getTypeData("StructureType")
                         .then(onTypeDataComplete, onTypeDataError);
             $("#typeDataModal").modal('hide');
             location.reload();
@@ -33,25 +33,23 @@
 
         //Edit Data Type in Grid
         $scope.editTypeData = function(item) {
-            localService.editTypeData(item.ID, item.TypeDataEnum)
+            adminHttpService.editTypeData(item.ID, item.TypeDataEnum)
                         .then(onEditDataType, onEditErrorDataType);
         }
 
         //Delete Data Type in Grid
         $scope.deleteTypeData = function (item) {
-            localService.deleteTypeData(item)
+            adminHttpService.deleteTypeData(item)
                         .then(onUpdateDataType, onTypeDataError);
         }
 
         //Update Data Type in Grid
         $scope.updateTypeData = function (typeData) {
-            localService.updateTypeData(typeData)
+            adminHttpService.updateTypeData(typeData)
                         .then(onUpdateDataType, onTypeDataError);
-            $("#typeDataModal").modal('hide');
-
         }
 
-        localService.getTypeData("StructureType").then(onTypeDataComplete, onTypeDataError);
+        adminHttpService.getTypeData("StructureType").then(onTypeDataComplete, onTypeDataError);
     };
     
     app.controller("MaintController", MaintController);
