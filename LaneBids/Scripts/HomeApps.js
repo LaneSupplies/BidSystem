@@ -7,8 +7,9 @@
         $scope.customer = [];
 
         var onContactListComplete = function (data) {
-            $scope.customer.contacts = data;
-            //$scope.contact = $scope.contacts[1];
+            $scope.contacts = data;
+            $scope.customer.contact = $scope.contacts[1];
+            //$scope.customer.contact = $scope.contacts[1];
         };
 
         var onAddCustomerComplete = function(data) {
