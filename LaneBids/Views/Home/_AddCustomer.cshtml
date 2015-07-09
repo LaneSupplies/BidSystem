@@ -1,5 +1,5 @@
 ﻿@model LaneBids.Models.CustomerDetails
-<div ng-controller="HomeController">
+
     <div class="divPartial">
         <div class="label divLabelOnly"><label>Customer:</label></div>
         <div class="label divDropDown">
@@ -10,69 +10,69 @@
         <div class="label divAddButton"><a href="#" id="AddCustomerLink" class="addImage" ng-click="showAddCustomer()"></a></div>
     </div>
 
-    <div id="divAddCustomer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
-        <div id="#customerModal" class="modal-dialog" role="document" ng-model="customer">
-            <div class=" modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title" id="typeDataModalLabel">Add Customer</h4>
-                </div>
+<div id="divAddCustomer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
+    <div id="#customerModal" class="modal-dialog" role="document" ng-model="customer">
+        <div class=" modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="typeDataModalLabel">Add Customer</h4>
+            </div>
 
-                <div class="modal-body">
-                    <form novalidate>
-                        <div class="divLabel">
-                            <label>First Name</label>
-                            <input type="text" id="custFirstName" ng-model="customer.FirstName" />
-                        </div>
-                        <div class="divLabel">
-                            <label>Last Name</label>
-                            <input type="text" id="custLastName" ng-model="customer.LastName" />
-                        </div>
-                        <div class="divLabel">
-                            <label>Email</label>
-                            <input type="text" id="custEmail" ng-model="customer.Email" />
-                        </div>
-                        <div class="divLabel">
-                            <label>Company Name</label>
-                            <input type="text" id="custCompanyName" ng-model="customer.CompanyName" />
-                        </div>
-                        <div class="divLabel">
-                            <label>Address Line 1</label>
-                            <input type="text" id="custAddressLine1" ng-model="customer.AddressLine1" />
-                        </div>
-                        <div class="divLabel">
-                            <label>Address Line 2</label>
-                            <input type="text" id="custAddressLine2" ng-model="customer.AddressLine2" />
-                        </div>
-                        <div class="divLabel">
-                            <label>City</label>
-                            <input type="text" id="custCity" ng-model="customer.City" />
-                        </div>
-                        <div class="divLabel">
-                            <label>State</label>
-                            <input type="text" id="custState" ng-model="customer.State" />
-                        </div>
-                        <div class="divLabel">
-                            <label>Zip</label>
-                            <input type="text" id="custZip" ng-model="customer.Zip" />
-                        </div>
-                        <div class="divLabel">
-                            <select id="contactId" ng-model="customer.contact" ng-options="contact.Id as contact.Name for contact in contacts"></select>
-                            <input type="text" id="custZip" ng-model="customer.PhoneNumber" />
-                        </div>
-                    </form>
-                </div>
+            <div class="modal-body">
+                <form novalidate>
+                    <div class="divLabel">
+                        <label>First Name</label>
+                        <input type="text" id="custFirstName" ng-model="customer.FirstName" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Last Name</label>
+                        <input type="text" id="custLastName" ng-model="customer.LastName" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Email</label>
+                        <input type="text" id="custEmail" ng-model="customer.Email" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Company Name</label>
+                        <input type="text" id="custCompanyName" ng-model="customer.CompanyName" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Address Line 1</label>
+                        <input type="text" id="custAddressLine1" ng-model="customer.AddressLine1" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Address Line 2</label>
+                        <input type="text" id="custAddressLine2" ng-model="customer.AddressLine2" />
+                    </div>
+                    <div class="divLabel">
+                        <label>City</label>
+                        <input type="text" id="custCity" ng-model="customer.City" />
+                    </div>
+                    <div class="divLabel">
+                        <label>State</label>
+                        <input type="text" id="custState" ng-model="customer.State" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Zip</label>
+                        <input type="text" id="custZip" ng-model="customer.Zip" />
+                    </div>
+                    <div class="divLabel">
+                        <select id="contactId" ng-model="customer.ContactId" ng-options="contact.Id as contact.Name for contact in contacts"></select>
+                        <input type="text" id="custZip" ng-model="customer.PhoneNumber" />
+                    </div>
+                </form>
+            </div>
 
-                <div class="modal-footer button-list">
-                    <button type="button" ng-click="addCustomer(customer)">Add</button>&nbsp;&nbsp;
-                    <button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
-                </div>
+            <div class="modal-footer button-list">
+                <button type="button" ng-click="addCustomer(customer)">Add</button>&nbsp;&nbsp;
+                <button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
             </div>
         </div>
     </div>
 </div>
+
 <!--<script>
     //$(document).ready(function () {
     //    angular.element("#customerModal").scope.getContactList();

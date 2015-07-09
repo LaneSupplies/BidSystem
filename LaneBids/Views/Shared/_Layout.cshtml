@@ -96,7 +96,7 @@
         </div>
         <div id="divBody">
             @RenderSection("featured", required: false)
-            <div class="main-body">
+            <div class="main-body" ng-controller="HomeController">
                 @RenderBody()
             </div>
         </div>

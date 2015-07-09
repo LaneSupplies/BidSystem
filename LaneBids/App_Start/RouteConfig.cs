@@ -37,6 +37,17 @@ namespace LaneBids
                 );
 
             routes.MapRoute(
+               name: "Home",
+               url: "{controller}/{action}/{type}",
+               defaults: new
+               {
+                   controller = "Home",
+                   action = "Customer",
+                   type = UrlParameter.Optional
+               }
+               );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}",
                 defaults: new {controller = "Home", action = "Index"}

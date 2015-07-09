@@ -222,36 +222,41 @@ namespace LaneBids.Controllers
         public ActionResult CustomerAdd(CustomerDetails customer)
         {
             var entities = new LaneEntities();
-            var addAddress = new Address();
-            addAddress.Address_Line1 = customer.AddressLine1;
-            addAddress.Address_Line2 = customer.AddressLine2;
-            addAddress.City = customer.City;
-            addAddress.State = customer.State;
-            addAddress.Zip = customer.Zip;
+            var addAddress = new Address
+            {
+                Address_Line1 = customer.AddressLine1,
+                Address_Line2 = customer.AddressLine2,
+                City = customer.City,
+                State = customer.State,
+                Zip = customer.Zip
+            };
             entities.Addresses.Add(addAddress);
             entities.SaveChanges();
 
-            var contact = new Contact_Info();
-            contact.Contact_Text = customer.PhoneNumber;
-            contact.Contact_Type_ID = customer.ContactId;
-            contact.Create_Date = DateTime.Now;
-            contact.Created_By = WebSecurity.CurrentUserId;
+            var contact = new Contact_Info
+            {
+                Contact_Text = customer.PhoneNumber,
+                Contact_Type_ID = customer.ContactId,
+                Create_Date = DateTime.Now,
+                Created_By = WebSecurity.CurrentUserId
+            };
             entities.Contact_Info.Add(contact);
             entities.SaveChanges();
 
-            var newCustomer = new Customer();
-            newCustomer.Customer_ID = Guid.NewGuid();
-            newCustomer.First_Name = customer.FirstName;
-            newCustomer.Last_Name = customer.LastName;
-            newCustomer.Email = customer.Email;
-            newCustomer.Company_Name = customer.CompanyName;
-            newCustomer.Address_ID = addAddress.Address_ID;
-            newCustomer.Create_Date = DateTime.Now;
-            newCustomer.Created_By = WebSecurity.CurrentUserId;
+            var newCustomer = new Customer
+            {
+                First_Name = customer.FirstName,
+                Last_Name = customer.LastName,
+                Email = customer.Email,
+                Company_Name = customer.CompanyName,
+                Address_ID = addAddress.Address_ID,
+                Create_Date = DateTime.Now,
+                Created_By = WebSecurity.CurrentUserId
+            };
             entities.Customers.Add(newCustomer);
             entities.SaveChanges();
 
-            return Content(customer.CustomerId + "|" + customer.FirstName + " " + customer.LastName);
+            return Content(newCustomer.Customer_ID + "|" + customer.FirstName + " " + customer.LastName);
         }
 
         [HttpPost]

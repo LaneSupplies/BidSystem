@@ -209,7 +209,7 @@
           <Key>
             <PropertyRef Name="Customer_ID" />
           </Key>
-          <Property Name="Customer_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Customer_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="First_Name" Type="varchar" MaxLength="75" />
           <Property Name="Last_Name" Type="varchar" MaxLength="75" />
           <Property Name="Email" Type="varchar" MaxLength="75" />
@@ -1241,7 +1241,7 @@
           <Key>
             <PropertyRef Name="Customer_ID" />
           </Key>
-          <Property Name="Customer_ID" Type="Guid" Nullable="false" />
+          <Property Name="Customer_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="First_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <Property Name="Last_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />

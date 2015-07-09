@@ -2,6 +2,7 @@
 
     var homeHttpService = function ($http) {
         var transform = function (data) {
+            console.log($.param(data));
             return $.param(data);
         };
 
