@@ -30,7 +30,7 @@ namespace LaneBids.Models
         public String ScopeTypeCode { get; set; }
 
         [Required]
-        public String CustomerId { get; set; }
+        public Guid CustomerId { get; set; }
 
         [Required]
         public Int32 SalesPersonId { get; set; }

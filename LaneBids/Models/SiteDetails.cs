@@ -18,6 +18,6 @@ namespace LaneBids.Models
         public String Country { get; set; }
         public AddressModel Address { get; set; }
 
-        public IEnumerable<SelectListItem> SiteList { get; set; } 
+        public IList<SelectListItem> SiteList { get; set; } 
     }
 }

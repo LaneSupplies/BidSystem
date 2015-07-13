@@ -6,75 +6,93 @@
         @Html.DropDownListFor(model => model.SiteId, Model.SiteList)
         @Html.ValidationMessageFor(v => v.SiteId, null, new { @class = "errorMessage" })
     </div>
-    <div class="label divAddButton"><a href="#" id="AddSiteLink" class="addImage"></a></div>
+    <div class="label divAddButton"><a href="#" id="AddSiteLink" class="addImage" ng-click="showAddSite()"></a></div>
 </div>
 
-<div id="divAddSite" style="display: none" title="Add Site">
+<div id="divAddSite" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
+    <div id="#siteModal" class="modal-dialog" role="document" ng-model="site">
+        <div class=" modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="typeDataModalLabel">Add Site</h4>
+            </div>
 
-    <div class="divLabel">
-        <label>Site Name</label>
-        @Html.TextBoxFor(m => m.SiteName, new { @id = "SiteName" })
-    </div>
-    <div class="divLabel">
-        <label>Address Line 1</label>
-        @Html.TextBoxFor(m => m.Address.AddressLine1, new { @id = "SiteAddress1" })
-    </div>
-    <div class="divLabel">
-        <label>Address Line 2</label>
-        @Html.TextBoxFor(m => m.Address.AddressLine2, new { @id = "SiteAddress2" })
-    </div>
-    <div class="divLabel">
-        <label>City</label>
-        @Html.TextBoxFor(m => m.Address.City, new { @id = "SiteCity" })
-    </div>
-    <div class="divLabel">
-        <label>State</label>
-        @Html.DropDownListFor(m => m.Address.State, Model.Address.StateList, new { @id = "SiteState" })
-    </div>
-    <div class="divLabel">
-        <label>Zip</label>
-        @Html.TextBoxFor(m => m.Address.Zip, new { @id = "SiteZip" })
-    </div>
-    <input type="button" id="SubmitSite" name="SubmitSite" value="Submit" />
+            <div class="modal-body">
+                <form novalidate>
+                    <div class="divLabel">
+                        <label>Site Name</label>
+                        <input type="text" id="siteName" ng-model="site.SiteName" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Address Line 1</label>
+                        <input type="text" id="siteAddressLine1" ng-model="site.AddressLine1" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Address Line 2</label>
+                        <input type="text" id="siteAddressLine2" ng-model="site.AddressLine2" />
+                    </div>
+                    <div class="divLabel">
+                        <label>City</label>
+                        <input type="text" id="siteCity" ng-model="site.City" />
+                    </div>
+                    <div class="divLabel">
+                        <label>State</label>
+                        <select id="stateId" ng-model="site.State" ng-options="state.Value as state.Text for state in stateList"></select>
+                    </div>
+                    <div class="divLabel">
+                        <label>Zip</label>
+                        <input type="text" id="siteZip" ng-model="site.Zip" />
+                    </div>
+                </form>
+            </div>
 
+            <div class="modal-footer button-list">
+                <button type="button" ng-click="addSite(site)">Add</button>&nbsp;&nbsp;
+                <button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        var newOption = "<option value='0' selected > -- Select Site --</option>";
-        $("#SiteId").append(newOption);
-    });
 
-    $("#AddSiteLink").on("click", function () {
-        $("#divAddSite").dialog({
-            width: 500,
-            height: 430
-        });
-    });
-
-    $("#SubmitSite").on("click", function () {
-        $.ajax({
-            url: "/Home/AddSite",
-            type: "POST",
-            dataType: "text",
-            data: {
-                SiteName: $("#SiteName").val(),
-                AddressLine1: $("#SiteAddress1").val(),
-                AddressLine2: $("#SiteAddress2").val(),
-                City: $("#SiteCity").val(),
-                State: $("#SiteState").val(),
-                Zip: $("#SiteZip").val()
-            }
-        }).success(function (response) {
-            //alert("Added SalesPerson: " + response);
-            var value = response.split('|');
-            var newOption = "<option value='" + value[0] +"' selected >" + value[1] + "</option>";
+@*<script>
+        $(document).ready(function() {
+            var newOption = "<option value='0' selected > -- Select Site --</option>";
             $("#SiteId").append(newOption);
-            $("#divAddSite").dialog("close");
-        }).error(function (xhr, textStatus, errorThrown) {
-            alert("Failure to add customer (Response: " + xhr.responseText + " | Status: " + textStatus + " | ErrorMessage: " + errorThrown + ")");
-            $("#divAddSite").dialog("close");
         });
 
-    });
-</script>
+        $("#AddSiteLink").on("click", function () {
+            $("#divAddSite").dialog({
+                width: 500,
+                height: 430
+            });
+        });
+
+        $("#SubmitSite").on("click", function () {
+            $.ajax({
+                url: "/Home/AddSite",
+                type: "POST",
+                dataType: "text",
+                data: {
+                    SiteName: $("#SiteName").val(),
+                    AddressLine1: $("#SiteAddress1").val(),
+                    AddressLine2: $("#SiteAddress2").val(),
+                    City: $("#SiteCity").val(),
+                    State: $("#SiteState").val(),
+                    Zip: $("#SiteZip").val()
+                }
+            }).success(function (response) {
+                //alert("Added SalesPerson: " + response);
+                var value = response.split('|');
+                var newOption = "<option value='" + value[0] +"' selected >" + value[1] + "</option>";
+                $("#SiteId").append(newOption);
+                $("#divAddSite").dialog("close");
+            }).error(function (xhr, textStatus, errorThrown) {
+                alert("Failure to add customer (Response: " + xhr.responseText + " | Status: " + textStatus + " | ErrorMessage: " + errorThrown + ")");
+                $("#divAddSite").dialog("close");
+            });
+
+        });
+    </script>*@

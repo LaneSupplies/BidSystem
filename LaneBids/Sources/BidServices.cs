@@ -27,35 +27,30 @@ namespace LaneBids.Sources
                 Value = x.Structure_Type_ID.ToString(),
                 Text = x.Name
             }).ToList();
-            bid.StructureList.Add(new SelectListItem { Selected = true, Text = " -- Select Structure -- ", Value = "None" });
-
+            
             bid.BidTypeList = entities.Bid_Types.ToList().Select(x => new SelectListItem
             {
                 Value = x.Bid_Type_ID.ToString(),
                 Text = x.Name
             }).ToList();
-            bid.BidTypeList.Add(new SelectListItem { Selected = true, Text = " -- Select Type -- ", Value = "None" });
 
             bid.BidStatusList = entities.Bid_Statuses.ToList().Select(x => new SelectListItem
             {
                 Value = x.Bid_Status_ID.ToString(),
                 Text = x.Status
             }).ToList();
-            bid.BidStatusList.Add(new SelectListItem { Selected = true, Text = " -- Select Status -- ", Value = "None" });
 
             bid.JobTypeList = entities.Job_Types.ToList().Select(x => new SelectListItem
             {
                 Value = x.Job_Type_ID.ToString(),
                 Text = x.Name
             }).ToList();
-            bid.JobTypeList.Add(new SelectListItem { Selected = true, Text = " -- Select Job Type -- ", Value = "None" });
 
             bid.ScopeTypeList = entities.Scope_Types.ToList().Select(x => new SelectListItem
             {
                 Value = x.Scope_Type_ID.ToString(),
                 Text = x.Name
             }).ToList();
-            bid.ScopeTypeList.Add(new SelectListItem { Selected = true, Text = " -- Select Scope Type -- ", Value = "None" });
 
             bid.AddressesList = entities.Addresses.ToList().Select(x => new SelectListItem
             {
@@ -74,12 +69,6 @@ namespace LaneBids.Sources
                 Value = x.Site_ID.ToString(),
                 Text = x.Name
             }).ToList();
-
-            //bid.SalesPeople = Roles.GetUsersInRole("SalesPeople").Select(Membership.GetUser).Select(user => new SelectListItem
-            //{
-            //    Value = user.ProviderUserKey.ToString(), 
-            //    Text = user.UserName,
-            //}).ToList();
 
             //Contact Types
             var contactTypeList = entities.Contact_Types.ToList().Select(s => new SelectListItem
@@ -112,6 +101,7 @@ namespace LaneBids.Sources
                 }).ToList()
             };
 
+            //Sites
             bid.AddSiteDetails = new SiteDetails
             {
                 Address = new AddressModel {StateList = AddressService.States},
@@ -122,13 +112,16 @@ namespace LaneBids.Sources
                 }).ToList()
             };
 
-            bid.AddShippingInfoDetails = new ShippingInfoDetails();
-            bid.AddShippingInfoDetails.StateList = AddressService.States;
-            bid.AddShippingInfoDetails.ShippingList = entities.Shipping_Info.ToList().Select(x => new SelectListItem
+            //Shipping Info
+            bid.AddShippingInfoDetails = new ShippingInfoDetails
             {
-                Value = x.Shipping_ID.ToString(),
-                Text = x.Name
-            }).ToList();
+                StateList = AddressService.States,
+                ShippingList = entities.Shipping_Info.ToList().Select(x => new SelectListItem
+                {
+                    Value = x.Shipping_ID.ToString(),
+                    Text = x.Name
+                }).ToList()
+            };
 
             return bid;
         }

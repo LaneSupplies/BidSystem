@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
+    <fieldset ng-init="addDefaultsSelectBidPage()">
         @Html.HiddenFor(m => m.BidId)
         @Html.HiddenFor(m => m.CanopyId)
         <div class="divLabel">
@@ -23,33 +23,33 @@
         <div class="divLabel">
             <label>Structure Type:</label>
             @Html.DropDownListFor(d => d.StructureId, Model.StructureList)
-            @Html.ValidationMessageFor(v => v.StructureId, null, new { @class = "errorMessage"})
+            @Html.ValidationMessageFor(v => v.StructureId, null, new { @class = "errorMessage" })
         </div>
 
         <div class="divLabel">
             <label>Bid Status:</label>
             @Html.DropDownListFor(model => model.BidStatusId, Model.BidStatusList)
-            @Html.ValidationMessageFor(v => v.BidStatusId, null, new { @class = "errorMessage"})
+            @Html.ValidationMessageFor(v => v.BidStatusId, null, new { @class = "errorMessage" })
         </div>
 
         <div class="divLabel">
             <label>Job Type:</label>
             @Html.DropDownListFor(model => model.JobTypeId, Model.JobTypeList)
-            @Html.ValidationMessageFor(v => v.JobTypeId, null, new { @class = "errorMessage"})
+            @Html.ValidationMessageFor(v => v.JobTypeId, null, new { @class = "errorMessage" })
         </div>
 
         <div class="divLabel">
             <label>Scope Types:</label>
             @Html.DropDownListFor(model => model.ScopeTypeId, Model.ScopeTypeList)
-            @Html.ValidationMessageFor(v => v.ScopeTypeId, null, new { @class = "errorMessage"})
+            @Html.ValidationMessageFor(v => v.ScopeTypeId, null, new { @class = "errorMessage" })
         </div>
 
         <div class="divLabel">
             <label>Bid Types:</label>
             @Html.DropDownListFor(model => model.BidTypeId, Model.BidTypeList)
-            @Html.ValidationMessageFor(v => v.BidTypeId, null, new { @class = "errorMessage"})
+            @Html.ValidationMessageFor(v => v.BidTypeId, null, new { @class = "errorMessage" })
         </div>
-    
+
         <div>
             @Html.Partial("_AddCustomer", Model.AddCustomerInfo)
         </div>
@@ -105,12 +105,15 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         
-    $(document).ready(function() {
-        $("#BidStatusId").val("None");
-        $("#JobTypeId").val("None");
-        $("#ScopeTypeId").val("None");
-        $("#BidTypeId").val("None");
-    });
+        $(document).ready(function () {
+            setTimeout(function() {
+                $("#contactId option[value='?']").remove();
+                $("#stateId option[value='?']").remove();
+                $("#contactId option[value='1']").attr("selected", true);
+                $("#stateId option[value='1']").attr("selected", true);
+            }, 1000);
+
+        });
     
     </script>
     

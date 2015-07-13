@@ -52,7 +52,7 @@
                     </div>
                     <div class="divLabel">
                         <label>State</label>
-                        <input type="text" id="custState" ng-model="customer.State" />
+                        <select id="stateId" ng-model="customer.State" ng-options="state.Value as state.Text for state in stateList"></select>
                     </div>
                     <div class="divLabel">
                         <label>Zip</label>

@@ -6,86 +6,112 @@
         @Html.DropDownListFor(model => model.SalesPersonId, Model.SalesPersonList)
         @Html.ValidationMessageFor(v => v.SalesPersonId, null, new { @class = "errorMessage" })
     </div>
-    <div class="label divAddButton"><a href="#" id="AddSalesPersonLink" class="addImage"></a></div>
+    <div class="label divAddButton"><a href="#" id="AddSalesPersonLink" class="addImage" ng-click="showAddSalesPerson()"></a></div>
 </div>
 
-<div id="divAddSalesPerson" style="display: none" title="Add Sales Person">
+<div id="divAddSalesPerson" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
 
-    <div class="divLabel">
-        <label>First Name</label>
-        @Html.TextBoxFor(m => m.FirstName, new { @id="SalesFirstName"})
+    <div id="#salesPersonModal" class="modal-dialog" role="document" ng-model="salesPerson">
+        <div class=" modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="typeDataModalLabel">Add Sales Person</h4>
+            </div>
+            
+            <div class="modal-body">
+                <form novalidate>
+                    <div class="divLabel">
+                        <label>First Name</label>
+                        <input type="text" id="salesFirstName" ng-model="salesPerson.FirstName" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Last Name</label>
+                        <input type="text" id="salesLastName" ng-model="salesPerson.LastName" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Email</label>
+                        <input type="text" id="salesEmail" ng-model="salesPerson.Email" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Company Name</label>
+                        <input type="text" id="salesCompanyName" ng-model="salesPerson.CompanyName" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Address Line 1</label>
+                        <input type="text" id="salesAddressLine1" ng-model="salesPerson.AddressLine1" />
+                    </div>
+                    <div class="divLabel">
+                        <label>Address Line 2</label>
+                        <input type="text" id="salesAddressLine2" ng-model="salesPerson.AddressLine2" />
+                    </div>
+                    <div class="divLabel">
+                        <label>City</label>
+                        <input type="text" id="salesCity" ng-model="salesPerson.City" />
+                    </div>
+                    <div class="divLabel">
+                        <label>State</label>
+                        <select id="stateId" ng-model="salesPerson.State" ng-options="state.Value as state.Text for state in stateList"></select>
+                    </div>
+                    <div class="divLabel">
+                        <label>Zip</label>
+                        <input type="text" id="salesZip" ng-model="salesPerson.Zip" />
+                    </div>
+                    <div class="divLabel">
+                        <select id="contactId" ng-model="salesPerson.ContactId" ng-options="contact.Id as contact.Name for contact in contacts"></select>
+                        <input type="text" id="salesZip" ng-model="salesPerson.PhoneNumber" />
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer button-list">
+                <button type="button" ng-click="addSalesPerson(salesPerson)">Add</button>&nbsp;&nbsp;
+                <button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+            </div>
+        </div>
     </div>
-    <div class="divLabel">
-        <label>Last Name</label>
-        @Html.TextBoxFor(m => m.LastName, new { @id = "SalesLastName" })
-    </div>
-    <div class="divLabel">
-        <label>Address Line 1</label>
-        @Html.TextBoxFor(m => m.Address.AddressLine1, new { @id = "SalesAddress1" })
-    </div>
-    <div class="divLabel">
-        <label>Address Line 2</label>
-        @Html.TextBoxFor(m => m.Address.AddressLine2, new { @id = "SalesAddress2" })
-    </div>
-    <div class="divLabel">
-        <label>City</label>
-        @Html.TextBoxFor(m => m.Address.City, new { @id = "SalesCity" })
-    </div>
-    <div class="divLabel">
-        <label>State</label>
-        @Html.DropDownListFor(m => m.Address.State, Model.Address.StateList, new { @id = "SalesState" })
-    </div>
-    <div class="divLabel">
-        <label>Zip</label>
-        @Html.TextBoxFor(m => m.Address.Zip, new { @id = "SalesZip" })
-    </div>
-    <div class="divLabel">
-        @Html.DropDownListFor(m => m.PhoneContacts.ContactId, Model.PhoneContacts.ContactTypeList, new { @id = "SalesContactType" })
-        @Html.TextBoxFor(m => m.PhoneContacts.PhoneNumber, new { @id = "SalesContact" })
-    </div>
-    <input type="button" id="SubmitSalesPerson" name="SubmitSalesPerson" value="Submit" />
-
 </div>
 
-<script>
-    $(document).ready(function() {
-        var newOption = "<option value='0' selected > -- Select Sales Person --</option>";
-        $("#SalesPersonId").append(newOption);
-    });
+        @*<script>
+            $(document).ready(function () {
+                var newOption = "<option value='0' selected > -- Select Sales Person --</option>";
+                $("#SalesPersonId").append(newOption);
+            });
 
-    $("#AddSalesPersonLink").on("click", function () {
-        $("#divAddSalesPerson").dialog({
-            width: 500,
-            height: 550
-        });
-    });
+            $("#AddSalesPersonLink").on("click", function () {
+                $("#divAddSalesPerson").dialog({
+                    width: 500,
+                    height: 550
+                });
+            });
 
-    $("#SubmitSalesPerson").on("click", function () {
-        $.ajax({
-            url: "/Home/SalesPersonAdd",
-            type: "POST",
-            dataType: "text",
-            data: {
-                FirstName: $("#SalesFirstName").val(),
-                LastName: $("#SalesLastName").val(),
-                AddressLine1: $("#SalesAddress1").val(),
-                AddressLine2: $("#SalesAddress2").val(),
-                City: $("#SalesCity").val(),
-                State: $("#SalesState").val(),
-                Zip: $("#SalesZip").val(),
-                PhoneNumber: $("#SalesContact").val(),
-                ContactId: $("#SalesContactType").val()
-            }
-        }).success(function (response) {
-            //alert("Added SalesPerson: " + response);
-            var value = response.split('|');
-            var newOption = "<option value='" + value[0] +"' selected >" + value[1] + "</option>";
-            $("#SalesPersonId").append(newOption);
-            $("#divAddSalesPerson").dialog("close");
-        }).error(function (xhr, textStatus, errorThrown) {
-            alert("Failure to add customer (Response: " + xhr.responseText + " | Status: " + textStatus + " | ErrorMessage: " + errorThrown + ")");
-            $("#divAddSalesPerson").dialog("close");
-        });
+            $("#SubmitSalesPerson").on("click", function () {
+                $.ajax({
+                    url: "/Home/SalesPersonAdd",
+                    type: "POST",
+                    dataType: "text",
+                    data: {
+                        FirstName: $("#SalesFirstName").val(),
+                        LastName: $("#SalesLastName").val(),
+                        AddressLine1: $("#SalesAddress1").val(),
+                        AddressLine2: $("#SalesAddress2").val(),
+                        City: $("#SalesCity").val(),
+                        State: $("#SalesState").val(),
+                        Zip: $("#SalesZip").val(),
+                        PhoneNumber: $("#SalesContact").val(),
+                        ContactId: $("#SalesContactType").val()
+                    }
+                }).success(function (response) {
+                    //alert("Added SalesPerson: " + response);
+                    var value = response.split('|');
+                    var newOption = "<option value='" + value[0] + "' selected >" + value[1] + "</option>";
+                    $("#SalesPersonId").append(newOption);
+                    $("#divAddSalesPerson").dialog("close");
+                }).error(function (xhr, textStatus, errorThrown) {
+                    alert("Failure to add customer (Response: " + xhr.responseText + " | Status: " + textStatus + " | ErrorMessage: " + errorThrown + ")");
+                    $("#divAddSalesPerson").dialog("close");
+                });
 
-    });
-</script>
+            });
+        </script>*@

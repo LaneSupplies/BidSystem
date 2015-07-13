@@ -17,6 +17,8 @@ namespace LaneBids.Controllers
 {
     public class HomeController : Controller
     {
+
+        private CanopyServices _canopyService = new CanopyServices();
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
@@ -38,66 +40,44 @@ namespace LaneBids.Controllers
         public ActionResult Canopy(BidDetails bidDetails)
         {
             ViewBag.Title = "Canopy";
-            //if (ModelState.IsValid)
-            //{
-            //    var bidServices = new BidServices();
-            //    var entities = new LaneEntities();
-            //    var newBid = new Bid();
-            //    newBid.Bid_Status_ID = bidDetails.BidStatusId;
-            //    newBid.Bid_Type_ID = bidDetails.BidTypeId;
-            //    newBid.Scope_Type_ID = bidDetails.ScopeTypeId;
-            //    newBid.Job_Type_ID = bidDetails.JobTypeId;
-            //    newBid.Structure_Type_ID = bidDetails.StructureId;
-            //    newBid.Created_By = WebSecurity.CurrentUserId;
-            //    newBid.Create_Date = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                var entities = new LaneEntities();
+                var newBid = new Bid
+                {
+                    Bid_Status_ID = bidDetails.BidStatusId,
+                    Bid_Type_ID = bidDetails.BidTypeId,
+                    Scope_Type_ID = bidDetails.ScopeTypeId,
+                    Job_Type_ID = bidDetails.JobTypeId,
+                    Structure_Type_ID = bidDetails.StructureId,
+                    Customer_ID = bidDetails.CustomerId,
+                    Sales_Person_ID = bidDetails.SalesPersonId,
+                    Shipping_ID = bidDetails.ShippingId,
+                    Site_ID = bidDetails.SiteId,
+                    Created_By = WebSecurity.CurrentUserId,
+                    Create_Date = DateTime.Now
+                };
+                
+                entities.Bids.Add(newBid);
+                entities.SaveChanges();
+                
+                if (!String.IsNullOrEmpty(bidDetails.BidNotesText))
+                {
+                    var bidNote = new Bid_Notes
+                    {
+                        Notes = bidDetails.BidNotesText,
+                        Create_Date = DateTime.Now,
+                        Created_By = WebSecurity.CurrentUserId
+                    };
+                    entities.Bid_Notes.Add(bidNote);
+                    entities.SaveChanges();
 
-            //    if (bidDetails.CustomerId == "None")
-            //    {
-            //        ModelState.AddModelError("CustomerId", "Please choose a Customer");
-            //        return View("Bid", bidServices.BidDetailInfo(bidDetails.CanopyId.ToString()));
-            //    }
-            //    newBid.Customer_ID = new Guid(bidDetails.CustomerId);
+                    newBid.Bid_Note_ID = bidNote.Bid_Note_ID;
+                    entities.SaveChanges();
+                }
+            }
 
-            //    if (bidDetails.SalesPersonId == 0)
-            //    {
-            //        ModelState.AddModelError("SalesPersonId", "Please choose a Sales Person");
-            //        return View("Bid", bidServices.BidDetailInfo(bidDetails.CanopyId.ToString()));
-            //    }
-            //    newBid.Sales_Person_ID = bidDetails.SalesPersonId;
-
-            //    if (bidDetails.ShippingId == 0)
-            //    {
-            //        ModelState.AddModelError("ShippingId", "Please choose a Shipping Address");
-            //        return View("Bid", bidServices.BidDetailInfo(bidDetails.CanopyId.ToString()));
-            //    }
-            //    newBid.Shipping_ID = bidDetails.ShippingId;
-
-            //    if (bidDetails.SiteId == 0)
-            //    {
-            //        ModelState.AddModelError("SiteId", "Please choose a Site");
-            //        return View("Bid", bidServices.BidDetailInfo(bidDetails.CanopyId.ToString()));
-            //    }
-            //    newBid.Site_ID = bidDetails.SiteId;
-
-            //    entities.Bids.Add(newBid);
-            //    //entities.SaveChanges();
-
-            //    if (!String.IsNullOrEmpty(bidDetails.BidNotesText))
-            //    {
-            //        var bidNote = new Bid_Notes();
-            //        bidNote.Notes = bidDetails.BidNotesText;
-            //        bidNote.Create_Date = DateTime.Now;
-            //        bidNote.Created_By = WebSecurity.CurrentUserId;
-            //        entities.Bid_Notes.Add(bidNote);
-            //        entities.SaveChanges();
-
-            //        newBid.Bid_Note_ID = bidNote.Bid_Note_ID;
-            //        //entities.SaveChanges();
-            //    }
-            //}
-
-            var canopyService = new CanopyServices();
-            var canopyInfo = canopyService.CanopyLoadData(bidDetails);
+            var canopyInfo = _canopyService.CanopyLoadData(bidDetails);
             
             return View(canopyInfo);
         }
@@ -205,6 +185,8 @@ namespace LaneBids.Controllers
             return View(searchData);
         }
 
+        #region Home AJAX calls
+
         [HttpGet]
         public JsonResult ContactList()
         {
@@ -218,8 +200,14 @@ namespace LaneBids.Controllers
 
         }
 
+        [HttpGet]
+        public JsonResult StateList()
+        {
+            return Json(AddressService.States, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
-        public ActionResult CustomerAdd(CustomerDetails customer)
+        public ActionResult AddCustomer(CustomerDetails customer)
         {
             var entities = new LaneEntities();
             var addAddress = new Address
@@ -238,7 +226,7 @@ namespace LaneBids.Controllers
                 Contact_Text = customer.PhoneNumber,
                 Contact_Type_ID = customer.ContactId,
                 Create_Date = DateTime.Now,
-                Created_By = WebSecurity.CurrentUserId
+                Created_By = WebSecurity.CurrentUserId,
             };
             entities.Contact_Info.Add(contact);
             entities.SaveChanges();
@@ -260,32 +248,38 @@ namespace LaneBids.Controllers
         }
 
         [HttpPost]
-        public ActionResult SalesPersonAdd(SalesPersonDetails salesPerson)
+        public ActionResult AddSalesPerson(SalesPersonDetails salesPerson)
         {
             var entities = new LaneEntities();
-            var addAddress = new Address();
-            addAddress.Address_Line1 = salesPerson.AddressLine1;
-            addAddress.Address_Line2 = salesPerson.AddressLine2;
-            addAddress.City = salesPerson.City;
-            addAddress.State = salesPerson.State;
-            addAddress.Zip = salesPerson.Zip;
+            var addAddress = new Address
+            {
+                Address_Line1 = salesPerson.AddressLine1,
+                Address_Line2 = salesPerson.AddressLine2,
+                City = salesPerson.City,
+                State = salesPerson.State,
+                Zip = salesPerson.Zip
+            };
             entities.Addresses.Add(addAddress);
             entities.SaveChanges();
 
-            var newSalesPerson = new Sales_Persons();
-            newSalesPerson.First_Name = salesPerson.FirstName;
-            newSalesPerson.Last_Name = salesPerson.LastName;
-            newSalesPerson.Address_ID = addAddress.Address_ID;
-            newSalesPerson.Create_Date = DateTime.Now;
-            newSalesPerson.Created_By = WebSecurity.CurrentUserId;
+            var newSalesPerson = new Sales_Persons
+            {
+                First_Name = salesPerson.FirstName,
+                Last_Name = salesPerson.LastName,
+                Address_ID = addAddress.Address_ID,
+                Create_Date = DateTime.Now,
+                Created_By = WebSecurity.CurrentUserId
+            };
             entities.Sales_Persons.Add(newSalesPerson);
             entities.SaveChanges();
 
-            var contact = new Contact_Info();
-            contact.Contact_Text = salesPerson.PhoneNumber;
-            contact.Contact_Type_ID = salesPerson.ContactId;
-            contact.Create_Date = DateTime.Now;
-            contact.Created_By = WebSecurity.CurrentUserId;
+            var contact = new Contact_Info
+            {
+                Contact_Text = salesPerson.PhoneNumber,
+                Contact_Type_ID = salesPerson.ContactId,
+                Create_Date = DateTime.Now,
+                Created_By = WebSecurity.CurrentUserId
+            };
             entities.Contact_Info.Add(contact);
             entities.SaveChanges();
             
@@ -355,5 +349,8 @@ namespace LaneBids.Controllers
 
             return Content(addColor.Color_ID + "|" + addColor.Name);
         }
+
+        #endregion
+
     }
 }
