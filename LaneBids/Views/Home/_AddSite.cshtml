@@ -4,9 +4,13 @@
     <div class="label divLabelOnly"><label>Site:</label></div>
     <div class="label divDropDown">
         @Html.DropDownListFor(model => model.SiteId, Model.SiteList)
+    </div>
+    <div class="label divAddButton">
+        <a href="#" id="AddSiteLink" class="addImage" ng-click="showAddSite()"></a>
+    </div>
+    <div class="error-lable">
         @Html.ValidationMessageFor(v => v.SiteId, null, new { @class = "errorMessage" })
     </div>
-    <div class="label divAddButton"><a href="#" id="AddSiteLink" class="addImage" ng-click="showAddSite()"></a></div>
 </div>
 
 <div id="divAddSite" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">

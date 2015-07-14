@@ -445,6 +445,13 @@ aside {
     padding-top: 8px;
 }
 
+.error-lable {
+    font-weight: 700;
+    display: block;
+    float: left;
+    padding-top: 8px;
+}
+
 /* login page */
 #loginForm {
     /*border-right: solid 2px #c8c8c8;
@@ -820,9 +827,11 @@ li {
 
 .divAddButton {
     padding: 10px;
-    width: 30px;
+    width: 10px;
     display: block;
     text-wrap: none;
+    font-weight: 700;
+    float: left;
 }
 
 a.addImage, a.addImage:visited {

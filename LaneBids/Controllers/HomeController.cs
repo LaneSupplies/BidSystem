@@ -17,8 +17,9 @@ namespace LaneBids.Controllers
 {
     public class HomeController : Controller
     {
-
+        private BidServices _bidServices = new BidServices();
         private CanopyServices _canopyService = new CanopyServices();
+
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
@@ -30,8 +31,9 @@ namespace LaneBids.Controllers
         public ActionResult Bid(string type)
         {
             ViewBag.Title = "Bid";
-            var bidServices = new BidServices();
-            var baseBidInfo = bidServices.BidDetailInfo(type);
+
+            var baseBidInfo = _bidServices.BidDetailInfo(new BidDetails());
+            baseBidInfo.StructureId = _bidServices.GetCanopyTypeId(type);
             
             return View(baseBidInfo);
         }
@@ -40,45 +42,49 @@ namespace LaneBids.Controllers
         public ActionResult Canopy(BidDetails bidDetails)
         {
             ViewBag.Title = "Canopy";
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var entities = new LaneEntities();
-                var newBid = new Bid
-                {
-                    Bid_Status_ID = bidDetails.BidStatusId,
-                    Bid_Type_ID = bidDetails.BidTypeId,
-                    Scope_Type_ID = bidDetails.ScopeTypeId,
-                    Job_Type_ID = bidDetails.JobTypeId,
-                    Structure_Type_ID = bidDetails.StructureId,
-                    Customer_ID = bidDetails.CustomerId,
-                    Sales_Person_ID = bidDetails.SalesPersonId,
-                    Shipping_ID = bidDetails.ShippingId,
-                    Site_ID = bidDetails.SiteId,
-                    Created_By = WebSecurity.CurrentUserId,
-                    Create_Date = DateTime.Now
-                };
-                
-                entities.Bids.Add(newBid);
-                entities.SaveChanges();
-                
-                if (!String.IsNullOrEmpty(bidDetails.BidNotesText))
-                {
-                    var bidNote = new Bid_Notes
-                    {
-                        Notes = bidDetails.BidNotesText,
-                        Create_Date = DateTime.Now,
-                        Created_By = WebSecurity.CurrentUserId
-                    };
-                    entities.Bid_Notes.Add(bidNote);
-                    entities.SaveChanges();
-
-                    newBid.Bid_Note_ID = bidNote.Bid_Note_ID;
-                    entities.SaveChanges();
-                }
+                bidDetails = _bidServices.BidDetailInfo(bidDetails);
+                return View("Bid", bidDetails);
             }
 
+            var entities = new LaneEntities();
+            var newBid = new Bid
+            {
+                Bid_Status_ID = bidDetails.BidStatusId,
+                Bid_Type_ID = bidDetails.BidTypeId,
+                Scope_Type_ID = bidDetails.ScopeTypeId,
+                Job_Type_ID = bidDetails.JobTypeId,
+                Structure_Type_ID = bidDetails.StructureId,
+                Customer_ID = bidDetails.CustomerId,
+                Sales_Person_ID = bidDetails.SalesPersonId,
+                Shipping_ID = bidDetails.ShippingId,
+                Site_ID = bidDetails.SiteId,
+                Created_By = WebSecurity.CurrentUserId,
+                Create_Date = DateTime.Now
+            };
+
+            entities.Bids.Add(newBid);
+            entities.SaveChanges();
+
+            if (!String.IsNullOrEmpty(bidDetails.BidNotesText))
+            {
+                var bidNote = new Bid_Notes
+                {
+                    Notes = bidDetails.BidNotesText,
+                    Create_Date = DateTime.Now,
+                    Created_By = WebSecurity.CurrentUserId
+                };
+                entities.Bid_Notes.Add(bidNote);
+                entities.SaveChanges();
+
+                newBid.Bid_Note_ID = bidNote.Bid_Note_ID;
+                entities.SaveChanges();
+            }
+
+
             var canopyInfo = _canopyService.CanopyLoadData(bidDetails);
-            
+
             return View(canopyInfo);
         }
 

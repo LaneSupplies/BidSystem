@@ -9,69 +9,67 @@ namespace LaneBids.Sources
 {
     public class BidServices
     {
-        public static int GetCanopyTypeId(string CanopyType)
+        private readonly LaneEntities _entities = new LaneEntities();
+
+        public int GetCanopyTypeId(string canopyType)
         {
             var entities = new LaneEntities();
-            var bidType = entities.Structure_Types.FirstOrDefault(x => x.Name == CanopyType);
+            var bidType = entities.Structure_Types.FirstOrDefault(x => x.Name == canopyType);
             return bidType != null ? bidType.Structure_Type_ID : 0;
         }
 
-        public BidDetails BidDetailInfo(string canopyType)
+        public BidDetails BidDetailInfo(BidDetails bid)
         {
-            var entities = new LaneEntities();
-            var bid = new BidDetails();
-            bid.StructureId = GetCanopyTypeId(canopyType);
-
-            bid.StructureList = entities.Structure_Types.ToList().Select(x => new SelectListItem
+            bid.StructureList = _entities.Structure_Types.ToList().Select(x => new SelectListItem
             {
                 Value = x.Structure_Type_ID.ToString(),
                 Text = x.Name
             }).ToList();
             
-            bid.BidTypeList = entities.Bid_Types.ToList().Select(x => new SelectListItem
+            bid.BidTypeList = _entities.Bid_Types.ToList().Select(x => new SelectListItem
             {
                 Value = x.Bid_Type_ID.ToString(),
                 Text = x.Name
             }).ToList();
 
-            bid.BidStatusList = entities.Bid_Statuses.ToList().Select(x => new SelectListItem
+            bid.BidStatusList = _entities.Bid_Statuses.ToList().Select(x => new SelectListItem
             {
                 Value = x.Bid_Status_ID.ToString(),
                 Text = x.Status
             }).ToList();
 
-            bid.JobTypeList = entities.Job_Types.ToList().Select(x => new SelectListItem
+            bid.JobTypeList = _entities.Job_Types.ToList().Select(x => new SelectListItem
             {
                 Value = x.Job_Type_ID.ToString(),
                 Text = x.Name
             }).ToList();
 
-            bid.ScopeTypeList = entities.Scope_Types.ToList().Select(x => new SelectListItem
+            bid.ScopeTypeList = _entities.Scope_Types.ToList().Select(x => new SelectListItem
             {
                 Value = x.Scope_Type_ID.ToString(),
                 Text = x.Name
             }).ToList();
 
-            bid.AddressesList = entities.Addresses.ToList().Select(x => new SelectListItem
+            bid.AddressesList = _entities.Addresses.ToList().Select(x => new SelectListItem
             {
                 Value = x.Address_ID.ToString(),
                 Text = x.Address_Line1 + " , " + x.City + " , " + x.State + " " + x.Zip
             }).ToList();
 
-            bid.ShippingList = entities.Addresses.ToList().Select(x => new SelectListItem
+            bid.ShippingList = _entities.Addresses.ToList().Select(x => new SelectListItem
             {
                 Value = x.Address_ID.ToString(),
                 Text = x.Address_Line1 + " , " + x.City + " , " + x.State + " " + x.Zip
             }).ToList();
 
-            bid.SiteList = entities.Sites.ToList().Select(x => new SelectListItem
+            bid.SiteList = _entities.Sites.ToList().Select(x => new SelectListItem
             {
                 Value = x.Site_ID.ToString(),
                 Text = x.Name
             }).ToList();
 
             //Contact Types
-            var contactTypeList = entities.Contact_Types.ToList().Select(s => new SelectListItem
+            var contactTypeList = _entities.Contact_Types.ToList().Select(s => new SelectListItem
             {
                 Value = s.Contact_Type_ID.ToString(),
                 Text = s.Name
@@ -82,7 +80,7 @@ namespace LaneBids.Sources
             {
                 Address = new AddressModel {StateList = AddressService.States},
                 PhoneContacts = new PhoneContacts {ContactTypeList = contactTypeList},
-                CustomerList = entities.Customers.OrderBy(x => x.Last_Name).ToList().Select(x => new SelectListItem
+                CustomerList = _entities.Customers.OrderBy(x => x.Last_Name).ToList().Select(x => new SelectListItem
                 {
                     Value = x.Customer_ID.ToString(),
                     Text = x.First_Name + " " + x.Last_Name
@@ -94,7 +92,7 @@ namespace LaneBids.Sources
             {
                 Address = new AddressModel {StateList = AddressService.States},
                 PhoneContacts = new PhoneContacts {ContactTypeList = contactTypeList},
-                SalesPersonList = entities.Sales_Persons.ToList().Select(x => new SelectListItem
+                SalesPersonList = _entities.Sales_Persons.ToList().Select(x => new SelectListItem
                 {
                     Value = x.Sales_Person_ID.ToString(),
                     Text = x.First_Name + " " + x.Last_Name
@@ -105,7 +103,7 @@ namespace LaneBids.Sources
             bid.AddSiteDetails = new SiteDetails
             {
                 Address = new AddressModel {StateList = AddressService.States},
-                SiteList = entities.Sites.ToList().Select(x => new SelectListItem
+                SiteList = _entities.Sites.ToList().Select(x => new SelectListItem
                 {
                     Value = x.Site_ID.ToString(),
                     Text = x.Name
@@ -116,7 +114,7 @@ namespace LaneBids.Sources
             bid.AddShippingInfoDetails = new ShippingInfoDetails
             {
                 StateList = AddressService.States,
-                ShippingList = entities.Shipping_Info.ToList().Select(x => new SelectListItem
+                ShippingList = _entities.Shipping_Info.ToList().Select(x => new SelectListItem
                 {
                     Value = x.Shipping_ID.ToString(),
                     Text = x.Name
@@ -128,41 +126,40 @@ namespace LaneBids.Sources
 
         public BidSearchModel SearchBaseData(string structureType)
         {
-            var entities = new LaneEntities();
             var baseData = new BidSearchModel();
             baseData.SearchResultsList = new List<BidSearch_Result>();
 
-            baseData.BidTypesList = entities.Bid_Types.ToList().Select(s => new SelectListItem
+            baseData.BidTypesList = _entities.Bid_Types.ToList().Select(s => new SelectListItem
             {
                 Value = s.Bid_Type_ID.ToString(),
                 Text = s.Name
             });
 
-            baseData.BidStatusList = entities.Bid_Statuses.ToList().Select(s => new SelectListItem
+            baseData.BidStatusList = _entities.Bid_Statuses.ToList().Select(s => new SelectListItem
             {
                 Value = s.Bid_Status_ID.ToString(),
                 Text = s.Status
             });
 
-            baseData.JobTypesList = entities.Job_Types.ToList().Select(s => new SelectListItem
+            baseData.JobTypesList = _entities.Job_Types.ToList().Select(s => new SelectListItem
             {
                 Value = s.Job_Type_ID.ToString(),
                 Text = s.Code + " - " + s.Name
             });
 
-            baseData.SiteList = entities.Sites.ToList().Select(s => new SelectListItem
+            baseData.SiteList = _entities.Sites.ToList().Select(s => new SelectListItem
             {
                 Value = s.Site_ID.ToString(),
                 Text = s.Name
             });
 
-            baseData.SalesPersonList = entities.Sales_Persons.ToList().Select(s => new SelectListItem
+            baseData.SalesPersonList = _entities.Sales_Persons.ToList().Select(s => new SelectListItem
             {
                 Value = s.Sales_Person_ID.ToString(),
                 Text = s.First_Name + " " + s.Last_Name
             });
 
-            baseData.StructureTypeList = entities.Structure_Types.ToList().Select(s => new SelectListItem
+            baseData.StructureTypeList = _entities.Structure_Types.ToList().Select(s => new SelectListItem
             {
                 Value = s.Structure_Type_ID.ToString(),
                 Text = s.Name

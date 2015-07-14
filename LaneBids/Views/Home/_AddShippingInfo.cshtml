@@ -4,9 +4,13 @@
     <div class="label divLabelOnly"><label>Shipping Info:</label></div>
     <div class="label divDropDown">
         @Html.DropDownListFor(model => model.ShippingId, Model.ShippingList)
+    </div>
+    <div class="label divAddButton">
+        <a href="#" id="AddShippingLink" class="addImage" ng-click="showAddShipping()"></a>
+    </div>
+    <div class="error-lable">
         @Html.ValidationMessageFor(v => v.ShippingId, null, new { @class = "errorMessage" })
     </div>
-    <div class="label divAddButton"><a href="#" id="AddShippingLink" class="addImage" ng-click="showAddShipping()"></a></div>
 </div>
 
 <div id="divAddShipping" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
@@ -47,14 +51,14 @@
                     </div>
                 </form>
             </div>
-            
+
             <div class="modal-footer button-list">
                 <button type="button" ng-click="addShippingInfo(ship)">Add</button>&nbsp;&nbsp;
                 <button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
             </div>
         </div>
     </div>
-</div>    
+</div>
 
 @*<script>
         $(document).ready(function () {

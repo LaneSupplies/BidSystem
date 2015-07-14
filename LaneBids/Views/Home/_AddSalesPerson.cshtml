@@ -4,9 +4,13 @@
     <div class="label divLabelOnly"><label>Sales Person:</label></div>
     <div class="label divDropDown">
         @Html.DropDownListFor(model => model.SalesPersonId, Model.SalesPersonList)
+    </div>
+    <div class="divAddButton">
+        <a href="#" id="AddSalesPersonLink" class="addImage" ng-click="showAddSalesPerson()"></a>
+    </div>
+    <div class="error-lable">
         @Html.ValidationMessageFor(v => v.SalesPersonId, null, new { @class = "errorMessage" })
     </div>
-    <div class="label divAddButton"><a href="#" id="AddSalesPersonLink" class="addImage" ng-click="showAddSalesPerson()"></a></div>
 </div>
 
 <div id="divAddSalesPerson" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
@@ -19,7 +23,7 @@
                 </button>
                 <h4 class="modal-title" id="typeDataModalLabel">Add Sales Person</h4>
             </div>
-            
+
             <div class="modal-body">
                 <form novalidate>
                     <div class="divLabel">
@@ -64,7 +68,7 @@
                     </div>
                 </form>
             </div>
-            
+
             <div class="modal-footer button-list">
                 <button type="button" ng-click="addSalesPerson(salesPerson)">Add</button>&nbsp;&nbsp;
                 <button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
@@ -73,45 +77,45 @@
     </div>
 </div>
 
-        @*<script>
-            $(document).ready(function () {
-                var newOption = "<option value='0' selected > -- Select Sales Person --</option>";
+@*<script>
+        $(document).ready(function () {
+            var newOption = "<option value='0' selected > -- Select Sales Person --</option>";
+            $("#SalesPersonId").append(newOption);
+        });
+
+        $("#AddSalesPersonLink").on("click", function () {
+            $("#divAddSalesPerson").dialog({
+                width: 500,
+                height: 550
+            });
+        });
+
+        $("#SubmitSalesPerson").on("click", function () {
+            $.ajax({
+                url: "/Home/SalesPersonAdd",
+                type: "POST",
+                dataType: "text",
+                data: {
+                    FirstName: $("#SalesFirstName").val(),
+                    LastName: $("#SalesLastName").val(),
+                    AddressLine1: $("#SalesAddress1").val(),
+                    AddressLine2: $("#SalesAddress2").val(),
+                    City: $("#SalesCity").val(),
+                    State: $("#SalesState").val(),
+                    Zip: $("#SalesZip").val(),
+                    PhoneNumber: $("#SalesContact").val(),
+                    ContactId: $("#SalesContactType").val()
+                }
+            }).success(function (response) {
+                //alert("Added SalesPerson: " + response);
+                var value = response.split('|');
+                var newOption = "<option value='" + value[0] + "' selected >" + value[1] + "</option>";
                 $("#SalesPersonId").append(newOption);
+                $("#divAddSalesPerson").dialog("close");
+            }).error(function (xhr, textStatus, errorThrown) {
+                alert("Failure to add customer (Response: " + xhr.responseText + " | Status: " + textStatus + " | ErrorMessage: " + errorThrown + ")");
+                $("#divAddSalesPerson").dialog("close");
             });
 
-            $("#AddSalesPersonLink").on("click", function () {
-                $("#divAddSalesPerson").dialog({
-                    width: 500,
-                    height: 550
-                });
-            });
-
-            $("#SubmitSalesPerson").on("click", function () {
-                $.ajax({
-                    url: "/Home/SalesPersonAdd",
-                    type: "POST",
-                    dataType: "text",
-                    data: {
-                        FirstName: $("#SalesFirstName").val(),
-                        LastName: $("#SalesLastName").val(),
-                        AddressLine1: $("#SalesAddress1").val(),
-                        AddressLine2: $("#SalesAddress2").val(),
-                        City: $("#SalesCity").val(),
-                        State: $("#SalesState").val(),
-                        Zip: $("#SalesZip").val(),
-                        PhoneNumber: $("#SalesContact").val(),
-                        ContactId: $("#SalesContactType").val()
-                    }
-                }).success(function (response) {
-                    //alert("Added SalesPerson: " + response);
-                    var value = response.split('|');
-                    var newOption = "<option value='" + value[0] + "' selected >" + value[1] + "</option>";
-                    $("#SalesPersonId").append(newOption);
-                    $("#divAddSalesPerson").dialog("close");
-                }).error(function (xhr, textStatus, errorThrown) {
-                    alert("Failure to add customer (Response: " + xhr.responseText + " | Status: " + textStatus + " | ErrorMessage: " + errorThrown + ")");
-                    $("#divAddSalesPerson").dialog("close");
-                });
-
-            });
-        </script>*@
+        });
+    </script>*@

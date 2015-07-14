@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace LaneBids.Models
 {
@@ -11,31 +12,34 @@ namespace LaneBids.Models
     {
         public Int32 BidId { get; set; }
         public Int32 RevisionNumber { get; set; }
+
+        [Required(ErrorMessage = "You must choose a Structure Type")]
         public Int32 StructureId { get; set; }
-        
-        [Required]
+
+        [Required(ErrorMessage = "You must choose a Bid Type")]
         public Int32 BidTypeId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "You must choose a Bid Status")]
         public Int32 BidStatusId { get; set; }
-        
-        [Required]
+
+        [Required(ErrorMessage = "You must choose a Job Type")]
         public Int32 JobTypeId { get; set; }
         
         public String JobTypeCode { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "You must choose a Scope Type")]
         public Int32 ScopeTypeId { get; set; }
 
+        [Required(ErrorMessage = "You must choose a Scope Type")]
         public String ScopeTypeCode { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "You must choose a Customer")]
         public Guid CustomerId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "You must choose a Sales Person")]
         public Int32 SalesPersonId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "You must choose a Site")]
         public Int32 SiteId { get; set; }
 
 

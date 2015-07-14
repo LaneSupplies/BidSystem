@@ -1,14 +1,18 @@
 ﻿@model LaneBids.Models.CustomerDetails
 
-    <div class="divPartial">
-        <div class="label divLabelOnly"><label>Customer:</label></div>
-        <div class="label divDropDown">
-            @Html.ValidationSummary(true)
-            @Html.DropDownListFor(model => model.CustomerId, Model.CustomerList)
-            @Html.ValidationMessageFor(v => v.CustomerId, null, new { @class = "errorMessage" })
-        </div>
-        <div class="label divAddButton"><a href="#" id="AddCustomerLink" class="addImage" ng-click="showAddCustomer()"></a></div>
+<div class="divPartial">
+    <div class="label divLabelOnly"><label>Customer:</label></div>
+    <div class="label divDropDown">
+        @Html.ValidationSummary(true)
+        @Html.DropDownListFor(model => model.CustomerId, Model.CustomerList)
     </div>
+    <div class="label divAddButton">
+        <a href="#" id="AddCustomerLink" class="addImage" ng-click="showAddCustomer()"></a>
+    </div>
+    <div class="error-lable">
+        @Html.ValidationMessageFor(v => v.CustomerId, null, new { @class = "errorMessage" })
+    </div>
+</div>
 
 <div id="divAddCustomer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
     <div id="#customerModal" class="modal-dialog" role="document" ng-model="customer">
