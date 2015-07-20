@@ -2,8 +2,10 @@
 @{
     ViewBag.Title = "Create Bid";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    PageData["NgApp"] = "BidViewer";
+    PageData["NgController"] = "BidController";
 }
+
 
 <h2>Add Bid</h2>
 
@@ -102,6 +104,7 @@
     </fieldset>
 }
 @section Scripts {
+    @Scripts.Render("~/bundles/Bid")
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         

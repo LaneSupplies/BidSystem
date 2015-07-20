@@ -2,57 +2,75 @@
 @{
     ViewBag.Title = "Canopy";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    PageData["NgApp"] = "CanopyViewer";
+    PageData["NgController"] = "CanopyController";
 }
 
 <h2>Canopy</h2>
-@using (Html.BeginForm("InsertCanopy", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
+
+<form>
     <fieldset>
+        <input type="hidden" ng-model="canopyDetail.BidFunctionType" />
+        <input type="hidden" ng-model="canopyDetail.BidId" />
         @Html.HiddenFor(m => m.BidFunctionType)
         @Html.HiddenFor(m => m.BidId)
         <div id="Quantity" class="divLabel">
             <label>Quantity:</label>
-            <label>@Html.TextBoxFor(t => t.Quantity, new { @class = "numberOnly" })</label>
+            <label>
+                <input type="number" class="numberOnly" ng-model="canopyDetail.Quantity" />
+            </label>
         </div>
         <br />
         <div id="Size">
             <div class="divLabel">
                 <label>Size Height:</label>
                 <div class="measurementLabel">
-                    @Html.TextBoxFor(t => t.SizeHeightFeet) Feet
-                    @Html.TextBoxFor(t => t.SizeHeightInches) Inches
+                    <input type="number" class="numberOnly" ng-model="canopyDetail.SizeHeightFeet" /> Feet
+                    <input type="number" class="numberOnly" ng-model="canopyDetail.SizeHeightInches" /> Inches
                 </div>
             </div>
             <div class="divLabel">
                 <label>Size Width:</label>
                 <div class="measurementLabel">
-                    @Html.TextBoxFor(t => t.SizeWidthFeet) Feet
-                    @Html.TextBoxFor(t => t.SizeWidthInches) Inches
+                    <input type="number" class="numberOnly" ng-model="canopyDetail.SizeWidthFeet" /> Feet
+                    <input type="number" class="numberOnly" ng-model="canopyDetail.SizeWidthInches" /> Inches
                 </div>
             </div>
         </div>
         <div id="Clearance" class="divLabel">
             <label>Clearance:</label>
-            <div class="measurementLabel">@Html.TextBoxFor(t => t.ClearanceFeet) Feet @Html.TextBoxFor(t => t.ClearanceInches) Inches</div>
+            <div class="measurementLabel">
+                <input type="number" class="numberOnly" ng-model="canopyDetail.ClearanceFeet" /> Feet
+                <input type="number" class="numberOnly" ng-model="canopyDetail.ClearanceInches" /> Inches
+            </div>
         </div>
         <div id="ColumnInfo">
             <h3>Column Info</h3>
             <div class="divLabel">
                 <label>Quantity:</label>
-                <label>@Html.TextBoxFor(t => t.ColumnQuantity, new { @class = "numberOnly" })</label>
+                <label>
+                    <input type="number" class="numberOnly" ng-model="canopyDetail.ColumnQuantity" />
+                </label>
             </div>
             <br />
             <div class="divLabel">
                 <label>Type:</label>
-                <label>@Html.DropDownListFor(t => t.ColumnTypeId, Model.ColumnTypeList)</label>
+                <label>
+                    @Html.DropDownListFor(t => t.ColumnTypeId, Model.ColumnTypeList, htmlAttributes: new { ng_model="canopyDetail.ColumnTypeId" })
+                </label>
             </div><br />
             <div class="divLabel">
                 <label>Size:</label>
-                <div class="measurementLabel">@Html.TextBoxFor(t => t.ColumnSizeFeet) Feet @Html.TextBoxFor(t => t.ColumnSizeInches) Inches</div>
+                <div class="measurementLabel">
+                    <input type="number" class="numberOnly" ng-model="canopyDetail.ColumnSizeFeet" /> Feet
+                    <input type="number" class="numberOnly" ng-model="canopyDetail.ColumnSizeInches" /> Inches
+                </div>
             </div>
             <div class="divLabel">
                 <label>Shape:</label>
-                <label>@Html.DropDownListFor(d => d.ColumnShapeId, Model.ColumnShapeList)</label>
+                <label>
+                    @Html.DropDownListFor(d => d.ColumnShapeId, Model.ColumnShapeList, new { ng_model = "canopyDetail.ColumnShapeId" })
+                </label>
             </div><br />
         </div>
         <br />
@@ -61,13 +79,15 @@
 
             <div id="ColumnLengh">
                 <div class="divColumnAddButton">
-                    <a href="#" id="AddColumnLengthLink" class="addLength">Add New Length Column</a><a href="#" id="AddSameColumnLengthLink" class="addLength">Add Same Length Column</a>
+                    <a href="#" class="addLength" ng-click="addColumnLength()">Add New Length Column</a>
+                    <a href="#" class="addLength" ng-click="addSameColumnLenght()">Add Same Length Column</a>
                 </div>
                 <div class="measurementList">
                     <div class="labelColumns">Column Spacing Length(s):</div>
                     <div id="LengthColumns" class="ColumnSpacing">
                         <div class="measurementListColumn">
-                            @Html.TextBox("CSLengthFeet1") Feet @Html.TextBox("CSLengthInches1") Inches
+                            <input type="number" id="colLenFeet1" class="numberOnly" ng-model="canopyDetail.ColumnLengths.Feet"  /> Feet
+                            <input type="number" id="colLenFeet1" class="numberOnly" ng-model="canopyDetail.ColumnLengths.Inches" /> Inches
                         </div>
                     </div>
                 </div>
@@ -82,7 +102,8 @@
                     <div class="labelColumns">Column Spacing Width(s):</div>
                     <div id="WidthColumns" class="ColumnSpacing">
                         <div class="measurementListColumn">
-                            @Html.TextBox("CSWidthFeet1") Feet @Html.TextBox("CSWidthInches1") Inches
+                            <input type="number" class="numberOnly" ng-model="canopyDetail.ColumnWidths.Feet" /> Feet
+                            <input type="number" class="numberOnly" ng-model="canopyDetail.ColumnWidths.Inches" /> Inches
                         </div>
                     </div>
                 </div>
@@ -91,29 +112,35 @@
             <br />
             <div id="ColumnNotes" class="divLabel">
                 <label>Column Spacing Notes:</label>
-                <div>@Html.TextAreaFor(t => t.ColumnSpacingNotes)</div>
+                <div>
+                    <textarea ng-model="canopyDetail.ColumnSpacingNotes"></textarea>
+                </div>
             </div>
         </div>
         <br />
         <div id="Designs">
             <h3>Design Loads</h3><br />
             <div class="divLabel">
-                <label>Design Load Live PSF:</label>@Html.TextBoxFor(t => t.DesignLoadsLivePsf, new { @class = "numberOnly" })
+                <label>Design Load Live PSF:</label>
+                <input type="number" class="numberOnly" ng-model="canopyDetail.DesignLoadsLivePsf" />
             </div>
             <div class="divLabel">
-                <label>Design Load Wind PSF:</label>@Html.TextBoxFor(t => t.DesignLoadWindPsf, new { @class = "numberOnly" })
+                <label>Design Load Wind PSF:</label>
+                <input type="number" class="numberOnly" ng-model="canopyDetail.DesignLoadWindPsf" />
             </div>
             <div class="divLabel">
-                <label>Design Load Wind MPH:</label>@Html.TextBoxFor(t => t.DesignLoadWindMph, new { @class = "numberOnly" })
+                <label>Design Load Wind MPH:</label>
+                <input type="number" class="numberOnly" ng-model="canopyDetail.DesignLoadWindMph" />
             </div>
             <div class="divLabel">
-                <label>Design Load Notes:</label>@Html.TextAreaFor(t => t.DesignLoadNotes)
+                <label>Design Load Notes:</label>
+                <textarea ng-model="canopyDetail.DesignLoadNotes"></textarea>
             </div>
         </div>
         <br />
         <div id="DeckInfo" class="divLabel">
             <label>Deck Style:</label>
-            @Html.DropDownListFor(d => d.DeckStyleId, Model.DeckStyleList)
+            @Html.DropDownListFor(d => d.DeckStyleId, Model.DeckStyleList, new { ng_model = "canopyDetail.DeckStyleId" })
         </div>
         <br />
         <div id="ImageFascia">
@@ -128,73 +155,76 @@
             <div class="divLabel">
                 <label>Fascia Height:</label>
                 <div class="measurementLabel">
-                    @Html.TextBoxFor(t => t.FasciaHeightFeet) Feet @Html.TextBoxFor(t => t.FasciaHeightInches) Inches
+                    <input type="number" class="numberOnly" ng-model="canopyDetail.FasciaHeightFeet" /> Feet
+                    <input type="number" class="numberOnly" ng-model="canopyDetail.FasciaHeightInches" /> Inches
                 </div>
             </div>
             <div class="divLabel">
                 <label>Fascia Type:</label>
-                @Html.DropDownListFor(d => d.FasciaTypeId, Model.FasciaTypeList)
+                @Html.DropDownListFor(d => d.FasciaTypeId, Model.FasciaTypeList, new { ng_model = "canopyDetail.FasciaTypeId" })
             </div>
         </div>
         <br />
         <div id="Drainage" class="divLabel">
             <label>Drainage:</label>
-            @Html.DropDownListFor(d => d.DrainageTypeId, Model.DrainageList)
+            @Html.DropDownListFor(d => d.DrainageTypeId, Model.DrainageList, new { ng_model = "canopyDetail.DrainageTypeId" })
         </div>
         <br />
         <div id="Drawings">
             <label style="width: 150px;">Engineered Sealed?</label>
             <span style="width: 100px;">
-                <input type="radio" name="DrawingSealed" id="DrawingSealedNo" value="No" checked="checked" style="width: 50px" />No
-                <input type="radio" name="DrawingSealed" id="DrawingSealedYes" value="Yes" style="width: 50px" />Yes
+                <input type="radio" name="DrawingSealed" id="DrawingSealedNo" ng-model="canopyDetail.DrawingSealedNo" value="No" checked="checked" style="width: 50px" />No
+                <input type="radio" name="DrawingSealed" id="DrawingSealedYes" ng-model="canopyDetail.DrawingSealedYes" value="Yes" style="width: 50px" />Yes
             </span>
         </div>
         <br />
         <div id="OtherNotes" class="divLabel">
-            <label>Other Notes:</label>@Html.TextAreaFor(t => t.OtherNotes)
+            <label>Other Notes:</label>
+            <textarea ng-model="canopyDetail.OtherNotes"></textarea>
         </div>
         <br />
         <div id="SpecificInclusions" class="divLabel">
             <label>Specific Inclusions:</label>
-            @Html.TextAreaFor(t => t.InclusionNotes)
+            <textarea ng-model="canopyDetail.InclusionNotes"></textarea>
         </div>
         <br />
         <div id="SpecificExclusions" class="divLabel">
             <label>Specific Exclusions:</label>
-            @Html.TextAreaFor(t => t.ExclusionNotes)
+            <textarea ng-model="canopyDetail.ExclusionNotes"></textarea>
         </div>
         <br />
         <div id="GeneralInclusions" class="divLabel">
             <label>General Inclusions:</label>
-            @Html.TextAreaFor(t => t.GeneralInclusionNotes)
+            <textarea ng-model="canopyDetail.GeneralInclusionNotes"></textarea>
         </div>
         <br />
         <div id="GeneralExclusions" class="divLabel">
             <label>General Exclusions:</label>
-            @Html.TextAreaFor(t => t.GeneralExclusionNotes)
+            <textarea ng-model="canopyDetail.GeneralExclusionNotes"></textarea>
         </div>
         <br />
         <div id="BasePrice" class="divLabel">
             <label>Material Cost:</label>
-            @Html.TextBoxFor(t => t.MaterialPrice, new { @class = "Currency" })<br />
+            <input type="text" class="Currency" ng-model="canopyDetail.MaterialPrice" /><br />
             <label>Labor:</label>
-            @Html.TextBoxFor(t => t.LaborPrice, new { @class = "Currency" })<br />
+            <input type="text" class="Currency" ng-model="canopyDetail.LaborPrice" /><br />
             <label>Freight:</label>
-            @Html.TextBoxFor(t => t.FreightPrice, new { @class = "Currency" })<br />
+            <input type="text" class="Currency" ng-model="canopyDetail.FreightPrice" /><br />
             <label>Tax:</label>
-            @Html.TextBoxFor(t => t.TaxPrice, new { @class = "Currency" })<br />
+            <input type="text" class="Currency" ng-model="canopyDetail.TaxPrice" /><br />
             <label>Total:</label>
-            @Html.TextBoxFor(t => t.TotalPrice, new { @class = "Currency" })
+            <input type="text" class="Currency" ng-model="canopyDetail.TotalPrice" />
         </div>
         <br />
         <div id="SubmitForm" class="divLabel">
             <input type="submit" value="Submit" />
         </div>
     </fieldset>
-}
+</form>
 
 @section Scripts {
-    <script type="text/javascript" src="/scripts/jquery.formatCurrency-1.4.0.min.js"></script>
+    @Scripts.Render("~/bundles/Canopy")
+    <script type="text/javascript" src="/scripts/vendor/jquery.formatCurrency-1.4.0.js"></script>
     <script>
         $(".Currency").blur(function () {
             $(".Currency").formatCurrency();
@@ -208,8 +238,8 @@
             });
 
             var nextInputCount = (inputCount / 2) + 1;
-            var addLength = "<div class='measurementListColumn'><input type='text' id='CSLengthFeet" + nextInputCount + "' />&nbsp;Feet&nbsp;" +
-                            "<input type='text' id='CSLengthInches" + nextInputCount + "' />&nbsp;Inches</div>";
+            var addLength = "<div class='measurementListColumn'><input type='number' id='CSLengthFeet" + nextInputCount + "' />&nbsp;Feet&nbsp;" +
+                            "<input type='number' id='CSLengthInches" + nextInputCount + "' />&nbsp;Inches</div>";
 
             $("#LengthColumns").append(addLength);
         });
@@ -226,8 +256,8 @@
             var inches = $("#CSLengthInches" + lastLengthNumber).val();
             var nextInputCount = lastLengthNumber + 1;
             
-            var addLength = "<div class='measurementListColumn'><input type='text' id='CSLengthFeet" + nextInputCount + "' value='" + feet + "' />&nbsp;Feet&nbsp;" +
-                            "<input type='text' id='CSLengthInches" + nextInputCount + "' value='" + inches + "' />&nbsp;Inches</div>";
+            var addLength = "<div class='measurementListColumn'><input type='number' id='CSLengthFeet" + nextInputCount + "' value='" + feet + "' />&nbsp;Feet&nbsp;" +
+                            "<input type='number' id='CSLengthInches" + nextInputCount + "' value='" + inches + "' />&nbsp;Inches</div>";
 
             $("#LengthColumns").append(addLength);
         });
@@ -240,8 +270,8 @@
             });
 
             var nextInputCount = (inputCount / 2) + 1;
-            var addWidth = "<div class='measurementListColumn'><input type='text' id='CSLengthFeet" + nextInputCount + "' />&nbsp;Feet&nbsp;" +
-                            "<input type='text' id='CSLengthInches" + nextInputCount + "' />&nbsp;Inches</div>";
+            var addWidth = "<div class='measurementListColumn'><input type='number' id='CSLengthFeet" + nextInputCount + "' />&nbsp;Feet&nbsp;" +
+                            "<input type='number' id='CSLengthInches" + nextInputCount + "' />&nbsp;Inches</div>";
 
             $("#WidthColumns").append(addWidth);
         });
@@ -258,8 +288,8 @@
             var inches = $("#CSLengthInches" + lastLengthNumber).val();
             var nextInputCount = lastLengthNumber + 1;
 
-            var addWidth = "<div class='measurementListColumn'><input type='text' id='CSLengthFeet" + nextInputCount + "' value='" + feet + "' />&nbsp;Feet&nbsp;" +
-                            "<input type='text' id='CSLengthInches" + nextInputCount + "' value='" + inches + "' />&nbsp;Inches</div>";
+            var addWidth = "<div class='measurementListColumn'><input type='number' id='CSLengthFeet" + nextInputCount + "' value='" + feet + "' />&nbsp;Feet&nbsp;" +
+                            "<input type='number' id='CSLengthInches" + nextInputCount + "' value='" + inches + "' />&nbsp;Inches</div>";
 
             $("#WidthColumns").append(addWidth);
         });

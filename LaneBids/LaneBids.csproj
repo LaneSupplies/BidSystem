@@ -363,7 +363,9 @@
     <Content Include="fonts\ui-grid.eot" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <Content Include="Scripts\AdminApps.js" />
-    <Content Include="Scripts\home-http.js" />
+    <Content Include="Scripts\canopy-http.js" />
+    <Content Include="Scripts\CanopyApps.js" />
+    <Content Include="Scripts\bid-http.js" />
     <Content Include="Scripts\vendor\angular-animate.js" />
     <Content Include="Scripts\vendor\angular-animate.min.js" />
     <Content Include="Scripts\vendor\angular-aria.js" />
@@ -388,7 +390,7 @@
     <Content Include="Scripts\vendor\angular.js" />
     <Content Include="Scripts\vendor\angular.min.js" />
     <Content Include="Scripts\vendor\bootstrap.js" />
-    <Content Include="Scripts\HomeApps.js" />
+    <Content Include="Scripts\BidApps.js" />
     <None Include="Scripts\vendor\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\vendor\jquery-1.11.1.js" />
     <Content Include="Scripts\vendor\jquery-ui-1.11.2.js" />

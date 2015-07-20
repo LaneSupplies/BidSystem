@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    var homeHttpService = function ($http) {
+    var bidHttpService = function ($http) {
         var transform = function (data) {
             console.log($.param(data));
             return $.param(data);
@@ -106,8 +106,8 @@
         };
     };
 
-    var appHttp = angular.module("HomeViewer");
-    appHttp.factory("homeHttpService", homeHttpService);
+    var appHttp = angular.module("BidViewer");
+    appHttp.factory("bidHttpService", bidHttpService);
 
     //appHttp.config(function ($httpProvider) {
     //    $httpProvider.defaults.transformRequest = function (data) {

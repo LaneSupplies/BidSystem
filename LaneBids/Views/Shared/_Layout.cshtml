@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="HomeViewer">
+<html lang="en" ng-app="@PageData["NgApp"]">
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title - Lane Supplies</title>
@@ -10,6 +10,8 @@
     @RenderSection("Styles", required: false)
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/angularjs")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <!--[if lt IE 9]>
@@ -96,15 +98,12 @@
         </div>
         <div id="divBody">
             @RenderSection("featured", required: false)
-            <div class="main-body" ng-controller="HomeController">
+            <div class="main-body" ng-controller="@PageData["NgController"]">
                 @RenderBody()
             </div>
         </div>
     </section>
 
-    @Scripts.Render("~/bundles/angularjs")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/Home")
     @RenderSection("Scripts", required: false)
 
     <script>

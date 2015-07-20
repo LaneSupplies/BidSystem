@@ -1,10 +1,10 @@
 ﻿(function () {
 
-    var app = angular.module('HomeViewer', ['ngTouch']);
+    var app = angular.module('BidViewer', ['ngTouch']);
 
-    var HomeController = function ($scope, homeHttpService) {
+    var bidController = function ($scope, bidHttpService) {
 
-        var onHomeError = function (response) {
+        var onBidError = function (response) {
             $scope.error = "Error getting data.";
         };
 
@@ -20,6 +20,7 @@
             
         };
 
+        //Set default dropdowns in bids page
         $scope.addDefaultsSelectBidPage = function() {
             var defaultStructureType = "<option value='None' selected > -- Select Structure -- </option>";
             var defaultBidStatus = "<option value='None' selected > -- Select Status -- </option>";
@@ -48,8 +49,8 @@
         }
 
         $scope.addCustomer = function(customer) {
-            homeHttpService.addCustomer(customer)
-                .then(onAddCustomerComplete, onHomeError);
+            bidHttpService.addCustomer(customer)
+                .then(onAddCustomerComplete, onBidError);
         }
 
         var onAddCustomerComplete = function (data) {
@@ -65,8 +66,8 @@
         }
 
         $scope.addSalesPerson = function (salesPerson) {
-            homeHttpService.addSalesPerson(salesPerson)
-                .then(onAddSalesPersonComplete, onHomeError);
+            bidHttpService.addSalesPerson(salesPerson)
+                .then(onAddSalesPersonComplete, onBidError);
         }
 
         var onAddSalesPersonComplete = function (data) {
@@ -82,8 +83,8 @@
         }
 
         $scope.addSite = function (site) {
-            homeHttpService.addSite(site)
-                .then(onAddSiteComplete, onHomeError);
+            bidHttpService.addSite(site)
+                .then(onAddSiteComplete, onBidError);
         }
 
         var onAddSiteComplete = function (data) {
@@ -99,8 +100,8 @@
         }
 
         $scope.addShippingInfo = function (site) {
-            homeHttpService.addShippingInfo(site)
-                .then(onAddShippingInfoComplete, onHomeError);
+            bidHttpService.addShippingInfo(site)
+                .then(onAddShippingInfoComplete, onBidError);
         }
 
         var onAddShippingInfoComplete = function (data) {
@@ -110,9 +111,9 @@
             $("#divAddShipping").modal("hide");
         };
 
-        homeHttpService.getContacts().then(onContactListComplete, onHomeError);
-        homeHttpService.getStateList().then(onStateListComplete, onHomeError);
+        bidHttpService.getContacts().then(onContactListComplete, onBidError);
+        bidHttpService.getStateList().then(onStateListComplete, onBidError);
     };
 
-    app.controller("HomeController", HomeController);
+    app.controller("BidController", bidController);
 }());

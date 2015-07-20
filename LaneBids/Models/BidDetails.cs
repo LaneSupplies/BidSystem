@@ -29,8 +29,6 @@ namespace LaneBids.Models
 
         [Required(ErrorMessage = "You must choose a Scope Type")]
         public Int32 ScopeTypeId { get; set; }
-
-        [Required(ErrorMessage = "You must choose a Scope Type")]
         public String ScopeTypeCode { get; set; }
 
         [Required(ErrorMessage = "You must choose a Customer")]
