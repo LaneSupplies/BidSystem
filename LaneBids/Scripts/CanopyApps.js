@@ -4,20 +4,22 @@
 
     var CanopyController = function ($scope, $compile, canopyHttpService) {
 
+        $scope.ColumnLengths = {feet: ''};
+
         var onCanopyError = function (response) {
             $scope.error = "Error getting data.";
         };
 
-        $scope.columnLengthCount = 1;
+        $scope.columnLengthCount = 0;
 
         $scope.addColumnLength = function() {
             $scope.columnLengthCount += 1;
             var addLength = "<div class='measurementListColumn'> " +
-                "<input type='number' id='colLenFeet" + $scope.columnLengthCount + "' " +
-                " ng-model='canopyDetail.ColumnLengths.Feet' /> Feet " +
-                "<input type='number' id='colLenInch" + $scope.columnLengthCount + "' " +
-                "ng-model='canopyDetail.ColumnLengths.Inches' />  Inches " +
-                "<img ng-click='deleteColumnLength($event)' class='ui-state-highlight ui-icon ui-icon-circle-close measure-icon' />" +
+                "<input type='number' class='numberOnly feet' " +
+                "ng-model='canopyDetail.ColumnLengths[" + $scope.columnLengthCount + "].Feet' /> Feet " +
+                "<input type='number' class='numberOnly inches' " +
+                "ng-model='canopyDetail.ColumnLengths[" + $scope.columnLengthCount + "].Inches' />  Inches " +
+                "<img ng-click='deleteColumnLength($event)' class='ui-icon ui-icon-circle-close measure-icon' />" +
                 "</div>";
 
             var newMeasurement = $compile(addLength)($scope);
@@ -27,21 +29,22 @@
 
         $scope.addSameColumnLenght = function () {
             $scope.columnLengthCount += 1;
-            var lastDiv = $("#ColumnLengh").find('div.measurementList').last();
-            var feet = lastDiv.first('input').val();
-            var inch = lastDiv.last('input').val();
+            var feet = $('#ColumnLength').find('div.measurementListColumn').last().find('input.feet').val();
+            var inch = $('#ColumnLength').find('div.measurementListColumn').last().find('input.inches').val();
 
             var addLength = "<div class='measurementListColumn'> " +
-                "<input type='number' id='colLenFeet" + $scope.columnLengthCount + "' " +
+                "<input type='number' class='numberOnly feet' " +
                 "value='" + feet + "' " +
-                "ng-model='canopyDetail.ColumnLengths.Feet' /> Feet " +
-                "<input type='number' id='colLenInch" + $scope.columnLengthCount + "' " +
+                "ng-model='canopyDetail.ColumnLengths[" + $scope.columnLengthCount + "].Feet' /> Feet " +
+                "<input type='number' class='numberOnly inches' " +
                 "value='" + inch + "' " +
-                "ng-model='canopyDetail.ColumnLengths.Inches' />  Inches " +
-                "<img ng-click='deleteColumnLength($event)' class='ui-state-highlight ui-icon ui-icon-circle-close measure-icon' />" +
+                "ng-model='canopyDetail.ColumnLengths[" + $scope.columnLengthCount + "].Inches' />  Inches " +
+                "<img ng-click='deleteColumnLength($event)' class='ui-icon ui-icon-circle-close measure-icon' />" +
                 "</div>";
 
-            $("#LengthColumns").append(addLength);
+            var newMeasurement = $compile(addLength)($scope);
+
+            $("#LengthColumns").append(newMeasurement);
         };
 
         $scope.deleteColumnLength = function ($event) {

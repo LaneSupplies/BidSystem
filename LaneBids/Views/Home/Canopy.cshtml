@@ -77,19 +77,32 @@
         <div id="ColumnSpacing">
             <h3>Column Spacing</h3><br />
 
-            <div id="ColumnLengh">
+            <div id="ColumnLength">
                 <div class="divColumnAddButton">
                     <a href="#" class="addLength" ng-click="addColumnLength()">Add New Length Column</a>
-                    <a href="#" class="addLength" ng-click="addSameColumnLenght()">Add Same Length Column</a>
                 </div>
-                <div class="measurementList">
-                    <div class="labelColumns">Column Spacing Length(s):</div>
-                    <div id="LengthColumns" class="ColumnSpacing">
-                        <div class="measurementListColumn">
-                            <input type="number" id="colLenFeet1" class="numberOnly" ng-model="canopyDetail.ColumnLengths.Feet"  /> Feet
-                            <input type="number" id="colLenFeet1" class="numberOnly" ng-model="canopyDetail.ColumnLengths.Inches" /> Inches
-                        </div>
-                    </div>
+                <div class="measurementList" style="padding-bottom: 30px;">
+                    <div class="caption">Column Lengths</div>
+                    <table ng-table="columnLengthTable">
+                        <thead>
+                            <tr>
+                                <td>Feet</td>
+                                <td>Inches</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="length in ColumnLengths">
+                            <td data-title="Feet">
+                                <input type="text" class="numberOnly" ng-model="length.feet" />
+                            </td>
+                            <td data-title="Inches">
+                                <input type="text" class="numberOnly" ng-model="length.inches" />
+                            </td>
+                            <td>
+                                <a href="#" ng-click="addSameColumnLenght()">Add Same</a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <br />
@@ -231,67 +244,67 @@
         });
 
         //Add new column Length
-        $("#AddColumnLengthLink").on("click", function () {
-            var inputCount = 0;
-            $("#LengthColumns :input").each(function () {
-                inputCount++;
-            });
+        //$("#AddColumnLengthLink").on("click", function () {
+        //    var inputCount = 0;
+        //    $("#LengthColumns :input").each(function () {
+        //        inputCount++;
+        //    });
 
-            var nextInputCount = (inputCount / 2) + 1;
-            var addLength = "<div class='measurementListColumn'><input type='number' id='CSLengthFeet" + nextInputCount + "' />&nbsp;Feet&nbsp;" +
-                            "<input type='number' id='CSLengthInches" + nextInputCount + "' />&nbsp;Inches</div>";
+        //    var nextInputCount = (inputCount / 2) + 1;
+        //    var addLength = "<div class='measurementListColumn'><input type='number' id='CSLengthFeet" + nextInputCount + "' />&nbsp;Feet&nbsp;" +
+        //                    "<input type='number' id='CSLengthInches" + nextInputCount + "' />&nbsp;Inches</div>";
 
-            $("#LengthColumns").append(addLength);
-        });
+        //    $("#LengthColumns").append(addLength);
+        //});
 
-        //Add same column Length
-        $("#AddSameColumnLengthLink").on("click", function () {
-            var inputCount = 0;
-            $("#LengthColumns :input").each(function () {
-                inputCount++;
-            });
+        ////Add same column Length
+        //$("#AddSameColumnLengthLink").on("click", function () {
+        //    var inputCount = 0;
+        //    $("#LengthColumns :input").each(function () {
+        //        inputCount++;
+        //    });
 
-            var lastLengthNumber = (inputCount / 2);
-            var feet = $("#CSLengthFeet" + lastLengthNumber).val();
-            var inches = $("#CSLengthInches" + lastLengthNumber).val();
-            var nextInputCount = lastLengthNumber + 1;
+        //    var lastLengthNumber = (inputCount / 2);
+        //    var feet = $("#CSLengthFeet" + lastLengthNumber).val();
+        //    var inches = $("#CSLengthInches" + lastLengthNumber).val();
+        //    var nextInputCount = lastLengthNumber + 1;
             
-            var addLength = "<div class='measurementListColumn'><input type='number' id='CSLengthFeet" + nextInputCount + "' value='" + feet + "' />&nbsp;Feet&nbsp;" +
-                            "<input type='number' id='CSLengthInches" + nextInputCount + "' value='" + inches + "' />&nbsp;Inches</div>";
+        //    var addLength = "<div class='measurementListColumn'><input type='number' id='CSLengthFeet" + nextInputCount + "' value='" + feet + "' />&nbsp;Feet&nbsp;" +
+        //                    "<input type='number' id='CSLengthInches" + nextInputCount + "' value='" + inches + "' />&nbsp;Inches</div>";
 
-            $("#LengthColumns").append(addLength);
-        });
+        //    $("#LengthColumns").append(addLength);
+        //});
 
-        //Add new column Width
-        $("#AddColumnWidthLink").on("click", function () {
-            var inputCount = 0;
-            $("#WidthColumns :input").each(function () {
-                inputCount++;
-            });
+        ////Add new column Width
+        //$("#AddColumnWidthLink").on("click", function () {
+        //    var inputCount = 0;
+        //    $("#WidthColumns :input").each(function () {
+        //        inputCount++;
+        //    });
 
-            var nextInputCount = (inputCount / 2) + 1;
-            var addWidth = "<div class='measurementListColumn'><input type='number' id='CSLengthFeet" + nextInputCount + "' />&nbsp;Feet&nbsp;" +
-                            "<input type='number' id='CSLengthInches" + nextInputCount + "' />&nbsp;Inches</div>";
+        //    var nextInputCount = (inputCount / 2) + 1;
+        //    var addWidth = "<div class='measurementListColumn'><input type='number' id='CSLengthFeet" + nextInputCount + "' />&nbsp;Feet&nbsp;" +
+        //                    "<input type='number' id='CSLengthInches" + nextInputCount + "' />&nbsp;Inches</div>";
 
-            $("#WidthColumns").append(addWidth);
-        });
+        //    $("#WidthColumns").append(addWidth);
+        //});
 
-        //Add same column Width
-        $("#AddSameColumnWidthLink").on("click", function () {
-            var inputCount = 0;
-            $("#WidthColumns :input").each(function () {
-                inputCount++;
-            });
+        ////Add same column Width
+        //$("#AddSameColumnWidthLink").on("click", function () {
+        //    var inputCount = 0;
+        //    $("#WidthColumns :input").each(function () {
+        //        inputCount++;
+        //    });
 
-            var lastLengthNumber = (inputCount / 2);
-            var feet = $("#CSLengthFeet" + lastLengthNumber).val();
-            var inches = $("#CSLengthInches" + lastLengthNumber).val();
-            var nextInputCount = lastLengthNumber + 1;
+        //    var lastLengthNumber = (inputCount / 2);
+        //    var feet = $("#CSLengthFeet" + lastLengthNumber).val();
+        //    var inches = $("#CSLengthInches" + lastLengthNumber).val();
+        //    var nextInputCount = lastLengthNumber + 1;
 
-            var addWidth = "<div class='measurementListColumn'><input type='number' id='CSLengthFeet" + nextInputCount + "' value='" + feet + "' />&nbsp;Feet&nbsp;" +
-                            "<input type='number' id='CSLengthInches" + nextInputCount + "' value='" + inches + "' />&nbsp;Inches</div>";
+        //    var addWidth = "<div class='measurementListColumn'><input type='number' id='CSLengthFeet" + nextInputCount + "' value='" + feet + "' />&nbsp;Feet&nbsp;" +
+        //                    "<input type='number' id='CSLengthInches" + nextInputCount + "' value='" + inches + "' />&nbsp;Inches</div>";
 
-            $("#WidthColumns").append(addWidth);
-        });
+        //    $("#WidthColumns").append(addWidth);
+        //});
     </script>
 }

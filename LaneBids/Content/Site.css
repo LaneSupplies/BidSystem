@@ -117,6 +117,52 @@ div#two {
     background: black;
 }*/
 
+/* Table Layout */
+
+table {
+    border-collapse: collapse;
+}
+
+table thead {
+    background: SteelBlue;
+    color: white;
+}
+
+table th {
+    text-align: left;
+}
+
+table th,
+table td {
+    padding: 5px 10px;
+    border: 1px solid black;
+
+}
+
+table tbody tr:nth-child(even) {
+    background: #cccccc;
+}
+
+table tbody tr td:nth-child(2) {
+    text-align: center;
+}
+
+table tbody tr td:nth-child(3),
+tabletbody tr td:nth-child(4) {
+    text-align: right;
+}
+
+table tfoot {
+    background: SeaGreen;
+    color: white;
+    text-align: right;
+}
+
+    table tfoot tr th:last-child {
+        font-family: monospace;
+    }
+
+
 section#sectionBody {
     height: 600px;
     margin: auto;
@@ -780,9 +826,8 @@ li {
 }
 
 .measurementList label {
-    width: 200px;
+    width: 300px;
     padding-left: 10px;
-    display: block;
 }
 
 .numberOnly {
@@ -798,8 +843,6 @@ li {
     height: 40px;
     width: auto;
 }
-
-
 
 .AddNewLink {
     text-decoration: underline;
@@ -851,10 +894,7 @@ a.addImage, a.addImage:visited {
 /* Column Spacing */
 .measurementList {
     padding: 10px;
-    text-wrap: none;
     width: 1000px;
-    height: 30px;
-    margin-bottom: 10px;
 }
 
 .labelColumns {
@@ -872,7 +912,7 @@ a.addImage, a.addImage:visited {
 }
 
 .measurementListColumn {
-    width: 170px;
+    width: 250px;
     height: 30px;
     float: left;
 }
@@ -880,6 +920,8 @@ a.addImage, a.addImage:visited {
     .measurementListColumn img {
         float: right;
         margin-top: 5px;
+        border: 0;
+        border-style:none;
     }
 
 .measurementListColumnAdded {
