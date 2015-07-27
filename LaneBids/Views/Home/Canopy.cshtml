@@ -91,7 +91,7 @@
                                 <td>&nbsp;</td>
                             </tr>
                         </thead>
-                        <tr ng-repeat="length in ColumnLengths">
+                        <tr ng-repeat="length in ColumnLengths.measurements">
                             <td data-title="Feet">
                                 <input type="text" class="numberOnly" ng-model="length.feet" />
                             </td>
@@ -99,7 +99,8 @@
                                 <input type="text" class="numberOnly" ng-model="length.inches" />
                             </td>
                             <td>
-                                <a href="#" ng-click="addSameColumnLenght()">Add Same</a>
+                                <a href="#" ng-click="addSameColumnLenght(length)">Add Same</a>&nbsp;&nbsp;
+                                <a href="#" ng-click="deleteColumnLength($index)">Delete</a>
                             </td>
                         </tr>
                     </table>
