@@ -91,7 +91,7 @@
                                 <td>&nbsp;</td>
                             </tr>
                         </thead>
-                        <tr ng-repeat="length in ColumnLengths.measurements">
+                        <tr ng-repeat="length in canopyDetail.ColumnLengths.measurements">
                             <td data-title="Feet">
                                 <input type="text" class="numberOnly" ng-model="length.feet" />
                             </td>
@@ -110,16 +110,31 @@
 
             <div id="ColumnWidth">
                 <div class="divColumnAddButton">
-                    <a href="#" id="AddColumnWidthLink" class="addLength">Add New Width Column</a><a href="#" id="AddSameColumnWidthLink" class="addLength">Add Same Width Column</a>
+                    <a href="#" class="addWidth" ng-click="addColumnWidth()">Add New Width Column</a>
                 </div>
-                <div class="measurementList">
-                    <div class="labelColumns">Column Spacing Width(s):</div>
-                    <div id="WidthColumns" class="ColumnSpacing">
-                        <div class="measurementListColumn">
-                            <input type="number" class="numberOnly" ng-model="canopyDetail.ColumnWidths.Feet" /> Feet
-                            <input type="number" class="numberOnly" ng-model="canopyDetail.ColumnWidths.Inches" /> Inches
-                        </div>
-                    </div>
+                <div class="measurementList" style="padding-bottom: 30px;">
+                    <div class="caption">Column Widths</div>
+                    <table ng-table="columnWidthTable">
+                        <thead>
+                            <tr>
+                                <td>Feet</td>
+                                <td>Inches</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="width in canopyDetail.ColumnWidths.measurements">
+                            <td data-title="Feet">
+                                <input type="text" class="numberOnly" ng-model="width.feet" />
+                            </td>
+                            <td data-title="Inches">
+                                <input type="text" class="numberOnly" ng-model="width.inches" />
+                            </td>
+                            <td>
+                                <a href="#" ng-click="addSameColumnWidth(width)">Add Same</a>&nbsp;&nbsp;
+                                <a href="#" ng-click="deleteColumnWidth($index)">Delete</a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
 
@@ -231,7 +246,7 @@
         </div>
         <br />
         <div id="SubmitForm" class="divLabel">
-            <input type="submit" value="Submit" />
+            <input type="button" value="Submit" ng-click="submitForm(canopyDetail)" />
         </div>
     </fieldset>
 </form>
