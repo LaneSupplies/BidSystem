@@ -185,49 +185,48 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Activity_Log.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Address.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Admin\TypeDataCodeModel.cs" />
     <Compile Include="Models\Admin\TypeDataModel.cs" />
     <Compile Include="Models\Bid.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BidSearch_Result.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Bid_Notes.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Bid_Statuses.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Bid_Types.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Canopy.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Color.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ColorModel.cs" />
-    <Compile Include="Models\Column_Shapes.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\ColumnLength.cs" />
+    <Compile Include="Models\ColumnWidths.cs" />
     <Compile Include="Models\Column_Types.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Contact_Info.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Contact_Types.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerDetails.cs" />
     <Compile Include="Models\AddressModel.cs" />
@@ -236,63 +235,66 @@
     <Compile Include="Models\BidSearchModel.cs" />
     <Compile Include="Models\CanopyDetails.cs" />
     <Compile Include="Models\Deck_Styles.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Drainage_Types.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Fascia_Types.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gutter_Types.cs">
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Image.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Job_Types.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LaneBidEntities.Context.cs">
+    <Compile Include="Models\LaneEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LaneBidEntities.Context.tt</DependentUpon>
+      <DependentUpon>LaneEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LaneBidEntities.cs">
+    <Compile Include="Models\LaneEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LaneBidEntities.Designer.cs">
+    <Compile Include="Models\LaneEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LaneBidEntities.edmx</DependentUpon>
+      <DependentUpon>LaneEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Measurement.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Measurement_Lists.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhoneContacts.cs" />
     <Compile Include="Models\SalesPersonDetails.cs" />
     <Compile Include="Models\Sales_Persons.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Scope_Types.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShippingInfoDetails.cs" />
     <Compile Include="Models\Shipping_Info.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Site.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SiteDetails.cs" />
     <Compile Include="Models\Structure_Types.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TypeEnum.cs" />
-    <Compile Include="Models\UserLoginProfile.cs">
-      <DependentUpon>LaneBidEntities.tt</DependentUpon>
+    <Compile Include="Models\UserLoginProfiles.cs">
+      <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sources\AddressService.cs" />
@@ -355,23 +357,6 @@
     <Content Include="Global.asax" />
     <Content Include="Images\BlueAdd.png" />
     <Content Include="Images\Logo.gif" />
-    <EntityDeploy Include="Models\LaneBidEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LaneBidEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\LaneBidEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LaneBidEntities.edmx</DependentUpon>
-      <LastGenOutput>LaneBidEntities.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\LaneBidEntities.edmx.diagram">
-      <DependentUpon>LaneBidEntities.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\LaneBidEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LaneBidEntities.edmx</DependentUpon>
-      <LastGenOutput>LaneBidEntities.cs</LastGenOutput>
-    </Content>
     <Content Include="fonts\ui-grid.woff" />
     <Content Include="fonts\ui-grid.ttf" />
     <Content Include="fonts\ui-grid.eot" />
@@ -381,35 +366,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <EntityDeploy Include="Models\LaneEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LaneEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\LaneEntities.edmx.diagram">
+      <DependentUpon>LaneEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
+    <Content Include="Models\LaneEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LaneEntities.edmx</DependentUpon>
+      <LastGenOutput>LaneEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\LaneEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LaneEntities.edmx</DependentUpon>
+      <LastGenOutput>LaneEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\AdminApps.js" />
-    <Content Include="Scripts\angular-animate.js" />
-    <Content Include="Scripts\angular-animate.min.js" />
-    <Content Include="Scripts\angular-aria.js" />
-    <Content Include="Scripts\angular-aria.min.js" />
-    <Content Include="Scripts\angular-cookies.js" />
-    <Content Include="Scripts\angular-cookies.min.js" />
-    <Content Include="Scripts\angular-csp.css" />
-    <Content Include="Scripts\angular-loader.js" />
-    <Content Include="Scripts\angular-loader.min.js" />
-    <Content Include="Scripts\angular-message-format.js" />
-    <Content Include="Scripts\angular-message-format.min.js" />
-    <Content Include="Scripts\angular-messages.js" />
-    <Content Include="Scripts\angular-messages.min.js" />
-    <Content Include="Scripts\angular-mocks.js" />
-    <Content Include="Scripts\angular-resource.js" />
-    <Content Include="Scripts\angular-resource.min.js" />
-    <Content Include="Scripts\angular-route.js" />
-    <Content Include="Scripts\angular-route.min.js" />
-    <Content Include="Scripts\angular-sanitize.js" />
-    <Content Include="Scripts\angular-sanitize.min.js" />
-    <Content Include="Scripts\angular-scenario.js" />
-    <Content Include="Scripts\angular-touch.js" />
-    <Content Include="Scripts\angular-touch.min.js" />
-    <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\canopy-http.js" />
     <Content Include="Scripts\CanopyApps.js" />
     <Content Include="Scripts\bid-http.js" />
@@ -1156,14 +1131,6 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
-    <Content Include="Scripts\jquery-ui-1.11.4.js" />
-    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\vendor\angular-animate.js" />
     <Content Include="Scripts\vendor\angular-animate.min.js" />
     <Content Include="Scripts\vendor\angular-aria.js" />
@@ -1189,18 +1156,6 @@
     <Content Include="Scripts\vendor\angular.min.js" />
     <Content Include="Scripts\vendor\bootstrap.js" />
     <Content Include="Scripts\BidApps.js" />
-    <Content Include="Scripts\errors.json" />
-    <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Scripts\angular-touch.min.js.map" />
-    <Content Include="Scripts\angular-sanitize.min.js.map" />
-    <Content Include="Scripts\angular-route.min.js.map" />
-    <Content Include="Scripts\angular-resource.min.js.map" />
-    <Content Include="Scripts\angular-messages.min.js.map" />
-    <Content Include="Scripts\angular-message-format.min.js.map" />
-    <Content Include="Scripts\angular-loader.min.js.map" />
-    <Content Include="Scripts\angular-cookies.min.js.map" />
-    <Content Include="Scripts\angular-aria.min.js.map" />
-    <Content Include="Scripts\angular-animate.min.js.map" />
     <None Include="Scripts\vendor\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\vendor\jquery-1.11.1.js" />
     <Content Include="Scripts\vendor\jquery-ui-1.11.2.js" />
@@ -1303,7 +1258,6 @@
     <Content Include="Views\Admin\EditorTemplates\TypeDataCodeModel.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Scripts\vendor\version.json" />
-    <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -31,6 +31,8 @@ namespace LaneBids.Models
         public int Sales_Person_ID { get; set; }
         public Nullable<int> Site_ID { get; set; }
         public int Shipping_ID { get; set; }
+        public Nullable<int> Special_Shipping_ID { get; set; }
+        public Nullable<int> Alternate_Shipping_ID { get; set; }
         public int Bid_Note_ID { get; set; }
         public int Canopy_ID { get; set; }
         public int Created_By { get; set; }
@@ -40,12 +42,14 @@ namespace LaneBids.Models
     
         public virtual Bid_Statuses Bid_Statuses { get; set; }
         public virtual Bid_Types Bid_Types { get; set; }
+        public virtual Shipping_Info Shipping_Info { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Job_Types Job_Types { get; set; }
         public virtual Sales_Persons Sales_Persons { get; set; }
         public virtual Scope_Types Scope_Types { get; set; }
-        public virtual Shipping_Info Shipping_Info { get; set; }
+        public virtual Shipping_Info Shipping_Info1 { get; set; }
         public virtual Site Site { get; set; }
+        public virtual Shipping_Info Shipping_Info2 { get; set; }
         public virtual Structure_Types Structure_Types { get; set; }
         public virtual ICollection<Canopy> Canopies { get; set; }
         public virtual ICollection<Bid_Notes> Bid_Notes { get; set; }

@@ -12,19 +12,18 @@ namespace LaneBids.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Job_Types
+    public partial class Gutter_Types
     {
-        public Job_Types()
+        public Gutter_Types()
         {
-            this.Bids = new HashSet<Bid>();
+            this.Canopies = new HashSet<Canopy>();
         }
     
-        public int Job_Type_ID { get; set; }
+        public int Gutter_Type_ID { get; set; }
         public string Name { get; set; }
-        public string Code { get; set; }
         public Nullable<int> Created_By { get; set; }
         public Nullable<System.DateTime> Create_Date { get; set; }
     
-        public virtual ICollection<Bid> Bids { get; set; }
+        public virtual ICollection<Canopy> Canopies { get; set; }
     }
 }

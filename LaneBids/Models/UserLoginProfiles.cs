@@ -12,19 +12,13 @@ namespace LaneBids.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Job_Types
+    public partial class UserLoginProfiles
     {
-        public Job_Types()
-        {
-            this.Bids = new HashSet<Bid>();
-        }
-    
-        public int Job_Type_ID { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
-        public Nullable<int> Created_By { get; set; }
-        public Nullable<System.DateTime> Create_Date { get; set; }
-    
-        public virtual ICollection<Bid> Bids { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Role { get; set; }
     }
 }

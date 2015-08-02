@@ -56,12 +56,16 @@
             $scope.canopyDetail.ColumnWidths.measurements.splice(index, 1);
         };
 
-        $scope.submitForm = function(canopyDetail) {
-            alert(canopyDetail);
-        }
+        //Submit Form
+        var onAddCanopyComplete = function (data) {
+            window.location.href = "/Home/Index";
+        };
 
-        //canopyHttpService.getContacts().then(onContactListComplete, onCanopyError);
-        //canopyHttpService.getStateList().then(onStateListComplete, onCanopyError);
+        $scope.submitForm = function(canopyDetail) {
+            canopyHttpService.createCanopy(canopyDetail)
+                .then(onAddCanopyComplete, onCanopyError);
+        };
+        
     };
 
     app.controller("CanopyController", CanopyController);

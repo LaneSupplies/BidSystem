@@ -4,7 +4,7 @@
     <div class="label divLabelOnly"><label>Facia Color:</label></div>
     <div class="label divDropDown">
         @Html.ValidationSummary(true)
-        @Html.DropDownListFor(model => model.ColorId, Model.FasciaColorList)
+        @Html.DropDownListFor(model => model.ColorId, Model.FasciaColorList, new { ng_model= "canopyDetail.FasciaColorId" })
     </div>
     <div class="label divAddButton"><span id="AddFaciaColorLink" class="addImage"></span></div>
 </div>

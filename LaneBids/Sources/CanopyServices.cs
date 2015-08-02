@@ -22,11 +22,6 @@ namespace LaneBids.Sources
             //    }).ToList();
             //canopyInfo.ColorList.Add(new SelectListItem { Selected = true, Text = " -- Select Color -- ", Value = "0" });
 
-            canopyInfo.ColumnShapeList = entities.Column_Shapes.ToList().Select(x => new SelectListItem
-            {
-                Value = x.Column_Shape_ID.ToString(),
-                Text = x.Name
-            }).ToList();
             canopyInfo.ColumnShapeList.Add(new SelectListItem { Selected = true, Text = " -- Select -- ", Value = "0" });
 
             canopyInfo.FasciaTypeList = entities.Fascia_Types.ToList().Select(x => new SelectListItem

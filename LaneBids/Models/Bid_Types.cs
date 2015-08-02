@@ -22,8 +22,8 @@ namespace LaneBids.Models
         public int Bid_Type_ID { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
-        public Nullable<System.DateTime> Create_Date { get; set; }
         public Nullable<int> Created_By { get; set; }
+        public Nullable<System.DateTime> Create_Date { get; set; }
     
         public virtual ICollection<Bid> Bids { get; set; }
     }

@@ -93,80 +93,95 @@ namespace LaneBids.Controllers
         {
             var entities = new LaneEntities();
 
-            var clearanceHeight = new Measurement();
-            clearanceHeight.Feet = canopyDetails.ClearanceFeet;
-            clearanceHeight.Inches = canopyDetails.ClearanceInches;
+            var clearanceHeight = new Measurement
+            {
+                Feet = canopyDetails.ClearanceFeet,
+                Inches = canopyDetails.ClearanceInches
+            };
             entities.Measurements.Add(clearanceHeight);
 
-            var columnSize = new Measurement();
-            columnSize.Feet = canopyDetails.ColumnSizeFeet;
-            columnSize.Inches = canopyDetails.ColumnSizeInches;
+            var columnSize = new Measurement
+            {
+                Feet = canopyDetails.ColumnSizeFeet,
+                Inches = canopyDetails.ColumnSizeInches
+            };
             entities.Measurements.Add(columnSize);
 
-            var deckThickness = new Measurement();
-            deckThickness.Feet = canopyDetails.DeckThicknessFeet;
-            deckThickness.Inches = canopyDetails.DeckthicknessInches;
+            var deckThickness = new Measurement
+            {
+                Feet = canopyDetails.DeckThicknessFeet,
+                Inches = canopyDetails.DeckthicknessInches
+            };
             entities.Measurements.Add(deckThickness);
 
-            var fasciaHeight = new Measurement();
-            fasciaHeight.Feet = canopyDetails.FasciaHeightFeet;
-            fasciaHeight.Inches = canopyDetails.FasciaHeightInches;
+            var fasciaHeight = new Measurement
+            {
+                Feet = canopyDetails.FasciaHeightFeet,
+                Inches = canopyDetails.FasciaHeightInches
+            };
             entities.Measurements.Add(fasciaHeight);
 
-            var sizeHeight = new Measurement();
-            sizeHeight.Feet = canopyDetails.SizeHeightFeet;
-            sizeHeight.Inches = canopyDetails.SizeHeightInches;
+            var sizeHeight = new Measurement
+            {
+                Feet = canopyDetails.SizeHeightFeet,
+                Inches = canopyDetails.SizeHeightInches
+            };
             entities.Measurements.Add(sizeHeight);
 
-            var sizeWidth = new Measurement();
-            sizeWidth.Feet = canopyDetails.SizeWidthFeet;
-            sizeWidth.Inches = canopyDetails.SizeWidthInches;
+            var sizeWidth = new Measurement
+            {
+                Feet = canopyDetails.SizeWidthFeet,
+                Inches = canopyDetails.SizeWidthInches
+            };
             entities.Measurements.Add(sizeWidth);
 
-            //entities.SaveChanges();
+            entities.SaveChanges();
+
             
-            var newCanopy = new Canopy();
-            newCanopy.Column_Quantity = canopyDetails.Quantity;
-            newCanopy.Column_Shape_ID = canopyDetails.ColumnShapeId;
-            newCanopy.Column_Type_ID = canopyDetails.ColumnTypeId;
-            newCanopy.Deck_Color_ID = canopyDetails.DeckColorId;
-            newCanopy.Deck_Style_ID = canopyDetails.DeckStyleId;
-            newCanopy.Design_Load_Notes = canopyDetails.DesignLoadNotes;
-            newCanopy.Design_Load_Wind_Mph = canopyDetails.DesignLoadWindMph;
-            newCanopy.Design_Load_Wind_Psf = canopyDetails.DesignLoadWindPsf;
-            newCanopy.Design_Loads_Live_Psf = canopyDetails.DesignLoadsLivePsf;
-            newCanopy.Drainage_Type_ID = canopyDetails.DrainageTypeId;
-            newCanopy.Drawing_Code = canopyDetails.DrawingCode;
-            newCanopy.Drawing_Sealed = canopyDetails.DrawingSealed;
-            newCanopy.Drawing_State = canopyDetails.DrawingState;
-            newCanopy.Exclusion_Notes = canopyDetails.ExclusionNotes;
-            newCanopy.Inclusion_Notes = canopyDetails.InclusionNotes;
-            newCanopy.Fascia_Color_ID = canopyDetails.FasciaColorId;
-            newCanopy.Fascia_Type_ID = canopyDetails.FasciaTypeId;
-            newCanopy.Freight_Price =  canopyDetails.FreightPrice;
-            newCanopy.General_Exclusion_Notes = canopyDetails.GeneralExclusionNotes;
-            newCanopy.General_Inclusion_Notes = canopyDetails.GeneralInclusionNotes;
-            newCanopy.Image_ID = canopyDetails.ImageId;
-            newCanopy.Labor_Price = canopyDetails.LaborPrice;
-            newCanopy.Material_Price = canopyDetails.MaterialPrice;
-            newCanopy.Other_Notes = canopyDetails.OtherNotes;
-            newCanopy.Quantity = canopyDetails.Quantity;
-            newCanopy.Tax_Price = canopyDetails.TaxPrice;
-            newCanopy.Total_Price = canopyDetails.TotalPrice;
 
-            newCanopy.Alt_Base_Price = canopyDetails.AltBasePrice;
-            newCanopy.Base_Price = canopyDetails.BasePrice;
+            var newCanopy = new Canopy
+            {
+                Column_Quantity = canopyDetails.Quantity,
+                Column_Type_ID = canopyDetails.ColumnTypeId,
+                Deck_Color_ID = canopyDetails.DeckColorId,
+                Deck_Style_ID = canopyDetails.DeckStyleId,
+                Design_Load_Notes = canopyDetails.DesignLoadNotes,
+                Design_Load_Wind_Mph = canopyDetails.DesignLoadWindMph,
+                Design_Load_Wind_Psf = canopyDetails.DesignLoadWindPsf,
+                Design_Loads_Live_Psf = canopyDetails.DesignLoadsLivePsf,
+                Drainage_Type_ID = canopyDetails.DrainageTypeId,
+                Drawing_Code = canopyDetails.DrawingCode,
+                Drawing_Sealed = canopyDetails.DrawingSealed,
+                Drawing_State = canopyDetails.DrawingState,
+                Exclusion_Notes = canopyDetails.ExclusionNotes,
+                Inclusion_Notes = canopyDetails.InclusionNotes,
+                Fascia_Color_ID = canopyDetails.FasciaColorId,
+                Fascia_Type_ID = canopyDetails.FasciaTypeId,
+                Freight_Price = canopyDetails.FreightPrice,
+                General_Exclusion_Notes = canopyDetails.GeneralExclusionNotes,
+                General_Inclusion_Notes = canopyDetails.GeneralInclusionNotes,
+                Image_ID = canopyDetails.ImageId,
+                Labor_Price = canopyDetails.LaborPrice,
+                Material_Price = canopyDetails.MaterialPrice,
+                Other_Notes = canopyDetails.OtherNotes,
+                Quantity = canopyDetails.Quantity,
+                Tax_Price = canopyDetails.TaxPrice,
+                Total_Price = canopyDetails.TotalPrice,
+                Alt_Base_Price = canopyDetails.AltBasePrice,
+                Base_Price = canopyDetails.BasePrice,
+                Clearance_Height_Measure_ID = clearanceHeight.Measurement_ID,
+                Column_Size_Measure_ID = columnSize.Measurement_ID,
+                Deck_Thickness_Measure_ID = deckThickness.Measurement_ID,
+                Fascia_Height_Measure_ID = fasciaHeight.Measurement_ID,
+                Size_Length_Measure_ID = sizeHeight.Measurement_ID,
+                Size_Width_Measure_ID = sizeWidth.Measurement_ID
+            };
 
-            newCanopy.Clearance_Height_Measure_ID = clearanceHeight.Measurement_ID;
-            newCanopy.Column_Size_Measure_ID = columnSize.Measurement_ID;
-            newCanopy.Deck_Thickness_Measure_ID = deckThickness.Measurement_ID;
-            newCanopy.Fascia_Height_Measure_ID = fasciaHeight.Measurement_ID;
-            newCanopy.Size_Height_Measure_ID = sizeHeight.Measurement_ID;
-            newCanopy.Size_Width_Measure_ID = sizeWidth.Measurement_ID;
+            entities.Canopies.Add(newCanopy);
+            entities.SaveChanges();
 
-            //entities.SaveChanges();
-
-            return RedirectToAction("BidSearch");
+            //return RedirectToAction("BidSearch");
+            return Content("Success");
         }
 
         public ActionResult BidSearch(string type)

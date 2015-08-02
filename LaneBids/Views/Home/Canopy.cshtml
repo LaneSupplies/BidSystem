@@ -9,246 +9,243 @@
 <h2>Canopy</h2>
 
 <form>
-    <fieldset>
-        <input type="hidden" ng-model="canopyDetail.BidFunctionType" />
-        <input type="hidden" ng-model="canopyDetail.BidId" />
-        @Html.HiddenFor(m => m.BidFunctionType)
-        @Html.HiddenFor(m => m.BidId)
-        <div id="Quantity" class="divLabel">
+    <input type="hidden" ng-model="canopyDetail.BidFunctionType" />
+    <input type="hidden" ng-model="canopyDetail.BidId" />
+    <div id="Quantity" class="divLabel">
+        <label>Quantity:</label>
+        <label>
+            <input type="number" class="numberOnly" ng-model="canopyDetail.Quantity" />
+        </label>
+    </div>
+    <br />
+    <div id="Size">
+        <div class="divLabel">
+            <label>Size Height:</label>
+            <div class="measurementLabel">
+                <input type="number" class="numberOnly" ng-model="canopyDetail.SizeHeightFeet" /> Feet
+                <input type="number" class="numberOnly" ng-model="canopyDetail.SizeHeightInches" /> Inches
+            </div>
+        </div>
+        <div class="divLabel">
+            <label>Size Width:</label>
+            <div class="measurementLabel">
+                <input type="number" class="numberOnly" ng-model="canopyDetail.SizeWidthFeet" /> Feet
+                <input type="number" class="numberOnly" ng-model="canopyDetail.SizeWidthInches" /> Inches
+            </div>
+        </div>
+    </div>
+    <div id="Clearance" class="divLabel">
+        <label>Clearance:</label>
+        <div class="measurementLabel">
+            <input type="number" class="numberOnly" ng-model="canopyDetail.ClearanceFeet" /> Feet
+            <input type="number" class="numberOnly" ng-model="canopyDetail.ClearanceInches" /> Inches
+        </div>
+    </div>
+    <div id="ColumnInfo">
+        <h3>Column Info</h3>
+        <div class="divLabel">
             <label>Quantity:</label>
             <label>
-                <input type="number" class="numberOnly" ng-model="canopyDetail.Quantity" />
+                <input type="number" class="numberOnly" ng-model="canopyDetail.ColumnQuantity" />
             </label>
         </div>
         <br />
-        <div id="Size">
-            <div class="divLabel">
-                <label>Size Height:</label>
-                <div class="measurementLabel">
-                    <input type="number" class="numberOnly" ng-model="canopyDetail.SizeHeightFeet" /> Feet
-                    <input type="number" class="numberOnly" ng-model="canopyDetail.SizeHeightInches" /> Inches
-                </div>
-            </div>
-            <div class="divLabel">
-                <label>Size Width:</label>
-                <div class="measurementLabel">
-                    <input type="number" class="numberOnly" ng-model="canopyDetail.SizeWidthFeet" /> Feet
-                    <input type="number" class="numberOnly" ng-model="canopyDetail.SizeWidthInches" /> Inches
-                </div>
-            </div>
-        </div>
-        <div id="Clearance" class="divLabel">
-            <label>Clearance:</label>
+        <div class="divLabel">
+            <label>Type:</label>
+            <label>
+                @Html.DropDownListFor(t => t.ColumnTypeId, Model.ColumnTypeList, htmlAttributes: new { ng_model = "canopyDetail.ColumnTypeId" })
+            </label>
+        </div><br />
+        <div class="divLabel">
+            <label>Size:</label>
             <div class="measurementLabel">
-                <input type="number" class="numberOnly" ng-model="canopyDetail.ClearanceFeet" /> Feet
-                <input type="number" class="numberOnly" ng-model="canopyDetail.ClearanceInches" /> Inches
+                <input type="number" class="numberOnly" ng-model="canopyDetail.ColumnSizeFeet" /> Feet
+                <input type="number" class="numberOnly" ng-model="canopyDetail.ColumnSizeInches" /> Inches
             </div>
         </div>
-        <div id="ColumnInfo">
-            <h3>Column Info</h3>
-            <div class="divLabel">
-                <label>Quantity:</label>
-                <label>
-                    <input type="number" class="numberOnly" ng-model="canopyDetail.ColumnQuantity" />
-                </label>
-            </div>
-            <br />
-            <div class="divLabel">
-                <label>Type:</label>
-                <label>
-                    @Html.DropDownListFor(t => t.ColumnTypeId, Model.ColumnTypeList, htmlAttributes: new { ng_model="canopyDetail.ColumnTypeId" })
-                </label>
-            </div><br />
-            <div class="divLabel">
-                <label>Size:</label>
-                <div class="measurementLabel">
-                    <input type="number" class="numberOnly" ng-model="canopyDetail.ColumnSizeFeet" /> Feet
-                    <input type="number" class="numberOnly" ng-model="canopyDetail.ColumnSizeInches" /> Inches
-                </div>
-            </div>
-            <div class="divLabel">
-                <label>Shape:</label>
-                <label>
-                    @Html.DropDownListFor(d => d.ColumnShapeId, Model.ColumnShapeList, new { ng_model = "canopyDetail.ColumnShapeId" })
-                </label>
-            </div><br />
-        </div>
-        <br />
-        <div id="ColumnSpacing">
-            <h3>Column Spacing</h3><br />
+        <div class="divLabel">
+            <label>Shape:</label>
+            <label>
+                @Html.DropDownListFor(d => d.ColumnShapeId, Model.ColumnShapeList, new { ng_model = "canopyDetail.ColumnShapeId" })
+            </label>
+        </div><br />
+    </div>
+    <br />
+    <div id="ColumnSpacing">
+        <h3>Column Spacing</h3><br />
 
-            <div id="ColumnLength">
-                <div class="divColumnAddButton">
-                    <a href="#" class="addLength" ng-click="addColumnLength()">Add New Length Column</a>
-                </div>
-                <div class="measurementList" style="padding-bottom: 30px;">
-                    <div class="caption">Column Lengths</div>
-                    <table ng-table="columnLengthTable">
-                        <thead>
-                            <tr>
-                                <td>Feet</td>
-                                <td>Inches</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                        </thead>
-                        <tr ng-repeat="length in canopyDetail.ColumnLengths.measurements">
-                            <td data-title="Feet">
-                                <input type="text" class="numberOnly" ng-model="length.feet" />
-                            </td>
-                            <td data-title="Inches">
-                                <input type="text" class="numberOnly" ng-model="length.inches" />
-                            </td>
-                            <td>
-                                <a href="#" ng-click="addSameColumnLenght(length)">Add Same</a>&nbsp;&nbsp;
-                                <a href="#" ng-click="deleteColumnLength($index)">Delete</a>
-                            </td>
+        <div id="ColumnLength">
+            <div class="divColumnAddButton">
+                <a href="#" class="addLength" ng-click="addColumnLength()">Add New Length Column</a>
+            </div>
+            <div class="measurementList" style="padding-bottom: 30px;">
+                <div class="caption">Column Lengths</div>
+                <table ng-table="columnLengthTable">
+                    <thead>
+                        <tr>
+                            <td>Feet</td>
+                            <td>Inches</td>
+                            <td>&nbsp;</td>
                         </tr>
-                    </table>
-                </div>
+                    </thead>
+                    <tr ng-repeat="length in canopyDetail.ColumnLengths.measurements">
+                        <td data-title="Feet">
+                            <input type="text" class="numberOnly" ng-model="length.feet" />
+                        </td>
+                        <td data-title="Inches">
+                            <input type="text" class="numberOnly" ng-model="length.inches" />
+                        </td>
+                        <td>
+                            <a href="#" ng-click="addSameColumnLenght(length)">Add Same</a>&nbsp;&nbsp;
+                            <a href="#" ng-click="deleteColumnLength($index)">Delete</a>
+                        </td>
+                    </tr>
+                </table>
             </div>
-            <br />
+        </div>
+        <br />
 
-            <div id="ColumnWidth">
-                <div class="divColumnAddButton">
-                    <a href="#" class="addWidth" ng-click="addColumnWidth()">Add New Width Column</a>
-                </div>
-                <div class="measurementList" style="padding-bottom: 30px;">
-                    <div class="caption">Column Widths</div>
-                    <table ng-table="columnWidthTable">
-                        <thead>
-                            <tr>
-                                <td>Feet</td>
-                                <td>Inches</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                        </thead>
-                        <tr ng-repeat="width in canopyDetail.ColumnWidths.measurements">
-                            <td data-title="Feet">
-                                <input type="text" class="numberOnly" ng-model="width.feet" />
-                            </td>
-                            <td data-title="Inches">
-                                <input type="text" class="numberOnly" ng-model="width.inches" />
-                            </td>
-                            <td>
-                                <a href="#" ng-click="addSameColumnWidth(width)">Add Same</a>&nbsp;&nbsp;
-                                <a href="#" ng-click="deleteColumnWidth($index)">Delete</a>
-                            </td>
+        <div id="ColumnWidth">
+            <div class="divColumnAddButton">
+                <a href="#" class="addWidth" ng-click="addColumnWidth()">Add New Width Column</a>
+            </div>
+            <div class="measurementList" style="padding-bottom: 30px;">
+                <div class="caption">Column Widths</div>
+                <table ng-table="columnWidthTable">
+                    <thead>
+                        <tr>
+                            <td>Feet</td>
+                            <td>Inches</td>
+                            <td>&nbsp;</td>
                         </tr>
-                    </table>
-                </div>
+                    </thead>
+                    <tr ng-repeat="width in canopyDetail.ColumnWidths.measurements">
+                        <td data-title="Feet">
+                            <input type="text" class="numberOnly" ng-model="width.feet" />
+                        </td>
+                        <td data-title="Inches">
+                            <input type="text" class="numberOnly" ng-model="width.inches" />
+                        </td>
+                        <td>
+                            <a href="#" ng-click="addSameColumnWidth(width)">Add Same</a>&nbsp;&nbsp;
+                            <a href="#" ng-click="deleteColumnWidth($index)">Delete</a>
+                        </td>
+                    </tr>
+                </table>
             </div>
+        </div>
 
-            <br />
-            <div id="ColumnNotes" class="divLabel">
-                <label>Column Spacing Notes:</label>
-                <div>
-                    <textarea ng-model="canopyDetail.ColumnSpacingNotes"></textarea>
-                </div>
-            </div>
-        </div>
         <br />
-        <div id="Designs">
-            <h3>Design Loads</h3><br />
-            <div class="divLabel">
-                <label>Design Load Live PSF:</label>
-                <input type="number" class="numberOnly" ng-model="canopyDetail.DesignLoadsLivePsf" />
-            </div>
-            <div class="divLabel">
-                <label>Design Load Wind PSF:</label>
-                <input type="number" class="numberOnly" ng-model="canopyDetail.DesignLoadWindPsf" />
-            </div>
-            <div class="divLabel">
-                <label>Design Load Wind MPH:</label>
-                <input type="number" class="numberOnly" ng-model="canopyDetail.DesignLoadWindMph" />
-            </div>
-            <div class="divLabel">
-                <label>Design Load Notes:</label>
-                <textarea ng-model="canopyDetail.DesignLoadNotes"></textarea>
-            </div>
-        </div>
-        <br />
-        <div id="DeckInfo" class="divLabel">
-            <label>Deck Style:</label>
-            @Html.DropDownListFor(d => d.DeckStyleId, Model.DeckStyleList, new { ng_model = "canopyDetail.DeckStyleId" })
-        </div>
-        <br />
-        <div id="ImageFascia">
-            <h3>Fascia Info</h3>
+        <div id="ColumnNotes" class="divLabel">
+            <label>Column Spacing Notes:</label>
             <div>
-                @Html.Partial("_AddFaciaColor", Model.FaciaColors)
-            </div>
-            <div class="divLabel">
-                <label>Fascia Image:</label>
-                <input type="file" name="ImagePath" id="ImagePath" />
-            </div>
-            <div class="divLabel">
-                <label>Fascia Height:</label>
-                <div class="measurementLabel">
-                    <input type="number" class="numberOnly" ng-model="canopyDetail.FasciaHeightFeet" /> Feet
-                    <input type="number" class="numberOnly" ng-model="canopyDetail.FasciaHeightInches" /> Inches
-                </div>
-            </div>
-            <div class="divLabel">
-                <label>Fascia Type:</label>
-                @Html.DropDownListFor(d => d.FasciaTypeId, Model.FasciaTypeList, new { ng_model = "canopyDetail.FasciaTypeId" })
+                <textarea ng-model="canopyDetail.ColumnSpacingNotes"></textarea>
             </div>
         </div>
-        <br />
-        <div id="Drainage" class="divLabel">
-            <label>Drainage:</label>
-            @Html.DropDownListFor(d => d.DrainageTypeId, Model.DrainageList, new { ng_model = "canopyDetail.DrainageTypeId" })
+    </div>
+    <br />
+    <div id="Designs">
+        <h3>Design Loads</h3><br />
+        <div class="divLabel">
+            <label>Design Load Live PSF:</label>
+            <input type="number" class="numberOnly" ng-model="canopyDetail.DesignLoadsLivePsf" />
         </div>
-        <br />
-        <div id="Drawings">
-            <label style="width: 150px;">Engineered Sealed?</label>
-            <span style="width: 100px;">
-                <input type="radio" name="DrawingSealed" id="DrawingSealedNo" ng-model="canopyDetail.DrawingSealedNo" value="No" checked="checked" style="width: 50px" />No
-                <input type="radio" name="DrawingSealed" id="DrawingSealedYes" ng-model="canopyDetail.DrawingSealedYes" value="Yes" style="width: 50px" />Yes
-            </span>
+        <div class="divLabel">
+            <label>Design Load Wind PSF:</label>
+            <input type="number" class="numberOnly" ng-model="canopyDetail.DesignLoadWindPsf" />
         </div>
-        <br />
-        <div id="OtherNotes" class="divLabel">
-            <label>Other Notes:</label>
-            <textarea ng-model="canopyDetail.OtherNotes"></textarea>
+        <div class="divLabel">
+            <label>Design Load Wind MPH:</label>
+            <input type="number" class="numberOnly" ng-model="canopyDetail.DesignLoadWindMph" />
         </div>
-        <br />
-        <div id="SpecificInclusions" class="divLabel">
-            <label>Specific Inclusions:</label>
-            <textarea ng-model="canopyDetail.InclusionNotes"></textarea>
+        <div class="divLabel">
+            <label>Design Load Notes:</label>
+            <textarea ng-model="canopyDetail.DesignLoadNotes"></textarea>
         </div>
-        <br />
-        <div id="SpecificExclusions" class="divLabel">
-            <label>Specific Exclusions:</label>
-            <textarea ng-model="canopyDetail.ExclusionNotes"></textarea>
+    </div>
+    <br />
+    <div id="DeckInfo" class="divLabel">
+        <label>Deck Style:</label>
+        @Html.DropDownListFor(d => d.DeckStyleId, Model.DeckStyleList, new { ng_model = "canopyDetail.DeckStyleId" })
+    </div>
+    <br />
+
+    <div id="ImageFascia">
+        <h3>Fascia Info</h3>
+        <div>
+            @Html.Partial("_AddFaciaColor", Model.FaciaColors)
         </div>
-        <br />
-        <div id="GeneralInclusions" class="divLabel">
-            <label>General Inclusions:</label>
-            <textarea ng-model="canopyDetail.GeneralInclusionNotes"></textarea>
+        <div class="divLabel">
+            <label>Fascia Image:</label>
+            <input type="file" name="ImagePath" id="ImagePath" />
         </div>
-        <br />
-        <div id="GeneralExclusions" class="divLabel">
-            <label>General Exclusions:</label>
-            <textarea ng-model="canopyDetail.GeneralExclusionNotes"></textarea>
+        <div class="divLabel">
+            <label>Fascia Height:</label>
+            <div class="measurementLabel">
+                <input type="number" class="numberOnly" ng-model="canopyDetail.FasciaHeightFeet" /> Feet
+                <input type="number" class="numberOnly" ng-model="canopyDetail.FasciaHeightInches" /> Inches
+            </div>
         </div>
-        <br />
-        <div id="BasePrice" class="divLabel">
-            <label>Material Cost:</label>
-            <input type="text" class="Currency" ng-model="canopyDetail.MaterialPrice" /><br />
-            <label>Labor:</label>
-            <input type="text" class="Currency" ng-model="canopyDetail.LaborPrice" /><br />
-            <label>Freight:</label>
-            <input type="text" class="Currency" ng-model="canopyDetail.FreightPrice" /><br />
-            <label>Tax:</label>
-            <input type="text" class="Currency" ng-model="canopyDetail.TaxPrice" /><br />
-            <label>Total:</label>
-            <input type="text" class="Currency" ng-model="canopyDetail.TotalPrice" />
+        <div class="divLabel">
+            <label>Fascia Type:</label>
+            @Html.DropDownListFor(d => d.FasciaTypeId, Model.FasciaTypeList, new { ng_model = "canopyDetail.FasciaTypeId" })
         </div>
-        <br />
-        <div id="SubmitForm" class="divLabel">
-            <input type="button" value="Submit" ng-click="submitForm(canopyDetail)" />
-        </div>
-    </fieldset>
+    </div>
+    <br />
+    <div id="Drainage" class="divLabel">
+        <label>Drainage:</label>
+        @Html.DropDownListFor(d => d.DrainageTypeId, Model.DrainageList, new { ng_model = "canopyDetail.DrainageTypeId" })
+    </div>
+    <br />
+    <div id="Drawings">
+        <label style="width: 150px;">Engineered Sealed?</label>
+        <span style="width: 100px;">
+            <input type="radio" name="DrawingSealed" id="DrawingSealedNo" ng-model="canopyDetail.DrawingSealedNo" value="No" checked="checked" style="width: 50px" />No
+            <input type="radio" name="DrawingSealed" id="DrawingSealedYes" ng-model="canopyDetail.DrawingSealedYes" value="Yes" style="width: 50px" />Yes
+        </span>
+    </div>
+    <br />
+    <div id="OtherNotes" class="divLabel">
+        <label>Other Notes:</label>
+        <textarea ng-model="canopyDetail.OtherNotes"></textarea>
+    </div>
+    <br />
+    <div id="SpecificInclusions" class="divLabel">
+        <label>Specific Inclusions:</label>
+        <textarea ng-model="canopyDetail.InclusionNotes"></textarea>
+    </div>
+    <br />
+    <div id="SpecificExclusions" class="divLabel">
+        <label>Specific Exclusions:</label>
+        <textarea ng-model="canopyDetail.ExclusionNotes"></textarea>
+    </div>
+    <br />
+    <div id="GeneralInclusions" class="divLabel">
+        <label>General Inclusions:</label>
+        <textarea ng-model="canopyDetail.GeneralInclusionNotes"></textarea>
+    </div>
+    <br />
+    <div id="GeneralExclusions" class="divLabel">
+        <label>General Exclusions:</label>
+        <textarea ng-model="canopyDetail.GeneralExclusionNotes"></textarea>
+    </div>
+    <br />
+    <div id="BasePrice" class="divLabel">
+        <label>Material Cost:</label>
+        <input type="text" class="Currency" ng-model="canopyDetail.MaterialPrice" /><br />
+        <label>Labor:</label>
+        <input type="text" class="Currency" ng-model="canopyDetail.LaborPrice" /><br />
+        <label>Freight:</label>
+        <input type="text" class="Currency" ng-model="canopyDetail.FreightPrice" /><br />
+        <label>Tax:</label>
+        <input type="text" class="Currency" ng-model="canopyDetail.TaxPrice" /><br />
+        <label>Total:</label>
+        <input type="text" class="Currency" ng-model="canopyDetail.TotalPrice" />
+    </div>
+    <br />
+    <div id="SubmitForm" class="divLabel">
+        <input type="button" value="Submit" ng-click="submitForm(canopyDetail)" />
+    </div>
 </form>
 
 @section Scripts {
@@ -284,7 +281,7 @@
         //    var feet = $("#CSLengthFeet" + lastLengthNumber).val();
         //    var inches = $("#CSLengthInches" + lastLengthNumber).val();
         //    var nextInputCount = lastLengthNumber + 1;
-            
+
         //    var addLength = "<div class='measurementListColumn'><input type='number' id='CSLengthFeet" + nextInputCount + "' value='" + feet + "' />&nbsp;Feet&nbsp;" +
         //                    "<input type='number' id='CSLengthInches" + nextInputCount + "' value='" + inches + "' />&nbsp;Inches</div>";
 

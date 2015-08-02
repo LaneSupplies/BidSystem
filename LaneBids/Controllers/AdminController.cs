@@ -235,22 +235,6 @@ namespace LaneBids.Controllers
                             }).ToList()
                         };
                         break;
-                    case TypeDataEnum.ColumnShapes:
-                        gridModel = new TypeDataGridModel
-                        {
-                            Title = displayName,
-                            HasCode = false,
-                            DataTypes = entities.Column_Shapes.ToList().Select(t => new TypeDataModel
-                            {
-                                ID = t.Column_Shape_ID,
-                                Name = t.Name,
-                                Code = "",
-                                Create_Date = String.Format("{0:d}", t.Create_Date),
-                                FullName = UserServices.ConvertUserId(t.Created_By),
-                                TypeDataEnum = type
-                            }).ToList()
-                        };
-                        break;
                     case TypeDataEnum.DeckStyles:
                         gridModel = new TypeDataGridModel
                         {
@@ -555,27 +539,6 @@ namespace LaneBids.Controllers
                 columnTypes.Create_Date = DateTime.Now;
                 columnTypes.Created_By = WebSecurity.CurrentUserId;
                 entities.Column_Types.Add(columnTypes);
-                entities.SaveChanges();
-            }
-            return RedirectToAction("Maintenance");
-        }
-
-        [HttpPost]
-        public ActionResult ColumnShapes(Column_Shapes columnShapes)
-        {
-            var entities = new LaneEntities();
-            var colShapes = entities.Column_Shapes.FirstOrDefault(x => x.Column_Shape_ID == columnShapes.Column_Shape_ID);
-            if (colShapes != null)
-            {
-                colShapes.Name = columnShapes.Name;
-                colShapes.Create_Date = DateTime.Now;
-                colShapes.Created_By = WebSecurity.CurrentUserId;
-            }
-            else
-            {
-                columnShapes.Create_Date = DateTime.Now;
-                columnShapes.Created_By = WebSecurity.CurrentUserId;
-                entities.Column_Shapes.Add(columnShapes);
                 entities.SaveChanges();
             }
             return RedirectToAction("Maintenance");

@@ -8,61 +8,57 @@ namespace LaneBids.Models
 {
     public class CanopyDetails
     {
-        public Int32 CanopyId { get; set; }
-        public Int32 BidId { get; set; }
+        public int CanopyId { get; set; }
+        public int BidId { get; set; }
         public string BidFunctionType { get; set; }
-        public Int32 Quantity { get; set; }
-        public Int32 StructureId { get; set; }
-        public Int32 SizeHeightFeet { get; set; }
-        public Int32 SizeHeightInches { get; set; }
-        public Int32 SizeWidthFeet { get; set; }
-        public Int32 SizeWidthInches { get; set; }
-        public Int32 ClearanceFeet { get; set; }
-        public Int32 ClearanceInches { get; set; }
-        public Int32 ColumnQuantity { get; set; }
-        public Int32 ColumnTypeId { get; set; }
-        public Int32 ColumnSizeFeet { get; set; }
-        public Int32 ColumnSizeInches { get; set; }
-        public Int32 ColumnSpacingLength { get; set; }
-        public Int32 ColumnShapeId { get; set; }
-        public Int32 ColumnSpacingLengthFeet { get; set; }
-        public Int32 ColumnSpacingLengthInches { get; set; }
-        public Int32 ColumnSpacingWidthFeet { get; set; }
-        public Int32 ColumnSpacingWidthInches { get; set; }
-        public String ColumnSpacingNotes { get; set; }
-        public Int32 DeckStyleId { get; set; }
-        public Int32 DeckColorId { get; set; }
-        public Int32 DeckThicknessFeet { get; set; }
-        public Int32 DeckthicknessInches { get; set; }
-        public Int32 ImageId { get; set; }
-        public Int32 ColorId { get; set; }
-        public String ImagePath { get; set; }
-        public Int32 FasciaHeightFeet { get; set; }
-        public Int32 FasciaHeightInches { get; set; }
-        public Int32 FasciaTypeId { get; set; }
-        public Int32 FasciaColorId { get; set; }
-        public Int32 DrainageTypeId { get; set; }
-        public String OtherNotes { get; set; }
-        public String InclusionNotes { get; set; }
-        public String ExclusionNotes { get; set; }
-        public String GeneralInclusionNotes { get; set; }
-        public String GeneralExclusionNotes { get; set; }
-        public Decimal? BasePrice { get; set; }
-        public Decimal? MaterialPrice { get; set; }
-        public Decimal? LaborPrice { get; set; }
-        public Decimal? FreightPrice { get; set; }
-        public Decimal? TaxPrice { get; set; }
-        public Decimal? TotalPrice { get; set; }
-        public Decimal? AltBasePrice { get; set; }
-        public Int32 DesignLoadsLivePsf { get; set; }
-        public Int32 DesignLoadWindMph { get; set; }
-        public Int32 DesignLoadWindPsf { get; set; }
-        public String DesignLoadNotes { get; set; }
-        public String DrawingSealed { get; set; }
-        public String DrawingState { get; set; }
-        public String DrawingCode { get; set; }
-        public String CreatedBy { get; set; }
-        public String ModifiedBy { get; set; }
+        public int Quantity { get; set; }
+        public int StructureId { get; set; }
+        public int SizeHeightFeet { get; set; }
+        public int SizeHeightInches { get; set; }
+        public int SizeWidthFeet { get; set; }
+        public int SizeWidthInches { get; set; }
+        public int ClearanceFeet { get; set; }
+        public int ClearanceInches { get; set; }
+        public int ColumnQuantity { get; set; }
+        public int ColumnTypeId { get; set; }
+        public int ColumnSizeFeet { get; set; }
+        public int ColumnSizeInches { get; set; }
+        public int ColumnSpacingLength { get; set; }
+        public int ColumnShapeId { get; set; }
+        public string ColumnSpacingNotes { get; set; }
+        public int DeckStyleId { get; set; }
+        public int DeckColorId { get; set; }
+        public int DeckThicknessFeet { get; set; }
+        public int DeckthicknessInches { get; set; }
+        public int ImageId { get; set; }
+        public int ColorId { get; set; }
+        public string ImagePath { get; set; }
+        public int FasciaHeightFeet { get; set; }
+        public int FasciaHeightInches { get; set; }
+        public int FasciaTypeId { get; set; }
+        public int FasciaColorId { get; set; }
+        public int DrainageTypeId { get; set; }
+        public string OtherNotes { get; set; }
+        public string InclusionNotes { get; set; }
+        public string ExclusionNotes { get; set; }
+        public string GeneralInclusionNotes { get; set; }
+        public string GeneralExclusionNotes { get; set; }
+        public decimal? BasePrice { get; set; }
+        public decimal? MaterialPrice { get; set; }
+        public decimal? LaborPrice { get; set; }
+        public decimal? FreightPrice { get; set; }
+        public decimal? TaxPrice { get; set; }
+        public decimal? TotalPrice { get; set; }
+        public decimal? AltBasePrice { get; set; }
+        public int DesignLoadsLivePsf { get; set; }
+        public int DesignLoadWindMph { get; set; }
+        public int DesignLoadWindPsf { get; set; }
+        public string DesignLoadNotes { get; set; }
+        public string DrawingSealed { get; set; }
+        public string DrawingState { get; set; }
+        public string DrawingCode { get; set; }
+        public string CreatedBy { get; set; }
+        public string ModifiedBy { get; set; }
         
         public IList<SelectListItem> ColumnShapeList { get; set; }
 
@@ -79,5 +75,9 @@ namespace LaneBids.Models
         public IList<SelectListItem> SalesPersonList { get; set; }
 
         public ColorModel FaciaColors { get; set; }
+
+        public IList<ColumnLength> ColumnLengths { get; set; }
+
+        public IList<ColumnLength> ColumnWidths { get; set; }
     }
 }

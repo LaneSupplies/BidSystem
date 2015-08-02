@@ -17,6 +17,8 @@ namespace LaneBids.Models
         public Shipping_Info()
         {
             this.Bids = new HashSet<Bid>();
+            this.Bids1 = new HashSet<Bid>();
+            this.Bids2 = new HashSet<Bid>();
         }
     
         public int Shipping_ID { get; set; }
@@ -24,5 +26,7 @@ namespace LaneBids.Models
         public Nullable<int> Address_ID { get; set; }
     
         public virtual ICollection<Bid> Bids { get; set; }
+        public virtual ICollection<Bid> Bids1 { get; set; }
+        public virtual ICollection<Bid> Bids2 { get; set; }
     }
 }

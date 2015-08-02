@@ -22,6 +22,7 @@ namespace LaneBids.Models
             this.Canopies3 = new HashSet<Canopy>();
             this.Canopies4 = new HashSet<Canopy>();
             this.Canopies5 = new HashSet<Canopy>();
+            this.Canopies6 = new HashSet<Canopy>();
             this.Measurement_Lists = new HashSet<Measurement_Lists>();
         }
     
@@ -35,6 +36,7 @@ namespace LaneBids.Models
         public virtual ICollection<Canopy> Canopies3 { get; set; }
         public virtual ICollection<Canopy> Canopies4 { get; set; }
         public virtual ICollection<Canopy> Canopies5 { get; set; }
+        public virtual ICollection<Canopy> Canopies6 { get; set; }
         public virtual ICollection<Measurement_Lists> Measurement_Lists { get; set; }
     }
 }
