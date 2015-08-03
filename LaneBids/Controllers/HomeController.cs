@@ -82,7 +82,7 @@ namespace LaneBids.Controllers
                 entities.SaveChanges();
             }
 
-
+            bidDetails.BidId = newBid.Bid_ID;
             var canopyInfo = _canopyService.CanopyLoadData(bidDetails);
 
             return View(canopyInfo);

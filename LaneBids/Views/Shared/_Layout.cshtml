@@ -80,7 +80,7 @@
                 </li>
             </ul>
             <br /><br />
-            @*@if (User.IsInRole("Administrator"))
+            @if (User.IsInRole("Administrator"))
             {
                 <div class="AdminFunctions">
                     <span class="label">Admin Links</span>
@@ -94,7 +94,7 @@
                         </li>
                     </ul>
                 </div>
-            }*@
+            }
         </div>
         <div id="divBody">
             @RenderSection("featured", required: false)

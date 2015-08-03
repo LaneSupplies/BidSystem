@@ -88,88 +88,6 @@ namespace LaneBids.Controllers
         public ActionResult Maintenance()
         {
             ViewBag.Title = "Admin Maintenance";
-            //var entities = new LaneEntities();
-
-            //var adminMaint = new AdminMaintenance
-            //{
-            //    StructureTypeList = new TypeDataListModel{
-            //        GridTitle = "Structure Type",
-            //        TypeDataEnum = TypeDataEnum.StructureType,
-            //        Types = entities.Structure_Types.ToList().Select(type => new TypeDataModel
-            //    {
-            //        ID = type.Structure_Type_ID,
-            //        Name = type.Name,
-            //        Create_Date = String.Format("{0:d}", type.Create_Date),
-            //        FullName = UserServices.ConvertUserId(type.Created_By)
-            //    })},
-            //    BidTypesList = entities.Bid_Types.ToList().Select(type => new
-            //    {
-            //        type.Bid_Type_ID,
-            //        type.Name,
-            //        type.Code,
-            //        type.Create_Date,
-            //        FullName = UserServices.ConvertUserId(type.Created_By)
-            //    }),
-            //    BidStatusList = entities.Bid_Statuses.ToList().Select(type => new
-            //    {
-            //        type.Bid_Status_ID,
-            //        type.Status,
-            //        type.Create_Date,
-            //        FullName = UserServices.ConvertUserId(type.Created_By)
-            //    }),
-            //    JobTypesList = entities.Job_Types.ToList().Select(type => new
-            //    {
-            //        type.Job_Type_ID,
-            //        type.Name,
-            //        type.Code,
-            //        type.Create_Date,
-            //        FullName = UserServices.ConvertUserId(type.Created_By)
-            //    }),
-            //    ScopeTypesList = entities.Scope_Types.ToList().Select(type => new
-            //    {
-            //        type.Scope_Type_ID,
-            //        type.Name,
-            //        type.Code,
-            //        type.Create_Date,
-            //        FullName = UserServices.ConvertUserId(type.Created_By)
-            //    }),
-            //    ColumnTypesList = entities.Column_Types.ToList().Select(type => new
-            //    {
-            //        type.Column_Type_ID,
-            //        type.Name,
-            //        type.Create_Date,
-            //        FullName = UserServices.ConvertUserId(type.Created_By)
-            //    }),
-            //    ColumnShapesList = entities.Column_Shapes.ToList().Select(type => new
-            //    {
-            //        type.Column_Shape_ID,
-            //        type.Name,
-            //        type.Create_Date,
-            //        FullName = UserServices.ConvertUserId(type.Created_By)
-            //    }),
-            //    DeckStylesList = entities.Deck_Styles.ToList().Select(type => new
-            //    {
-            //        type.Deck_Style_ID,
-            //        type.Name,
-            //        type.Create_Date,
-            //        FullName = UserServices.ConvertUserId(type.Created_By)
-            //    }),
-            //    FasciaTypesList = entities.Fascia_Types.ToList().Select(type => new
-            //    {
-            //        type.Fascia_Type_ID,
-            //        type.Name,
-            //        type.Create_Date,
-            //        FullName = UserServices.ConvertUserId(type.Created_By)
-            //    }),
-            //    DrainageList = entities.Drainage_Types.ToList().Select(type => new
-            //    {
-            //        type.Drainage_Type_ID,
-            //        type.Name,
-            //        type.Create_Date,
-            //        FullName = UserServices.ConvertUserId(type.Created_By)
-            //    })
-            //};
-
             return View();
         }
 
@@ -197,7 +115,7 @@ namespace LaneBids.Controllers
                                 ID = t.Structure_Type_ID,
                                 Name = t.Name,
                                 Code = "",
-                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                Create_Date = $"{t.Create_Date:d}",
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -213,7 +131,7 @@ namespace LaneBids.Controllers
                                 ID = t.Bid_Status_ID,
                                 Name = t.Status,
                                 Code = "",
-                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                Create_Date = $"{t.Create_Date:d}",
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -229,7 +147,7 @@ namespace LaneBids.Controllers
                                 ID = t.Bid_Type_ID,
                                 Name = t.Name,
                                 Code = t.Code,
-                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                Create_Date = $"{t.Create_Date:d}",
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -245,7 +163,7 @@ namespace LaneBids.Controllers
                                 ID = t.Deck_Style_ID,
                                 Name = t.Name,
                                 Code = "",
-                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                Create_Date = $"{t.Create_Date:d}",
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -261,7 +179,7 @@ namespace LaneBids.Controllers
                                 ID = t.Drainage_Type_ID,
                                 Name = t.Name,
                                 Code = "",
-                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                Create_Date = $"{t.Create_Date:d}",
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -277,7 +195,7 @@ namespace LaneBids.Controllers
                                 ID = t.Fascia_Type_ID,
                                 Name = t.Name,
                                 Code = "",
-                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                Create_Date = $"{t.Create_Date:d}",
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -293,7 +211,7 @@ namespace LaneBids.Controllers
                                 ID = t.Job_Type_ID,
                                 Name = t.Name,
                                 Code = t.Code,
-                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                Create_Date = $"{t.Create_Date:d}",
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -309,7 +227,22 @@ namespace LaneBids.Controllers
                                 ID = t.Scope_Type_ID,
                                 Name = t.Name,
                                 Code = t.Code,
-                                Create_Date = String.Format("{0:d}", t.Create_Date),
+                                Create_Date = $"{t.Create_Date:d}",
+                                FullName = UserServices.ConvertUserId(t.Created_By),
+                                TypeDataEnum = type
+                            }).ToList()
+                        };
+                        break;
+                    case TypeDataEnum.GutterTypes:
+                        gridModel = new TypeDataGridModel
+                        {
+                            Title = displayName,
+                            HasCode = false,
+                            DataTypes = entities.Gutter_Types.ToList().Select(t => new TypeDataModel
+                            {
+                                ID = t.Gutter_Type_ID,
+                                Name = t.Name,
+                                Create_Date = $"{t.Create_Date:d}",
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -383,96 +316,96 @@ namespace LaneBids.Controllers
             return Content("Success");
         }
 
-        [HttpPost]
-        public ActionResult BidTypes(Bid_Types bidTypes)
-        {
-            var entities = new LaneEntities();
-            var type = entities.Bid_Types.FirstOrDefault(x => x.Bid_Type_ID == bidTypes.Bid_Type_ID);
-            if (type != null)
-            {
-                type.Name = bidTypes.Name;
-                type.Code = bidTypes.Code;
-                type.Create_Date = DateTime.Now;
-                type.Created_By = WebSecurity.CurrentUserId;
-                entities.SaveChanges();
-            }
-            else
-            {
-                bidTypes.Create_Date = DateTime.Now;
-                bidTypes.Created_By = WebSecurity.CurrentUserId;
-                entities.Bid_Types.Add(bidTypes);
-                entities.SaveChanges();
-            }
-            return RedirectToAction("Maintenance");
-        }
+        //[HttpPost]
+        //public ActionResult BidTypes(Bid_Types bidTypes)
+        //{
+        //    var entities = new LaneEntities();
+        //    var type = entities.Bid_Types.FirstOrDefault(x => x.Bid_Type_ID == bidTypes.Bid_Type_ID);
+        //    if (type != null)
+        //    {
+        //        type.Name = bidTypes.Name;
+        //        type.Code = bidTypes.Code;
+        //        type.Create_Date = DateTime.Now;
+        //        type.Created_By = WebSecurity.CurrentUserId;
+        //        entities.SaveChanges();
+        //    }
+        //    else
+        //    {
+        //        bidTypes.Create_Date = DateTime.Now;
+        //        bidTypes.Created_By = WebSecurity.CurrentUserId;
+        //        entities.Bid_Types.Add(bidTypes);
+        //        entities.SaveChanges();
+        //    }
+        //    return RedirectToAction("Maintenance");
+        //}
 
-        [HttpPost]
-        public ActionResult BidStatus(Bid_Statuses bidStatuses)
-        {
-            var entities = new LaneEntities();
-            var status = entities.Bid_Statuses.FirstOrDefault(x => x.Bid_Status_ID == bidStatuses.Bid_Status_ID);
-            if (status != null)
-            {
-                status.Status = bidStatuses.Status;
-                status.Create_Date = DateTime.Now;
-                status.Created_By = WebSecurity.CurrentUserId;
-                entities.SaveChanges();
-            }
-            else
-            {
-                bidStatuses.Create_Date = DateTime.Now;
-                bidStatuses.Created_By = WebSecurity.CurrentUserId;
-                entities.Bid_Statuses.Add(bidStatuses);
-                entities.SaveChanges();
-            }
-            return RedirectToAction("Maintenance");
-        }
+        //[HttpPost]
+        //public ActionResult BidStatus(Bid_Statuses bidStatuses)
+        //{
+        //    var entities = new LaneEntities();
+        //    var status = entities.Bid_Statuses.FirstOrDefault(x => x.Bid_Status_ID == bidStatuses.Bid_Status_ID);
+        //    if (status != null)
+        //    {
+        //        status.Status = bidStatuses.Status;
+        //        status.Create_Date = DateTime.Now;
+        //        status.Created_By = WebSecurity.CurrentUserId;
+        //        entities.SaveChanges();
+        //    }
+        //    else
+        //    {
+        //        bidStatuses.Create_Date = DateTime.Now;
+        //        bidStatuses.Created_By = WebSecurity.CurrentUserId;
+        //        entities.Bid_Statuses.Add(bidStatuses);
+        //        entities.SaveChanges();
+        //    }
+        //    return RedirectToAction("Maintenance");
+        //}
 
-        [HttpPost]
-        public ActionResult JobTypes(Job_Types jobTypes)
-        {
-            var entities = new LaneEntities();
-            var job = entities.Job_Types.FirstOrDefault(x => x.Job_Type_ID == jobTypes.Job_Type_ID);
-            if (job != null)
-            {
-                job.Name = jobTypes.Name;
-                job.Code = jobTypes.Code;
-                job.Create_Date = DateTime.Now;
-                job.Created_By = WebSecurity.CurrentUserId;
-                entities.SaveChanges();
-            }
-            else
-            {
-                jobTypes.Create_Date = DateTime.Now;
-                jobTypes.Created_By = WebSecurity.CurrentUserId;
-                entities.Job_Types.Add(jobTypes);
-                entities.SaveChanges();
-            }
-            return RedirectToAction("Maintenance");
-        }
+        //[HttpPost]
+        //public ActionResult JobTypes(Job_Types jobTypes)
+        //{
+        //    var entities = new LaneEntities();
+        //    var job = entities.Job_Types.FirstOrDefault(x => x.Job_Type_ID == jobTypes.Job_Type_ID);
+        //    if (job != null)
+        //    {
+        //        job.Name = jobTypes.Name;
+        //        job.Code = jobTypes.Code;
+        //        job.Create_Date = DateTime.Now;
+        //        job.Created_By = WebSecurity.CurrentUserId;
+        //        entities.SaveChanges();
+        //    }
+        //    else
+        //    {
+        //        jobTypes.Create_Date = DateTime.Now;
+        //        jobTypes.Created_By = WebSecurity.CurrentUserId;
+        //        entities.Job_Types.Add(jobTypes);
+        //        entities.SaveChanges();
+        //    }
+        //    return RedirectToAction("Maintenance");
+        //}
 
-        [HttpPost]
-        public ActionResult ScopeType(Scope_Types scopeTypes)
-        {
-            var entities = new LaneEntities();
-            var scope = entities.Scope_Types.FirstOrDefault(x => x.Scope_Type_ID == scopeTypes.Scope_Type_ID);
-            if (scope != null)
-            {
-                scope.Name = scopeTypes.Name;
-                scope.Code = scopeTypes.Code;
-                scope.Create_Date = DateTime.Now;
-                scope.Created_By = WebSecurity.CurrentUserId;
-                entities.SaveChanges();
-            }
-            else
-            {
-                scopeTypes.Create_Date = DateTime.Now;
-                scopeTypes.Created_By = WebSecurity.CurrentUserId;
-                entities.Scope_Types.Add(scopeTypes);
-                entities.SaveChanges();
-            }
-            return RedirectToAction("Maintenance");
-        }
+        //[HttpPost]
+        //public ActionResult ScopeType(Scope_Types scopeTypes)
+        //{
+        //    var entities = new LaneEntities();
+        //    var scope = entities.Scope_Types.FirstOrDefault(x => x.Scope_Type_ID == scopeTypes.Scope_Type_ID);
+        //    if (scope != null)
+        //    {
+        //        scope.Name = scopeTypes.Name;
+        //        scope.Code = scopeTypes.Code;
+        //        scope.Create_Date = DateTime.Now;
+        //        scope.Created_By = WebSecurity.CurrentUserId;
+        //        entities.SaveChanges();
+        //    }
+        //    else
+        //    {
+        //        scopeTypes.Create_Date = DateTime.Now;
+        //        scopeTypes.Created_By = WebSecurity.CurrentUserId;
+        //        entities.Scope_Types.Add(scopeTypes);
+        //        entities.SaveChanges();
+        //    }
+        //    return RedirectToAction("Maintenance");
+        //}
 
         #region Structure Types
         
@@ -522,93 +455,93 @@ namespace LaneBids.Controllers
 
         #endregion
 
-        [HttpPost]
-        public ActionResult ColumnTypes(Column_Types columnTypes)
-        {
-            var entities = new LaneEntities();
-            var colType = entities.Column_Types.FirstOrDefault(x => x.Column_Type_ID == columnTypes.Column_Type_ID);
-            if (colType != null)
-            {
-                colType.Name = columnTypes.Name;
-                colType.Create_Date = DateTime.Now;
-                colType.Created_By = WebSecurity.CurrentUserId;
-                entities.SaveChanges();
-            }
-            else
-            {
-                columnTypes.Create_Date = DateTime.Now;
-                columnTypes.Created_By = WebSecurity.CurrentUserId;
-                entities.Column_Types.Add(columnTypes);
-                entities.SaveChanges();
-            }
-            return RedirectToAction("Maintenance");
-        }
+        //[HttpPost]
+        //public ActionResult ColumnTypes(Column_Types columnTypes)
+        //{
+        //    var entities = new LaneEntities();
+        //    var colType = entities.Column_Types.FirstOrDefault(x => x.Column_Type_ID == columnTypes.Column_Type_ID);
+        //    if (colType != null)
+        //    {
+        //        colType.Name = columnTypes.Name;
+        //        colType.Create_Date = DateTime.Now;
+        //        colType.Created_By = WebSecurity.CurrentUserId;
+        //        entities.SaveChanges();
+        //    }
+        //    else
+        //    {
+        //        columnTypes.Create_Date = DateTime.Now;
+        //        columnTypes.Created_By = WebSecurity.CurrentUserId;
+        //        entities.Column_Types.Add(columnTypes);
+        //        entities.SaveChanges();
+        //    }
+        //    return RedirectToAction("Maintenance");
+        //}
 
-        [HttpPost]
-        public ActionResult DeckStyles(Deck_Styles deckStyles)
-        {
-            var entities = new LaneEntities();
-            var deck = entities.Deck_Styles.FirstOrDefault(x => x.Deck_Style_ID == deckStyles.Deck_Style_ID);
-            if (deck != null)
-            {
-                deck.Name = deckStyles.Name;
-                deck.Create_Date = DateTime.Now;
-                deck.Created_By = WebSecurity.CurrentUserId;
-                entities.SaveChanges();
-            }
-            else
-            {
-                deckStyles.Create_Date = DateTime.Now;
-                deckStyles.Created_By = WebSecurity.CurrentUserId;
-                entities.Deck_Styles.Add(deckStyles);
-                entities.SaveChanges();
-            }
-            return RedirectToAction("Maintenance");
-        }
+        //[HttpPost]
+        //public ActionResult DeckStyles(Deck_Styles deckStyles)
+        //{
+        //    var entities = new LaneEntities();
+        //    var deck = entities.Deck_Styles.FirstOrDefault(x => x.Deck_Style_ID == deckStyles.Deck_Style_ID);
+        //    if (deck != null)
+        //    {
+        //        deck.Name = deckStyles.Name;
+        //        deck.Create_Date = DateTime.Now;
+        //        deck.Created_By = WebSecurity.CurrentUserId;
+        //        entities.SaveChanges();
+        //    }
+        //    else
+        //    {
+        //        deckStyles.Create_Date = DateTime.Now;
+        //        deckStyles.Created_By = WebSecurity.CurrentUserId;
+        //        entities.Deck_Styles.Add(deckStyles);
+        //        entities.SaveChanges();
+        //    }
+        //    return RedirectToAction("Maintenance");
+        //}
 
-        [HttpPost]
-        public ActionResult FasciaTypes(Fascia_Types fasciaTypes)
-        {
-            var entities = new LaneEntities();
-            var fascia = entities.Fascia_Types.FirstOrDefault(x => x.Fascia_Type_ID == fasciaTypes.Fascia_Type_ID);
-            if (fascia != null)
-            {
-                fascia.Name = fasciaTypes.Name;
-                fascia.Create_Date = DateTime.Now;
-                fascia.Created_By = WebSecurity.CurrentUserId;
-                entities.SaveChanges();
-            }
-            else
-            {
-                fasciaTypes.Create_Date = DateTime.Now;
-                fasciaTypes.Created_By = WebSecurity.CurrentUserId;
-                entities.Fascia_Types.Add(fasciaTypes);
-                entities.SaveChanges();
-            }
-            return RedirectToAction("Maintenance");
-        }
+        //[HttpPost]
+        //public ActionResult FasciaTypes(Fascia_Types fasciaTypes)
+        //{
+        //    var entities = new LaneEntities();
+        //    var fascia = entities.Fascia_Types.FirstOrDefault(x => x.Fascia_Type_ID == fasciaTypes.Fascia_Type_ID);
+        //    if (fascia != null)
+        //    {
+        //        fascia.Name = fasciaTypes.Name;
+        //        fascia.Create_Date = DateTime.Now;
+        //        fascia.Created_By = WebSecurity.CurrentUserId;
+        //        entities.SaveChanges();
+        //    }
+        //    else
+        //    {
+        //        fasciaTypes.Create_Date = DateTime.Now;
+        //        fasciaTypes.Created_By = WebSecurity.CurrentUserId;
+        //        entities.Fascia_Types.Add(fasciaTypes);
+        //        entities.SaveChanges();
+        //    }
+        //    return RedirectToAction("Maintenance");
+        //}
 
-        [HttpPost]
-        public ActionResult Drainage(Drainage_Types drainageTypes)
-        {
-            var entities = new LaneEntities();
-            var drainage = entities.Drainage_Types.FirstOrDefault(x => x.Drainage_Type_ID == drainageTypes.Drainage_Type_ID);
-            if (drainage != null)
-            {
-                drainage.Name = drainageTypes.Name;
-                drainage.Create_Date = DateTime.Now;
-                drainage.Created_By = WebSecurity.CurrentUserId;
-                entities.SaveChanges();
-            }
-            else
-            {
-                drainageTypes.Create_Date = DateTime.Now;
-                drainageTypes.Created_By = WebSecurity.CurrentUserId;
-                entities.Drainage_Types.Add(drainageTypes);
-                entities.SaveChanges();
-            }
-            return RedirectToAction("Maintenance");
-        }
+        //[HttpPost]
+        //public ActionResult Drainage(Drainage_Types drainageTypes)
+        //{
+        //    var entities = new LaneEntities();
+        //    var drainage = entities.Drainage_Types.FirstOrDefault(x => x.Drainage_Type_ID == drainageTypes.Drainage_Type_ID);
+        //    if (drainage != null)
+        //    {
+        //        drainage.Name = drainageTypes.Name;
+        //        drainage.Create_Date = DateTime.Now;
+        //        drainage.Created_By = WebSecurity.CurrentUserId;
+        //        entities.SaveChanges();
+        //    }
+        //    else
+        //    {
+        //        drainageTypes.Create_Date = DateTime.Now;
+        //        drainageTypes.Created_By = WebSecurity.CurrentUserId;
+        //        entities.Drainage_Types.Add(drainageTypes);
+        //        entities.SaveChanges();
+        //    }
+        //    return RedirectToAction("Maintenance");
+        //}
 
         protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
         {

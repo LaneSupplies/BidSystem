@@ -21,9 +21,9 @@ namespace LaneBids.Models
         [DescriptionAttribute("Bid Type")]
         BidType = 2,
 
-        [Display(Name = "Column Shapes")]
-        [DescriptionAttribute("Column Shapes")]
-        ColumnShapes = 3,
+        [Display(Name = "Gutter Types")]
+        [DescriptionAttribute("Gutter Types")]
+        GutterTypes = 3,
 
         [Display(Name = "Deck Styles")]
         [DescriptionAttribute("Deck Styles")]

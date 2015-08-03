@@ -24,7 +24,6 @@ namespace LaneBids.Models
         public int ColumnSizeFeet { get; set; }
         public int ColumnSizeInches { get; set; }
         public int ColumnSpacingLength { get; set; }
-        public int ColumnShapeId { get; set; }
         public string ColumnSpacingNotes { get; set; }
         public int DeckStyleId { get; set; }
         public int DeckColorId { get; set; }
@@ -60,8 +59,7 @@ namespace LaneBids.Models
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
         
-        public IList<SelectListItem> ColumnShapeList { get; set; }
-
+        
         public IList<SelectListItem> FasciaTypeList { get; set; }
 
         public IList<SelectListItem> ColumnTypeList { get; set; }
