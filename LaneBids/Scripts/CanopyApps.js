@@ -3,14 +3,20 @@
     var app = angular.module('CanopyViewer', ['ngTouch']);
 
     var CanopyController = function ($scope, $compile, canopyHttpService) {
+        $scope.canopyDetail = {};
 
         var onCanopyError = function (response) {
             $scope.error = "Error getting data.";
         };
 
+        var init = function() {
+            var mvcBidId = $("#hiddenBidId").val();
+            $scope.canopyDetail.BidId = mvcBidId;
+        };
+
+        init();
+
         //Column Lengths
-        $scope.canopyDetail = {};
-        $scope.canopyDetail.ColumnLengths = {};
         $scope.canopyDetail.ColumnLengths = {
             measurements: [{
                 feet: '',
@@ -58,10 +64,12 @@
 
         //Submit Form
         var onAddCanopyComplete = function (data) {
-            window.location.href = "/Home/Index";
+            alert('Saved Canopy');
+            //window.location.href = "/Home/Index";
         };
 
-        $scope.submitForm = function(canopyDetail) {
+        $scope.submitForm = function (canopyDetail) {
+            console.log(canopyDetail);
             canopyHttpService.createCanopy(canopyDetail)
                 .then(onAddCanopyComplete, onCanopyError);
         };

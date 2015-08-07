@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
-using System.Web.Configuration;
+using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 using LaneBids.Models;
 using LaneBids.Models.Admin;
 using LaneBids.Sources;
-using Microsoft.Ajax.Utilities;
-using Newtonsoft.Json;
 using WebMatrix.WebData;
 
 namespace LaneBids.Controllers
@@ -43,13 +39,12 @@ namespace LaneBids.Controllers
                         Roles.CreateRole(model.Role);
                     }
                     
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password,
-                                propertyValues: new
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new
                                 {
-                                    Email = model.Email,
-                                    FirstName = model.FirstName,
-                                    LastName = model.LastName,
-                                    Role = model.Role
+                                    model.Email, 
+                                    model.FirstName, 
+                                    model.LastName, 
+                                    model.Role
                                 });
 
                     Roles.AddUserToRole(model.UserName, model.Role);
@@ -62,12 +57,14 @@ namespace LaneBids.Controllers
                         var laneUsers = entities.Sales_Persons.FirstOrDefault(x => x.Sales_Person_ID == WebSecurity.CurrentUserId);
                         if (laneUsers == null)
                         {
-                            var salesPerson = new Sales_Persons();
-                            salesPerson.Sales_Person_ID = WebSecurity.CurrentUserId;
-                            salesPerson.First_Name = model.FirstName;
-                            salesPerson.Last_Name = model.LastName;
-                            salesPerson.Create_Date = DateTime.Now;
-                            salesPerson.Created_By = currentUserId;
+                            var salesPerson = new Sales_Persons
+                            {
+                                Sales_Person_ID = WebSecurity.CurrentUserId,
+                                First_Name = model.FirstName,
+                                Last_Name = model.LastName,
+                                Create_Date = DateTime.Now,
+                                Created_By = currentUserId
+                            };
                             entities.Sales_Persons.Add(salesPerson);
                             entities.SaveChanges();
                         }
@@ -115,7 +112,7 @@ namespace LaneBids.Controllers
                                 ID = t.Structure_Type_ID,
                                 Name = t.Name,
                                 Code = "",
-                                Create_Date = $"{t.Create_Date:d}",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -131,7 +128,7 @@ namespace LaneBids.Controllers
                                 ID = t.Bid_Status_ID,
                                 Name = t.Status,
                                 Code = "",
-                                Create_Date = $"{t.Create_Date:d}",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -147,7 +144,7 @@ namespace LaneBids.Controllers
                                 ID = t.Bid_Type_ID,
                                 Name = t.Name,
                                 Code = t.Code,
-                                Create_Date = $"{t.Create_Date:d}",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -163,7 +160,7 @@ namespace LaneBids.Controllers
                                 ID = t.Deck_Style_ID,
                                 Name = t.Name,
                                 Code = "",
-                                Create_Date = $"{t.Create_Date:d}",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -179,7 +176,7 @@ namespace LaneBids.Controllers
                                 ID = t.Drainage_Type_ID,
                                 Name = t.Name,
                                 Code = "",
-                                Create_Date = $"{t.Create_Date:d}",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -195,7 +192,7 @@ namespace LaneBids.Controllers
                                 ID = t.Fascia_Type_ID,
                                 Name = t.Name,
                                 Code = "",
-                                Create_Date = $"{t.Create_Date:d}",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -211,7 +208,7 @@ namespace LaneBids.Controllers
                                 ID = t.Job_Type_ID,
                                 Name = t.Name,
                                 Code = t.Code,
-                                Create_Date = $"{t.Create_Date:d}",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -227,7 +224,7 @@ namespace LaneBids.Controllers
                                 ID = t.Scope_Type_ID,
                                 Name = t.Name,
                                 Code = t.Code,
-                                Create_Date = $"{t.Create_Date:d}",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -242,7 +239,7 @@ namespace LaneBids.Controllers
                             {
                                 ID = t.Gutter_Type_ID,
                                 Name = t.Name,
-                                Create_Date = $"{t.Create_Date:d}",
+                                Create_Date = String.Format("{0:d}", t.Create_Date),
                                 FullName = UserServices.ConvertUserId(t.Created_By),
                                 TypeDataEnum = type
                             }).ToList()
@@ -543,7 +540,7 @@ namespace LaneBids.Controllers
         //    return RedirectToAction("Maintenance");
         //}
 
-        protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
+        protected override JsonResult Json(object data, string contentType, Encoding contentEncoding, JsonRequestBehavior behavior)
         {
             return new JsonNetResult
             {

@@ -14,6 +14,7 @@ namespace LaneBids.Sources
             var entities = new LaneEntities();
             var canopyInfo = new CanopyDetails();
             canopyInfo.BidId = bidDetails.BidId;
+            canopyInfo.StructureId = bidDetails.StructureId;
 
             //canopyInfo.ColorList = entities.Colors.ToList().Select(x => new SelectListItem
             //    {
@@ -43,6 +44,8 @@ namespace LaneBids.Sources
                 Text = x.Image_Path
             }).ToList();
             canopyInfo.ImageList.Add(new SelectListItem { Selected = true, Text = " -- Select -- ", Value = "0" });
+
+
 
             canopyInfo.DeckStyleList = entities.Deck_Styles.ToList().Select(x => new SelectListItem
             {

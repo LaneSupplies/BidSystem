@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="LaneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LaneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity_Log">
           <Key>
             <PropertyRef Name="Activity_Log_ID" />
@@ -108,8 +108,6 @@
           <Property Name="Column_Quantity" Type="int" />
           <Property Name="Column_Type_ID" Type="int" Nullable="false" />
           <Property Name="Column_Size_Measure_ID" Type="int" Nullable="false" />
-          <Property Name="Column_Spacing_Length_ID" Type="int" Nullable="false" />
-          <Property Name="Column_Spacing_Width_ID" Type="int" />
           <Property Name="Column_Spacing_Notes" Type="varchar" MaxLength="1000" />
           <Property Name="Deck_Style_ID" Type="int" Nullable="false" />
           <Property Name="Deck_Color_ID" Type="int" />
@@ -118,7 +116,7 @@
           <Property Name="Facia_Image" Type="varchar" MaxLength="100" />
           <Property Name="Fascia_Height_Measure_ID" Type="int" />
           <Property Name="Fascia_Type_ID" Type="int" Nullable="false" />
-          <Property Name="Fascia_Color_ID" Type="int" Nullable="false" />
+          <Property Name="Fascia_Color_ID" Type="int" />
           <Property Name="Fascia_Info" Type="varchar" MaxLength="2000" />
           <Property Name="Facia_Thickness" Type="int" />
           <Property Name="Drainage_Type_ID" Type="int" Nullable="false" />
@@ -150,22 +148,6 @@
           <Property Name="Modified_By" Type="int" />
           <Property Name="Modifed_Date" Type="datetime" />
         </EntityType>
-        <EntityType Name="Canopy_Column_Spacing_Length_Measurements">
-          <Key>
-            <PropertyRef Name="Canopies_Canopy_ID" />
-            <PropertyRef Name="Measurement_Lists_Measurement_List_ID" />
-          </Key>
-          <Property Name="Canopies_Canopy_ID" Type="int" Nullable="false" />
-          <Property Name="Measurement_Lists_Measurement_List_ID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Canopy_Column_Spacing_Width_Measurements">
-          <Key>
-            <PropertyRef Name="Canopies_Canopy_ID" />
-            <PropertyRef Name="Measurement_Lists_Measurement_List_ID" />
-          </Key>
-          <Property Name="Canopies_Canopy_ID" Type="int" Nullable="false" />
-          <Property Name="Measurement_Lists_Measurement_List_ID" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Colors">
           <Key>
             <PropertyRef Name="Color_ID" />
@@ -175,6 +157,24 @@
           <Property Name="ColorText" Type="varchar" MaxLength="10" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Column_Spacing_Lengths">
+          <Key>
+            <PropertyRef Name="Column_Spacing_Length_ID" />
+          </Key>
+          <Property Name="Column_Spacing_Length_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Canopy_ID" Type="int" Nullable="false" />
+          <Property Name="Measurement_ID" Type="int" Nullable="false" />
+          <Property Name="Sequence" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Column_Spacing_Widths">
+          <Key>
+            <PropertyRef Name="Column_Spacing_Width_ID" />
+          </Key>
+          <Property Name="Column_Spacing_Width_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Canopy_ID" Type="int" Nullable="false" />
+          <Property Name="Measurement_ID" Type="int" Nullable="false" />
+          <Property Name="Sequence" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Column_Types">
           <Key>
@@ -281,17 +281,6 @@
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
         </EntityType>
-        <EntityType Name="Measurement_Lists">
-          <Key>
-            <PropertyRef Name="Measurement_List_ID" />
-          </Key>
-          <Property Name="Measurement_List_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Measurement_ID" Type="int" Nullable="false" />
-          <Property Name="Quantity" Type="int" />
-          <Property Name="Sequence_Number" Type="int" />
-          <Property Name="Created_By" Type="int" />
-          <Property Name="Create_Date" Type="datetime" />
-        </EntityType>
         <EntityType Name="Measurements">
           <Key>
             <PropertyRef Name="Measurement_ID" />
@@ -391,7 +380,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Bid_Canopies_Canopy">
+        <Association Name="FK_Bid_Canopies_Canopies">
           <End Role="Canopies" Type="Self.Canopies" Multiplicity="1" />
           <End Role="Bid_Canopies" Type="Self.Bid_Canopies" Multiplicity="*" />
           <ReferentialConstraint>
@@ -463,51 +452,87 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Canopy_Column_Spacing_Length_Measurements_Canopy">
-          <End Role="Canopies" Type="Self.Canopies" Multiplicity="1" />
-          <End Role="Canopy_Column_Spacing_Length_Measurements" Type="Self.Canopy_Column_Spacing_Length_Measurements" Multiplicity="*" />
+        <Association Name="FK_Canopies_Measurements">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Canopies">
-              <PropertyRef Name="Canopy_ID" />
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
             </Principal>
-            <Dependent Role="Canopy_Column_Spacing_Length_Measurements">
-              <PropertyRef Name="Canopies_Canopy_ID" />
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Size_Width_Measure_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Canopy_Column_Spacing_Length_Measurements_Measurement_Lists">
-          <End Role="Measurement_Lists" Type="Self.Measurement_Lists" Multiplicity="1" />
-          <End Role="Canopy_Column_Spacing_Length_Measurements" Type="Self.Canopy_Column_Spacing_Length_Measurements" Multiplicity="*" />
+        <Association Name="FK_Canopies_Measurements1">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Measurement_Lists">
-              <PropertyRef Name="Measurement_List_ID" />
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
             </Principal>
-            <Dependent Role="Canopy_Column_Spacing_Length_Measurements">
-              <PropertyRef Name="Measurement_Lists_Measurement_List_ID" />
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Size_Length_Measure_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Canopy_Column_Spacing_Width_Measurements_Canopy">
-          <End Role="Canopies" Type="Self.Canopies" Multiplicity="1" />
-          <End Role="Canopy_Column_Spacing_Width_Measurements" Type="Self.Canopy_Column_Spacing_Width_Measurements" Multiplicity="*" />
+        <Association Name="FK_Canopies_Measurements2">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Canopies">
-              <PropertyRef Name="Canopy_ID" />
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
             </Principal>
-            <Dependent Role="Canopy_Column_Spacing_Width_Measurements">
-              <PropertyRef Name="Canopies_Canopy_ID" />
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Clearance_Height_Measure_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Canopy_Column_Spacing_Width_Measurements_Measurement_Lists">
-          <End Role="Measurement_Lists" Type="Self.Measurement_Lists" Multiplicity="1" />
-          <End Role="Canopy_Column_Spacing_Width_Measurements" Type="Self.Canopy_Column_Spacing_Width_Measurements" Multiplicity="*" />
+        <Association Name="FK_Canopies_Measurements3">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Measurement_Lists">
-              <PropertyRef Name="Measurement_List_ID" />
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
             </Principal>
-            <Dependent Role="Canopy_Column_Spacing_Width_Measurements">
-              <PropertyRef Name="Measurement_Lists_Measurement_List_ID" />
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Column_Size_Measure_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurements4">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Deck_Thickness_Measure_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurements5">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Fascia_Height_Measure_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurements6">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Drainage_Measure_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -524,7 +549,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Colors_Canopy_2">
-          <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
+          <End Role="Colors" Type="Self.Colors" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Colors">
@@ -532,6 +557,30 @@
             </Principal>
             <Dependent Role="Canopies">
               <PropertyRef Name="Fascia_Color_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Column_Spacing_Lengths_Measurements">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
+          <End Role="Column_Spacing_Lengths" Type="Self.Column_Spacing_Lengths" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Column_Spacing_Lengths">
+              <PropertyRef Name="Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Column_Spacing_Widths_Measurements">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
+          <End Role="Column_Spacing_Widths" Type="Self.Column_Spacing_Widths" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Column_Spacing_Widths">
+              <PropertyRef Name="Measurement_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -655,18 +704,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Images_Canopy">
-          <End Role="Images" Type="Self.Images" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Images">
-              <PropertyRef Name="Image_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Image_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Job_Types_Bids">
           <End Role="Job_Types" Type="Self.Job_Types" Multiplicity="1" />
           <End Role="Bids" Type="Self.Bids" Multiplicity="*" />
@@ -676,90 +713,6 @@
             </Principal>
             <Dependent Role="Bids">
               <PropertyRef Name="Job_Type_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Measurements_Canopy_Clearance_Height">
-          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Clearance_Height_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Measurements_Canopy_Column_Size">
-          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Column_Size_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Measurements_Canopy_Deck_Thickness">
-          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Deck_Thickness_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Measurements_Canopy_Fascia_Height">
-          <End Role="Measurements" Type="Self.Measurements" Multiplicity="0..1" />
-          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Fascia_Height_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Measurements_Canopy_Size_Length">
-          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Size_Length_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Measurements_Canopy_Size_Width">
-          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Size_Width_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Measurements_Measurement_Lists">
-          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
-          <End Role="Measurement_Lists" Type="Self.Measurement_Lists" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Measurement_Lists">
-              <PropertyRef Name="Measurement_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -888,9 +841,9 @@
           <EntitySet Name="Bid_Types" EntityType="Self.Bid_Types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bids" EntityType="Self.Bids" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Canopies" EntityType="Self.Canopies" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Canopy_Column_Spacing_Length_Measurements" EntityType="Self.Canopy_Column_Spacing_Length_Measurements" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Canopy_Column_Spacing_Width_Measurements" EntityType="Self.Canopy_Column_Spacing_Width_Measurements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Colors" EntityType="Self.Colors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Column_Spacing_Lengths" EntityType="Self.Column_Spacing_Lengths" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Column_Spacing_Widths" EntityType="Self.Column_Spacing_Widths" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Column_Types" EntityType="Self.Column_Types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contact_Info" EntityType="Self.Contact_Info" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contact_Types" EntityType="Self.Contact_Types" Schema="dbo" store:Type="Tables" />
@@ -902,7 +855,6 @@
           <EntitySet Name="Gutter_Types" EntityType="Self.Gutter_Types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Job_Types" EntityType="Self.Job_Types" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Measurement_Lists" EntityType="Self.Measurement_Lists" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Measurements" EntityType="Self.Measurements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sales_Person_Contact_Info" EntityType="Self.Sales_Person_Contact_Info" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sales_Persons" EntityType="Self.Sales_Persons" Schema="dbo" store:Type="Tables" />
@@ -919,7 +871,7 @@
             <End Role="Bids" EntitySet="Bids" />
             <End Role="Bid_Canopies" EntitySet="Bid_Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Bid_Canopies_Canopy" Association="Self.FK_Bid_Canopies_Canopy">
+          <AssociationSet Name="FK_Bid_Canopies_Canopies" Association="Self.FK_Bid_Canopies_Canopies">
             <End Role="Canopies" EntitySet="Canopies" />
             <End Role="Bid_Canopies" EntitySet="Bid_Canopies" />
           </AssociationSet>
@@ -943,21 +895,33 @@
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Bids" EntitySet="Bids" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopy_Column_Spacing_Length_Measurements_Canopy" Association="Self.FK_Canopy_Column_Spacing_Length_Measurements_Canopy">
+          <AssociationSet Name="FK_Canopies_Measurements" Association="Self.FK_Canopies_Measurements">
+            <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
-            <End Role="Canopy_Column_Spacing_Length_Measurements" EntitySet="Canopy_Column_Spacing_Length_Measurements" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopy_Column_Spacing_Length_Measurements_Measurement_Lists" Association="Self.FK_Canopy_Column_Spacing_Length_Measurements_Measurement_Lists">
-            <End Role="Measurement_Lists" EntitySet="Measurement_Lists" />
-            <End Role="Canopy_Column_Spacing_Length_Measurements" EntitySet="Canopy_Column_Spacing_Length_Measurements" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Canopy_Column_Spacing_Width_Measurements_Canopy" Association="Self.FK_Canopy_Column_Spacing_Width_Measurements_Canopy">
+          <AssociationSet Name="FK_Canopies_Measurements1" Association="Self.FK_Canopies_Measurements1">
+            <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
-            <End Role="Canopy_Column_Spacing_Width_Measurements" EntitySet="Canopy_Column_Spacing_Width_Measurements" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopy_Column_Spacing_Width_Measurements_Measurement_Lists" Association="Self.FK_Canopy_Column_Spacing_Width_Measurements_Measurement_Lists">
-            <End Role="Measurement_Lists" EntitySet="Measurement_Lists" />
-            <End Role="Canopy_Column_Spacing_Width_Measurements" EntitySet="Canopy_Column_Spacing_Width_Measurements" />
+          <AssociationSet Name="FK_Canopies_Measurements2" Association="Self.FK_Canopies_Measurements2">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurements3" Association="Self.FK_Canopies_Measurements3">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurements4" Association="Self.FK_Canopies_Measurements4">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurements5" Association="Self.FK_Canopies_Measurements5">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurements6" Association="Self.FK_Canopies_Measurements6">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
           <AssociationSet Name="FK_Colors_Canopy_1" Association="Self.FK_Colors_Canopy_1">
             <End Role="Colors" EntitySet="Colors" />
@@ -966,6 +930,14 @@
           <AssociationSet Name="FK_Colors_Canopy_2" Association="Self.FK_Colors_Canopy_2">
             <End Role="Colors" EntitySet="Colors" />
             <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Column_Spacing_Lengths_Measurements" Association="Self.FK_Column_Spacing_Lengths_Measurements">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Column_Spacing_Lengths" EntitySet="Column_Spacing_Lengths" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Column_Spacing_Widths_Measurements" Association="Self.FK_Column_Spacing_Widths_Measurements">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Column_Spacing_Widths" EntitySet="Column_Spacing_Widths" />
           </AssociationSet>
           <AssociationSet Name="FK_Column_Types_Canopy" Association="Self.FK_Column_Types_Canopy">
             <End Role="Column_Types" EntitySet="Column_Types" />
@@ -1007,41 +979,9 @@
             <End Role="Gutter_Types" EntitySet="Gutter_Types" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Images_Canopy" Association="Self.FK_Images_Canopy">
-            <End Role="Images" EntitySet="Images" />
-            <End Role="Canopies" EntitySet="Canopies" />
-          </AssociationSet>
           <AssociationSet Name="FK_Job_Types_Bids" Association="Self.FK_Job_Types_Bids">
             <End Role="Job_Types" EntitySet="Job_Types" />
             <End Role="Bids" EntitySet="Bids" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Measurements_Canopy_Clearance_Height" Association="Self.FK_Measurements_Canopy_Clearance_Height">
-            <End Role="Measurements" EntitySet="Measurements" />
-            <End Role="Canopies" EntitySet="Canopies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Measurements_Canopy_Column_Size" Association="Self.FK_Measurements_Canopy_Column_Size">
-            <End Role="Measurements" EntitySet="Measurements" />
-            <End Role="Canopies" EntitySet="Canopies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Measurements_Canopy_Deck_Thickness" Association="Self.FK_Measurements_Canopy_Deck_Thickness">
-            <End Role="Measurements" EntitySet="Measurements" />
-            <End Role="Canopies" EntitySet="Canopies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Measurements_Canopy_Fascia_Height" Association="Self.FK_Measurements_Canopy_Fascia_Height">
-            <End Role="Measurements" EntitySet="Measurements" />
-            <End Role="Canopies" EntitySet="Canopies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Measurements_Canopy_Size_Length" Association="Self.FK_Measurements_Canopy_Size_Length">
-            <End Role="Measurements" EntitySet="Measurements" />
-            <End Role="Canopies" EntitySet="Canopies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Measurements_Canopy_Size_Width" Association="Self.FK_Measurements_Canopy_Size_Width">
-            <End Role="Measurements" EntitySet="Measurements" />
-            <End Role="Canopies" EntitySet="Canopies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Measurements_Measurement_Lists" Association="Self.FK_Measurements_Measurement_Lists">
-            <End Role="Measurements" EntitySet="Measurements" />
-            <End Role="Measurement_Lists" EntitySet="Measurement_Lists" />
           </AssociationSet>
           <AssociationSet Name="FK_Sales_Person_Contact_Info_Contact_Info" Association="Self.FK_Sales_Person_Contact_Info_Contact_Info">
             <End Role="Contact_Info" EntitySet="Contact_Info" />
@@ -1080,7 +1020,8 @@
             <End Role="Bids" EntitySet="Bids" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LaneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1189,8 +1130,6 @@
           <Property Name="Column_Quantity" Type="Int32" />
           <Property Name="Column_Type_ID" Type="Int32" Nullable="false" />
           <Property Name="Column_Size_Measure_ID" Type="Int32" Nullable="false" />
-          <Property Name="Column_Spacing_Length_ID" Type="Int32" Nullable="false" />
-          <Property Name="Column_Spacing_Width_ID" Type="Int32" />
           <Property Name="Column_Spacing_Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Deck_Style_ID" Type="Int32" Nullable="false" />
           <Property Name="Deck_Color_ID" Type="Int32" />
@@ -1199,7 +1138,7 @@
           <Property Name="Facia_Image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Fascia_Height_Measure_ID" Type="Int32" />
           <Property Name="Fascia_Type_ID" Type="Int32" Nullable="false" />
-          <Property Name="Fascia_Color_ID" Type="Int32" Nullable="false" />
+          <Property Name="Fascia_Color_ID" Type="Int32" />
           <Property Name="Fascia_Info" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="Facia_Thickness" Type="Int32" />
           <Property Name="Drainage_Type_ID" Type="Int32" Nullable="false" />
@@ -1230,24 +1169,22 @@
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <Property Name="Modified_By" Type="Int32" />
           <Property Name="Modifed_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Measurement" Relationship="Self.FK_Canopies_Measurements" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement1" Relationship="Self.FK_Canopies_Measurements1" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement2" Relationship="Self.FK_Canopies_Measurements2" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement3" Relationship="Self.FK_Canopies_Measurements3" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement4" Relationship="Self.FK_Canopies_Measurements4" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement5" Relationship="Self.FK_Canopies_Measurements5" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement6" Relationship="Self.FK_Canopies_Measurements6" FromRole="Canopies" ToRole="Measurements" />
           <NavigationProperty Name="Color" Relationship="Self.FK_Colors_Canopy_1" FromRole="Canopies" ToRole="Colors" />
           <NavigationProperty Name="Color1" Relationship="Self.FK_Colors_Canopy_2" FromRole="Canopies" ToRole="Colors" />
           <NavigationProperty Name="Column_Types" Relationship="Self.FK_Column_Types_Canopy" FromRole="Canopies" ToRole="Column_Types" />
           <NavigationProperty Name="Deck_Styles" Relationship="Self.FK_Deck_Styles_Canopy" FromRole="Canopies" ToRole="Deck_Styles" />
-          <NavigationProperty Name="Measurement" Relationship="Self.FK_Drainage_Measurement_Canopy" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement7" Relationship="Self.FK_Drainage_Measurement_Canopy" FromRole="Canopies" ToRole="Measurements" />
           <NavigationProperty Name="Drainage_Types" Relationship="Self.FK_Drainage_Types_Canopy" FromRole="Canopies" ToRole="Drainage_Types" />
           <NavigationProperty Name="Fascia_Types" Relationship="Self.FK_Fascia_Types_Canopy" FromRole="Canopies" ToRole="Fascia_Types" />
           <NavigationProperty Name="Gutter_Types" Relationship="Self.FK_Gutter_Types_Canopy" FromRole="Canopies" ToRole="Gutter_Types" />
-          <NavigationProperty Name="Image" Relationship="Self.FK_Images_Canopy" FromRole="Canopies" ToRole="Images" />
-          <NavigationProperty Name="Measurement1" Relationship="Self.FK_Measurements_Canopy_Clearance_Height" FromRole="Canopies" ToRole="Measurements" />
-          <NavigationProperty Name="Measurement2" Relationship="Self.FK_Measurements_Canopy_Column_Size" FromRole="Canopies" ToRole="Measurements" />
-          <NavigationProperty Name="Measurement3" Relationship="Self.FK_Measurements_Canopy_Deck_Thickness" FromRole="Canopies" ToRole="Measurements" />
-          <NavigationProperty Name="Measurement4" Relationship="Self.FK_Measurements_Canopy_Fascia_Height" FromRole="Canopies" ToRole="Measurements" />
-          <NavigationProperty Name="Measurement5" Relationship="Self.FK_Measurements_Canopy_Size_Length" FromRole="Canopies" ToRole="Measurements" />
-          <NavigationProperty Name="Measurement6" Relationship="Self.FK_Measurements_Canopy_Size_Width" FromRole="Canopies" ToRole="Measurements" />
           <NavigationProperty Name="Bids" Relationship="Self.Bid_Canopies" FromRole="Canopies" ToRole="Bids" />
-          <NavigationProperty Name="Measurement_Lists" Relationship="Self.Canopy_Column_Spacing_Length_Measurements" FromRole="Canopies" ToRole="Measurement_Lists" />
-          <NavigationProperty Name="Measurement_Lists1" Relationship="Self.Canopy_Column_Spacing_Width_Measurements" FromRole="Canopies" ToRole="Measurement_Lists" />
         </EntityType>
         <EntityType Name="Color">
           <Key>
@@ -1260,6 +1197,26 @@
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Canopies" Relationship="Self.FK_Colors_Canopy_1" FromRole="Colors" ToRole="Canopies" />
           <NavigationProperty Name="Canopies1" Relationship="Self.FK_Colors_Canopy_2" FromRole="Colors" ToRole="Canopies" />
+        </EntityType>
+        <EntityType Name="Column_Spacing_Lengths">
+          <Key>
+            <PropertyRef Name="Column_Spacing_Length_ID" />
+          </Key>
+          <Property Name="Column_Spacing_Length_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Canopy_ID" Type="Int32" Nullable="false" />
+          <Property Name="Measurement_ID" Type="Int32" Nullable="false" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Measurement" Relationship="Self.FK_Column_Spacing_Lengths_Measurements" FromRole="Column_Spacing_Lengths" ToRole="Measurements" />
+        </EntityType>
+        <EntityType Name="Column_Spacing_Widths">
+          <Key>
+            <PropertyRef Name="Column_Spacing_Width_ID" />
+          </Key>
+          <Property Name="Column_Spacing_Width_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Canopy_ID" Type="Int32" Nullable="false" />
+          <Property Name="Measurement_ID" Type="Int32" Nullable="false" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Measurement" Relationship="Self.FK_Column_Spacing_Widths_Measurements" FromRole="Column_Spacing_Widths" ToRole="Measurements" />
         </EntityType>
         <EntityType Name="Column_Types">
           <Key>
@@ -1359,7 +1316,6 @@
           <Property Name="Image_Path" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Canopies" Relationship="Self.FK_Images_Canopy" FromRole="Images" ToRole="Canopies" />
         </EntityType>
         <EntityType Name="Job_Types">
           <Key>
@@ -1372,20 +1328,6 @@
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Job_Types_Bids" FromRole="Job_Types" ToRole="Bids" />
         </EntityType>
-        <EntityType Name="Measurement_Lists">
-          <Key>
-            <PropertyRef Name="Measurement_List_ID" />
-          </Key>
-          <Property Name="Measurement_List_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Measurement_ID" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" />
-          <Property Name="Sequence_Number" Type="Int32" />
-          <Property Name="Created_By" Type="Int32" />
-          <Property Name="Create_Date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Measurement" Relationship="Self.FK_Measurements_Measurement_Lists" FromRole="Measurement_Lists" ToRole="Measurements" />
-          <NavigationProperty Name="Canopies" Relationship="Self.Canopy_Column_Spacing_Length_Measurements" FromRole="Measurement_Lists" ToRole="Canopies" />
-          <NavigationProperty Name="Canopies1" Relationship="Self.Canopy_Column_Spacing_Width_Measurements" FromRole="Measurement_Lists" ToRole="Canopies" />
-        </EntityType>
         <EntityType Name="Measurement">
           <Key>
             <PropertyRef Name="Measurement_ID" />
@@ -1393,14 +1335,16 @@
           <Property Name="Measurement_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Feet" Type="Int32" />
           <Property Name="Inches" Type="Int32" />
-          <NavigationProperty Name="Canopies" Relationship="Self.FK_Drainage_Measurement_Canopy" FromRole="Measurements" ToRole="Canopies" />
-          <NavigationProperty Name="Canopies1" Relationship="Self.FK_Measurements_Canopy_Clearance_Height" FromRole="Measurements" ToRole="Canopies" />
-          <NavigationProperty Name="Canopies2" Relationship="Self.FK_Measurements_Canopy_Column_Size" FromRole="Measurements" ToRole="Canopies" />
-          <NavigationProperty Name="Canopies3" Relationship="Self.FK_Measurements_Canopy_Deck_Thickness" FromRole="Measurements" ToRole="Canopies" />
-          <NavigationProperty Name="Canopies4" Relationship="Self.FK_Measurements_Canopy_Fascia_Height" FromRole="Measurements" ToRole="Canopies" />
-          <NavigationProperty Name="Canopies5" Relationship="Self.FK_Measurements_Canopy_Size_Length" FromRole="Measurements" ToRole="Canopies" />
-          <NavigationProperty Name="Canopies6" Relationship="Self.FK_Measurements_Canopy_Size_Width" FromRole="Measurements" ToRole="Canopies" />
-          <NavigationProperty Name="Measurement_Lists" Relationship="Self.FK_Measurements_Measurement_Lists" FromRole="Measurements" ToRole="Measurement_Lists" />
+          <NavigationProperty Name="Canopies" Relationship="Self.FK_Canopies_Measurements" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies1" Relationship="Self.FK_Canopies_Measurements1" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies2" Relationship="Self.FK_Canopies_Measurements2" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies3" Relationship="Self.FK_Canopies_Measurements3" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies4" Relationship="Self.FK_Canopies_Measurements4" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies5" Relationship="Self.FK_Canopies_Measurements5" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies6" Relationship="Self.FK_Canopies_Measurements6" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies7" Relationship="Self.FK_Drainage_Measurement_Canopy" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Column_Spacing_Lengths" Relationship="Self.FK_Column_Spacing_Lengths_Measurements" FromRole="Measurements" ToRole="Column_Spacing_Lengths" />
+          <NavigationProperty Name="Column_Spacing_Widths" Relationship="Self.FK_Column_Spacing_Widths_Measurements" FromRole="Measurements" ToRole="Column_Spacing_Widths" />
         </EntityType>
         <EntityType Name="Sales_Persons">
           <Key>
@@ -1458,6 +1402,17 @@
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Structure_Types_Bids" FromRole="Structure_Types" ToRole="Bids" />
+        </EntityType>
+        <EntityType Name="UserLoginProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="56" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Customer_Addresses">
           <End Role="Addresses" Type="Self.Address" Multiplicity="0..1" />
@@ -1615,6 +1570,90 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Canopies_Measurements">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Size_Width_Measure_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurements1">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Size_Length_Measure_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurements2">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Clearance_Height_Measure_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurements3">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Column_Size_Measure_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurements4">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Deck_Thickness_Measure_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurements5">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Fascia_Height_Measure_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurements6">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Drainage_Measure_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Colors_Canopy_1">
           <End Role="Colors" Type="Self.Color" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
@@ -1628,7 +1667,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Colors_Canopy_2">
-          <End Role="Colors" Type="Self.Color" Multiplicity="1" />
+          <End Role="Colors" Type="Self.Color" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Colors">
@@ -1711,87 +1750,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Images_Canopy">
-          <End Role="Images" Type="Self.Image" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Images">
-              <PropertyRef Name="Image_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Image_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Measurements_Canopy_Clearance_Height">
+        <Association Name="FK_Column_Spacing_Lengths_Measurements">
           <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <End Role="Column_Spacing_Lengths" Type="Self.Column_Spacing_Lengths" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Measurements">
               <PropertyRef Name="Measurement_ID" />
             </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Clearance_Height_Measure_ID" />
+            <Dependent Role="Column_Spacing_Lengths">
+              <PropertyRef Name="Measurement_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Measurements_Canopy_Column_Size">
+        <Association Name="FK_Column_Spacing_Widths_Measurements">
           <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <End Role="Column_Spacing_Widths" Type="Self.Column_Spacing_Widths" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Measurements">
               <PropertyRef Name="Measurement_ID" />
             </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Column_Size_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Measurements_Canopy_Deck_Thickness">
-          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
+            <Dependent Role="Column_Spacing_Widths">
               <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Deck_Thickness_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Measurements_Canopy_Fascia_Height">
-          <End Role="Measurements" Type="Self.Measurement" Multiplicity="0..1" />
-          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Fascia_Height_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Measurements_Canopy_Size_Length">
-          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Size_Length_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Measurements_Canopy_Size_Width">
-          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Size_Width_Measure_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1807,18 +1786,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Measurements_Measurement_Lists">
-          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
-          <End Role="Measurement_Lists" Type="Self.Measurement_Lists" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Measurement_Lists">
-              <PropertyRef Name="Measurement_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="Bid_Canopies">
           <End Role="Bids" Type="Self.Bid" Multiplicity="*" />
           <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
@@ -1826,14 +1793,6 @@
         <Association Name="Bid_To_Notes">
           <End Role="Bid_Notes" Type="Self.Bid_Notes" Multiplicity="*" />
           <End Role="Bids" Type="Self.Bid" Multiplicity="*" />
-        </Association>
-        <Association Name="Canopy_Column_Spacing_Length_Measurements">
-          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
-          <End Role="Measurement_Lists" Type="Self.Measurement_Lists" Multiplicity="*" />
-        </Association>
-        <Association Name="Canopy_Column_Spacing_Width_Measurements">
-          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
-          <End Role="Measurement_Lists" Type="Self.Measurement_Lists" Multiplicity="*" />
         </Association>
         <Association Name="Customer_Contact_Info">
           <End Role="Contact_Info" Type="Self.Contact_Info" Multiplicity="*" />
@@ -1852,6 +1811,8 @@
           <EntitySet Name="Bids" EntityType="Self.Bid" />
           <EntitySet Name="Canopies" EntityType="Self.Canopy" />
           <EntitySet Name="Colors" EntityType="Self.Color" />
+          <EntitySet Name="Column_Spacing_Lengths" EntityType="Self.Column_Spacing_Lengths" />
+          <EntitySet Name="Column_Spacing_Widths" EntityType="Self.Column_Spacing_Widths" />
           <EntitySet Name="Column_Types" EntityType="Self.Column_Types" />
           <EntitySet Name="Contact_Info" EntityType="Self.Contact_Info" />
           <EntitySet Name="Contact_Types" EntityType="Self.Contact_Types" />
@@ -1862,13 +1823,13 @@
           <EntitySet Name="Gutter_Types" EntityType="Self.Gutter_Types" />
           <EntitySet Name="Images" EntityType="Self.Image" />
           <EntitySet Name="Job_Types" EntityType="Self.Job_Types" />
-          <EntitySet Name="Measurement_Lists" EntityType="Self.Measurement_Lists" />
           <EntitySet Name="Measurements" EntityType="Self.Measurement" />
           <EntitySet Name="Sales_Persons" EntityType="Self.Sales_Persons" />
           <EntitySet Name="Scope_Types" EntityType="Self.Scope_Types" />
           <EntitySet Name="Shipping_Info" EntityType="Self.Shipping_Info" />
           <EntitySet Name="Sites" EntityType="Self.Site" />
           <EntitySet Name="Structure_Types" EntityType="Self.Structure_Types" />
+          <EntitySet Name="UserLoginProfiles" EntityType="LaneModel.UserLoginProfile" />
           <AssociationSet Name="FK_Customer_Addresses" Association="Self.FK_Customer_Addresses">
             <End Role="Addresses" EntitySet="Addresses" />
             <End Role="Customer" EntitySet="Customers" />
@@ -1921,6 +1882,34 @@
             <End Role="Structure_Types" EntitySet="Structure_Types" />
             <End Role="Bids" EntitySet="Bids" />
           </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurements" Association="Self.FK_Canopies_Measurements">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurements1" Association="Self.FK_Canopies_Measurements1">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurements2" Association="Self.FK_Canopies_Measurements2">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurements3" Association="Self.FK_Canopies_Measurements3">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurements4" Association="Self.FK_Canopies_Measurements4">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurements5" Association="Self.FK_Canopies_Measurements5">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurements6" Association="Self.FK_Canopies_Measurements6">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
           <AssociationSet Name="FK_Colors_Canopy_1" Association="Self.FK_Colors_Canopy_1">
             <End Role="Colors" EntitySet="Colors" />
             <End Role="Canopies" EntitySet="Canopies" />
@@ -1953,41 +1942,17 @@
             <End Role="Gutter_Types" EntitySet="Gutter_Types" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Images_Canopy" Association="Self.FK_Images_Canopy">
-            <End Role="Images" EntitySet="Images" />
-            <End Role="Canopies" EntitySet="Canopies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Measurements_Canopy_Clearance_Height" Association="Self.FK_Measurements_Canopy_Clearance_Height">
+          <AssociationSet Name="FK_Column_Spacing_Lengths_Measurements" Association="Self.FK_Column_Spacing_Lengths_Measurements">
             <End Role="Measurements" EntitySet="Measurements" />
-            <End Role="Canopies" EntitySet="Canopies" />
+            <End Role="Column_Spacing_Lengths" EntitySet="Column_Spacing_Lengths" />
           </AssociationSet>
-          <AssociationSet Name="FK_Measurements_Canopy_Column_Size" Association="Self.FK_Measurements_Canopy_Column_Size">
+          <AssociationSet Name="FK_Column_Spacing_Widths_Measurements" Association="Self.FK_Column_Spacing_Widths_Measurements">
             <End Role="Measurements" EntitySet="Measurements" />
-            <End Role="Canopies" EntitySet="Canopies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Measurements_Canopy_Deck_Thickness" Association="Self.FK_Measurements_Canopy_Deck_Thickness">
-            <End Role="Measurements" EntitySet="Measurements" />
-            <End Role="Canopies" EntitySet="Canopies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Measurements_Canopy_Fascia_Height" Association="Self.FK_Measurements_Canopy_Fascia_Height">
-            <End Role="Measurements" EntitySet="Measurements" />
-            <End Role="Canopies" EntitySet="Canopies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Measurements_Canopy_Size_Length" Association="Self.FK_Measurements_Canopy_Size_Length">
-            <End Role="Measurements" EntitySet="Measurements" />
-            <End Role="Canopies" EntitySet="Canopies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Measurements_Canopy_Size_Width" Association="Self.FK_Measurements_Canopy_Size_Width">
-            <End Role="Measurements" EntitySet="Measurements" />
-            <End Role="Canopies" EntitySet="Canopies" />
+            <End Role="Column_Spacing_Widths" EntitySet="Column_Spacing_Widths" />
           </AssociationSet>
           <AssociationSet Name="FK_Contact_Info_Contact_Types" Association="Self.FK_Contact_Info_Contact_Types">
             <End Role="Contact_Types" EntitySet="Contact_Types" />
             <End Role="Contact_Info" EntitySet="Contact_Info" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Measurements_Measurement_Lists" Association="Self.FK_Measurements_Measurement_Lists">
-            <End Role="Measurements" EntitySet="Measurements" />
-            <End Role="Measurement_Lists" EntitySet="Measurement_Lists" />
           </AssociationSet>
           <AssociationSet Name="Bid_Canopies" Association="Self.Bid_Canopies">
             <End Role="Bids" EntitySet="Bids" />
@@ -1996,14 +1961,6 @@
           <AssociationSet Name="Bid_To_Notes" Association="Self.Bid_To_Notes">
             <End Role="Bid_Notes" EntitySet="Bid_Notes" />
             <End Role="Bids" EntitySet="Bids" />
-          </AssociationSet>
-          <AssociationSet Name="Canopy_Column_Spacing_Length_Measurements" Association="Self.Canopy_Column_Spacing_Length_Measurements">
-            <End Role="Canopies" EntitySet="Canopies" />
-            <End Role="Measurement_Lists" EntitySet="Measurement_Lists" />
-          </AssociationSet>
-          <AssociationSet Name="Canopy_Column_Spacing_Width_Measurements" Association="Self.Canopy_Column_Spacing_Width_Measurements">
-            <End Role="Canopies" EntitySet="Canopies" />
-            <End Role="Measurement_Lists" EntitySet="Measurement_Lists" />
           </AssociationSet>
           <AssociationSet Name="Customer_Contact_Info" Association="Self.Customer_Contact_Info">
             <End Role="Contact_Info" EntitySet="Contact_Info" />
@@ -2020,7 +1977,6 @@
             <Parameter Name="BidStatusId" Mode="In" Type="Int32" />
             <Parameter Name="JobTypeId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="UserLoginProfiles" EntityType="LaneModel.UserLoginProfiles" />
         </EntityContainer>
         <ComplexType Name="BidSearch_Result">
           <Property Type="Int32" Name="Bid_ID" Nullable="false" />
@@ -2040,17 +1996,6 @@
           <Property Type="String" Name="City" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="State" Nullable="true" MaxLength="30" />
         </ComplexType>
-        <EntityType Name="UserLoginProfiles">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2149,8 +2094,6 @@
                 <ScalarProperty Name="Column_Quantity" ColumnName="Column_Quantity" />
                 <ScalarProperty Name="Column_Type_ID" ColumnName="Column_Type_ID" />
                 <ScalarProperty Name="Column_Size_Measure_ID" ColumnName="Column_Size_Measure_ID" />
-                <ScalarProperty Name="Column_Spacing_Length_ID" ColumnName="Column_Spacing_Length_ID" />
-                <ScalarProperty Name="Column_Spacing_Width_ID" ColumnName="Column_Spacing_Width_ID" />
                 <ScalarProperty Name="Column_Spacing_Notes" ColumnName="Column_Spacing_Notes" />
                 <ScalarProperty Name="Deck_Style_ID" ColumnName="Deck_Style_ID" />
                 <ScalarProperty Name="Deck_Color_ID" ColumnName="Deck_Color_ID" />
@@ -2201,6 +2144,26 @@
                 <ScalarProperty Name="ColorText" ColumnName="ColorText" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />
                 <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Column_Spacing_Lengths">
+            <EntityTypeMapping TypeName="LaneModel.Column_Spacing_Lengths">
+              <MappingFragment StoreEntitySet="Column_Spacing_Lengths">
+                <ScalarProperty Name="Column_Spacing_Length_ID" ColumnName="Column_Spacing_Length_ID" />
+                <ScalarProperty Name="Canopy_ID" ColumnName="Canopy_ID" />
+                <ScalarProperty Name="Measurement_ID" ColumnName="Measurement_ID" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Column_Spacing_Widths">
+            <EntityTypeMapping TypeName="LaneModel.Column_Spacing_Widths">
+              <MappingFragment StoreEntitySet="Column_Spacing_Widths">
+                <ScalarProperty Name="Column_Spacing_Width_ID" ColumnName="Column_Spacing_Width_ID" />
+                <ScalarProperty Name="Canopy_ID" ColumnName="Canopy_ID" />
+                <ScalarProperty Name="Measurement_ID" ColumnName="Measurement_ID" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2311,18 +2274,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Measurement_Lists">
-            <EntityTypeMapping TypeName="LaneModel.Measurement_Lists">
-              <MappingFragment StoreEntitySet="Measurement_Lists">
-                <ScalarProperty Name="Measurement_List_ID" ColumnName="Measurement_List_ID" />
-                <ScalarProperty Name="Measurement_ID" ColumnName="Measurement_ID" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Sequence_Number" ColumnName="Sequence_Number" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Measurements">
             <EntityTypeMapping TypeName="LaneModel.Measurement">
               <MappingFragment StoreEntitySet="Measurements">
@@ -2385,6 +2336,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserLoginProfiles">
+            <EntityTypeMapping TypeName="LaneModel.UserLoginProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="Bid_Canopies" TypeName="LaneModel.Bid_Canopies" StoreEntitySet="Bid_Canopies">
             <EndProperty Name="Bids">
               <ScalarProperty Name="Bid_ID" ColumnName="Bids_Bid_ID" />
@@ -2399,22 +2362,6 @@
             </EndProperty>
             <EndProperty Name="Bids">
               <ScalarProperty Name="Bid_ID" ColumnName="Bid_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Canopy_Column_Spacing_Length_Measurements" TypeName="LaneModel.Canopy_Column_Spacing_Length_Measurements" StoreEntitySet="Canopy_Column_Spacing_Length_Measurements">
-            <EndProperty Name="Canopies">
-              <ScalarProperty Name="Canopy_ID" ColumnName="Canopies_Canopy_ID" />
-            </EndProperty>
-            <EndProperty Name="Measurement_Lists">
-              <ScalarProperty Name="Measurement_List_ID" ColumnName="Measurement_Lists_Measurement_List_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Canopy_Column_Spacing_Width_Measurements" TypeName="LaneModel.Canopy_Column_Spacing_Width_Measurements" StoreEntitySet="Canopy_Column_Spacing_Width_Measurements">
-            <EndProperty Name="Canopies">
-              <ScalarProperty Name="Canopy_ID" ColumnName="Canopies_Canopy_ID" />
-            </EndProperty>
-            <EndProperty Name="Measurement_Lists">
-              <ScalarProperty Name="Measurement_List_ID" ColumnName="Measurement_Lists_Measurement_List_ID" />
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="Customer_Contact_Info" TypeName="LaneModel.Customer_Contact_Info" StoreEntitySet="Customer_Contact_Info">
@@ -2455,18 +2402,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="UserLoginProfiles">
-            <EntityTypeMapping TypeName="LaneModel.UserLoginProfiles">
-              <MappingFragment StoreEntitySet="UserProfile">
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2483,7 +2418,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

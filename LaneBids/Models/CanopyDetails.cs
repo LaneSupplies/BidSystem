@@ -10,7 +10,6 @@ namespace LaneBids.Models
     {
         public int CanopyId { get; set; }
         public int BidId { get; set; }
-        public string BidFunctionType { get; set; }
         public int Quantity { get; set; }
         public int StructureId { get; set; }
         public int SizeHeightFeet { get; set; }
@@ -58,6 +57,9 @@ namespace LaneBids.Models
         public string DrawingCode { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
+
+        public ColumnLength ColumnLengths { get; set; }
+        public ColumnLength ColumnWidths { get; set; }
         
         
         public IList<SelectListItem> FasciaTypeList { get; set; }
@@ -74,8 +76,6 @@ namespace LaneBids.Models
 
         public ColorModel FaciaColors { get; set; }
 
-        public IList<ColumnLength> ColumnLengths { get; set; }
-
-        public IList<ColumnLength> ColumnWidths { get; set; }
+        
     }
 }

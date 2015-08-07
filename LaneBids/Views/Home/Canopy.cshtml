@@ -9,8 +9,8 @@
 <h2>Canopy</h2>
 
 <form>
-    <input type="hidden" ng-model="canopyDetail.BidFunctionType" />
-    <input type="hidden" ng-model="canopyDetail.BidId" />
+    <input type="hidden" value="@Model.BidId" id="hiddenBidId" />
+    <input type="hidden" ng-model="canopyDetail.BidId" ng-value="@Model.BidId" />
     <div id="Quantity" class="divLabel">
         <label>Quantity:</label>
         <label>
@@ -158,10 +158,17 @@
         </div>
     </div>
     <br />
-    <div id="DeckInfo" class="divLabel">
+<div id="DeckInfo" class="divLabel">
+    <div class="divLabel">
         <label>Deck Style:</label>
-        @Html.DropDownListFor(d => d.DeckStyleId, Model.DeckStyleList, new { ng_model = "canopyDetail.DeckStyleId" })
+        @Html.DropDownListFor(d => d.DeckStyleId, Model.DeckStyleList, new {ng_model = "canopyDetail.DeckStyleId"})
     </div>
+    <div class="divLabel">
+        <label>Deck Color:</label>
+
+    </div>
+
+</div>
     <br />
 
     <div id="ImageFascia">

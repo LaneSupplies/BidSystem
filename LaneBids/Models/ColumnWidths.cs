@@ -8,12 +8,12 @@ namespace LaneBids.Models
 {
     public class ColumnWidths
     {
-        public IList<MeasurementWidth> measurements { get; set; }
+        public IEnumerable<MeasurementWidth> measurements { get; set; }
     }
 
     public class MeasurementWidth
     {
-        public int Feet { get; set; }
-        public int Inches { get; set; }
+        public int feet { get; set; }
+        public int inches { get; set; }
     }
 }

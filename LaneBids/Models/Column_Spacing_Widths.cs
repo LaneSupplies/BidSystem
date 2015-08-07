@@ -12,12 +12,13 @@ namespace LaneBids.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Image
+    public partial class Column_Spacing_Widths
     {
-        public int Image_ID { get; set; }
-        public Nullable<int> Color_ID { get; set; }
-        public string Image_Path { get; set; }
-        public Nullable<int> Created_By { get; set; }
-        public Nullable<System.DateTime> Create_Date { get; set; }
+        public int Column_Spacing_Width_ID { get; set; }
+        public int Canopy_ID { get; set; }
+        public int Measurement_ID { get; set; }
+        public int Sequence { get; set; }
+    
+        public virtual Measurement Measurement { get; set; }
     }
 }

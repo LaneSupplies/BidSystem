@@ -19,6 +19,7 @@ namespace LaneBids.Controllers
     {
         private BidServices _bidServices = new BidServices();
         private CanopyServices _canopyService = new CanopyServices();
+        private CommonServices _commonServices = new CommonServices();
 
         public ActionResult Index()
         {
@@ -93,52 +94,13 @@ namespace LaneBids.Controllers
         {
             var entities = new LaneEntities();
 
-            var clearanceHeight = new Measurement
-            {
-                Feet = canopyDetails.ClearanceFeet,
-                Inches = canopyDetails.ClearanceInches
-            };
-            entities.Measurements.Add(clearanceHeight);
-
-            var columnSize = new Measurement
-            {
-                Feet = canopyDetails.ColumnSizeFeet,
-                Inches = canopyDetails.ColumnSizeInches
-            };
-            entities.Measurements.Add(columnSize);
-
-            var deckThickness = new Measurement
-            {
-                Feet = canopyDetails.DeckThicknessFeet,
-                Inches = canopyDetails.DeckthicknessInches
-            };
-            entities.Measurements.Add(deckThickness);
-
-            var fasciaHeight = new Measurement
-            {
-                Feet = canopyDetails.FasciaHeightFeet,
-                Inches = canopyDetails.FasciaHeightInches
-            };
-            entities.Measurements.Add(fasciaHeight);
-
-            var sizeHeight = new Measurement
-            {
-                Feet = canopyDetails.SizeHeightFeet,
-                Inches = canopyDetails.SizeHeightInches
-            };
-            entities.Measurements.Add(sizeHeight);
-
-            var sizeWidth = new Measurement
-            {
-                Feet = canopyDetails.SizeWidthFeet,
-                Inches = canopyDetails.SizeWidthInches
-            };
-            entities.Measurements.Add(sizeWidth);
-
-            entities.SaveChanges();
-
+            var clearanceHeight = _commonServices.MeasurementId(canopyDetails.ClearanceFeet, canopyDetails.ClearanceInches);
+            var columnSize = _commonServices.MeasurementId(canopyDetails.ColumnSizeFeet, canopyDetails.ColumnSizeInches);
+            var deckThickness = _commonServices.MeasurementId(canopyDetails.DeckThicknessFeet, canopyDetails.DeckthicknessInches);
+            var fasciaHeight = _commonServices.MeasurementId(canopyDetails.FasciaHeightFeet, canopyDetails.FasciaHeightInches);
+            var sizeHeight = _commonServices.MeasurementId(canopyDetails.SizeHeightFeet, canopyDetails.SizeHeightInches);
+            var sizeWidth = _commonServices.MeasurementId(canopyDetails.SizeWidthFeet, canopyDetails.SizeWidthInches);
             
-
             var newCanopy = new Canopy
             {
                 Column_Quantity = canopyDetails.Quantity,
@@ -169,18 +131,40 @@ namespace LaneBids.Controllers
                 Total_Price = canopyDetails.TotalPrice,
                 Alt_Base_Price = canopyDetails.AltBasePrice,
                 Base_Price = canopyDetails.BasePrice,
-                Clearance_Height_Measure_ID = clearanceHeight.Measurement_ID,
-                Column_Size_Measure_ID = columnSize.Measurement_ID,
-                Deck_Thickness_Measure_ID = deckThickness.Measurement_ID,
-                Fascia_Height_Measure_ID = fasciaHeight.Measurement_ID,
-                Size_Length_Measure_ID = sizeHeight.Measurement_ID,
-                Size_Width_Measure_ID = sizeWidth.Measurement_ID
+                Clearance_Height_Measure_ID = clearanceHeight,
+                Column_Size_Measure_ID = columnSize,
+                Deck_Thickness_Measure_ID = deckThickness,
+                Fascia_Height_Measure_ID = fasciaHeight,
+                Size_Length_Measure_ID = sizeHeight,
+                Size_Width_Measure_ID = sizeWidth,
+                Created_By = WebSecurity.CurrentUserId,
+                Create_Date = DateTime.Now
             };
 
             entities.Canopies.Add(newCanopy);
             entities.SaveChanges();
 
-            //return RedirectToAction("BidSearch");
+            foreach (var measurement in canopyDetails.ColumnLengths.measurements)
+            {
+                var newColLength = new Column_Spacing_Lengths
+                {
+                    Measurement_ID = _commonServices.MeasurementId(measurement.feet, measurement.inches),
+                    Canopy_ID = newCanopy.Canopy_ID
+                };
+                entities.Column_Spacing_Lengths.Add(newColLength);
+            }
+
+            foreach (var measurement in canopyDetails.ColumnWidths.measurements)
+            {
+                var newColWidth = new Column_Spacing_Widths
+                {
+                    Measurement_ID = _commonServices.MeasurementId(measurement.feet, measurement.inches),
+                    Canopy_ID = newCanopy.Canopy_ID
+                };
+                entities.Column_Spacing_Widths.Add(newColWidth);
+            }
+
+            entities.SaveChanges();
             return Content("Success");
         }
 
