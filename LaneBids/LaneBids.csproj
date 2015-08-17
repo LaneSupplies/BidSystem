@@ -202,6 +202,7 @@
     <Compile Include="Models\BidSearch_Result.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BidViewModel.cs" />
     <Compile Include="Models\Bid_Notes.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
@@ -218,8 +219,8 @@
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ColorModel.cs" />
-    <Compile Include="Models\ColumnLength.cs" />
-    <Compile Include="Models\ColumnWidths.cs" />
+    <Compile Include="Models\ColumnLengthModel.cs" />
+    <Compile Include="Models\ColumnWidthsModel.cs" />
     <Compile Include="Models\Column_Spacing_Lengths.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
@@ -238,12 +239,12 @@
     <Compile Include="Models\Customer.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomerDetails.cs" />
+    <Compile Include="Models\CustomerDetailsModel.cs" />
     <Compile Include="Models\AddressModel.cs" />
-    <Compile Include="Models\AdminMaintenance.cs" />
-    <Compile Include="Models\BidDetails.cs" />
+    <Compile Include="Models\AdminMaintenanceModel.cs" />
+    <Compile Include="Models\BidDetailsModel.cs" />
     <Compile Include="Models\BidSearchModel.cs" />
-    <Compile Include="Models\CanopyDetails.cs" />
+    <Compile Include="Models\CanopyDetailsModel.cs" />
     <Compile Include="Models\Deck_Styles.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
@@ -280,22 +281,22 @@
     <Compile Include="Models\Measurement.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PhoneContacts.cs" />
-    <Compile Include="Models\SalesPersonDetails.cs" />
+    <Compile Include="Models\PhoneContactsModel.cs" />
+    <Compile Include="Models\SalesPersonDetailsModel.cs" />
     <Compile Include="Models\Sales_Persons.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Scope_Types.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ShippingInfoDetails.cs" />
+    <Compile Include="Models\ShippingInfoDetailsModel.cs" />
     <Compile Include="Models\Shipping_Info.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Site.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SiteDetails.cs" />
+    <Compile Include="Models\SiteDetailsModel.cs" />
     <Compile Include="Models\Structure_Types.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
@@ -1266,6 +1267,7 @@
     <Content Include="Views\Admin\EditorTemplates\TypeDataCodeModel.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Scripts\vendor\version.json" />
+    <Content Include="Views\Home\BidView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

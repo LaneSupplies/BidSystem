@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace LaneBids.Models
 {
-    public class CanopyDetails
+    public class CanopyDetailsModel
     {
         public int CanopyId { get; set; }
         public int BidId { get; set; }
@@ -25,16 +25,16 @@ namespace LaneBids.Models
         public int ColumnSpacingLength { get; set; }
         public string ColumnSpacingNotes { get; set; }
         public int DeckStyleId { get; set; }
-        public int DeckColorId { get; set; }
+        public int? DeckColorId { get; set; }
         public int DeckThicknessFeet { get; set; }
         public int DeckthicknessInches { get; set; }
         public int ImageId { get; set; }
-        public int ColorId { get; set; }
+        public int? ColorId { get; set; }
         public string ImagePath { get; set; }
         public int FasciaHeightFeet { get; set; }
         public int FasciaHeightInches { get; set; }
         public int FasciaTypeId { get; set; }
-        public int FasciaColorId { get; set; }
+        public int? FasciaColorId { get; set; }
         public int DrainageTypeId { get; set; }
         public string OtherNotes { get; set; }
         public string InclusionNotes { get; set; }
@@ -58,8 +58,8 @@ namespace LaneBids.Models
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
 
-        public ColumnLength ColumnLengths { get; set; }
-        public ColumnLength ColumnWidths { get; set; }
+        public ColumnLengthModel ColumnLengths { get; set; }
+        public ColumnLengthModel ColumnWidths { get; set; }
         
         
         public IList<SelectListItem> FasciaTypeList { get; set; }

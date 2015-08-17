@@ -6,12 +6,12 @@ using System.Web;
 
 namespace LaneBids.Models
 {
-    public class ColumnLength
+    public class ColumnWidthsModel
     {
-        public IEnumerable<MeasurementLength> measurements { get; set; }
+        public IEnumerable<MeasurementWidthModel> measurements { get; set; }
     }
 
-    public class MeasurementLength
+    public class MeasurementWidthModel
     {
         public int feet { get; set; }
         public int inches { get; set; }

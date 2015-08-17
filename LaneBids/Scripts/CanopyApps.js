@@ -64,8 +64,8 @@
 
         //Submit Form
         var onAddCanopyComplete = function (data) {
-            alert('Saved Canopy');
-            //window.location.href = "/Home/Index";
+            //alert('Saved Canopy');
+            window.location.href = "/Home/Index";
         };
 
         $scope.submitForm = function (canopyDetail) {

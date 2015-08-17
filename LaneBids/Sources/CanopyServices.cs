@@ -9,10 +9,10 @@ namespace LaneBids.Sources
 {
     public class CanopyServices
     {
-        public CanopyDetails CanopyLoadData(BidDetails bidDetails)
+        public CanopyDetailsModel CanopyLoadData(BidDetailsModel bidDetails)
         {
             var entities = new LaneEntities();
-            var canopyInfo = new CanopyDetails();
+            var canopyInfo = new CanopyDetailsModel();
             canopyInfo.BidId = bidDetails.BidId;
             canopyInfo.StructureId = bidDetails.StructureId;
 

@@ -1,4 +1,4 @@
-﻿@model LaneBids.Models.SalesPersonDetails
+﻿@model LaneBids.Models.SalesPersonDetailsModel
 
 <div class="divPartial">
     <div class="label divLabelOnly"><label>Sales Person:</label></div>
@@ -26,33 +26,34 @@
 
             <div class="modal-body">
                 <form novalidate>
+                    
                     <div class="divLabel">
                         <label>First Name</label>
-                        <input type="text" id="salesFirstName" ng-model="salesPerson.FirstName" />
+                        <input type="text" id="salesFirstName" ng-model="salesPerson.FirstName"/>
                     </div>
                     <div class="divLabel">
                         <label>Last Name</label>
-                        <input type="text" id="salesLastName" ng-model="salesPerson.LastName" />
+                        <input type="text" id="salesLastName" ng-model="salesPerson.LastName"/>
                     </div>
                     <div class="divLabel">
                         <label>Email</label>
-                        <input type="text" id="salesEmail" ng-model="salesPerson.Email" />
+                        <input type="text" id="salesEmail" ng-model="salesPerson.Email"/>
                     </div>
                     <div class="divLabel">
                         <label>Company Name</label>
-                        <input type="text" id="salesCompanyName" ng-model="salesPerson.CompanyName" />
+                        <input type="text" id="salesCompanyName" ng-model="salesPerson.CompanyName"/>
                     </div>
                     <div class="divLabel">
                         <label>Address Line 1</label>
-                        <input type="text" id="salesAddressLine1" ng-model="salesPerson.AddressLine1" />
+                        <input type="text" id="salesAddressLine1" ng-model="salesPerson.AddressLine1"/>
                     </div>
                     <div class="divLabel">
                         <label>Address Line 2</label>
-                        <input type="text" id="salesAddressLine2" ng-model="salesPerson.AddressLine2" />
+                        <input type="text" id="salesAddressLine2" ng-model="salesPerson.AddressLine2"/>
                     </div>
                     <div class="divLabel">
                         <label>City</label>
-                        <input type="text" id="salesCity" ng-model="salesPerson.City" />
+                        <input type="text" id="salesCity" ng-model="salesPerson.City"/>
                     </div>
                     <div class="divLabel">
                         <label>State</label>
@@ -60,11 +61,11 @@
                     </div>
                     <div class="divLabel">
                         <label>Zip</label>
-                        <input type="text" id="salesZip" ng-model="salesPerson.Zip" />
+                        <input type="text" id="salesZip" ng-model="salesPerson.Zip"/>
                     </div>
                     <div class="divLabel">
                         <select id="contactId" ng-model="salesPerson.ContactId" ng-options="contact.Id as contact.Name for contact in contacts"></select>
-                        <input type="text" id="salesZip" ng-model="salesPerson.PhoneNumber" />
+                        <input type="text" id="salesZip" ng-model="salesPerson.PhoneNumber"/>
                     </div>
                 </form>
             </div>

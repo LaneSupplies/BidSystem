@@ -28,14 +28,14 @@
         $("#ColorId").append(newOption);
     });
 
-    $("#AddFaciaColorLink").on("click", function () {
+    $("#AddFaciaColorLink").on("click", function() {
         $("#divAddColor").dialog({
             width: 300,
             height: 300
         });
     });
 
-    $("#SubmitColor").on("click", function () {
+    $("#SubmitColor").on("click", function() {
         $.ajax({
             url: "/Home/ColorAdd",
             type: "POST",
@@ -44,13 +44,13 @@
                 ColorName: $("#FaciaColorName").val(),
                 ColorText: $("#FaciaColorText").val()
             }
-        }).success(function (response) {
+        }).success(function(response) {
             //alert("Added Customer: " + response);
             var value = response.split('|');
-            var newOption = "<option value='" + value[0] +"' selected >" + value[1] + "</option>";
+            var newOption = "<option value='" + value[0] + "' selected >" + value[1] + "</option>";
             $("#ColorId").append(newOption);
             $("#divAddColor").dialog("close");
-        }).error(function (xhr, textStatus, errorThrown) {
+        }).error(function(xhr, textStatus, errorThrown) {
             alert("Failure to add color (Response: " + xhr.responseText + " | Status: " + textStatus + " | ErrorMessage: " + errorThrown + ")");
         });
 

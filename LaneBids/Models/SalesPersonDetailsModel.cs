@@ -6,13 +6,11 @@ using System.Web.Mvc;
 
 namespace LaneBids.Models
 {
-    public class CustomerDetails
+    public class SalesPersonDetailsModel
     {
-        public System.Guid CustomerId { get; set; }
+        public Int32 SalesPersonId { get; set; }
         public String FirstName { get; set; }
         public String LastName { get; set; }
-        public String Email { get; set; }
-        public String CompanyName { get; set; }
         public String AddressLine1 { get; set; }
         public String AddressLine2 { get; set; }
         public String City { get; set; }
@@ -21,10 +19,9 @@ namespace LaneBids.Models
         public String Country { get; set; }
         public String PhoneNumber { get; set; }
         public Int32 ContactId { get; set; }
-
         public AddressModel Address { get; set; }
-        public PhoneContacts PhoneContacts { get; set; }
+        public PhoneContactsModel PhoneContacts { get; set; }
 
-        public IList<SelectListItem> CustomerList { get; set; } 
+        public IList<SelectListItem> SalesPersonList { get; set; } 
     }
 }

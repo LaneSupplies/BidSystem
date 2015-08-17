@@ -33,14 +33,14 @@ namespace LaneBids.Controllers
         {
             ViewBag.Title = "Bid";
 
-            var baseBidInfo = _bidServices.BidDetailInfo(new BidDetails());
+            var baseBidInfo = _bidServices.BidDetailInfo(new BidDetailsModel());
             baseBidInfo.StructureId = _bidServices.GetCanopyTypeId(type);
             
             return View(baseBidInfo);
         }
 
         [HttpPost]
-        public ActionResult Canopy(BidDetails bidDetails)
+        public ActionResult Canopy(BidDetailsModel bidDetails)
         {
             ViewBag.Title = "Canopy";
             if (!ModelState.IsValid)
@@ -90,7 +90,7 @@ namespace LaneBids.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsertCanopy(CanopyDetails canopyDetails)
+        public ActionResult InsertCanopy(CanopyDetailsModel canopyDetails)
         {
             var entities = new LaneEntities();
 
@@ -100,9 +100,11 @@ namespace LaneBids.Controllers
             var fasciaHeight = _commonServices.MeasurementId(canopyDetails.FasciaHeightFeet, canopyDetails.FasciaHeightInches);
             var sizeHeight = _commonServices.MeasurementId(canopyDetails.SizeHeightFeet, canopyDetails.SizeHeightInches);
             var sizeWidth = _commonServices.MeasurementId(canopyDetails.SizeWidthFeet, canopyDetails.SizeWidthInches);
-            
+            var bids = entities.Bids.Where(x => x.Bid_ID == canopyDetails.BidId).ToList();
+
             var newCanopy = new Canopy
             {
+                Bids = bids,
                 Column_Quantity = canopyDetails.Quantity,
                 Column_Type_ID = canopyDetails.ColumnTypeId,
                 Deck_Color_ID = canopyDetails.DeckColorId,
@@ -212,7 +214,7 @@ namespace LaneBids.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddCustomer(CustomerDetails customer)
+        public ActionResult AddCustomer(CustomerDetailsModel customer)
         {
             var entities = new LaneEntities();
             var addAddress = new Address
@@ -253,7 +255,7 @@ namespace LaneBids.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddSalesPerson(SalesPersonDetails salesPerson)
+        public ActionResult AddSalesPerson(SalesPersonDetailsModel salesPerson)
         {
             var entities = new LaneEntities();
             var addAddress = new Address
@@ -292,7 +294,7 @@ namespace LaneBids.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddSite(SiteDetails site)
+        public ActionResult AddSite(SiteDetailsModel site)
         {
             var entities = new LaneEntities();
             var addAddress = new Address();
@@ -316,7 +318,7 @@ namespace LaneBids.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddShipping(ShippingInfoDetails shippingInfo)
+        public ActionResult AddShipping(ShippingInfoDetailsModel shippingInfo)
         {
             var entities = new LaneEntities();
             var addAddress = new Address();

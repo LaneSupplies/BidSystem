@@ -18,7 +18,7 @@ namespace LaneBids.Sources
             return bidType != null ? bidType.Structure_Type_ID : 0;
         }
 
-        public BidDetails BidDetailInfo(BidDetails bid)
+        public BidDetailsModel BidDetailInfo(BidDetailsModel bid)
         {
             bid.StructureList = _entities.Structure_Types.ToList().Select(x => new SelectListItem
             {
@@ -76,10 +76,10 @@ namespace LaneBids.Sources
             });
 
             //Customer Data
-            bid.AddCustomerInfo = new CustomerDetails
+            bid.AddCustomerInfo = new CustomerDetailsModel
             {
                 Address = new AddressModel {StateList = AddressService.States},
-                PhoneContacts = new PhoneContacts {ContactTypeList = contactTypeList},
+                PhoneContacts = new PhoneContactsModel {ContactTypeList = contactTypeList},
                 CustomerList = _entities.Customers.OrderBy(x => x.Last_Name).ToList().Select(x => new SelectListItem
                 {
                     Value = x.Customer_ID.ToString(),
@@ -88,10 +88,10 @@ namespace LaneBids.Sources
             };
 
             //Sales Person Data
-            bid.AddSalesPersonDetails = new SalesPersonDetails
+            bid.AddSalesPersonDetails = new SalesPersonDetailsModel
             {
                 Address = new AddressModel {StateList = AddressService.States},
-                PhoneContacts = new PhoneContacts {ContactTypeList = contactTypeList},
+                PhoneContacts = new PhoneContactsModel {ContactTypeList = contactTypeList},
                 SalesPersonList = _entities.Sales_Persons.ToList().Select(x => new SelectListItem
                 {
                     Value = x.Sales_Person_ID.ToString(),
@@ -100,7 +100,7 @@ namespace LaneBids.Sources
             };
 
             //Sites
-            bid.AddSiteDetails = new SiteDetails
+            bid.AddSiteDetails = new SiteDetailsModel
             {
                 Address = new AddressModel {StateList = AddressService.States},
                 SiteList = _entities.Sites.ToList().Select(x => new SelectListItem
@@ -111,7 +111,7 @@ namespace LaneBids.Sources
             };
 
             //Shipping Info
-            bid.AddShippingInfoDetails = new ShippingInfoDetails
+            bid.AddShippingInfoDetails = new ShippingInfoDetailsModel
             {
                 StateList = AddressService.States,
                 ShippingList = _entities.Shipping_Info.ToList().Select(x => new SelectListItem

@@ -37,7 +37,7 @@
             $("#JobTypeId").append(defaultJobType);
             $("#ScopeTypeId").append(defaultScopeType);
             $("#BidTypeId").append(defaultBidType);
-            //$("#CustomerId").append(defaultCustomer);
+            $("#CustomerId").append(defaultCustomer);
             $("#SalesPersonId").append(defaultSalesPerson);
             $("#ShippingId").append(defaultShipping);
             $("#SiteId").append(defaultSite);

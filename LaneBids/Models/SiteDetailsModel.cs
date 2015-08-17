@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace LaneBids.Models
 {
-    public class SiteDetails
+    public class SiteDetailsModel
     {
         public Int32 SiteId { get; set; }
         public String SiteName { get; set; }

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace LaneBids.Models
 {
-    public class PhoneContacts
+    public class PhoneContactsModel
     {
         public String PhoneNumber { get; set; }
         public Int32 ContactId { get; set; }

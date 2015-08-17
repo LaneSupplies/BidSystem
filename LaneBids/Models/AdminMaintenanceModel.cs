@@ -6,7 +6,7 @@ using LaneBids.Models.Admin;
 
 namespace LaneBids.Models
 {
-    public class AdminMaintenance
+    public class AdminMaintenanceModel
     {
         public IEnumerable<object> StructureTypeList { get; set; } 
         public IEnumerable<object> BidTypesList { get; set; }
