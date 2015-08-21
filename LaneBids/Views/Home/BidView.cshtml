@@ -1,4 +1,4 @@
-﻿
+﻿@model LaneBids.Models.BidViewModel
 @{
     ViewBag.Title = "BidView";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,3 +6,97 @@
 
 <h2>Bid</h2>
 
+<div>
+    <fieldset ng-init="addDefaultsSelectBidPage()">
+        @Html.HiddenFor(m => m.Bid.BidId)
+        
+        <div class="divLabel">
+            <label>Revision Number:</label>
+            @Model.Bid.RevisionNumber
+        </div>
+
+        <div class="divLabel">
+            <label>Structure Type:</label>
+            @Model.Bid.SelectedStructureName
+            @Html.HiddenFor(m => m.Bid.StructureId)
+        </div>
+
+        <div class="divLabel">
+            <label>Bid Status:</label>
+            @Model.Bid.SelectedBidStatusName
+            @Html.HiddenFor(m => m.Bid.BidStatusId)
+        </div>
+
+        <div class="divLabel">
+            <label>Job Type:</label>
+            @Model.Bid.SelectedJobTypeName
+            @Html.HiddenFor(m => m.Bid.JobTypeId)
+        </div>
+
+        <div class="divLabel">
+            <label>Scope Types:</label>
+            @Model.Bid.SelectedScopeTypeName
+            @Html.HiddenFor(m => m.Bid.ScopeTypeId)
+        </div>
+
+        <div class="divLabel">
+            <label>Bid Types:</label>
+            @Model.Bid.SelectedBidTypeName
+            @Html.HiddenFor(m => m.Bid.BidTypeId)
+        </div>
+
+        <div class="divLabel">
+            @Model.Bid.Customer.First_Name @Model.Bid.Customer.Last_Name
+            @Html.HiddenFor(m => m.Bid.CustomerId)
+        </div>
+
+        <div class="divLabel">
+            @Model.Bid.SelectedSalesPerson.FirstName @Model.Bid.SelectedSalesPerson.LastName
+            @Html.HiddenFor(m => m.Bid.SelectedSalesPerson.SalesPersonId)
+        </div>
+
+        <div class="divLabel">
+            @Model.Bid.SelectedSite
+            @Html.HiddenFor(m => m.Bid.SiteId)
+        </div>
+
+        <div class="divLabel">
+            @Model.Bid.SelectedShippingAddress.AddressId
+            @Html.HiddenFor(m => m.Bid.ShippingId)
+        </div>
+
+        <div class="divLabel">
+            <label>Bid Notes:</label>
+            @Model.Bid.BidNotesText
+        </div>
+
+        <div class="divLabel">
+            <label>Create By:</label>
+            @if (String.IsNullOrEmpty(Model.CreatedBy))
+            {
+                @User.Identity.Name
+            }
+            else
+            {
+                @Model.CreatedBy
+            }
+        </div>
+
+        <div class="divLabel">
+            <label>Last Modfied By:</label>
+            @if (String.IsNullOrEmpty(Model.CreatedBy))
+            {
+                @User.Identity.Name
+            }
+            else
+            {
+                @Model.ModifiedBy
+            }
+        </div>
+
+        <br />
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+</div>
