@@ -68,32 +68,12 @@
         <div class="divLabel">
             <label>Bid Notes:</label>
             @Model.Bid.BidNotesText
+
+
+
         </div>
 
-        <div class="divLabel">
-            <label>Create By:</label>
-            @if (String.IsNullOrEmpty(Model.CreatedBy))
-            {
-                @User.Identity.Name
-            }
-            else
-            {
-                @Model.CreatedBy
-            }
-        </div>
-
-        <div class="divLabel">
-            <label>Last Modfied By:</label>
-            @if (String.IsNullOrEmpty(Model.CreatedBy))
-            {
-                @User.Identity.Name
-            }
-            else
-            {
-                @Model.ModifiedBy
-            }
-        </div>
-
+        
         <br />
         <p>
             <input type="submit" value="Create" />
