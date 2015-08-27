@@ -18,19 +18,21 @@ namespace LaneBids.Models
         public Sales_Persons()
         {
             this.Bids = new HashSet<Bid>();
-            this.Contact_Info = new HashSet<Contact_Info>();
+            this.Contact_Text = new HashSet<Contact_Text>();
         }
     
-        public int Sales_Person_ID { get; set; }
+        public System.Guid Sales_Person_ID { get; set; }
+        public string Sales_Person_Code { get; set; }
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
-        public Nullable<int> Address_ID { get; set; }
+        public Nullable<System.Guid> Address_ID { get; set; }
         public Nullable<int> Created_By { get; set; }
         public Nullable<System.DateTime> Create_Date { get; set; }
     
+        public virtual Address Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bid> Bids { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contact_Info> Contact_Info { get; set; }
+        public virtual ICollection<Contact_Text> Contact_Text { get; set; }
     }
 }

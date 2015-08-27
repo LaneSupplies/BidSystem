@@ -25,13 +25,18 @@ namespace LaneBids.Models
             this.Canopies5 = new HashSet<Canopy>();
             this.Canopies6 = new HashSet<Canopy>();
             this.Canopies7 = new HashSet<Canopy>();
+            this.Canopies8 = new HashSet<Canopy>();
+            this.Canopies9 = new HashSet<Canopy>();
+            this.Canopies10 = new HashSet<Canopy>();
+            this.Canopies11 = new HashSet<Canopy>();
             this.Column_Spacing_Lengths = new HashSet<Column_Spacing_Lengths>();
             this.Column_Spacing_Widths = new HashSet<Column_Spacing_Widths>();
         }
     
-        public int Measurement_ID { get; set; }
+        public System.Guid Measurement_ID { get; set; }
         public Nullable<int> Feet { get; set; }
         public Nullable<int> Inches { get; set; }
+        public Nullable<int> Fractions_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Canopy> Canopies { get; set; }
@@ -50,8 +55,17 @@ namespace LaneBids.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Canopy> Canopies7 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Canopy> Canopies8 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Canopy> Canopies9 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Canopy> Canopies10 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Canopy> Canopies11 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Column_Spacing_Lengths> Column_Spacing_Lengths { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Column_Spacing_Widths> Column_Spacing_Widths { get; set; }
+        public virtual Fraction Fraction { get; set; }
     }
 }

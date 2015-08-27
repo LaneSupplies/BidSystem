@@ -12,25 +12,19 @@ namespace LaneBids.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Contact_Info
+    public partial class Company
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Contact_Info()
+        public Company()
         {
-            this.Customers = new HashSet<Customer>();
-            this.Sales_Persons = new HashSet<Sales_Persons>();
+            this.Bids = new HashSet<Bid>();
         }
     
-        public int Contact_Info_ID { get; set; }
-        public int Contact_Type_ID { get; set; }
-        public string Contact_Text { get; set; }
-        public Nullable<int> Created_By { get; set; }
-        public System.DateTime Create_Date { get; set; }
+        public System.Guid Company_ID { get; set; }
+        public string Company_Code { get; set; }
+        public string CompanyName { get; set; }
     
-        public virtual Contact_Types Contact_Types { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sales_Persons> Sales_Persons { get; set; }
+        public virtual ICollection<Bid> Bids { get; set; }
     }
 }

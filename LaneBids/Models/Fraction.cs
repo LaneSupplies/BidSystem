@@ -12,23 +12,18 @@ namespace LaneBids.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Color
+    public partial class Fraction
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Color()
+        public Fraction()
         {
-            this.Canopies = new HashSet<Canopy>();
-            this.Canopies1 = new HashSet<Canopy>();
+            this.Measurements = new HashSet<Measurement>();
         }
     
-        public int Color_ID { get; set; }
+        public int Fractions_ID { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Created_By { get; set; }
-        public Nullable<System.DateTime> Create_Date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Canopy> Canopies { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Canopy> Canopies1 { get; set; }
+        public virtual ICollection<Measurement> Measurements { get; set; }
     }
 }

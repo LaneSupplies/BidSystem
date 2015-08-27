@@ -14,10 +14,21 @@ namespace LaneBids.Models
     
     public partial class Image
     {
-        public int Image_ID { get; set; }
-        public Nullable<int> Color_ID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Image()
+        {
+            this.Canopies = new HashSet<Canopy>();
+            this.Canopies1 = new HashSet<Canopy>();
+        }
+    
+        public System.Guid Image_ID { get; set; }
         public string Image_Path { get; set; }
         public Nullable<int> Created_By { get; set; }
         public Nullable<System.DateTime> Create_Date { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Canopy> Canopies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Canopy> Canopies1 { get; set; }
     }
 }

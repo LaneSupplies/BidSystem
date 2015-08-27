@@ -17,7 +17,7 @@ namespace LaneBids.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Contact_Types()
         {
-            this.Contact_Info = new HashSet<Contact_Info>();
+            this.Contact_Text = new HashSet<Contact_Text>();
         }
     
         public int Contact_Type_ID { get; set; }
@@ -26,6 +26,6 @@ namespace LaneBids.Models
         public Nullable<System.DateTime> Create_Date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contact_Info> Contact_Info { get; set; }
+        public virtual ICollection<Contact_Text> Contact_Text { get; set; }
     }
 }

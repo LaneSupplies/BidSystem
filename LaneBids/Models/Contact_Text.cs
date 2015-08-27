@@ -12,23 +12,25 @@ namespace LaneBids.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Color
+    public partial class Contact_Text
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Color()
+        public Contact_Text()
         {
-            this.Canopies = new HashSet<Canopy>();
-            this.Canopies1 = new HashSet<Canopy>();
+            this.Customers = new HashSet<Customer>();
+            this.Sales_Persons = new HashSet<Sales_Persons>();
         }
     
-        public int Color_ID { get; set; }
-        public string Name { get; set; }
+        public System.Guid Contact_Text_ID { get; set; }
+        public int Contact_Type_ID { get; set; }
+        public string Text { get; set; }
         public Nullable<int> Created_By { get; set; }
-        public Nullable<System.DateTime> Create_Date { get; set; }
+        public System.DateTime Create_Date { get; set; }
     
+        public virtual Contact_Types Contact_Types { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Canopy> Canopies { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Canopy> Canopies1 { get; set; }
+        public virtual ICollection<Sales_Persons> Sales_Persons { get; set; }
     }
 }

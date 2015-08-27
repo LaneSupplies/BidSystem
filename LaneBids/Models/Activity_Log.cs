@@ -15,7 +15,7 @@ namespace LaneBids.Models
     public partial class Activity_Log
     {
         public System.Guid Activity_Log_ID { get; set; }
-        public Nullable<System.DateTime> Activity_Log_Date { get; set; }
+        public System.DateTime Activity_Log_Date { get; set; }
         public Nullable<int> User_ID { get; set; }
         public string Page { get; set; }
         public string Action { get; set; }

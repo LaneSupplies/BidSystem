@@ -22,9 +22,9 @@ namespace LaneBids.Models
             this.Bids2 = new HashSet<Bid>();
         }
     
-        public int Shipping_ID { get; set; }
+        public System.Guid Shipping_ID { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Address_ID { get; set; }
+        public Nullable<System.Guid> Address_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bid> Bids { get; set; }

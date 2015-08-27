@@ -4,13 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="LaneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LaneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity_Log">
           <Key>
             <PropertyRef Name="Activity_Log_ID" />
           </Key>
           <Property Name="Activity_Log_ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Activity_Log_Date" Type="datetime" />
+          <Property Name="Activity_Log_Date" Type="datetime" Nullable="false" />
           <Property Name="User_ID" Type="int" />
           <Property Name="Page" Type="varchar" MaxLength="40" />
           <Property Name="Action" Type="varchar" MaxLength="40" />
@@ -20,7 +20,7 @@
           <Key>
             <PropertyRef Name="Address_ID" />
           </Key>
-          <Property Name="Address_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Address_Line1" Type="varchar" MaxLength="150" />
           <Property Name="Address_Line2" Type="varchar" MaxLength="150" />
           <Property Name="City" Type="varchar" MaxLength="100" />
@@ -30,18 +30,18 @@
         </EntityType>
         <EntityType Name="Bid_Canopies">
           <Key>
-            <PropertyRef Name="Bids_Bid_ID" />
-            <PropertyRef Name="Canopies_Canopy_ID" />
+            <PropertyRef Name="Bid_ID" />
+            <PropertyRef Name="Canopy_ID" />
           </Key>
-          <Property Name="Bids_Bid_ID" Type="int" Nullable="false" />
-          <Property Name="Canopies_Canopy_ID" Type="int" Nullable="false" />
+          <Property Name="Bid_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Canopy_ID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Bid_Notes">
           <Key>
             <PropertyRef Name="Bid_Note_ID" />
           </Key>
-          <Property Name="Bid_Note_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Notes" Type="varchar" MaxLength="80" />
+          <Property Name="Bid_Note_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Notes" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
         </EntityType>
@@ -50,7 +50,7 @@
             <PropertyRef Name="Bid_Status_ID" />
           </Key>
           <Property Name="Bid_Status_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Status" Type="varchar" MaxLength="40" />
+          <Property Name="Status" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
         </EntityType>
@@ -59,16 +59,16 @@
             <PropertyRef Name="Bid_ID" />
             <PropertyRef Name="Bid_Note_ID" />
           </Key>
-          <Property Name="Bid_ID" Type="int" Nullable="false" />
-          <Property Name="Bid_Note_ID" Type="int" Nullable="false" />
+          <Property Name="Bid_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Bid_Note_ID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Bid_Types">
           <Key>
             <PropertyRef Name="Bid_Type_ID" />
           </Key>
           <Property Name="Bid_Type_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="40" />
-          <Property Name="Code" Type="varchar" MaxLength="5" />
+          <Property Name="Name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
         </EntityType>
@@ -76,22 +76,23 @@
           <Key>
             <PropertyRef Name="Bid_ID" />
           </Key>
-          <Property Name="Bid_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bid_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Revision_Number" Type="int" Nullable="false" />
+          <Property Name="Bid_Code" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Structure_Type_ID" Type="int" Nullable="false" />
           <Property Name="Bid_Status_ID" Type="int" Nullable="false" />
           <Property Name="Job_Type_ID" Type="int" Nullable="false" />
           <Property Name="Scope_Type_ID" Type="int" Nullable="false" />
           <Property Name="Bid_Type_ID" Type="int" Nullable="false" />
-          <Property Name="Customer_ID" Type="uniqueidentifier" />
-          <Property Name="Sales_Person_ID" Type="int" Nullable="false" />
-          <Property Name="Site_ID" Type="int" />
-          <Property Name="Shipping_ID" Type="int" Nullable="false" />
-          <Property Name="Special_Shipping_ID" Type="int" />
-          <Property Name="Alternate_Shipping_ID" Type="int" />
-          <Property Name="Bid_Note_ID" Type="int" Nullable="false" />
-          <Property Name="Canopy_ID" Type="int" Nullable="false" />
-          <Property Name="Created_By" Type="int" Nullable="false" />
+          <Property Name="Company_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Customer_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Customer_Contact_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Sales_Person_ID" Type="uniqueidentifier" />
+          <Property Name="Site_ID" Type="uniqueidentifier" />
+          <Property Name="Shipping_ID" Type="uniqueidentifier" />
+          <Property Name="Special_Shipping_ID" Type="uniqueidentifier" />
+          <Property Name="Alternate_Shipping_ID" Type="uniqueidentifier" />
+          <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
           <Property Name="Modifed_By" Type="int" />
           <Property Name="Modified_Date" Type="datetime" />
@@ -100,28 +101,35 @@
           <Key>
             <PropertyRef Name="Canopy_ID" />
           </Key>
-          <Property Name="Canopy_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Canopy_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Canopy_Code" Type="varchar" MaxLength="10" />
           <Property Name="Quantity" Type="int" />
-          <Property Name="Size_Width_Measure_ID" Type="int" Nullable="false" />
-          <Property Name="Size_Length_Measure_ID" Type="int" Nullable="false" />
-          <Property Name="Clearance_Height_Measure_ID" Type="int" Nullable="false" />
+          <Property Name="Size_Width_Measurement_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Size_Length_Measurement_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Clearance_Height_Measurement_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Column_Quantity" Type="int" />
-          <Property Name="Column_Type_ID" Type="int" Nullable="false" />
-          <Property Name="Column_Size_Measure_ID" Type="int" Nullable="false" />
+          <Property Name="Column_Type_ID" Type="int" />
+          <Property Name="Column_Type_Other" Type="varchar" MaxLength="50" />
+          <Property Name="Column_Size_Length_Measurement_ID" Type="uniqueidentifier" />
+          <Property Name="Column_Size_Width_Measurement_ID" Type="uniqueidentifier" />
+          <Property Name="Column_Size_Thickness_Measurement_ID" Type="uniqueidentifier" />
+          <Property Name="Column_Size_OD_Measurement_ID" Type="uniqueidentifier" />
+          <Property Name="Column_Size_Other" Type="varchar" MaxLength="50" />
           <Property Name="Column_Spacing_Notes" Type="varchar" MaxLength="1000" />
-          <Property Name="Deck_Style_ID" Type="int" Nullable="false" />
+          <Property Name="Deck_Style_ID" Type="int" />
+          <Property Name="Deck_Type_ID" Type="int" />
           <Property Name="Deck_Color_ID" Type="int" />
-          <Property Name="Deck_Thickness_Measure_ID" Type="int" Nullable="false" />
-          <Property Name="Image_ID" Type="int" Nullable="false" />
-          <Property Name="Facia_Image" Type="varchar" MaxLength="100" />
-          <Property Name="Fascia_Height_Measure_ID" Type="int" />
-          <Property Name="Fascia_Type_ID" Type="int" Nullable="false" />
+          <Property Name="Deck_Thickness_Measurement_ID" Type="uniqueidentifier" />
+          <Property Name="Deck_Gauge" Type="int" />
+          <Property Name="Image_ID" Type="uniqueidentifier" />
+          <Property Name="Fascia_Image_ID" Type="uniqueidentifier" />
+          <Property Name="Fascia_Height_Measurement_ID" Type="uniqueidentifier" />
+          <Property Name="Fascia_Type_ID" Type="int" />
           <Property Name="Fascia_Color_ID" Type="int" />
           <Property Name="Fascia_Info" Type="varchar" MaxLength="2000" />
-          <Property Name="Facia_Thickness" Type="int" />
-          <Property Name="Drainage_Type_ID" Type="int" Nullable="false" />
-          <Property Name="Drainage_Measure_ID" Type="int" />
-          <Property Name="Gutter_Type_ID" Type="int" />
+          <Property Name="Facia_Thickness_Measurement_ID" Type="uniqueidentifier" />
+          <Property Name="Drainage_Type_ID" Type="int" />
+          <Property Name="Drainage_Measurement_ID" Type="uniqueidentifier" />
           <Property Name="Other_Notes" Type="varchar" MaxLength="2000" />
           <Property Name="Inclusion_Notes" Type="varchar" MaxLength="2000" />
           <Property Name="Exclusion_Notes" Type="varchar" MaxLength="2000" />
@@ -140,7 +148,14 @@
           <Property Name="Design_Load_Snow" Type="varchar" MaxLength="1000" />
           <Property Name="Design_Load_Spec" Type="varchar" MaxLength="1000" />
           <Property Name="Design_Load_Notes" Type="varchar" MaxLength="1000" />
-          <Property Name="Drawing_Sealed" Type="varchar" MaxLength="1" />
+          <Property Name="Drawing_Sealed" Type="bit" />
+          <Property Name="Design_Specs" Type="varchar" MaxLength="1000" />
+          <Property Name="Has_Perimeter_Gutters" Type="bit" />
+          <Property Name="Has_Center_Gutters" Type="bit" />
+          <Property Name="Has_Internal_Gutters" Type="bit" />
+          <Property Name="Has_External_Gutters" Type="bit" />
+          <Property Name="Has_Scruppers" Type="bit" />
+          <Property Name="Gutter_Notes" Type="varchar" MaxLength="1000" />
           <Property Name="Drawing_State" Type="varchar" MaxLength="20" />
           <Property Name="Drawing_Code" Type="varchar" MaxLength="20" />
           <Property Name="Created_By" Type="int" />
@@ -154,7 +169,6 @@
           </Key>
           <Property Name="Color_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="40" />
-          <Property Name="ColorText" Type="varchar" MaxLength="10" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
         </EntityType>
@@ -162,18 +176,18 @@
           <Key>
             <PropertyRef Name="Column_Spacing_Length_ID" />
           </Key>
-          <Property Name="Column_Spacing_Length_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Column_Spacing_Length_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Canopy_ID" Type="int" Nullable="false" />
-          <Property Name="Measurement_ID" Type="int" Nullable="false" />
+          <Property Name="Measurement_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Sequence" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Column_Spacing_Widths">
           <Key>
             <PropertyRef Name="Column_Spacing_Width_ID" />
           </Key>
-          <Property Name="Column_Spacing_Width_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Column_Spacing_Width_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Canopy_ID" Type="int" Nullable="false" />
-          <Property Name="Measurement_ID" Type="int" Nullable="false" />
+          <Property Name="Measurement_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Sequence" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Column_Types">
@@ -185,13 +199,21 @@
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
         </EntityType>
-        <EntityType Name="Contact_Info">
+        <EntityType Name="Company">
           <Key>
-            <PropertyRef Name="Contact_Info_ID" />
+            <PropertyRef Name="Company_ID" />
           </Key>
-          <Property Name="Contact_Info_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Company_Code" Type="varchar" MaxLength="10" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contact_Text">
+          <Key>
+            <PropertyRef Name="Contact_Text_ID" />
+          </Key>
+          <Property Name="Contact_Text_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Contact_Type_ID" Type="int" Nullable="false" />
-          <Property Name="Contact_Text" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Text" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" Nullable="false" />
         </EntityType>
@@ -209,27 +231,46 @@
             <PropertyRef Name="Customer_ID" />
           </Key>
           <Property Name="Customer_ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="First_Name" Type="varchar" MaxLength="75" />
-          <Property Name="Last_Name" Type="varchar" MaxLength="75" />
-          <Property Name="Email" Type="varchar" MaxLength="75" />
-          <Property Name="Company_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Address_ID" Type="int" />
+          <Property Name="Company_ID" Type="int" Nullable="false" />
+          <Property Name="Bid_Code" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Sales_Code" Type="varchar" MaxLength="7" />
+          <Property Name="Company_Region_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Address_ID" Type="uniqueidentifier" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
         </EntityType>
-        <EntityType Name="Customer_Contact_Info">
+        <EntityType Name="Customer_Contact">
           <Key>
-            <PropertyRef Name="Customer_ID" />
-            <PropertyRef Name="Contact_Info_ID" />
+            <PropertyRef Name="Customer_Contact_ID" />
           </Key>
+          <Property Name="Customer_Contact_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Customer_ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Contact_Info_ID" Type="int" Nullable="false" />
+          <Property Name="First_Name" Type="varchar" MaxLength="75" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="75" />
+          <Property Name="Email" Type="varchar" MaxLength="75" />
+        </EntityType>
+        <EntityType Name="Customer_Contact_Text">
+          <Key>
+            <PropertyRef Name="Customer_Contact_ID" />
+            <PropertyRef Name="Contact_Text_ID" />
+          </Key>
+          <Property Name="Customer_Contact_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Contact_Text_ID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Deck_Styles">
           <Key>
             <PropertyRef Name="Deck_Style_ID" />
           </Key>
           <Property Name="Deck_Style_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="40" />
+          <Property Name="Created_By" Type="int" />
+          <Property Name="Create_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Deck_Types">
+          <Key>
+            <PropertyRef Name="Deck_Type_ID" />
+          </Key>
+          <Property Name="Deck_Type_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="40" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
@@ -252,21 +293,18 @@
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
         </EntityType>
-        <EntityType Name="Gutter_Types">
+        <EntityType Name="Fractions">
           <Key>
-            <PropertyRef Name="Gutter_Type_ID" />
+            <PropertyRef Name="Fractions_ID" />
           </Key>
-          <Property Name="Gutter_Type_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Created_By" Type="int" />
-          <Property Name="Create_Date" Type="datetime" />
+          <Property Name="Fractions_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="Images">
           <Key>
             <PropertyRef Name="Image_ID" />
           </Key>
-          <Property Name="Image_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Color_ID" Type="int" />
+          <Property Name="Image_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Image_Path" Type="varchar" MaxLength="100" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
@@ -285,26 +323,28 @@
           <Key>
             <PropertyRef Name="Measurement_ID" />
           </Key>
-          <Property Name="Measurement_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Measurement_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Feet" Type="int" />
           <Property Name="Inches" Type="int" />
+          <Property Name="Fractions_ID" Type="int" />
         </EntityType>
-        <EntityType Name="Sales_Person_Contact_Info">
+        <EntityType Name="Sales_Person_Contact_Text">
           <Key>
             <PropertyRef Name="Sales_Person_ID" />
-            <PropertyRef Name="Contact_Info_ID" />
+            <PropertyRef Name="Contact_Text_ID" />
           </Key>
-          <Property Name="Sales_Person_ID" Type="int" Nullable="false" />
-          <Property Name="Contact_Info_ID" Type="int" Nullable="false" />
+          <Property Name="Sales_Person_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Contact_Text_ID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Sales_Persons">
           <Key>
             <PropertyRef Name="Sales_Person_ID" />
           </Key>
-          <Property Name="Sales_Person_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sales_Person_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Sales_Person_Code" Type="varchar" MaxLength="5" />
           <Property Name="First_Name" Type="varchar" MaxLength="75" />
           <Property Name="Last_Name" Type="varchar" MaxLength="75" />
-          <Property Name="Address_ID" Type="int" />
+          <Property Name="Address_ID" Type="uniqueidentifier" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
         </EntityType>
@@ -322,17 +362,22 @@
           <Key>
             <PropertyRef Name="Shipping_ID" />
           </Key>
-          <Property Name="Shipping_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Shipping_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="75" />
-          <Property Name="Address_ID" Type="int" />
+          <Property Name="Address_ID" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="Sites">
           <Key>
             <PropertyRef Name="Site_ID" />
           </Key>
-          <Property Name="Site_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="75" />
-          <Property Name="Address_ID" Type="int" />
+          <Property Name="Site_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Main_Name" Type="varchar" MaxLength="5" />
+          <Property Name="Sub_Name" Type="varchar" MaxLength="5" />
+          <Property Name="Main_Name_Prefix" Type="varchar" MaxLength="3" />
+          <Property Name="Main_Name_Suffix" Type="varchar" MaxLength="3" />
+          <Property Name="Sub_Name_Prefix" Type="varchar" MaxLength="3" />
+          <Property Name="Sub_Name_Suffix" Type="varchar" MaxLength="3" />
+          <Property Name="Address_ID" Type="uniqueidentifier" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
         </EntityType>
@@ -368,18 +413,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Bid_Canopies_Bid">
-          <End Role="Bids" Type="Self.Bids" Multiplicity="1" />
-          <End Role="Bid_Canopies" Type="Self.Bid_Canopies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Bids">
-              <PropertyRef Name="Bid_ID" />
-            </Principal>
-            <Dependent Role="Bid_Canopies">
-              <PropertyRef Name="Bids_Bid_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Bid_Canopies_Canopies">
           <End Role="Canopies" Type="Self.Canopies" Multiplicity="1" />
           <End Role="Bid_Canopies" Type="Self.Bid_Canopies" Multiplicity="*" />
@@ -388,7 +421,7 @@
               <PropertyRef Name="Canopy_ID" />
             </Principal>
             <Dependent Role="Bid_Canopies">
-              <PropertyRef Name="Canopies_Canopy_ID" />
+              <PropertyRef Name="Canopy_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -441,7 +474,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Bids_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="Bids" Type="Self.Bids" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
@@ -452,7 +485,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Canopies_Measurements">
+        <Association Name="FK_Canopies_Fascia_Image">
+          <End Role="Images" Type="Self.Images" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="Image_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Fascia_Image_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Clearance_Height">
           <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
           <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
           <ReferentialConstraint>
@@ -460,59 +505,11 @@
               <PropertyRef Name="Measurement_ID" />
             </Principal>
             <Dependent Role="Canopies">
-              <PropertyRef Name="Size_Width_Measure_ID" />
+              <PropertyRef Name="Clearance_Height_Measurement_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Canopies_Measurements1">
-          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Size_Length_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Canopies_Measurements2">
-          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Clearance_Height_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Canopies_Measurements3">
-          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Column_Size_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Canopies_Measurements4">
-          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Deck_Thickness_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Canopies_Measurements5">
+        <Association Name="FK_Canopies_Measurement_Column_Size_Length">
           <End Role="Measurements" Type="Self.Measurements" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
           <ReferentialConstraint>
@@ -520,11 +517,11 @@
               <PropertyRef Name="Measurement_ID" />
             </Principal>
             <Dependent Role="Canopies">
-              <PropertyRef Name="Fascia_Height_Measure_ID" />
+              <PropertyRef Name="Column_Size_Length_Measurement_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Canopies_Measurements6">
+        <Association Name="FK_Canopies_Measurement_Column_Size_OD">
           <End Role="Measurements" Type="Self.Measurements" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
           <ReferentialConstraint>
@@ -532,7 +529,91 @@
               <PropertyRef Name="Measurement_ID" />
             </Principal>
             <Dependent Role="Canopies">
-              <PropertyRef Name="Drainage_Measure_ID" />
+              <PropertyRef Name="Column_Size_OD_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Column_Size_Thickness">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Column_Size_Thickness_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Column_Size_Width">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Column_Size_Width_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Deck_Thickness">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Deck_Thickness_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Drainage">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Drainage_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Fascia_Height">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Fascia_Height_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Size_Length">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Size_Length_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Size_Width">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Size_Width_Measurement_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -585,7 +666,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Column_Types_Canopy">
-          <End Role="Column_Types" Type="Self.Column_Types" Multiplicity="1" />
+          <End Role="Column_Types" Type="Self.Column_Types" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Column_Types">
@@ -596,14 +677,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Contact_Info_Contact_Types">
+        <Association Name="FK_Company_ID_Bids">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Bids" Type="Self.Bids" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Company_ID" />
+            </Principal>
+            <Dependent Role="Bids">
+              <PropertyRef Name="Company_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contact_Text_Contact_Types">
           <End Role="Contact_Types" Type="Self.Contact_Types" Multiplicity="1" />
-          <End Role="Contact_Info" Type="Self.Contact_Info" Multiplicity="*" />
+          <End Role="Contact_Text" Type="Self.Contact_Text" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contact_Types">
               <PropertyRef Name="Contact_Type_ID" />
             </Principal>
-            <Dependent Role="Contact_Info">
+            <Dependent Role="Contact_Text">
               <PropertyRef Name="Contact_Type_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -620,32 +713,56 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Customer_Contact_Info_Contact_Info">
-          <End Role="Contact_Info" Type="Self.Contact_Info" Multiplicity="1" />
-          <End Role="Customer_Contact_Info" Type="Self.Customer_Contact_Info" Multiplicity="*" />
+        <Association Name="FK_Customer_Contact_Bids">
+          <End Role="Customer_Contact" Type="Self.Customer_Contact" Multiplicity="1" />
+          <End Role="Bids" Type="Self.Bids" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Contact_Info">
-              <PropertyRef Name="Contact_Info_ID" />
+            <Principal Role="Customer_Contact">
+              <PropertyRef Name="Customer_Contact_ID" />
             </Principal>
-            <Dependent Role="Customer_Contact_Info">
-              <PropertyRef Name="Contact_Info_ID" />
+            <Dependent Role="Bids">
+              <PropertyRef Name="Customer_Contact_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Customer_Contact_Info_Customer">
+        <Association Name="FK_Customer_Contact_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="Customer_Contact_Info" Type="Self.Customer_Contact_Info" Multiplicity="*" />
+          <End Role="Customer_Contact" Type="Self.Customer_Contact" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
               <PropertyRef Name="Customer_ID" />
             </Principal>
-            <Dependent Role="Customer_Contact_Info">
+            <Dependent Role="Customer_Contact">
               <PropertyRef Name="Customer_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Customer_Contact_Text_Contact_Text">
+          <End Role="Contact_Text" Type="Self.Contact_Text" Multiplicity="1" />
+          <End Role="Customer_Contact_Text" Type="Self.Customer_Contact_Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact_Text">
+              <PropertyRef Name="Contact_Text_ID" />
+            </Principal>
+            <Dependent Role="Customer_Contact_Text">
+              <PropertyRef Name="Contact_Text_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Contact_Text_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Customer_Contact_Text" Type="Self.Customer_Contact_Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Customer_Contact_Text">
+              <PropertyRef Name="Customer_Contact_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Deck_Styles_Canopy">
-          <End Role="Deck_Styles" Type="Self.Deck_Styles" Multiplicity="1" />
+          <End Role="Deck_Styles" Type="Self.Deck_Styles" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Deck_Styles">
@@ -653,6 +770,18 @@
             </Principal>
             <Dependent Role="Canopies">
               <PropertyRef Name="Deck_Style_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deck_Type_Canopy">
+          <End Role="Deck_Types" Type="Self.Deck_Types" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deck_Types">
+              <PropertyRef Name="Deck_Type_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Deck_Type_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -664,12 +793,12 @@
               <PropertyRef Name="Measurement_ID" />
             </Principal>
             <Dependent Role="Canopies">
-              <PropertyRef Name="Drainage_Measure_ID" />
+              <PropertyRef Name="Drainage_Measurement_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Drainage_Types_Canopy">
-          <End Role="Drainage_Types" Type="Self.Drainage_Types" Multiplicity="1" />
+          <End Role="Drainage_Types" Type="Self.Drainage_Types" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Drainage_Types">
@@ -680,8 +809,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Fascia_Thickness_Canopy">
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Facia_Thickness_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Fascia_Types_Canopy">
-          <End Role="Fascia_Types" Type="Self.Fascia_Types" Multiplicity="1" />
+          <End Role="Fascia_Types" Type="Self.Fascia_Types" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Fascia_Types">
@@ -692,15 +833,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Gutter_Types_Canopy">
-          <End Role="Gutter_Types" Type="Self.Gutter_Types" Multiplicity="0..1" />
+        <Association Name="FK_Images_Canopy">
+          <End Role="Images" Type="Self.Images" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopies" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Gutter_Types">
-              <PropertyRef Name="Gutter_Type_ID" />
+            <Principal Role="Images">
+              <PropertyRef Name="Image_ID" />
             </Principal>
             <Dependent Role="Canopies">
-              <PropertyRef Name="Gutter_Type_ID" />
+              <PropertyRef Name="Image_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -716,32 +857,56 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sales_Person_Contact_Info_Contact_Info">
-          <End Role="Contact_Info" Type="Self.Contact_Info" Multiplicity="1" />
-          <End Role="Sales_Person_Contact_Info" Type="Self.Sales_Person_Contact_Info" Multiplicity="*" />
+        <Association Name="fk_Measurements_Fractions">
+          <End Role="Fractions" Type="Self.Fractions" Multiplicity="0..1" />
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Contact_Info">
-              <PropertyRef Name="Contact_Info_ID" />
+            <Principal Role="Fractions">
+              <PropertyRef Name="Fractions_ID" />
             </Principal>
-            <Dependent Role="Sales_Person_Contact_Info">
-              <PropertyRef Name="Contact_Info_ID" />
+            <Dependent Role="Measurements">
+              <PropertyRef Name="Fractions_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sales_Person_Contact_Info_Sales_Persons">
+        <Association Name="FK_Sales_Person_Address">
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
+          <End Role="Sales_Persons" Type="Self.Sales_Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="Address_ID" />
+            </Principal>
+            <Dependent Role="Sales_Persons">
+              <PropertyRef Name="Address_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Person_Contact_Text_Contact_Text">
+          <End Role="Contact_Text" Type="Self.Contact_Text" Multiplicity="1" />
+          <End Role="Sales_Person_Contact_Text" Type="Self.Sales_Person_Contact_Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact_Text">
+              <PropertyRef Name="Contact_Text_ID" />
+            </Principal>
+            <Dependent Role="Sales_Person_Contact_Text">
+              <PropertyRef Name="Contact_Text_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Person_Contact_Text_Sales_Persons">
           <End Role="Sales_Persons" Type="Self.Sales_Persons" Multiplicity="1" />
-          <End Role="Sales_Person_Contact_Info" Type="Self.Sales_Person_Contact_Info" Multiplicity="*" />
+          <End Role="Sales_Person_Contact_Text" Type="Self.Sales_Person_Contact_Text" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sales_Persons">
               <PropertyRef Name="Sales_Person_ID" />
             </Principal>
-            <Dependent Role="Sales_Person_Contact_Info">
+            <Dependent Role="Sales_Person_Contact_Text">
               <PropertyRef Name="Sales_Person_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sales_Persons_Bids">
-          <End Role="Sales_Persons" Type="Self.Sales_Persons" Multiplicity="1" />
+          <End Role="Sales_Persons" Type="Self.Sales_Persons" Multiplicity="0..1" />
           <End Role="Bids" Type="Self.Bids" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sales_Persons">
@@ -765,7 +930,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Shipping_Info_Bids">
-          <End Role="Shipping_Info" Type="Self.Shipping_Info" Multiplicity="1" />
+          <End Role="Shipping_Info" Type="Self.Shipping_Info" Multiplicity="0..1" />
           <End Role="Bids" Type="Self.Bids" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Shipping_Info">
@@ -825,9 +990,9 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="BidSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="BidId" Type="int" Mode="In" />
+          <Parameter Name="BidId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="StructTypeId" Type="int" Mode="In" />
-          <Parameter Name="SiteId" Type="int" Mode="In" />
+          <Parameter Name="SiteId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="BidStatusId" Type="int" Mode="In" />
           <Parameter Name="JobTypeId" Type="int" Mode="In" />
         </Function>
@@ -845,18 +1010,21 @@
           <EntitySet Name="Column_Spacing_Lengths" EntityType="Self.Column_Spacing_Lengths" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Column_Spacing_Widths" EntityType="Self.Column_Spacing_Widths" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Column_Types" EntityType="Self.Column_Types" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Contact_Info" EntityType="Self.Contact_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact_Text" EntityType="Self.Contact_Text" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contact_Types" EntityType="Self.Contact_Types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Customer_Contact_Info" EntityType="Self.Customer_Contact_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer_Contact" EntityType="Self.Customer_Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer_Contact_Text" EntityType="Self.Customer_Contact_Text" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Deck_Styles" EntityType="Self.Deck_Styles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deck_Types" EntityType="Self.Deck_Types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Drainage_Types" EntityType="Self.Drainage_Types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fascia_Types" EntityType="Self.Fascia_Types" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Gutter_Types" EntityType="Self.Gutter_Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fractions" EntityType="Self.Fractions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Job_Types" EntityType="Self.Job_Types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Measurements" EntityType="Self.Measurements" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Sales_Person_Contact_Info" EntityType="Self.Sales_Person_Contact_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales_Person_Contact_Text" EntityType="Self.Sales_Person_Contact_Text" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sales_Persons" EntityType="Self.Sales_Persons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Scope_Types" EntityType="Self.Scope_Types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shipping_Info" EntityType="Self.Shipping_Info" Schema="dbo" store:Type="Tables" />
@@ -866,10 +1034,6 @@
           <AssociationSet Name="FK_Alternate_Shipping_Info_Bids" Association="Self.FK_Alternate_Shipping_Info_Bids">
             <End Role="Shipping_Info" EntitySet="Shipping_Info" />
             <End Role="Bids" EntitySet="Bids" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Bid_Canopies_Bid" Association="Self.FK_Bid_Canopies_Bid">
-            <End Role="Bids" EntitySet="Bids" />
-            <End Role="Bid_Canopies" EntitySet="Bid_Canopies" />
           </AssociationSet>
           <AssociationSet Name="FK_Bid_Canopies_Canopies" Association="Self.FK_Bid_Canopies_Canopies">
             <End Role="Canopies" EntitySet="Canopies" />
@@ -895,31 +1059,47 @@
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Bids" EntitySet="Bids" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopies_Measurements" Association="Self.FK_Canopies_Measurements">
+          <AssociationSet Name="FK_Canopies_Fascia_Image" Association="Self.FK_Canopies_Fascia_Image">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurement_Clearance_Height" Association="Self.FK_Canopies_Measurement_Clearance_Height">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopies_Measurements1" Association="Self.FK_Canopies_Measurements1">
+          <AssociationSet Name="FK_Canopies_Measurement_Column_Size_Length" Association="Self.FK_Canopies_Measurement_Column_Size_Length">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopies_Measurements2" Association="Self.FK_Canopies_Measurements2">
+          <AssociationSet Name="FK_Canopies_Measurement_Column_Size_OD" Association="Self.FK_Canopies_Measurement_Column_Size_OD">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopies_Measurements3" Association="Self.FK_Canopies_Measurements3">
+          <AssociationSet Name="FK_Canopies_Measurement_Column_Size_Thickness" Association="Self.FK_Canopies_Measurement_Column_Size_Thickness">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopies_Measurements4" Association="Self.FK_Canopies_Measurements4">
+          <AssociationSet Name="FK_Canopies_Measurement_Column_Size_Width" Association="Self.FK_Canopies_Measurement_Column_Size_Width">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopies_Measurements5" Association="Self.FK_Canopies_Measurements5">
+          <AssociationSet Name="FK_Canopies_Measurement_Deck_Thickness" Association="Self.FK_Canopies_Measurement_Deck_Thickness">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopies_Measurements6" Association="Self.FK_Canopies_Measurements6">
+          <AssociationSet Name="FK_Canopies_Measurement_Drainage" Association="Self.FK_Canopies_Measurement_Drainage">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurement_Fascia_Height" Association="Self.FK_Canopies_Measurement_Fascia_Height">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurement_Size_Length" Association="Self.FK_Canopies_Measurement_Size_Length">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurement_Size_Width" Association="Self.FK_Canopies_Measurement_Size_Width">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
@@ -943,24 +1123,40 @@
             <End Role="Column_Types" EntitySet="Column_Types" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Contact_Info_Contact_Types" Association="Self.FK_Contact_Info_Contact_Types">
+          <AssociationSet Name="FK_Company_ID_Bids" Association="Self.FK_Company_ID_Bids">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Bids" EntitySet="Bids" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_Text_Contact_Types" Association="Self.FK_Contact_Text_Contact_Types">
             <End Role="Contact_Types" EntitySet="Contact_Types" />
-            <End Role="Contact_Info" EntitySet="Contact_Info" />
+            <End Role="Contact_Text" EntitySet="Contact_Text" />
           </AssociationSet>
           <AssociationSet Name="FK_Customer_Addresses" Association="Self.FK_Customer_Addresses">
             <End Role="Addresses" EntitySet="Addresses" />
             <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
-          <AssociationSet Name="FK_Customer_Contact_Info_Contact_Info" Association="Self.FK_Customer_Contact_Info_Contact_Info">
-            <End Role="Contact_Info" EntitySet="Contact_Info" />
-            <End Role="Customer_Contact_Info" EntitySet="Customer_Contact_Info" />
+          <AssociationSet Name="FK_Customer_Contact_Bids" Association="Self.FK_Customer_Contact_Bids">
+            <End Role="Customer_Contact" EntitySet="Customer_Contact" />
+            <End Role="Bids" EntitySet="Bids" />
           </AssociationSet>
-          <AssociationSet Name="FK_Customer_Contact_Info_Customer" Association="Self.FK_Customer_Contact_Info_Customer">
+          <AssociationSet Name="FK_Customer_Contact_Customer" Association="Self.FK_Customer_Contact_Customer">
             <End Role="Customer" EntitySet="Customer" />
-            <End Role="Customer_Contact_Info" EntitySet="Customer_Contact_Info" />
+            <End Role="Customer_Contact" EntitySet="Customer_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Contact_Text_Contact_Text" Association="Self.FK_Customer_Contact_Text_Contact_Text">
+            <End Role="Contact_Text" EntitySet="Contact_Text" />
+            <End Role="Customer_Contact_Text" EntitySet="Customer_Contact_Text" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Contact_Text_Customer" Association="Self.FK_Customer_Contact_Text_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Customer_Contact_Text" EntitySet="Customer_Contact_Text" />
           </AssociationSet>
           <AssociationSet Name="FK_Deck_Styles_Canopy" Association="Self.FK_Deck_Styles_Canopy">
             <End Role="Deck_Styles" EntitySet="Deck_Styles" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deck_Type_Canopy" Association="Self.FK_Deck_Type_Canopy">
+            <End Role="Deck_Types" EntitySet="Deck_Types" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
           <AssociationSet Name="FK_Drainage_Measurement_Canopy" Association="Self.FK_Drainage_Measurement_Canopy">
@@ -971,25 +1167,37 @@
             <End Role="Drainage_Types" EntitySet="Drainage_Types" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
+          <AssociationSet Name="FK_Fascia_Thickness_Canopy" Association="Self.FK_Fascia_Thickness_Canopy">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
           <AssociationSet Name="FK_Fascia_Types_Canopy" Association="Self.FK_Fascia_Types_Canopy">
             <End Role="Fascia_Types" EntitySet="Fascia_Types" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Gutter_Types_Canopy" Association="Self.FK_Gutter_Types_Canopy">
-            <End Role="Gutter_Types" EntitySet="Gutter_Types" />
+          <AssociationSet Name="FK_Images_Canopy" Association="Self.FK_Images_Canopy">
+            <End Role="Images" EntitySet="Images" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
           <AssociationSet Name="FK_Job_Types_Bids" Association="Self.FK_Job_Types_Bids">
             <End Role="Job_Types" EntitySet="Job_Types" />
             <End Role="Bids" EntitySet="Bids" />
           </AssociationSet>
-          <AssociationSet Name="FK_Sales_Person_Contact_Info_Contact_Info" Association="Self.FK_Sales_Person_Contact_Info_Contact_Info">
-            <End Role="Contact_Info" EntitySet="Contact_Info" />
-            <End Role="Sales_Person_Contact_Info" EntitySet="Sales_Person_Contact_Info" />
+          <AssociationSet Name="fk_Measurements_Fractions" Association="Self.fk_Measurements_Fractions">
+            <End Role="Fractions" EntitySet="Fractions" />
+            <End Role="Measurements" EntitySet="Measurements" />
           </AssociationSet>
-          <AssociationSet Name="FK_Sales_Person_Contact_Info_Sales_Persons" Association="Self.FK_Sales_Person_Contact_Info_Sales_Persons">
+          <AssociationSet Name="FK_Sales_Person_Address" Association="Self.FK_Sales_Person_Address">
+            <End Role="Addresses" EntitySet="Addresses" />
             <End Role="Sales_Persons" EntitySet="Sales_Persons" />
-            <End Role="Sales_Person_Contact_Info" EntitySet="Sales_Person_Contact_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Person_Contact_Text_Contact_Text" Association="Self.FK_Sales_Person_Contact_Text_Contact_Text">
+            <End Role="Contact_Text" EntitySet="Contact_Text" />
+            <End Role="Sales_Person_Contact_Text" EntitySet="Sales_Person_Contact_Text" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Person_Contact_Text_Sales_Persons" Association="Self.FK_Sales_Person_Contact_Text_Sales_Persons">
+            <End Role="Sales_Persons" EntitySet="Sales_Persons" />
+            <End Role="Sales_Person_Contact_Text" EntitySet="Sales_Person_Contact_Text" />
           </AssociationSet>
           <AssociationSet Name="FK_Sales_Persons_Bids" Association="Self.FK_Sales_Persons_Bids">
             <End Role="Sales_Persons" EntitySet="Sales_Persons" />
@@ -1020,7 +1228,8 @@
             <End Role="Bids" EntitySet="Bids" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LaneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1029,7 +1238,7 @@
             <PropertyRef Name="Activity_Log_ID" />
           </Key>
           <Property Name="Activity_Log_ID" Type="Guid" Nullable="false" />
-          <Property Name="Activity_Log_Date" Type="DateTime" Precision="3" />
+          <Property Name="Activity_Log_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="User_ID" Type="Int32" />
           <Property Name="Page" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="Action" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
@@ -1039,7 +1248,7 @@
           <Key>
             <PropertyRef Name="Address_ID" />
           </Key>
-          <Property Name="Address_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address_ID" Type="Guid" Nullable="false" />
           <Property Name="Address_Line1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Address_Line2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -1047,14 +1256,24 @@
           <Property Name="Zip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Country" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Addresses" FromRole="Addresses" ToRole="Customer" />
+          <NavigationProperty Name="Sales_Persons" Relationship="Self.FK_Sales_Person_Address" FromRole="Addresses" ToRole="Sales_Persons" />
           <NavigationProperty Name="Sites" Relationship="Self.FK_Sites_Addresses" FromRole="Addresses" ToRole="Sites" />
+        </EntityType>
+        <EntityType Name="Bid_Canopies">
+          <Key>
+            <PropertyRef Name="Bid_ID" />
+            <PropertyRef Name="Canopy_ID" />
+          </Key>
+          <Property Name="Bid_ID" Type="Guid" Nullable="false" />
+          <Property Name="Canopy_ID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Canopy" Relationship="Self.FK_Bid_Canopies_Canopies" FromRole="Bid_Canopies" ToRole="Canopies" />
         </EntityType>
         <EntityType Name="Bid_Notes">
           <Key>
             <PropertyRef Name="Bid_Note_ID" />
           </Key>
-          <Property Name="Bid_Note_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Notes" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Bid_Note_ID" Type="Guid" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Bids" Relationship="Self.Bid_To_Notes" FromRole="Bid_Notes" ToRole="Bids" />
@@ -1064,7 +1283,7 @@
             <PropertyRef Name="Bid_Status_ID" />
           </Key>
           <Property Name="Bid_Status_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Status" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Bid_Statuses_Bids" FromRole="Bid_Statuses" ToRole="Bids" />
@@ -1074,8 +1293,8 @@
             <PropertyRef Name="Bid_Type_ID" />
           </Key>
           <Property Name="Bid_Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="Code" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Bid_Types_Bids" FromRole="Bid_Types" ToRole="Bids" />
@@ -1084,22 +1303,23 @@
           <Key>
             <PropertyRef Name="Bid_ID" />
           </Key>
-          <Property Name="Bid_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bid_ID" Type="Guid" Nullable="false" />
           <Property Name="Revision_Number" Type="Int32" Nullable="false" />
+          <Property Name="Bid_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Structure_Type_ID" Type="Int32" Nullable="false" />
           <Property Name="Bid_Status_ID" Type="Int32" Nullable="false" />
           <Property Name="Job_Type_ID" Type="Int32" Nullable="false" />
           <Property Name="Scope_Type_ID" Type="Int32" Nullable="false" />
           <Property Name="Bid_Type_ID" Type="Int32" Nullable="false" />
-          <Property Name="Customer_ID" Type="Guid" />
-          <Property Name="Sales_Person_ID" Type="Int32" Nullable="false" />
-          <Property Name="Site_ID" Type="Int32" />
-          <Property Name="Shipping_ID" Type="Int32" Nullable="false" />
-          <Property Name="Special_Shipping_ID" Type="Int32" />
-          <Property Name="Alternate_Shipping_ID" Type="Int32" />
-          <Property Name="Bid_Note_ID" Type="Int32" Nullable="false" />
-          <Property Name="Canopy_ID" Type="Int32" Nullable="false" />
-          <Property Name="Created_By" Type="Int32" Nullable="false" />
+          <Property Name="Company_ID" Type="Guid" Nullable="false" />
+          <Property Name="Customer_ID" Type="Guid" Nullable="false" />
+          <Property Name="Customer_Contact_ID" Type="Guid" Nullable="false" />
+          <Property Name="Sales_Person_ID" Type="Guid" />
+          <Property Name="Site_ID" Type="Guid" />
+          <Property Name="Shipping_ID" Type="Guid" />
+          <Property Name="Special_Shipping_ID" Type="Guid" />
+          <Property Name="Alternate_Shipping_ID" Type="Guid" />
+          <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <Property Name="Modifed_By" Type="Int32" />
           <Property Name="Modified_Date" Type="DateTime" Precision="3" />
@@ -1107,6 +1327,8 @@
           <NavigationProperty Name="Bid_Types" Relationship="Self.FK_Bid_Types_Bids" FromRole="Bids" ToRole="Bid_Types" />
           <NavigationProperty Name="Shipping_Info" Relationship="Self.FK_Alternate_Shipping_Info_Bids" FromRole="Bids" ToRole="Shipping_Info" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Bids_Customer" FromRole="Bids" ToRole="Customer" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Company_ID_Bids" FromRole="Bids" ToRole="Company" />
+          <NavigationProperty Name="Customer_Contact" Relationship="Self.FK_Customer_Contact_Bids" FromRole="Bids" ToRole="Customer_Contact" />
           <NavigationProperty Name="Job_Types" Relationship="Self.FK_Job_Types_Bids" FromRole="Bids" ToRole="Job_Types" />
           <NavigationProperty Name="Sales_Persons" Relationship="Self.FK_Sales_Persons_Bids" FromRole="Bids" ToRole="Sales_Persons" />
           <NavigationProperty Name="Scope_Types" Relationship="Self.FK_Scope_Types_Bids" FromRole="Bids" ToRole="Scope_Types" />
@@ -1114,35 +1336,41 @@
           <NavigationProperty Name="Site" Relationship="Self.FK_Sites_Bids" FromRole="Bids" ToRole="Sites" />
           <NavigationProperty Name="Shipping_Info2" Relationship="Self.FK_Special_Shipping_Info_Bids" FromRole="Bids" ToRole="Shipping_Info" />
           <NavigationProperty Name="Structure_Types" Relationship="Self.FK_Structure_Types_Bids" FromRole="Bids" ToRole="Structure_Types" />
-          <NavigationProperty Name="Canopies" Relationship="Self.Bid_Canopies" FromRole="Bids" ToRole="Canopies" />
           <NavigationProperty Name="Bid_Notes" Relationship="Self.Bid_To_Notes" FromRole="Bids" ToRole="Bid_Notes" />
         </EntityType>
         <EntityType Name="Canopy">
           <Key>
             <PropertyRef Name="Canopy_ID" />
           </Key>
-          <Property Name="Canopy_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Canopy_ID" Type="Guid" Nullable="false" />
+          <Property Name="Canopy_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Quantity" Type="Int32" />
-          <Property Name="Size_Width_Measure_ID" Type="Int32" Nullable="false" />
-          <Property Name="Size_Length_Measure_ID" Type="Int32" Nullable="false" />
-          <Property Name="Clearance_Height_Measure_ID" Type="Int32" Nullable="false" />
+          <Property Name="Size_Width_Measurement_ID" Type="Guid" Nullable="false" />
+          <Property Name="Size_Length_Measurement_ID" Type="Guid" Nullable="false" />
+          <Property Name="Clearance_Height_Measurement_ID" Type="Guid" Nullable="false" />
           <Property Name="Column_Quantity" Type="Int32" />
-          <Property Name="Column_Type_ID" Type="Int32" Nullable="false" />
-          <Property Name="Column_Size_Measure_ID" Type="Int32" Nullable="false" />
+          <Property Name="Column_Type_ID" Type="Int32" />
+          <Property Name="Column_Type_Other" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_Size_Length_Measurement_ID" Type="Guid" />
+          <Property Name="Column_Size_Width_Measurement_ID" Type="Guid" />
+          <Property Name="Column_Size_Thickness_Measurement_ID" Type="Guid" />
+          <Property Name="Column_Size_OD_Measurement_ID" Type="Guid" />
+          <Property Name="Column_Size_Other" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Column_Spacing_Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Deck_Style_ID" Type="Int32" Nullable="false" />
+          <Property Name="Deck_Style_ID" Type="Int32" />
+          <Property Name="Deck_Type_ID" Type="Int32" />
           <Property Name="Deck_Color_ID" Type="Int32" />
-          <Property Name="Deck_Thickness_Measure_ID" Type="Int32" Nullable="false" />
-          <Property Name="Image_ID" Type="Int32" Nullable="false" />
-          <Property Name="Facia_Image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Fascia_Height_Measure_ID" Type="Int32" />
-          <Property Name="Fascia_Type_ID" Type="Int32" Nullable="false" />
+          <Property Name="Deck_Thickness_Measurement_ID" Type="Guid" />
+          <Property Name="Deck_Gauge" Type="Int32" />
+          <Property Name="Image_ID" Type="Guid" />
+          <Property Name="Fascia_Image_ID" Type="Guid" />
+          <Property Name="Fascia_Height_Measurement_ID" Type="Guid" />
+          <Property Name="Fascia_Type_ID" Type="Int32" />
           <Property Name="Fascia_Color_ID" Type="Int32" />
           <Property Name="Fascia_Info" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
-          <Property Name="Facia_Thickness" Type="Int32" />
-          <Property Name="Drainage_Type_ID" Type="Int32" Nullable="false" />
-          <Property Name="Drainage_Measure_ID" Type="Int32" />
-          <Property Name="Gutter_Type_ID" Type="Int32" />
+          <Property Name="Facia_Thickness_Measurement_ID" Type="Guid" />
+          <Property Name="Drainage_Type_ID" Type="Int32" />
+          <Property Name="Drainage_Measurement_ID" Type="Guid" />
           <Property Name="Other_Notes" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="Inclusion_Notes" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="Exclusion_Notes" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
@@ -1161,29 +1389,42 @@
           <Property Name="Design_Load_Snow" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Design_Load_Spec" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Design_Load_Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Drawing_Sealed" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Drawing_Sealed" Type="Boolean" />
+          <Property Name="Design_Specs" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Has_Perimeter_Gutters" Type="Boolean" />
+          <Property Name="Has_Center_Gutters" Type="Boolean" />
+          <Property Name="Has_Internal_Gutters" Type="Boolean" />
+          <Property Name="Has_External_Gutters" Type="Boolean" />
+          <Property Name="Has_Scruppers" Type="Boolean" />
+          <Property Name="Gutter_Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Drawing_State" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Drawing_Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <Property Name="Modified_By" Type="Int32" />
           <Property Name="Modifed_Date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Measurement" Relationship="Self.FK_Canopies_Measurements" FromRole="Canopies" ToRole="Measurements" />
-          <NavigationProperty Name="Measurement1" Relationship="Self.FK_Canopies_Measurements1" FromRole="Canopies" ToRole="Measurements" />
-          <NavigationProperty Name="Measurement2" Relationship="Self.FK_Canopies_Measurements2" FromRole="Canopies" ToRole="Measurements" />
-          <NavigationProperty Name="Measurement3" Relationship="Self.FK_Canopies_Measurements3" FromRole="Canopies" ToRole="Measurements" />
-          <NavigationProperty Name="Measurement4" Relationship="Self.FK_Canopies_Measurements4" FromRole="Canopies" ToRole="Measurements" />
-          <NavigationProperty Name="Measurement5" Relationship="Self.FK_Canopies_Measurements5" FromRole="Canopies" ToRole="Measurements" />
-          <NavigationProperty Name="Measurement6" Relationship="Self.FK_Canopies_Measurements6" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Bid_Canopies" Relationship="Self.FK_Bid_Canopies_Canopies" FromRole="Canopies" ToRole="Bid_Canopies" />
+          <NavigationProperty Name="Image" Relationship="Self.FK_Canopies_Fascia_Image" FromRole="Canopies" ToRole="Images" />
+          <NavigationProperty Name="Measurement" Relationship="Self.FK_Canopies_Measurement_Clearance_Height" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement1" Relationship="Self.FK_Canopies_Measurement_Column_Size_Length" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement2" Relationship="Self.FK_Canopies_Measurement_Column_Size_OD" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement3" Relationship="Self.FK_Canopies_Measurement_Column_Size_Thickness" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement4" Relationship="Self.FK_Canopies_Measurement_Column_Size_Width" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement5" Relationship="Self.FK_Canopies_Measurement_Deck_Thickness" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement6" Relationship="Self.FK_Canopies_Measurement_Drainage" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement7" Relationship="Self.FK_Canopies_Measurement_Fascia_Height" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement8" Relationship="Self.FK_Canopies_Measurement_Size_Length" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Measurement9" Relationship="Self.FK_Canopies_Measurement_Size_Width" FromRole="Canopies" ToRole="Measurements" />
           <NavigationProperty Name="Color" Relationship="Self.FK_Colors_Canopy_1" FromRole="Canopies" ToRole="Colors" />
           <NavigationProperty Name="Color1" Relationship="Self.FK_Colors_Canopy_2" FromRole="Canopies" ToRole="Colors" />
           <NavigationProperty Name="Column_Types" Relationship="Self.FK_Column_Types_Canopy" FromRole="Canopies" ToRole="Column_Types" />
           <NavigationProperty Name="Deck_Styles" Relationship="Self.FK_Deck_Styles_Canopy" FromRole="Canopies" ToRole="Deck_Styles" />
-          <NavigationProperty Name="Measurement7" Relationship="Self.FK_Drainage_Measurement_Canopy" FromRole="Canopies" ToRole="Measurements" />
+          <NavigationProperty Name="Deck_Types" Relationship="Self.FK_Deck_Type_Canopy" FromRole="Canopies" ToRole="Deck_Types" />
+          <NavigationProperty Name="Measurement10" Relationship="Self.FK_Drainage_Measurement_Canopy" FromRole="Canopies" ToRole="Measurements" />
           <NavigationProperty Name="Drainage_Types" Relationship="Self.FK_Drainage_Types_Canopy" FromRole="Canopies" ToRole="Drainage_Types" />
+          <NavigationProperty Name="Measurement11" Relationship="Self.FK_Fascia_Thickness_Canopy" FromRole="Canopies" ToRole="Measurements" />
           <NavigationProperty Name="Fascia_Types" Relationship="Self.FK_Fascia_Types_Canopy" FromRole="Canopies" ToRole="Fascia_Types" />
-          <NavigationProperty Name="Gutter_Types" Relationship="Self.FK_Gutter_Types_Canopy" FromRole="Canopies" ToRole="Gutter_Types" />
-          <NavigationProperty Name="Bids" Relationship="Self.Bid_Canopies" FromRole="Canopies" ToRole="Bids" />
+          <NavigationProperty Name="Image1" Relationship="Self.FK_Images_Canopy" FromRole="Canopies" ToRole="Images" />
         </EntityType>
         <EntityType Name="Color">
           <Key>
@@ -1191,7 +1432,6 @@
           </Key>
           <Property Name="Color_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="ColorText" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Canopies" Relationship="Self.FK_Colors_Canopy_1" FromRole="Colors" ToRole="Canopies" />
@@ -1201,9 +1441,9 @@
           <Key>
             <PropertyRef Name="Column_Spacing_Length_ID" />
           </Key>
-          <Property Name="Column_Spacing_Length_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Column_Spacing_Length_ID" Type="Guid" Nullable="false" />
           <Property Name="Canopy_ID" Type="Int32" Nullable="false" />
-          <Property Name="Measurement_ID" Type="Int32" Nullable="false" />
+          <Property Name="Measurement_ID" Type="Guid" Nullable="false" />
           <Property Name="Sequence" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Measurement" Relationship="Self.FK_Column_Spacing_Lengths_Measurements" FromRole="Column_Spacing_Lengths" ToRole="Measurements" />
         </EntityType>
@@ -1211,9 +1451,9 @@
           <Key>
             <PropertyRef Name="Column_Spacing_Width_ID" />
           </Key>
-          <Property Name="Column_Spacing_Width_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Column_Spacing_Width_ID" Type="Guid" Nullable="false" />
           <Property Name="Canopy_ID" Type="Int32" Nullable="false" />
-          <Property Name="Measurement_ID" Type="Int32" Nullable="false" />
+          <Property Name="Measurement_ID" Type="Guid" Nullable="false" />
           <Property Name="Sequence" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Measurement" Relationship="Self.FK_Column_Spacing_Widths_Measurements" FromRole="Column_Spacing_Widths" ToRole="Measurements" />
         </EntityType>
@@ -1227,18 +1467,27 @@
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Canopies" Relationship="Self.FK_Column_Types_Canopy" FromRole="Column_Types" ToRole="Canopies" />
         </EntityType>
-        <EntityType Name="Contact_Info">
+        <EntityType Name="Company">
           <Key>
-            <PropertyRef Name="Contact_Info_ID" />
+            <PropertyRef Name="Company_ID" />
           </Key>
-          <Property Name="Contact_Info_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_ID" Type="Guid" Nullable="false" />
+          <Property Name="Company_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Bids" Relationship="Self.FK_Company_ID_Bids" FromRole="Company" ToRole="Bids" />
+        </EntityType>
+        <EntityType Name="Contact_Text">
+          <Key>
+            <PropertyRef Name="Contact_Text_ID" />
+          </Key>
+          <Property Name="Contact_Text_ID" Type="Guid" Nullable="false" />
           <Property Name="Contact_Type_ID" Type="Int32" Nullable="false" />
-          <Property Name="Contact_Text" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Contact_Types" Relationship="Self.FK_Contact_Info_Contact_Types" FromRole="Contact_Info" ToRole="Contact_Types" />
-          <NavigationProperty Name="Customers" Relationship="Self.Customer_Contact_Info" FromRole="Contact_Info" ToRole="Customer" />
-          <NavigationProperty Name="Sales_Persons" Relationship="Self.Sales_Person_Contact_Info" FromRole="Contact_Info" ToRole="Sales_Persons" />
+          <NavigationProperty Name="Contact_Types" Relationship="Self.FK_Contact_Text_Contact_Types" FromRole="Contact_Text" ToRole="Contact_Types" />
+          <NavigationProperty Name="Customers" Relationship="Self.Customer_Contact_Text" FromRole="Contact_Text" ToRole="Customer" />
+          <NavigationProperty Name="Sales_Persons" Relationship="Self.Sales_Person_Contact_Text" FromRole="Contact_Text" ToRole="Sales_Persons" />
         </EntityType>
         <EntityType Name="Contact_Types">
           <Key>
@@ -1248,23 +1497,36 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Contact_Info" Relationship="Self.FK_Contact_Info_Contact_Types" FromRole="Contact_Types" ToRole="Contact_Info" />
+          <NavigationProperty Name="Contact_Text" Relationship="Self.FK_Contact_Text_Contact_Types" FromRole="Contact_Types" ToRole="Contact_Text" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Customer_ID" />
           </Key>
           <Property Name="Customer_ID" Type="Guid" Nullable="false" />
-          <Property Name="First_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
-          <Property Name="Last_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
-          <Property Name="Company_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Address_ID" Type="Int32" />
+          <Property Name="Company_ID" Type="Int32" Nullable="false" />
+          <Property Name="Bid_Code" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sales_Code" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Company_Region_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address_ID" Type="Guid" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Address" Relationship="Self.FK_Customer_Addresses" FromRole="Customer" ToRole="Addresses" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Bids_Customer" FromRole="Customer" ToRole="Bids" />
-          <NavigationProperty Name="Contact_Info" Relationship="Self.Customer_Contact_Info" FromRole="Customer" ToRole="Contact_Info" />
+          <NavigationProperty Name="Customer_Contact" Relationship="Self.FK_Customer_Contact_Customer" FromRole="Customer" ToRole="Customer_Contact" />
+          <NavigationProperty Name="Contact_Text" Relationship="Self.Customer_Contact_Text" FromRole="Customer" ToRole="Contact_Text" />
+        </EntityType>
+        <EntityType Name="Customer_Contact">
+          <Key>
+            <PropertyRef Name="Customer_Contact_ID" />
+          </Key>
+          <Property Name="Customer_Contact_ID" Type="Guid" Nullable="false" />
+          <Property Name="Customer_ID" Type="Guid" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bids" Relationship="Self.FK_Customer_Contact_Bids" FromRole="Customer_Contact" ToRole="Bids" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_Contact_Customer" FromRole="Customer_Contact" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Deck_Styles">
           <Key>
@@ -1275,6 +1537,16 @@
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Canopies" Relationship="Self.FK_Deck_Styles_Canopy" FromRole="Deck_Styles" ToRole="Canopies" />
+        </EntityType>
+        <EntityType Name="Deck_Types">
+          <Key>
+            <PropertyRef Name="Deck_Type_ID" />
+          </Key>
+          <Property Name="Deck_Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Created_By" Type="Int32" />
+          <Property Name="Create_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Canopies" Relationship="Self.FK_Deck_Type_Canopy" FromRole="Deck_Types" ToRole="Canopies" />
         </EntityType>
         <EntityType Name="Drainage_Types">
           <Key>
@@ -1296,25 +1568,24 @@
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Canopies" Relationship="Self.FK_Fascia_Types_Canopy" FromRole="Fascia_Types" ToRole="Canopies" />
         </EntityType>
-        <EntityType Name="Gutter_Types">
+        <EntityType Name="Fraction">
           <Key>
-            <PropertyRef Name="Gutter_Type_ID" />
+            <PropertyRef Name="Fractions_ID" />
           </Key>
-          <Property Name="Gutter_Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Created_By" Type="Int32" />
-          <Property Name="Create_Date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Canopies" Relationship="Self.FK_Gutter_Types_Canopy" FromRole="Gutter_Types" ToRole="Canopies" />
+          <Property Name="Fractions_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Measurements" Relationship="Self.fk_Measurements_Fractions" FromRole="Fractions" ToRole="Measurements" />
         </EntityType>
         <EntityType Name="Image">
           <Key>
             <PropertyRef Name="Image_ID" />
           </Key>
-          <Property Name="Image_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Color_ID" Type="Int32" />
+          <Property Name="Image_ID" Type="Guid" Nullable="false" />
           <Property Name="Image_Path" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Canopies" Relationship="Self.FK_Canopies_Fascia_Image" FromRole="Images" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies1" Relationship="Self.FK_Images_Canopy" FromRole="Images" ToRole="Canopies" />
         </EntityType>
         <EntityType Name="Job_Types">
           <Key>
@@ -1331,32 +1602,40 @@
           <Key>
             <PropertyRef Name="Measurement_ID" />
           </Key>
-          <Property Name="Measurement_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Measurement_ID" Type="Guid" Nullable="false" />
           <Property Name="Feet" Type="Int32" />
           <Property Name="Inches" Type="Int32" />
-          <NavigationProperty Name="Canopies" Relationship="Self.FK_Canopies_Measurements" FromRole="Measurements" ToRole="Canopies" />
-          <NavigationProperty Name="Canopies1" Relationship="Self.FK_Canopies_Measurements1" FromRole="Measurements" ToRole="Canopies" />
-          <NavigationProperty Name="Canopies2" Relationship="Self.FK_Canopies_Measurements2" FromRole="Measurements" ToRole="Canopies" />
-          <NavigationProperty Name="Canopies3" Relationship="Self.FK_Canopies_Measurements3" FromRole="Measurements" ToRole="Canopies" />
-          <NavigationProperty Name="Canopies4" Relationship="Self.FK_Canopies_Measurements4" FromRole="Measurements" ToRole="Canopies" />
-          <NavigationProperty Name="Canopies5" Relationship="Self.FK_Canopies_Measurements5" FromRole="Measurements" ToRole="Canopies" />
-          <NavigationProperty Name="Canopies6" Relationship="Self.FK_Canopies_Measurements6" FromRole="Measurements" ToRole="Canopies" />
-          <NavigationProperty Name="Canopies7" Relationship="Self.FK_Drainage_Measurement_Canopy" FromRole="Measurements" ToRole="Canopies" />
+          <Property Name="Fractions_ID" Type="Int32" />
+          <NavigationProperty Name="Canopies" Relationship="Self.FK_Canopies_Measurement_Clearance_Height" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies1" Relationship="Self.FK_Canopies_Measurement_Column_Size_Length" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies2" Relationship="Self.FK_Canopies_Measurement_Column_Size_OD" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies3" Relationship="Self.FK_Canopies_Measurement_Column_Size_Thickness" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies4" Relationship="Self.FK_Canopies_Measurement_Column_Size_Width" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies5" Relationship="Self.FK_Canopies_Measurement_Deck_Thickness" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies6" Relationship="Self.FK_Canopies_Measurement_Drainage" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies7" Relationship="Self.FK_Canopies_Measurement_Fascia_Height" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies8" Relationship="Self.FK_Canopies_Measurement_Size_Length" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies9" Relationship="Self.FK_Canopies_Measurement_Size_Width" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies10" Relationship="Self.FK_Drainage_Measurement_Canopy" FromRole="Measurements" ToRole="Canopies" />
+          <NavigationProperty Name="Canopies11" Relationship="Self.FK_Fascia_Thickness_Canopy" FromRole="Measurements" ToRole="Canopies" />
           <NavigationProperty Name="Column_Spacing_Lengths" Relationship="Self.FK_Column_Spacing_Lengths_Measurements" FromRole="Measurements" ToRole="Column_Spacing_Lengths" />
           <NavigationProperty Name="Column_Spacing_Widths" Relationship="Self.FK_Column_Spacing_Widths_Measurements" FromRole="Measurements" ToRole="Column_Spacing_Widths" />
+          <NavigationProperty Name="Fraction" Relationship="Self.fk_Measurements_Fractions" FromRole="Measurements" ToRole="Fractions" />
         </EntityType>
         <EntityType Name="Sales_Persons">
           <Key>
             <PropertyRef Name="Sales_Person_ID" />
           </Key>
-          <Property Name="Sales_Person_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sales_Person_ID" Type="Guid" Nullable="false" />
+          <Property Name="Sales_Person_Code" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="First_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <Property Name="Last_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
-          <Property Name="Address_ID" Type="Int32" />
+          <Property Name="Address_ID" Type="Guid" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_Sales_Person_Address" FromRole="Sales_Persons" ToRole="Addresses" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Sales_Persons_Bids" FromRole="Sales_Persons" ToRole="Bids" />
-          <NavigationProperty Name="Contact_Info" Relationship="Self.Sales_Person_Contact_Info" FromRole="Sales_Persons" ToRole="Contact_Info" />
+          <NavigationProperty Name="Contact_Text" Relationship="Self.Sales_Person_Contact_Text" FromRole="Sales_Persons" ToRole="Contact_Text" />
         </EntityType>
         <EntityType Name="Scope_Types">
           <Key>
@@ -1373,9 +1652,9 @@
           <Key>
             <PropertyRef Name="Shipping_ID" />
           </Key>
-          <Property Name="Shipping_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Shipping_ID" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
-          <Property Name="Address_ID" Type="Int32" />
+          <Property Name="Address_ID" Type="Guid" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Alternate_Shipping_Info_Bids" FromRole="Shipping_Info" ToRole="Bids" />
           <NavigationProperty Name="Bids1" Relationship="Self.FK_Shipping_Info_Bids" FromRole="Shipping_Info" ToRole="Bids" />
           <NavigationProperty Name="Bids2" Relationship="Self.FK_Special_Shipping_Info_Bids" FromRole="Shipping_Info" ToRole="Bids" />
@@ -1384,9 +1663,14 @@
           <Key>
             <PropertyRef Name="Site_ID" />
           </Key>
-          <Property Name="Site_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
-          <Property Name="Address_ID" Type="Int32" />
+          <Property Name="Site_ID" Type="Guid" Nullable="false" />
+          <Property Name="Main_Name" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Sub_Name" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Main_Name_Prefix" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Main_Name_Suffix" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Sub_Name_Prefix" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Sub_Name_Suffix" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Address_ID" Type="Guid" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Address" Relationship="Self.FK_Sites_Addresses" FromRole="Sites" ToRole="Addresses" />
@@ -1425,6 +1709,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Sales_Person_Address">
+          <End Role="Addresses" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Sales_Persons" Type="Self.Sales_Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="Address_ID" />
+            </Principal>
+            <Dependent Role="Sales_Persons">
+              <PropertyRef Name="Address_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Sites_Addresses">
           <End Role="Addresses" Type="Self.Address" Multiplicity="0..1" />
           <End Role="Sites" Type="Self.Site" Multiplicity="*" />
@@ -1434,6 +1730,18 @@
             </Principal>
             <Dependent Role="Sites">
               <PropertyRef Name="Address_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bid_Canopies_Canopies">
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="1" />
+          <End Role="Bid_Canopies" Type="Self.Bid_Canopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Canopies">
+              <PropertyRef Name="Canopy_ID" />
+            </Principal>
+            <Dependent Role="Bid_Canopies">
+              <PropertyRef Name="Canopy_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1474,7 +1782,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Bids_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="Bids" Type="Self.Bid" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
@@ -1482,6 +1790,30 @@
             </Principal>
             <Dependent Role="Bids">
               <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_ID_Bids">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Bids" Type="Self.Bid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Company_ID" />
+            </Principal>
+            <Dependent Role="Bids">
+              <PropertyRef Name="Company_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Contact_Bids">
+          <End Role="Customer_Contact" Type="Self.Customer_Contact" Multiplicity="1" />
+          <End Role="Bids" Type="Self.Bid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer_Contact">
+              <PropertyRef Name="Customer_Contact_ID" />
+            </Principal>
+            <Dependent Role="Bids">
+              <PropertyRef Name="Customer_Contact_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1498,7 +1830,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sales_Persons_Bids">
-          <End Role="Sales_Persons" Type="Self.Sales_Persons" Multiplicity="1" />
+          <End Role="Sales_Persons" Type="Self.Sales_Persons" Multiplicity="0..1" />
           <End Role="Bids" Type="Self.Bid" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sales_Persons">
@@ -1522,7 +1854,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Shipping_Info_Bids">
-          <End Role="Shipping_Info" Type="Self.Shipping_Info" Multiplicity="1" />
+          <End Role="Shipping_Info" Type="Self.Shipping_Info" Multiplicity="0..1" />
           <End Role="Bids" Type="Self.Bid" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Shipping_Info">
@@ -1569,7 +1901,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Canopies_Measurements">
+        <Association Name="FK_Canopies_Fascia_Image">
+          <End Role="Images" Type="Self.Image" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="Image_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Fascia_Image_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Clearance_Height">
           <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
           <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1577,59 +1921,11 @@
               <PropertyRef Name="Measurement_ID" />
             </Principal>
             <Dependent Role="Canopies">
-              <PropertyRef Name="Size_Width_Measure_ID" />
+              <PropertyRef Name="Clearance_Height_Measurement_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Canopies_Measurements1">
-          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Size_Length_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Canopies_Measurements2">
-          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Clearance_Height_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Canopies_Measurements3">
-          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Column_Size_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Canopies_Measurements4">
-          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
-          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Measurements">
-              <PropertyRef Name="Measurement_ID" />
-            </Principal>
-            <Dependent Role="Canopies">
-              <PropertyRef Name="Deck_Thickness_Measure_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Canopies_Measurements5">
+        <Association Name="FK_Canopies_Measurement_Column_Size_Length">
           <End Role="Measurements" Type="Self.Measurement" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1637,11 +1933,11 @@
               <PropertyRef Name="Measurement_ID" />
             </Principal>
             <Dependent Role="Canopies">
-              <PropertyRef Name="Fascia_Height_Measure_ID" />
+              <PropertyRef Name="Column_Size_Length_Measurement_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Canopies_Measurements6">
+        <Association Name="FK_Canopies_Measurement_Column_Size_OD">
           <End Role="Measurements" Type="Self.Measurement" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1649,7 +1945,91 @@
               <PropertyRef Name="Measurement_ID" />
             </Principal>
             <Dependent Role="Canopies">
-              <PropertyRef Name="Drainage_Measure_ID" />
+              <PropertyRef Name="Column_Size_OD_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Column_Size_Thickness">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Column_Size_Thickness_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Column_Size_Width">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Column_Size_Width_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Deck_Thickness">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Deck_Thickness_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Drainage">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Drainage_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Fascia_Height">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Fascia_Height_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Size_Length">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Size_Length_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canopies_Measurement_Size_Width">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Size_Width_Measurement_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1678,7 +2058,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Column_Types_Canopy">
-          <End Role="Column_Types" Type="Self.Column_Types" Multiplicity="1" />
+          <End Role="Column_Types" Type="Self.Column_Types" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Column_Types">
@@ -1690,7 +2070,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Deck_Styles_Canopy">
-          <End Role="Deck_Styles" Type="Self.Deck_Styles" Multiplicity="1" />
+          <End Role="Deck_Styles" Type="Self.Deck_Styles" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Deck_Styles">
@@ -1698,6 +2078,18 @@
             </Principal>
             <Dependent Role="Canopies">
               <PropertyRef Name="Deck_Style_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deck_Type_Canopy">
+          <End Role="Deck_Types" Type="Self.Deck_Types" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deck_Types">
+              <PropertyRef Name="Deck_Type_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Deck_Type_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1709,12 +2101,12 @@
               <PropertyRef Name="Measurement_ID" />
             </Principal>
             <Dependent Role="Canopies">
-              <PropertyRef Name="Drainage_Measure_ID" />
+              <PropertyRef Name="Drainage_Measurement_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Drainage_Types_Canopy">
-          <End Role="Drainage_Types" Type="Self.Drainage_Types" Multiplicity="1" />
+          <End Role="Drainage_Types" Type="Self.Drainage_Types" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Drainage_Types">
@@ -1725,8 +2117,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Fascia_Thickness_Canopy">
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="0..1" />
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Measurement_ID" />
+            </Principal>
+            <Dependent Role="Canopies">
+              <PropertyRef Name="Facia_Thickness_Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Fascia_Types_Canopy">
-          <End Role="Fascia_Types" Type="Self.Fascia_Types" Multiplicity="1" />
+          <End Role="Fascia_Types" Type="Self.Fascia_Types" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Fascia_Types">
@@ -1737,15 +2141,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Gutter_Types_Canopy">
-          <End Role="Gutter_Types" Type="Self.Gutter_Types" Multiplicity="0..1" />
+        <Association Name="FK_Images_Canopy">
+          <End Role="Images" Type="Self.Image" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Gutter_Types">
-              <PropertyRef Name="Gutter_Type_ID" />
+            <Principal Role="Images">
+              <PropertyRef Name="Image_ID" />
             </Principal>
             <Dependent Role="Canopies">
-              <PropertyRef Name="Gutter_Type_ID" />
+              <PropertyRef Name="Image_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1773,37 +2177,58 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Contact_Info_Contact_Types">
+        <Association Name="FK_Contact_Text_Contact_Types">
           <End Role="Contact_Types" Type="Self.Contact_Types" Multiplicity="1" />
-          <End Role="Contact_Info" Type="Self.Contact_Info" Multiplicity="*" />
+          <End Role="Contact_Text" Type="Self.Contact_Text" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contact_Types">
               <PropertyRef Name="Contact_Type_ID" />
             </Principal>
-            <Dependent Role="Contact_Info">
+            <Dependent Role="Contact_Text">
               <PropertyRef Name="Contact_Type_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Bid_Canopies">
-          <End Role="Bids" Type="Self.Bid" Multiplicity="*" />
-          <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
+        <Association Name="FK_Customer_Contact_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Customer_Contact" Type="Self.Customer_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Customer_Contact">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Measurements_Fractions">
+          <End Role="Fractions" Type="Self.Fraction" Multiplicity="0..1" />
+          <End Role="Measurements" Type="Self.Measurement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fractions">
+              <PropertyRef Name="Fractions_ID" />
+            </Principal>
+            <Dependent Role="Measurements">
+              <PropertyRef Name="Fractions_ID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <Association Name="Bid_To_Notes">
           <End Role="Bid_Notes" Type="Self.Bid_Notes" Multiplicity="*" />
           <End Role="Bids" Type="Self.Bid" Multiplicity="*" />
         </Association>
-        <Association Name="Customer_Contact_Info">
-          <End Role="Contact_Info" Type="Self.Contact_Info" Multiplicity="*" />
+        <Association Name="Customer_Contact_Text">
+          <End Role="Contact_Text" Type="Self.Contact_Text" Multiplicity="*" />
           <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
         </Association>
-        <Association Name="Sales_Person_Contact_Info">
-          <End Role="Contact_Info" Type="Self.Contact_Info" Multiplicity="*" />
+        <Association Name="Sales_Person_Contact_Text">
+          <End Role="Contact_Text" Type="Self.Contact_Text" Multiplicity="*" />
           <End Role="Sales_Persons" Type="Self.Sales_Persons" Multiplicity="*" />
         </Association>
         <EntityContainer Name="LaneEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Activity_Log" EntityType="Self.Activity_Log" />
           <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Bid_Canopies" EntityType="Self.Bid_Canopies" />
           <EntitySet Name="Bid_Notes" EntityType="Self.Bid_Notes" />
           <EntitySet Name="Bid_Statuses" EntityType="Self.Bid_Statuses" />
           <EntitySet Name="Bid_Types" EntityType="Self.Bid_Types" />
@@ -1813,13 +2238,16 @@
           <EntitySet Name="Column_Spacing_Lengths" EntityType="Self.Column_Spacing_Lengths" />
           <EntitySet Name="Column_Spacing_Widths" EntityType="Self.Column_Spacing_Widths" />
           <EntitySet Name="Column_Types" EntityType="Self.Column_Types" />
-          <EntitySet Name="Contact_Info" EntityType="Self.Contact_Info" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Contact_Text" EntityType="Self.Contact_Text" />
           <EntitySet Name="Contact_Types" EntityType="Self.Contact_Types" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Customer_Contact" EntityType="Self.Customer_Contact" />
           <EntitySet Name="Deck_Styles" EntityType="Self.Deck_Styles" />
+          <EntitySet Name="Deck_Types" EntityType="Self.Deck_Types" />
           <EntitySet Name="Drainage_Types" EntityType="Self.Drainage_Types" />
           <EntitySet Name="Fascia_Types" EntityType="Self.Fascia_Types" />
-          <EntitySet Name="Gutter_Types" EntityType="Self.Gutter_Types" />
+          <EntitySet Name="Fractions" EntityType="Self.Fraction" />
           <EntitySet Name="Images" EntityType="Self.Image" />
           <EntitySet Name="Job_Types" EntityType="Self.Job_Types" />
           <EntitySet Name="Measurements" EntityType="Self.Measurement" />
@@ -1833,9 +2261,17 @@
             <End Role="Addresses" EntitySet="Addresses" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
+          <AssociationSet Name="FK_Sales_Person_Address" Association="Self.FK_Sales_Person_Address">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="Sales_Persons" EntitySet="Sales_Persons" />
+          </AssociationSet>
           <AssociationSet Name="FK_Sites_Addresses" Association="Self.FK_Sites_Addresses">
             <End Role="Addresses" EntitySet="Addresses" />
             <End Role="Sites" EntitySet="Sites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bid_Canopies_Canopies" Association="Self.FK_Bid_Canopies_Canopies">
+            <End Role="Canopies" EntitySet="Canopies" />
+            <End Role="Bid_Canopies" EntitySet="Bid_Canopies" />
           </AssociationSet>
           <AssociationSet Name="FK_Bid_Statuses_Bids" Association="Self.FK_Bid_Statuses_Bids">
             <End Role="Bid_Statuses" EntitySet="Bid_Statuses" />
@@ -1851,6 +2287,14 @@
           </AssociationSet>
           <AssociationSet Name="FK_Bids_Customer" Association="Self.FK_Bids_Customer">
             <End Role="Customer" EntitySet="Customers" />
+            <End Role="Bids" EntitySet="Bids" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_ID_Bids" Association="Self.FK_Company_ID_Bids">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Bids" EntitySet="Bids" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Contact_Bids" Association="Self.FK_Customer_Contact_Bids">
+            <End Role="Customer_Contact" EntitySet="Customer_Contact" />
             <End Role="Bids" EntitySet="Bids" />
           </AssociationSet>
           <AssociationSet Name="FK_Job_Types_Bids" Association="Self.FK_Job_Types_Bids">
@@ -1881,31 +2325,47 @@
             <End Role="Structure_Types" EntitySet="Structure_Types" />
             <End Role="Bids" EntitySet="Bids" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopies_Measurements" Association="Self.FK_Canopies_Measurements">
+          <AssociationSet Name="FK_Canopies_Fascia_Image" Association="Self.FK_Canopies_Fascia_Image">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurement_Clearance_Height" Association="Self.FK_Canopies_Measurement_Clearance_Height">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopies_Measurements1" Association="Self.FK_Canopies_Measurements1">
+          <AssociationSet Name="FK_Canopies_Measurement_Column_Size_Length" Association="Self.FK_Canopies_Measurement_Column_Size_Length">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopies_Measurements2" Association="Self.FK_Canopies_Measurements2">
+          <AssociationSet Name="FK_Canopies_Measurement_Column_Size_OD" Association="Self.FK_Canopies_Measurement_Column_Size_OD">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopies_Measurements3" Association="Self.FK_Canopies_Measurements3">
+          <AssociationSet Name="FK_Canopies_Measurement_Column_Size_Thickness" Association="Self.FK_Canopies_Measurement_Column_Size_Thickness">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopies_Measurements4" Association="Self.FK_Canopies_Measurements4">
+          <AssociationSet Name="FK_Canopies_Measurement_Column_Size_Width" Association="Self.FK_Canopies_Measurement_Column_Size_Width">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopies_Measurements5" Association="Self.FK_Canopies_Measurements5">
+          <AssociationSet Name="FK_Canopies_Measurement_Deck_Thickness" Association="Self.FK_Canopies_Measurement_Deck_Thickness">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Canopies_Measurements6" Association="Self.FK_Canopies_Measurements6">
+          <AssociationSet Name="FK_Canopies_Measurement_Drainage" Association="Self.FK_Canopies_Measurement_Drainage">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurement_Fascia_Height" Association="Self.FK_Canopies_Measurement_Fascia_Height">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurement_Size_Length" Association="Self.FK_Canopies_Measurement_Size_Length">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canopies_Measurement_Size_Width" Association="Self.FK_Canopies_Measurement_Size_Width">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
@@ -1925,6 +2385,10 @@
             <End Role="Deck_Styles" EntitySet="Deck_Styles" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
+          <AssociationSet Name="FK_Deck_Type_Canopy" Association="Self.FK_Deck_Type_Canopy">
+            <End Role="Deck_Types" EntitySet="Deck_Types" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
           <AssociationSet Name="FK_Drainage_Measurement_Canopy" Association="Self.FK_Drainage_Measurement_Canopy">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Canopies" EntitySet="Canopies" />
@@ -1933,12 +2397,16 @@
             <End Role="Drainage_Types" EntitySet="Drainage_Types" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
+          <AssociationSet Name="FK_Fascia_Thickness_Canopy" Association="Self.FK_Fascia_Thickness_Canopy">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
           <AssociationSet Name="FK_Fascia_Types_Canopy" Association="Self.FK_Fascia_Types_Canopy">
             <End Role="Fascia_Types" EntitySet="Fascia_Types" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Gutter_Types_Canopy" Association="Self.FK_Gutter_Types_Canopy">
-            <End Role="Gutter_Types" EntitySet="Gutter_Types" />
+          <AssociationSet Name="FK_Images_Canopy" Association="Self.FK_Images_Canopy">
+            <End Role="Images" EntitySet="Images" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
           <AssociationSet Name="FK_Column_Spacing_Lengths_Measurements" Association="Self.FK_Column_Spacing_Lengths_Measurements">
@@ -1949,48 +2417,53 @@
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Column_Spacing_Widths" EntitySet="Column_Spacing_Widths" />
           </AssociationSet>
-          <AssociationSet Name="FK_Contact_Info_Contact_Types" Association="Self.FK_Contact_Info_Contact_Types">
+          <AssociationSet Name="FK_Contact_Text_Contact_Types" Association="Self.FK_Contact_Text_Contact_Types">
             <End Role="Contact_Types" EntitySet="Contact_Types" />
-            <End Role="Contact_Info" EntitySet="Contact_Info" />
+            <End Role="Contact_Text" EntitySet="Contact_Text" />
           </AssociationSet>
-          <AssociationSet Name="Bid_Canopies" Association="Self.Bid_Canopies">
-            <End Role="Bids" EntitySet="Bids" />
-            <End Role="Canopies" EntitySet="Canopies" />
+          <AssociationSet Name="FK_Customer_Contact_Customer" Association="Self.FK_Customer_Contact_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Customer_Contact" EntitySet="Customer_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Measurements_Fractions" Association="Self.fk_Measurements_Fractions">
+            <End Role="Fractions" EntitySet="Fractions" />
+            <End Role="Measurements" EntitySet="Measurements" />
           </AssociationSet>
           <AssociationSet Name="Bid_To_Notes" Association="Self.Bid_To_Notes">
             <End Role="Bid_Notes" EntitySet="Bid_Notes" />
             <End Role="Bids" EntitySet="Bids" />
           </AssociationSet>
-          <AssociationSet Name="Customer_Contact_Info" Association="Self.Customer_Contact_Info">
-            <End Role="Contact_Info" EntitySet="Contact_Info" />
+          <AssociationSet Name="Customer_Contact_Text" Association="Self.Customer_Contact_Text">
+            <End Role="Contact_Text" EntitySet="Contact_Text" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
-          <AssociationSet Name="Sales_Person_Contact_Info" Association="Self.Sales_Person_Contact_Info">
-            <End Role="Contact_Info" EntitySet="Contact_Info" />
+          <AssociationSet Name="Sales_Person_Contact_Text" Association="Self.Sales_Person_Contact_Text">
+            <End Role="Contact_Text" EntitySet="Contact_Text" />
             <End Role="Sales_Persons" EntitySet="Sales_Persons" />
           </AssociationSet>
           <FunctionImport Name="BidSearch" ReturnType="Collection(LaneModel.BidSearch_Result)">
-            <Parameter Name="BidId" Mode="In" Type="Int32" />
+            <Parameter Name="BidId" Mode="In" Type="Guid" />
             <Parameter Name="StructTypeId" Mode="In" Type="Int32" />
-            <Parameter Name="SiteId" Mode="In" Type="Int32" />
+            <Parameter Name="SiteId" Mode="In" Type="Guid" />
             <Parameter Name="BidStatusId" Mode="In" Type="Int32" />
             <Parameter Name="JobTypeId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BidSearch_Result">
-          <Property Type="Int32" Name="Bid_ID" Nullable="false" />
+          <Property Type="Guid" Name="Bid_ID" Nullable="false" />
           <Property Type="Int32" Name="Bid_Status_ID" Nullable="false" />
           <Property Type="Int32" Name="Structure_Type_ID" Nullable="false" />
           <Property Type="Int32" Name="Revision_Number" Nullable="false" />
           <Property Type="Int32" Name="Bid_Type_ID" Nullable="false" />
-          <Property Type="Guid" Name="Customer_ID" Nullable="true" />
-          <Property Type="Int32" Name="Site_ID" Nullable="true" />
-          <Property Type="String" Name="Site_Name" Nullable="true" MaxLength="75" />
+          <Property Type="Guid" Name="Customer_ID" Nullable="false" />
+          <Property Type="Guid" Name="Site_ID" Nullable="true" />
+          <Property Type="String" Name="Main_Site_Name" Nullable="true" MaxLength="13" />
+          <Property Type="String" Name="Main_Site_Name1" Nullable="true" MaxLength="13" />
           <Property Type="Int32" Name="Job_Type_ID" Nullable="false" />
-          <Property Type="Int32" Name="Sales_Person_ID" Nullable="false" />
+          <Property Type="Guid" Name="Sales_Person_ID" Nullable="true" />
           <Property Type="String" Name="Structure_Type_Name" Nullable="true" MaxLength="40" />
           <Property Type="String" Name="Job_Type_Name" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Bid_Status_Name" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="Bid_Status_Name" Nullable="false" MaxLength="40" />
           <Property Type="String" Name="Address_Line" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="City" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="State" Nullable="true" MaxLength="30" />
@@ -2023,6 +2496,14 @@
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Zip" ColumnName="Zip" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bid_Canopies">
+            <EntityTypeMapping TypeName="LaneModel.Bid_Canopies">
+              <MappingFragment StoreEntitySet="Bid_Canopies">
+                <ScalarProperty Name="Bid_ID" ColumnName="Bid_ID" />
+                <ScalarProperty Name="Canopy_ID" ColumnName="Canopy_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2062,19 +2543,20 @@
               <MappingFragment StoreEntitySet="Bids">
                 <ScalarProperty Name="Bid_ID" ColumnName="Bid_ID" />
                 <ScalarProperty Name="Revision_Number" ColumnName="Revision_Number" />
+                <ScalarProperty Name="Bid_Code" ColumnName="Bid_Code" />
                 <ScalarProperty Name="Structure_Type_ID" ColumnName="Structure_Type_ID" />
                 <ScalarProperty Name="Bid_Status_ID" ColumnName="Bid_Status_ID" />
                 <ScalarProperty Name="Job_Type_ID" ColumnName="Job_Type_ID" />
                 <ScalarProperty Name="Scope_Type_ID" ColumnName="Scope_Type_ID" />
                 <ScalarProperty Name="Bid_Type_ID" ColumnName="Bid_Type_ID" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
                 <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="Customer_Contact_ID" ColumnName="Customer_Contact_ID" />
                 <ScalarProperty Name="Sales_Person_ID" ColumnName="Sales_Person_ID" />
                 <ScalarProperty Name="Site_ID" ColumnName="Site_ID" />
                 <ScalarProperty Name="Shipping_ID" ColumnName="Shipping_ID" />
                 <ScalarProperty Name="Special_Shipping_ID" ColumnName="Special_Shipping_ID" />
                 <ScalarProperty Name="Alternate_Shipping_ID" ColumnName="Alternate_Shipping_ID" />
-                <ScalarProperty Name="Bid_Note_ID" ColumnName="Bid_Note_ID" />
-                <ScalarProperty Name="Canopy_ID" ColumnName="Canopy_ID" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />
                 <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
                 <ScalarProperty Name="Modifed_By" ColumnName="Modifed_By" />
@@ -2086,27 +2568,34 @@
             <EntityTypeMapping TypeName="LaneModel.Canopy">
               <MappingFragment StoreEntitySet="Canopies">
                 <ScalarProperty Name="Canopy_ID" ColumnName="Canopy_ID" />
+                <ScalarProperty Name="Canopy_Code" ColumnName="Canopy_Code" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Size_Width_Measure_ID" ColumnName="Size_Width_Measure_ID" />
-                <ScalarProperty Name="Size_Length_Measure_ID" ColumnName="Size_Length_Measure_ID" />
-                <ScalarProperty Name="Clearance_Height_Measure_ID" ColumnName="Clearance_Height_Measure_ID" />
+                <ScalarProperty Name="Size_Width_Measurement_ID" ColumnName="Size_Width_Measurement_ID" />
+                <ScalarProperty Name="Size_Length_Measurement_ID" ColumnName="Size_Length_Measurement_ID" />
+                <ScalarProperty Name="Clearance_Height_Measurement_ID" ColumnName="Clearance_Height_Measurement_ID" />
                 <ScalarProperty Name="Column_Quantity" ColumnName="Column_Quantity" />
                 <ScalarProperty Name="Column_Type_ID" ColumnName="Column_Type_ID" />
-                <ScalarProperty Name="Column_Size_Measure_ID" ColumnName="Column_Size_Measure_ID" />
+                <ScalarProperty Name="Column_Type_Other" ColumnName="Column_Type_Other" />
+                <ScalarProperty Name="Column_Size_Length_Measurement_ID" ColumnName="Column_Size_Length_Measurement_ID" />
+                <ScalarProperty Name="Column_Size_Width_Measurement_ID" ColumnName="Column_Size_Width_Measurement_ID" />
+                <ScalarProperty Name="Column_Size_Thickness_Measurement_ID" ColumnName="Column_Size_Thickness_Measurement_ID" />
+                <ScalarProperty Name="Column_Size_OD_Measurement_ID" ColumnName="Column_Size_OD_Measurement_ID" />
+                <ScalarProperty Name="Column_Size_Other" ColumnName="Column_Size_Other" />
                 <ScalarProperty Name="Column_Spacing_Notes" ColumnName="Column_Spacing_Notes" />
                 <ScalarProperty Name="Deck_Style_ID" ColumnName="Deck_Style_ID" />
+                <ScalarProperty Name="Deck_Type_ID" ColumnName="Deck_Type_ID" />
                 <ScalarProperty Name="Deck_Color_ID" ColumnName="Deck_Color_ID" />
-                <ScalarProperty Name="Deck_Thickness_Measure_ID" ColumnName="Deck_Thickness_Measure_ID" />
+                <ScalarProperty Name="Deck_Thickness_Measurement_ID" ColumnName="Deck_Thickness_Measurement_ID" />
+                <ScalarProperty Name="Deck_Gauge" ColumnName="Deck_Gauge" />
                 <ScalarProperty Name="Image_ID" ColumnName="Image_ID" />
-                <ScalarProperty Name="Facia_Image" ColumnName="Facia_Image" />
-                <ScalarProperty Name="Fascia_Height_Measure_ID" ColumnName="Fascia_Height_Measure_ID" />
+                <ScalarProperty Name="Fascia_Image_ID" ColumnName="Fascia_Image_ID" />
+                <ScalarProperty Name="Fascia_Height_Measurement_ID" ColumnName="Fascia_Height_Measurement_ID" />
                 <ScalarProperty Name="Fascia_Type_ID" ColumnName="Fascia_Type_ID" />
                 <ScalarProperty Name="Fascia_Color_ID" ColumnName="Fascia_Color_ID" />
                 <ScalarProperty Name="Fascia_Info" ColumnName="Fascia_Info" />
-                <ScalarProperty Name="Facia_Thickness" ColumnName="Facia_Thickness" />
+                <ScalarProperty Name="Facia_Thickness_Measurement_ID" ColumnName="Facia_Thickness_Measurement_ID" />
                 <ScalarProperty Name="Drainage_Type_ID" ColumnName="Drainage_Type_ID" />
-                <ScalarProperty Name="Drainage_Measure_ID" ColumnName="Drainage_Measure_ID" />
-                <ScalarProperty Name="Gutter_Type_ID" ColumnName="Gutter_Type_ID" />
+                <ScalarProperty Name="Drainage_Measurement_ID" ColumnName="Drainage_Measurement_ID" />
                 <ScalarProperty Name="Other_Notes" ColumnName="Other_Notes" />
                 <ScalarProperty Name="Inclusion_Notes" ColumnName="Inclusion_Notes" />
                 <ScalarProperty Name="Exclusion_Notes" ColumnName="Exclusion_Notes" />
@@ -2126,6 +2615,13 @@
                 <ScalarProperty Name="Design_Load_Spec" ColumnName="Design_Load_Spec" />
                 <ScalarProperty Name="Design_Load_Notes" ColumnName="Design_Load_Notes" />
                 <ScalarProperty Name="Drawing_Sealed" ColumnName="Drawing_Sealed" />
+                <ScalarProperty Name="Design_Specs" ColumnName="Design_Specs" />
+                <ScalarProperty Name="Has_Perimeter_Gutters" ColumnName="Has_Perimeter_Gutters" />
+                <ScalarProperty Name="Has_Center_Gutters" ColumnName="Has_Center_Gutters" />
+                <ScalarProperty Name="Has_Internal_Gutters" ColumnName="Has_Internal_Gutters" />
+                <ScalarProperty Name="Has_External_Gutters" ColumnName="Has_External_Gutters" />
+                <ScalarProperty Name="Has_Scruppers" ColumnName="Has_Scruppers" />
+                <ScalarProperty Name="Gutter_Notes" ColumnName="Gutter_Notes" />
                 <ScalarProperty Name="Drawing_State" ColumnName="Drawing_State" />
                 <ScalarProperty Name="Drawing_Code" ColumnName="Drawing_Code" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />
@@ -2140,7 +2636,6 @@
               <MappingFragment StoreEntitySet="Colors">
                 <ScalarProperty Name="Color_ID" ColumnName="Color_ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ColorText" ColumnName="ColorText" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />
                 <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
               </MappingFragment>
@@ -2176,12 +2671,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Contact_Info">
-            <EntityTypeMapping TypeName="LaneModel.Contact_Info">
-              <MappingFragment StoreEntitySet="Contact_Info">
-                <ScalarProperty Name="Contact_Info_ID" ColumnName="Contact_Info_ID" />
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="LaneModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="Company_Code" ColumnName="Company_Code" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contact_Text">
+            <EntityTypeMapping TypeName="LaneModel.Contact_Text">
+              <MappingFragment StoreEntitySet="Contact_Text">
+                <ScalarProperty Name="Contact_Text_ID" ColumnName="Contact_Text_ID" />
                 <ScalarProperty Name="Contact_Type_ID" ColumnName="Contact_Type_ID" />
-                <ScalarProperty Name="Contact_Text" ColumnName="Contact_Text" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />
                 <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
               </MappingFragment>
@@ -2201,13 +2705,24 @@
             <EntityTypeMapping TypeName="LaneModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
                 <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
-                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="Bid_Code" ColumnName="Bid_Code" />
+                <ScalarProperty Name="Sales_Code" ColumnName="Sales_Code" />
+                <ScalarProperty Name="Company_Region_Name" ColumnName="Company_Region_Name" />
                 <ScalarProperty Name="Address_ID" ColumnName="Address_ID" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />
                 <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer_Contact">
+            <EntityTypeMapping TypeName="LaneModel.Customer_Contact">
+              <MappingFragment StoreEntitySet="Customer_Contact">
+                <ScalarProperty Name="Customer_Contact_ID" ColumnName="Customer_Contact_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2215,6 +2730,16 @@
             <EntityTypeMapping TypeName="LaneModel.Deck_Styles">
               <MappingFragment StoreEntitySet="Deck_Styles">
                 <ScalarProperty Name="Deck_Style_ID" ColumnName="Deck_Style_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Deck_Types">
+            <EntityTypeMapping TypeName="LaneModel.Deck_Types">
+              <MappingFragment StoreEntitySet="Deck_Types">
+                <ScalarProperty Name="Deck_Type_ID" ColumnName="Deck_Type_ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />
                 <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
@@ -2241,13 +2766,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Gutter_Types">
-            <EntityTypeMapping TypeName="LaneModel.Gutter_Types">
-              <MappingFragment StoreEntitySet="Gutter_Types">
-                <ScalarProperty Name="Gutter_Type_ID" ColumnName="Gutter_Type_ID" />
+          <EntitySetMapping Name="Fractions">
+            <EntityTypeMapping TypeName="LaneModel.Fraction">
+              <MappingFragment StoreEntitySet="Fractions">
+                <ScalarProperty Name="Fractions_ID" ColumnName="Fractions_ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2255,7 +2778,6 @@
             <EntityTypeMapping TypeName="LaneModel.Image">
               <MappingFragment StoreEntitySet="Images">
                 <ScalarProperty Name="Image_ID" ColumnName="Image_ID" />
-                <ScalarProperty Name="Color_ID" ColumnName="Color_ID" />
                 <ScalarProperty Name="Image_Path" ColumnName="Image_Path" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />
                 <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
@@ -2279,6 +2801,7 @@
                 <ScalarProperty Name="Measurement_ID" ColumnName="Measurement_ID" />
                 <ScalarProperty Name="Feet" ColumnName="Feet" />
                 <ScalarProperty Name="Inches" ColumnName="Inches" />
+                <ScalarProperty Name="Fractions_ID" ColumnName="Fractions_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2286,6 +2809,7 @@
             <EntityTypeMapping TypeName="LaneModel.Sales_Persons">
               <MappingFragment StoreEntitySet="Sales_Persons">
                 <ScalarProperty Name="Sales_Person_ID" ColumnName="Sales_Person_ID" />
+                <ScalarProperty Name="Sales_Person_Code" ColumnName="Sales_Person_Code" />
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
                 <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
                 <ScalarProperty Name="Address_ID" ColumnName="Address_ID" />
@@ -2318,7 +2842,12 @@
             <EntityTypeMapping TypeName="LaneModel.Site">
               <MappingFragment StoreEntitySet="Sites">
                 <ScalarProperty Name="Site_ID" ColumnName="Site_ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Main_Name" ColumnName="Main_Name" />
+                <ScalarProperty Name="Sub_Name" ColumnName="Sub_Name" />
+                <ScalarProperty Name="Main_Name_Prefix" ColumnName="Main_Name_Prefix" />
+                <ScalarProperty Name="Main_Name_Suffix" ColumnName="Main_Name_Suffix" />
+                <ScalarProperty Name="Sub_Name_Prefix" ColumnName="Sub_Name_Prefix" />
+                <ScalarProperty Name="Sub_Name_Suffix" ColumnName="Sub_Name_Suffix" />
                 <ScalarProperty Name="Address_ID" ColumnName="Address_ID" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />
                 <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
@@ -2347,14 +2876,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="Bid_Canopies" TypeName="LaneModel.Bid_Canopies" StoreEntitySet="Bid_Canopies">
-            <EndProperty Name="Bids">
-              <ScalarProperty Name="Bid_ID" ColumnName="Bids_Bid_ID" />
-            </EndProperty>
-            <EndProperty Name="Canopies">
-              <ScalarProperty Name="Canopy_ID" ColumnName="Canopies_Canopy_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="Bid_To_Notes" TypeName="LaneModel.Bid_To_Notes" StoreEntitySet="Bid_To_Notes">
             <EndProperty Name="Bid_Notes">
               <ScalarProperty Name="Bid_Note_ID" ColumnName="Bid_Note_ID" />
@@ -2363,17 +2884,17 @@
               <ScalarProperty Name="Bid_ID" ColumnName="Bid_ID" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="Customer_Contact_Info" TypeName="LaneModel.Customer_Contact_Info" StoreEntitySet="Customer_Contact_Info">
-            <EndProperty Name="Contact_Info">
-              <ScalarProperty Name="Contact_Info_ID" ColumnName="Contact_Info_ID" />
+          <AssociationSetMapping Name="Customer_Contact_Text" TypeName="LaneModel.Customer_Contact_Text" StoreEntitySet="Customer_Contact_Text">
+            <EndProperty Name="Contact_Text">
+              <ScalarProperty Name="Contact_Text_ID" ColumnName="Contact_Text_ID" />
             </EndProperty>
             <EndProperty Name="Customer">
-              <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+              <ScalarProperty Name="Customer_ID" ColumnName="Customer_Contact_ID" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="Sales_Person_Contact_Info" TypeName="LaneModel.Sales_Person_Contact_Info" StoreEntitySet="Sales_Person_Contact_Info">
-            <EndProperty Name="Contact_Info">
-              <ScalarProperty Name="Contact_Info_ID" ColumnName="Contact_Info_ID" />
+          <AssociationSetMapping Name="Sales_Person_Contact_Text" TypeName="LaneModel.Sales_Person_Contact_Text" StoreEntitySet="Sales_Person_Contact_Text">
+            <EndProperty Name="Contact_Text">
+              <ScalarProperty Name="Contact_Text_ID" ColumnName="Contact_Text_ID" />
             </EndProperty>
             <EndProperty Name="Sales_Persons">
               <ScalarProperty Name="Sales_Person_ID" ColumnName="Sales_Person_ID" />
@@ -2389,7 +2910,8 @@
                 <ScalarProperty Name="Bid_Type_ID" ColumnName="Bid_Type_ID" />
                 <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
                 <ScalarProperty Name="Site_ID" ColumnName="Site_ID" />
-                <ScalarProperty Name="Site_Name" ColumnName="Site_Name" />
+                <ScalarProperty Name="Main_Site_Name" ColumnName="Main_Site_Name" />
+                <ScalarProperty Name="Main_Site_Name1" ColumnName="Main_Site_Name1" />
                 <ScalarProperty Name="Job_Type_ID" ColumnName="Job_Type_ID" />
                 <ScalarProperty Name="Sales_Person_ID" ColumnName="Sales_Person_ID" />
                 <ScalarProperty Name="Structure_Type_Name" ColumnName="Structure_Type_Name" />

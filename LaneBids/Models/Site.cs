@@ -20,9 +20,14 @@ namespace LaneBids.Models
             this.Bids = new HashSet<Bid>();
         }
     
-        public int Site_ID { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> Address_ID { get; set; }
+        public System.Guid Site_ID { get; set; }
+        public string Main_Name { get; set; }
+        public string Sub_Name { get; set; }
+        public string Main_Name_Prefix { get; set; }
+        public string Main_Name_Suffix { get; set; }
+        public string Sub_Name_Prefix { get; set; }
+        public string Sub_Name_Suffix { get; set; }
+        public Nullable<System.Guid> Address_ID { get; set; }
         public Nullable<int> Created_By { get; set; }
         public Nullable<System.DateTime> Create_Date { get; set; }
     

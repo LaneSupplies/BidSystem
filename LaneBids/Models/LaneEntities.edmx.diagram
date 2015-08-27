@@ -4,40 +4,48 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="70f88ee7dc1c423e81805821a6d93e5c" Name="Diagram1">
-        <EntityTypeShape EntityType="LaneModel.Activity_Log" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Address" Width="1.5" PointX="1.5" PointY="32.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Bid_Notes" Width="1.5" PointX="1.5" PointY="18.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Bid_Statuses" Width="1.5" PointX="1.5" PointY="21.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Bid_Types" Width="1.5" PointX="1.5" PointY="23.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Bid" Width="1.5" PointX="3.75" PointY="30.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Canopy" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Color" Width="1.5" PointX="3.75" PointY="50.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Column_Spacing_Lengths" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Column_Spacing_Widths" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Column_Types" Width="1.5" PointX="3.75" PointY="53.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Contact_Info" Width="1.5" PointX="1.5" PointY="36.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Contact_Types" Width="1.5" PointX="1.5" PointY="39.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Customer" Width="1.5" PointX="1.5" PointY="28.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Deck_Styles" Width="1.5" PointX="3.75" PointY="56.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Drainage_Types" Width="1.5" PointX="3.75" PointY="59.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Fascia_Types" Width="1.5" PointX="3.75" PointY="62" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Gutter_Types" Width="1.5" PointX="3.75" PointY="64.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Image" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Job_Types" Width="1.5" PointX="1.5" PointY="42.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Measurement" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Sales_Persons" Width="1.5" PointX="1.5" PointY="45.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Scope_Types" Width="1.5" PointX="1.5" PointY="48.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Shipping_Info" Width="1.5" PointX="1.5" PointY="51.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Site" Width="1.5" PointX="1.5" PointY="54.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.Structure_Types" Width="1.5" PointX="1.5" PointY="57.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaneModel.UserLoginProfile" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+      <Diagram DiagramId="ae6383d7d2414d428bffacf7875cada2" Name="Diagram1" ZoomLevel="77">
+        <EntityTypeShape EntityType="LaneModel.Activity_Log" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Address" Width="1.5" PointX="7.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Bid_Canopies" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Bid_Notes" Width="1.5" PointX="13" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Bid_Statuses" Width="1.5" PointX="13" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Bid_Types" Width="1.5" PointX="13" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Bid" Width="1.5" PointX="15.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Canopy" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Color" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Column_Spacing_Lengths" Width="1.5" PointX="3" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Column_Spacing_Widths" Width="1.5" PointX="3" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Column_Types" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Company" Width="1.5" PointX="13" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Contact_Text" Width="1.5" PointX="7.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Contact_Types" Width="1.5" PointX="5.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Customer" Width="1.5" PointX="10" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Customer_Contact" Width="1.5" PointX="12.25" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Deck_Styles" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Deck_Types" Width="1.5" PointX="0.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Drainage_Types" Width="1.5" PointX="0.75" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Fascia_Types" Width="1.5" PointX="0.75" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Fraction" Width="1.5" PointX="1.5" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Image" Width="1.5" PointX="0.75" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Job_Types" Width="1.5" PointX="13" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Measurement" Width="1.5" PointX="0.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Sales_Persons" Width="1.5" PointX="13" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Scope_Types" Width="1.5" PointX="13" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Shipping_Info" Width="1.5" PointX="13" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Site" Width="1.5" PointX="10" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.Structure_Types" Width="1.5" PointX="13" PointY="32.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaneModel.UserLoginProfile" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="LaneModel.FK_Customer_Addresses" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Sales_Person_Address" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Sites_Addresses" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Bid_Canopies_Canopies" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Bid_Statuses_Bids" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Bid_Types_Bids" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Alternate_Shipping_Info_Bids" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Bids_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Company_ID_Bids" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Customer_Contact_Bids" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Job_Types_Bids" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Sales_Persons_Bids" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Scope_Types_Bids" ManuallyRouted="false" />
@@ -45,28 +53,35 @@
         <AssociationConnector Association="LaneModel.FK_Sites_Bids" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Special_Shipping_Info_Bids" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Structure_Types_Bids" ManuallyRouted="false" />
-        <AssociationConnector Association="LaneModel.FK_Canopies_Measurements" ManuallyRouted="false" />
-        <AssociationConnector Association="LaneModel.FK_Canopies_Measurements1" ManuallyRouted="false" />
-        <AssociationConnector Association="LaneModel.FK_Canopies_Measurements2" ManuallyRouted="false" />
-        <AssociationConnector Association="LaneModel.FK_Canopies_Measurements3" ManuallyRouted="false" />
-        <AssociationConnector Association="LaneModel.FK_Canopies_Measurements4" ManuallyRouted="false" />
-        <AssociationConnector Association="LaneModel.FK_Canopies_Measurements5" ManuallyRouted="false" />
-        <AssociationConnector Association="LaneModel.FK_Canopies_Measurements6" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Canopies_Fascia_Image" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Canopies_Measurement_Clearance_Height" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Canopies_Measurement_Column_Size_Length" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Canopies_Measurement_Column_Size_OD" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Canopies_Measurement_Column_Size_Thickness" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Canopies_Measurement_Column_Size_Width" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Canopies_Measurement_Deck_Thickness" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Canopies_Measurement_Drainage" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Canopies_Measurement_Fascia_Height" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Canopies_Measurement_Size_Length" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Canopies_Measurement_Size_Width" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Colors_Canopy_1" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Colors_Canopy_2" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Column_Types_Canopy" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Deck_Styles_Canopy" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Deck_Type_Canopy" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Drainage_Measurement_Canopy" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Drainage_Types_Canopy" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Fascia_Thickness_Canopy" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Fascia_Types_Canopy" ManuallyRouted="false" />
-        <AssociationConnector Association="LaneModel.FK_Gutter_Types_Canopy" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Images_Canopy" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Column_Spacing_Lengths_Measurements" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.FK_Column_Spacing_Widths_Measurements" ManuallyRouted="false" />
-        <AssociationConnector Association="LaneModel.FK_Contact_Info_Contact_Types" ManuallyRouted="false" />
-        <AssociationConnector Association="LaneModel.Bid_Canopies" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Contact_Text_Contact_Types" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.FK_Customer_Contact_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.fk_Measurements_Fractions" ManuallyRouted="false" />
         <AssociationConnector Association="LaneModel.Bid_To_Notes" ManuallyRouted="false" />
-        <AssociationConnector Association="LaneModel.Customer_Contact_Info" ManuallyRouted="false" />
-        <AssociationConnector Association="LaneModel.Sales_Person_Contact_Info" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.Customer_Contact_Text" ManuallyRouted="false" />
+        <AssociationConnector Association="LaneModel.Sales_Person_Contact_Text" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

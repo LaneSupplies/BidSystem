@@ -29,6 +29,7 @@ namespace LaneBids.Models
     
         public virtual DbSet<Activity_Log> Activity_Log { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<Bid_Canopies> Bid_Canopies { get; set; }
         public virtual DbSet<Bid_Notes> Bid_Notes { get; set; }
         public virtual DbSet<Bid_Statuses> Bid_Statuses { get; set; }
         public virtual DbSet<Bid_Types> Bid_Types { get; set; }
@@ -38,13 +39,16 @@ namespace LaneBids.Models
         public virtual DbSet<Column_Spacing_Lengths> Column_Spacing_Lengths { get; set; }
         public virtual DbSet<Column_Spacing_Widths> Column_Spacing_Widths { get; set; }
         public virtual DbSet<Column_Types> Column_Types { get; set; }
-        public virtual DbSet<Contact_Info> Contact_Info { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<Contact_Text> Contact_Text { get; set; }
         public virtual DbSet<Contact_Types> Contact_Types { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Customer_Contact> Customer_Contact { get; set; }
         public virtual DbSet<Deck_Styles> Deck_Styles { get; set; }
+        public virtual DbSet<Deck_Types> Deck_Types { get; set; }
         public virtual DbSet<Drainage_Types> Drainage_Types { get; set; }
         public virtual DbSet<Fascia_Types> Fascia_Types { get; set; }
-        public virtual DbSet<Gutter_Types> Gutter_Types { get; set; }
+        public virtual DbSet<Fraction> Fractions { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Job_Types> Job_Types { get; set; }
         public virtual DbSet<Measurement> Measurements { get; set; }
@@ -55,11 +59,11 @@ namespace LaneBids.Models
         public virtual DbSet<Structure_Types> Structure_Types { get; set; }
         public virtual DbSet<UserLoginProfile> UserLoginProfiles { get; set; }
     
-        public virtual ObjectResult<BidSearch_Result> BidSearch(Nullable<int> bidId, Nullable<int> structTypeId, Nullable<int> siteId, Nullable<int> bidStatusId, Nullable<int> jobTypeId)
+        public virtual ObjectResult<BidSearch_Result> BidSearch(Nullable<System.Guid> bidId, Nullable<int> structTypeId, Nullable<System.Guid> siteId, Nullable<int> bidStatusId, Nullable<int> jobTypeId)
         {
             var bidIdParameter = bidId.HasValue ?
                 new ObjectParameter("BidId", bidId) :
-                new ObjectParameter("BidId", typeof(int));
+                new ObjectParameter("BidId", typeof(System.Guid));
     
             var structTypeIdParameter = structTypeId.HasValue ?
                 new ObjectParameter("StructTypeId", structTypeId) :
@@ -67,7 +71,7 @@ namespace LaneBids.Models
     
             var siteIdParameter = siteId.HasValue ?
                 new ObjectParameter("SiteId", siteId) :
-                new ObjectParameter("SiteId", typeof(int));
+                new ObjectParameter("SiteId", typeof(System.Guid));
     
             var bidStatusIdParameter = bidStatusId.HasValue ?
                 new ObjectParameter("BidStatusId", bidStatusId) :

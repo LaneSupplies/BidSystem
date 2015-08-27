@@ -13,16 +13,17 @@ namespace LaneBids.Models
     
     public partial class BidSearch_Result
     {
-        public int Bid_ID { get; set; }
+        public System.Guid Bid_ID { get; set; }
         public int Bid_Status_ID { get; set; }
         public int Structure_Type_ID { get; set; }
         public int Revision_Number { get; set; }
         public int Bid_Type_ID { get; set; }
-        public Nullable<System.Guid> Customer_ID { get; set; }
-        public Nullable<int> Site_ID { get; set; }
-        public string Site_Name { get; set; }
+        public System.Guid Customer_ID { get; set; }
+        public Nullable<System.Guid> Site_ID { get; set; }
+        public string Main_Site_Name { get; set; }
+        public string Main_Site_Name1 { get; set; }
         public int Job_Type_ID { get; set; }
-        public int Sales_Person_ID { get; set; }
+        public Nullable<System.Guid> Sales_Person_ID { get; set; }
         public string Structure_Type_Name { get; set; }
         public string Job_Type_Name { get; set; }
         public string Bid_Status_Name { get; set; }

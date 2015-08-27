@@ -12,23 +12,20 @@ namespace LaneBids.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Color
+    public partial class Deck_Types
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Color()
+        public Deck_Types()
         {
             this.Canopies = new HashSet<Canopy>();
-            this.Canopies1 = new HashSet<Canopy>();
         }
     
-        public int Color_ID { get; set; }
+        public int Deck_Type_ID { get; set; }
         public string Name { get; set; }
         public Nullable<int> Created_By { get; set; }
         public Nullable<System.DateTime> Create_Date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Canopy> Canopies { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Canopy> Canopies1 { get; set; }
     }
 }

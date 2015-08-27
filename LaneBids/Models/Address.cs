@@ -18,10 +18,11 @@ namespace LaneBids.Models
         public Address()
         {
             this.Customers = new HashSet<Customer>();
+            this.Sales_Persons = new HashSet<Sales_Persons>();
             this.Sites = new HashSet<Site>();
         }
     
-        public int Address_ID { get; set; }
+        public System.Guid Address_ID { get; set; }
         public string Address_Line1 { get; set; }
         public string Address_Line2 { get; set; }
         public string City { get; set; }
@@ -31,6 +32,8 @@ namespace LaneBids.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sales_Persons> Sales_Persons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Site> Sites { get; set; }
     }

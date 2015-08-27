@@ -12,20 +12,22 @@ namespace LaneBids.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Gutter_Types
+    public partial class Customer_Contact
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Gutter_Types()
+        public Customer_Contact()
         {
-            this.Canopies = new HashSet<Canopy>();
+            this.Bids = new HashSet<Bid>();
         }
     
-        public int Gutter_Type_ID { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> Created_By { get; set; }
-        public Nullable<System.DateTime> Create_Date { get; set; }
+        public System.Guid Customer_Contact_ID { get; set; }
+        public System.Guid Customer_ID { get; set; }
+        public string First_Name { get; set; }
+        public string Last_Name { get; set; }
+        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Canopy> Canopies { get; set; }
+        public virtual ICollection<Bid> Bids { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

@@ -203,6 +203,9 @@
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BidViewModel.cs" />
+    <Compile Include="Models\Bid_Canopies.cs">
+      <DependentUpon>LaneEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Bid_Notes.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
@@ -230,7 +233,10 @@
     <Compile Include="Models\Column_Types.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Contact_Info.cs">
+    <Compile Include="Models\Company.cs">
+      <DependentUpon>LaneEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Contact_Text.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Contact_Types.cs">
@@ -245,7 +251,13 @@
     <Compile Include="Models\BidDetailsModel.cs" />
     <Compile Include="Models\BidSearchModel.cs" />
     <Compile Include="Models\CanopyDetailsModel.cs" />
+    <Compile Include="Models\Customer_Contact.cs">
+      <DependentUpon>LaneEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Deck_Styles.cs">
+      <DependentUpon>LaneEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Deck_Types.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Drainage_Types.cs">
@@ -254,7 +266,7 @@
     <Compile Include="Models\Fascia_Types.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Gutter_Types.cs">
+    <Compile Include="Models\Fraction.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Image.cs">
