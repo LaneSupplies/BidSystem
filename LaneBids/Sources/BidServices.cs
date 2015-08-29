@@ -65,7 +65,7 @@ namespace LaneBids.Sources
             bid.SiteList = _entities.Sites.ToList().Select(x => new SelectListItem
             {
                 Value = x.Site_ID.ToString(),
-                Text = x.Name
+                Text = x.Main_Name_Prefix + "-" + x.Main_Name + "-" + x.Main_Name_Suffix
             }).ToList();
 
             //Contact Types
@@ -75,29 +75,19 @@ namespace LaneBids.Sources
                 Text = s.Name
             });
 
-            //Customer Data
-            bid.AddCustomerInfo = new CustomerDetailsModel
+            //Company Data
+            bid.CompanyList = _entities.Companies.ToList().Select(s => new SelectListItem
             {
-                Address = new AddressModel {StateList = AddressService.States},
-                PhoneContacts = new PhoneContactsModel {ContactTypeList = contactTypeList},
-                CustomerList = _entities.Customers.OrderBy(x => x.Last_Name).ToList().Select(x => new SelectListItem
-                {
-                    Value = x.Customer_ID.ToString(),
-                    Text = x.First_Name + " " + x.Last_Name
-                }).ToList()
-            };
+                Value = s.Company_ID.ToString(),
+                Text = s.CompanyName
+            }).ToList();
 
             //Sales Person Data
-            bid.AddSalesPersonDetails = new SalesPersonDetailsModel
+            bid.SalesPersonList = _entities.Sales_Persons.ToList().Select(s => new SelectListItem
             {
-                Address = new AddressModel {StateList = AddressService.States},
-                PhoneContacts = new PhoneContactsModel {ContactTypeList = contactTypeList},
-                SalesPersonList = _entities.Sales_Persons.ToList().Select(x => new SelectListItem
-                {
-                    Value = x.Sales_Person_ID.ToString(),
-                    Text = x.First_Name + " " + x.Last_Name
-                }).ToList()
-            };
+                Value = s.Sales_Person_ID.ToString(),
+                Text = s.First_Name + " " + s.Last_Name
+            }).ToList();
 
             //Sites
             bid.AddSiteDetails = new SiteDetailsModel
@@ -106,7 +96,7 @@ namespace LaneBids.Sources
                 SiteList = _entities.Sites.ToList().Select(x => new SelectListItem
                 {
                     Value = x.Site_ID.ToString(),
-                    Text = x.Name
+                    Text = x.Main_Name_Prefix + "-" + x.Main_Name + "-" + x.Main_Name_Suffix
                 }).ToList()
             };
 
@@ -150,7 +140,7 @@ namespace LaneBids.Sources
             baseData.SiteList = _entities.Sites.ToList().Select(s => new SelectListItem
             {
                 Value = s.Site_ID.ToString(),
-                Text = s.Name
+                Text = s.Main_Name_Prefix + "-" + s.Main_Name + "-" + s.Main_Name_Suffix
             });
 
             baseData.SalesPersonList = _entities.Sales_Persons.ToList().Select(s => new SelectListItem

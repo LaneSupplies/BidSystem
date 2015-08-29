@@ -4,8 +4,7 @@
 }
 
 <hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>Create a new account.</h2>
+    <h2>Create a User</h2>
 </hgroup>
 
 @using (Html.BeginForm())
@@ -17,13 +16,8 @@
         <legend>Registration Form</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.Role)
-                <select name="Role">
-                    <option value="ReadOnly">Read Only</option>
-                    <option value="SalesPeople">Sales People</option>
-                    <option value="Manager">Manager</option>
-                    <option value="Administrator">Admin</option>
-                </select>
+                @Html.LabelFor(m => m.LaneUserRole)
+                @Html.EnumDropDownListFor(m => m.LaneUserRole)
             </li>
             <li>
                 @Html.LabelFor(m => m.UserName)

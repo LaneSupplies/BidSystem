@@ -20,6 +20,7 @@ namespace LaneBids.Controllers
         private BidServices _bidServices = new BidServices();
         private CanopyServices _canopyService = new CanopyServices();
         private CommonServices _commonServices = new CommonServices();
+        private HomeServices _homeServices = new HomeServices();
 
         public ActionResult Index()
         {
@@ -48,8 +49,23 @@ namespace LaneBids.Controllers
                 bidDetails = _bidServices.BidDetailInfo(bidDetails);
                 return View("Bid", bidDetails);
             }
-
+            
             var entities = new LaneEntities();
+            var bidNotes = new List<Bid_Notes>();
+            if (!String.IsNullOrEmpty(bidDetails.BidNotesText))
+            {
+                var bidNote = new Bid_Notes
+                {
+                    Notes = bidDetails.BidNotesText,
+                    Create_Date = DateTime.Now,
+                    Created_By = WebSecurity.CurrentUserId
+                };
+                entities.Bid_Notes.Add(bidNote);
+                entities.SaveChanges();
+
+                bidNotes.Add(bidNote);
+            }
+
             var newBid = new Bid
             {
                 Bid_Status_ID = bidDetails.BidStatusId,
@@ -62,26 +78,14 @@ namespace LaneBids.Controllers
                 Shipping_ID = bidDetails.ShippingId,
                 Site_ID = bidDetails.SiteId,
                 Created_By = WebSecurity.CurrentUserId,
-                Create_Date = DateTime.Now
+                Create_Date = DateTime.Now,
+                Bid_Notes = bidNotes
             };
 
             entities.Bids.Add(newBid);
             entities.SaveChanges();
 
-            if (!String.IsNullOrEmpty(bidDetails.BidNotesText))
-            {
-                var bidNote = new Bid_Notes
-                {
-                    Notes = bidDetails.BidNotesText,
-                    Create_Date = DateTime.Now,
-                    Created_By = WebSecurity.CurrentUserId
-                };
-                entities.Bid_Notes.Add(bidNote);
-                entities.SaveChanges();
-
-                newBid.Bid_Note_ID = bidNote.Bid_Note_ID;
-                entities.SaveChanges();
-            }
+            
 
             bidDetails.BidId = newBid.Bid_ID;
             var canopyInfo = _canopyService.CanopyLoadData(bidDetails);
@@ -94,17 +98,17 @@ namespace LaneBids.Controllers
         {
             var entities = new LaneEntities();
 
-            var clearanceHeight = _commonServices.MeasurementId(canopyDetails.ClearanceFeet, canopyDetails.ClearanceInches);
-            var columnSize = _commonServices.MeasurementId(canopyDetails.ColumnSizeFeet, canopyDetails.ColumnSizeInches);
-            var deckThickness = _commonServices.MeasurementId(canopyDetails.DeckThicknessFeet, canopyDetails.DeckthicknessInches);
-            var fasciaHeight = _commonServices.MeasurementId(canopyDetails.FasciaHeightFeet, canopyDetails.FasciaHeightInches);
-            var sizeHeight = _commonServices.MeasurementId(canopyDetails.SizeHeightFeet, canopyDetails.SizeHeightInches);
-            var sizeWidth = _commonServices.MeasurementId(canopyDetails.SizeWidthFeet, canopyDetails.SizeWidthInches);
-            var bids = entities.Bids.Where(x => x.Bid_ID == canopyDetails.BidId).ToList();
+            var clearanceHeight = _commonServices.GetMeasurementId(canopyDetails.Clearance);
+            var columnSize = _commonServices.GetMeasurementId(canopyDetails.ColumnSize);
+            var deckThickness = _commonServices.GetMeasurementId(canopyDetails.DeckThickness);
+            var fasciaHeight = _commonServices.GetMeasurementId(canopyDetails.FasciaHeight);
+            var sizeHeight = _commonServices.GetMeasurementId(canopyDetails.SizeHeight);
+            var sizeWidth = _commonServices.GetMeasurementId(canopyDetails.SizeWidth);
+            var bids = entities.Bid_Canopies.Where(x => x.Bid_ID == canopyDetails.BidId).ToList();
 
             var newCanopy = new Canopy
             {
-                Bids = bids,
+                Bid_Canopies = bids,
                 Column_Quantity = canopyDetails.Quantity,
                 Column_Type_ID = canopyDetails.ColumnTypeId,
                 Deck_Color_ID = canopyDetails.DeckColorId,
@@ -133,14 +137,36 @@ namespace LaneBids.Controllers
                 Total_Price = canopyDetails.TotalPrice,
                 Alt_Base_Price = canopyDetails.AltBasePrice,
                 Base_Price = canopyDetails.BasePrice,
-                Clearance_Height_Measure_ID = clearanceHeight,
-                Column_Size_Measure_ID = columnSize,
-                Deck_Thickness_Measure_ID = deckThickness,
-                Fascia_Height_Measure_ID = fasciaHeight,
-                Size_Length_Measure_ID = sizeHeight,
-                Size_Width_Measure_ID = sizeWidth,
+                Clearance_Height_Measurement_ID = clearanceHeight,
+                Deck_Thickness_Measurement_ID = deckThickness,
+                Fascia_Height_Measurement_ID = fasciaHeight,
+                Size_Length_Measurement_ID = sizeHeight,
+                Size_Width_Measurement_ID = sizeWidth,
                 Created_By = WebSecurity.CurrentUserId,
-                Create_Date = DateTime.Now
+                Create_Date = DateTime.Now,
+                ///////////////////////////////////////
+                Column_Size_Length_Measurement_ID = columnSize,
+                Column_Size_OD_Measurement_ID = Guid.Empty,
+                Column_Size_Other = string.Empty,
+                Column_Size_Thickness_Measurement_ID = Guid.Empty,
+                Column_Size_Width_Measurement_ID = Guid.Empty,
+                Column_Spacing_Notes = string.Empty,
+                Column_Type_Other = string.Empty,
+                Deck_Gauge = 0,
+                Deck_Type_ID = 0,
+                Design_Load_Snow = string.Empty,
+                Design_Load_Spec = string.Empty,
+                Design_Specs = string.Empty,
+                Drainage_Measurement_ID = Guid.Empty,
+                Facia_Thickness_Measurement_ID = Guid.Empty,
+                Fascia_Image_ID = Guid.Empty,
+                Fascia_Info = string.Empty,
+                Gutter_Notes = string.Empty,
+                Has_Center_Gutters = false,
+                Has_External_Gutters = false,
+                Has_Internal_Gutters = false,
+                Has_Perimeter_Gutters = false,
+                Has_Scruppers = false,
             };
 
             entities.Canopies.Add(newCanopy);
@@ -150,7 +176,7 @@ namespace LaneBids.Controllers
             {
                 var newColLength = new Column_Spacing_Lengths
                 {
-                    Measurement_ID = _commonServices.MeasurementId(measurement.feet, measurement.inches),
+                    Measurement_ID = _commonServices.GetMeasurementId(measurement),
                     Canopy_ID = newCanopy.Canopy_ID
                 };
                 entities.Column_Spacing_Lengths.Add(newColLength);
@@ -160,7 +186,7 @@ namespace LaneBids.Controllers
             {
                 var newColWidth = new Column_Spacing_Widths
                 {
-                    Measurement_ID = _commonServices.MeasurementId(measurement.feet, measurement.inches),
+                    Measurement_ID = _commonServices.GetMeasurementId(measurement),
                     Canopy_ID = newCanopy.Canopy_ID
                 };
                 entities.Column_Spacing_Widths.Add(newColWidth);
@@ -212,109 +238,13 @@ namespace LaneBids.Controllers
         {
             return Json(AddressService.States, JsonRequestBehavior.AllowGet);
         }
-
+        
         [HttpPost]
-        public ActionResult AddCustomer(CustomerDetailsModel customer)
+        public JsonResult AddSite(SiteDetailsModel site)
         {
-            var entities = new LaneEntities();
-            var addAddress = new Address
-            {
-                Address_Line1 = customer.AddressLine1,
-                Address_Line2 = customer.AddressLine2,
-                City = customer.City,
-                State = customer.State,
-                Zip = customer.Zip
-            };
-            entities.Addresses.Add(addAddress);
-            entities.SaveChanges();
+            var newSite = _homeServices.SaveSite(site);
 
-            var contact = new Contact_Info
-            {
-                Contact_Text = customer.PhoneNumber,
-                Contact_Type_ID = customer.ContactId,
-                Create_Date = DateTime.Now,
-                Created_By = WebSecurity.CurrentUserId,
-            };
-            entities.Contact_Info.Add(contact);
-            entities.SaveChanges();
-
-            var newCustomer = new Customer
-            {
-                First_Name = customer.FirstName,
-                Last_Name = customer.LastName,
-                Email = customer.Email,
-                Company_Name = customer.CompanyName,
-                Address_ID = addAddress.Address_ID,
-                Create_Date = DateTime.Now,
-                Created_By = WebSecurity.CurrentUserId
-            };
-            entities.Customers.Add(newCustomer);
-            entities.SaveChanges();
-
-            return Content(newCustomer.Customer_ID + "|" + customer.FirstName + " " + customer.LastName);
-        }
-
-        [HttpPost]
-        public ActionResult AddSalesPerson(SalesPersonDetailsModel salesPerson)
-        {
-            var entities = new LaneEntities();
-            var addAddress = new Address
-            {
-                Address_Line1 = salesPerson.AddressLine1,
-                Address_Line2 = salesPerson.AddressLine2,
-                City = salesPerson.City,
-                State = salesPerson.State,
-                Zip = salesPerson.Zip
-            };
-            entities.Addresses.Add(addAddress);
-            entities.SaveChanges();
-
-            var newSalesPerson = new Sales_Persons
-            {
-                First_Name = salesPerson.FirstName,
-                Last_Name = salesPerson.LastName,
-                Address_ID = addAddress.Address_ID,
-                Create_Date = DateTime.Now,
-                Created_By = WebSecurity.CurrentUserId
-            };
-            entities.Sales_Persons.Add(newSalesPerson);
-            entities.SaveChanges();
-
-            var contact = new Contact_Info
-            {
-                Contact_Text = salesPerson.PhoneNumber,
-                Contact_Type_ID = salesPerson.ContactId,
-                Create_Date = DateTime.Now,
-                Created_By = WebSecurity.CurrentUserId
-            };
-            entities.Contact_Info.Add(contact);
-            entities.SaveChanges();
-            
-            return Content(newSalesPerson.Sales_Person_ID + "|" + newSalesPerson.First_Name + " " + newSalesPerson.Last_Name);
-        }
-
-        [HttpPost]
-        public ActionResult AddSite(SiteDetailsModel site)
-        {
-            var entities = new LaneEntities();
-            var addAddress = new Address();
-            addAddress.Address_Line1 = site.AddressLine1;
-            addAddress.Address_Line2 = site.AddressLine2;
-            addAddress.City = site.City;
-            addAddress.State = site.State;
-            addAddress.Zip = site.Zip;
-            entities.Addresses.Add(addAddress);
-            entities.SaveChanges();
-
-            var newSite = new Site();
-            newSite.Name = site.SiteName;
-            newSite.Address_ID = addAddress.Address_ID;
-            newSite.Create_Date = DateTime.Now;
-            newSite.Created_By = WebSecurity.CurrentUserId;
-            entities.Sites.Add(newSite);
-            entities.SaveChanges();
-            
-            return Content(newSite.Site_ID + "|" + newSite.Name);
+            return Json(newSite);
         }
 
         [HttpPost]
@@ -345,8 +275,7 @@ namespace LaneBids.Controllers
             var entities = new LaneEntities();
             var addColor = new Color
             {
-                Name = color.ColorName, 
-                ColorText = color.ColorText,
+                Name = color.ColorName,
                 Create_Date = DateTime.Now,
                 Created_By = WebSecurity.CurrentUserId
             };

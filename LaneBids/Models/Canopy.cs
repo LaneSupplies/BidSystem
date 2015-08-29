@@ -18,6 +18,8 @@ namespace LaneBids.Models
         public Canopy()
         {
             this.Bid_Canopies = new HashSet<Bid_Canopies>();
+            this.Column_Spacing_Lengths = new HashSet<Column_Spacing_Lengths>();
+            this.Column_Spacing_Widths = new HashSet<Column_Spacing_Widths>();
         }
     
         public System.Guid Canopy_ID { get; set; }
@@ -97,6 +99,10 @@ namespace LaneBids.Models
         public virtual Measurement Measurement9 { get; set; }
         public virtual Color Color { get; set; }
         public virtual Color Color1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Column_Spacing_Lengths> Column_Spacing_Lengths { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Column_Spacing_Widths> Column_Spacing_Widths { get; set; }
         public virtual Column_Types Column_Types { get; set; }
         public virtual Deck_Styles Deck_Styles { get; set; }
         public virtual Deck_Types Deck_Types { get; set; }

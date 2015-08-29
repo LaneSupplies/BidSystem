@@ -60,23 +60,6 @@
             $("#divAddCustomer").modal("hide");
         };
 
-        //Add Sales Person
-        $scope.showAddSalesPerson = function () {
-            $("#divAddSalesPerson").modal("show");
-        }
-
-        $scope.addSalesPerson = function (salesPerson) {
-            bidHttpService.addSalesPerson(salesPerson)
-                .then(onAddSalesPersonComplete, onBidError);
-        }
-
-        var onAddSalesPersonComplete = function (data) {
-            var value = data.data.split('|');
-            var newOption = "<option value='" + value[0] + "' selected >" + value[1] + "</option>";
-            $("#SalesPersonId").append(newOption);
-            $("#divAddSalesPerson").modal("hide");
-        };
-
         //Add Site
         $scope.showAddSite = function () {
             $("#divAddSite").modal("show");

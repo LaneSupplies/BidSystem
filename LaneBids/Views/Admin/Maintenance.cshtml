@@ -1,4 +1,4 @@
-﻿@model LaneBids.Models.AdminMaintenance
+﻿@model LaneBids.Models.AdminMaintenanceModel
 @{
     ViewBag.Title = "Maintenance";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -40,10 +40,10 @@
                 </tr>
             </tbody>
         </table>
-
+        <a href="#" ng-click="addTypeData({{gridModel}})" >Add New</a>
     </div>
 
-        <!-- Modal -->
+        <!-- Edit Modal -->
     <div id="typeDataModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document" ng-controller="MaintController">
             <div class="modal-content">
@@ -52,6 +52,47 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title" id="typeDataModalLabel">Edit Data</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form novalidate>
+                        <input type="hidden" id="TypeDataEnum" ng-model="typeData.TypeDataEnum" value="{{ typeData.TypeDataEnum }}"/>
+                        <input type="hidden" id="ID" ng-model="typeData.ID" value="{{ typeData.ID }}"/>
+
+                        <div class="divLabel">
+                            <label>ID:</label>
+                            <div>{{ typeData.ID }}</div>
+                        </div>
+
+                        <div class="divLabel">
+                            <label>Name:</label>
+                            <input type="text" id="Name" ng-model="typeData.Name" value="{{ typeData.Name }}"/>
+                        </div>
+
+                        <div class="divLabel" ng-show="typeData.Code">
+                            <label>Code:</label>
+                            <input type="text" id="Code" ng-model="typeData.Code" value="{{ typeData.Code }}" />
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer button-list">
+                    <button type="button" ng-click="updateTypeData(typeData)">Update</button>&nbsp;&nbsp;
+                    <button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Data Modal-->
+    <div id="addTypeDataModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addTypeDataModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document" ng-controller="MaintController">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="typeDataModalLabel">Add Data</h4>
                 </div>
 
                 <div class="modal-body">
@@ -66,13 +107,18 @@
 
                         <div class="divLabel">
                             <label>Name:</label>
-                            <input type="text" id="Name" ng-model="typeData.Name" value="{{ typeData.Name }}" />
+                            <input type="text" id="Name" ng-model="typeData.Name" value="{{ typeData.Name }}"/>
+                        </div>
+
+                        <div class="divLabel" ng-show="typeData.HasCode">
+                            <label>Code:</label>
+                            <input type="text" id="Code" ng-model="typeData.Code" value="{{ typeData.Code }}" />
                         </div>
                     </form>
                 </div>
 
                 <div class="modal-footer button-list">
-                    <button type="button" ng-click="updateTypeData(typeData)">Update</button>&nbsp;&nbsp;
+                    <button type="button" ng-click="createTypeData(typeData)">Update</button>&nbsp;&nbsp;
                     <button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
                 </div>
             </div>

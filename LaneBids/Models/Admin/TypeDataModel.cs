@@ -15,6 +15,7 @@ namespace LaneBids.Models.Admin
     {
         public string Title { get; set; }
         public bool HasCode { get; set; }
+        public TypeDataEnum TypeDataEnum { get; set; }
         public List<TypeDataModel> DataTypes { get; set; }
     }
 
@@ -29,9 +30,11 @@ namespace LaneBids.Models.Admin
         [Display(Name = "Code")]
         public string Code { get; set; }
 
+        public TypeDataEnum TypeDataEnum { get; set; }
+
         public string Create_Date { get; set; }
+
         public string FullName { get; set; }
 
-        public TypeDataEnum TypeDataEnum { get; set; }
     }
 }

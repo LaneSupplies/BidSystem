@@ -69,9 +69,6 @@
         <h3>Column Spacing</h3><br />
 
         <div id="ColumnLength">
-            <div class="divColumnAddButton">
-                <a href="#" class="addLength" ng-click="addColumnLength()">Add New Length Column</a>
-            </div>
             <div class="measurementList" style="padding-bottom: 30px;">
                 <div class="caption">Column Lengths</div>
                 <table ng-table="columnLengthTable">
@@ -90,7 +87,7 @@
                             <input type="text" class="numberOnly" ng-model="length.inches" />
                         </td>
                         <td>
-                            <a href="#" ng-click="addSameColumnLenght(length)">Add Same</a>&nbsp;&nbsp;
+                            <a href="#" ng-click="addSameColumnLenght(length)">Add</a>&nbsp;&nbsp;
                             <a href="#" ng-click="deleteColumnLength($index)">Delete</a>
                         </td>
                     </tr>
@@ -100,9 +97,6 @@
         <br />
 
         <div id="ColumnWidth">
-            <div class="divColumnAddButton">
-                <a href="#" class="addWidth" ng-click="addColumnWidth()">Add New Width Column</a>
-            </div>
             <div class="measurementList" style="padding-bottom: 30px;">
                 <div class="caption">Column Widths</div>
                 <table ng-table="columnWidthTable">
@@ -121,7 +115,7 @@
                             <input type="text" class="numberOnly" ng-model="width.inches" />
                         </td>
                         <td>
-                            <a href="#" ng-click="addSameColumnWidth(width)">Add Same</a>&nbsp;&nbsp;
+                            <a href="#" ng-click="addSameColumnWidth(width)">Add</a>&nbsp;&nbsp;
                             <a href="#" ng-click="deleteColumnWidth($index)">Delete</a>
                         </td>
                     </tr>

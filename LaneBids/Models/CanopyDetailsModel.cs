@@ -9,30 +9,32 @@ namespace LaneBids.Models
     public class CanopyDetailsModel
     {
         public int CanopyId { get; set; }
-        public int BidId { get; set; }
+        public Guid BidId { get; set; }
         public int Quantity { get; set; }
         public int StructureId { get; set; }
-        public int SizeHeightFeet { get; set; }
-        public int SizeHeightInches { get; set; }
-        public int SizeWidthFeet { get; set; }
-        public int SizeWidthInches { get; set; }
-        public int ClearanceFeet { get; set; }
-        public int ClearanceInches { get; set; }
+
+        public MeasurementModel SizeHeight { get; set; }
+        public MeasurementModel SizeWidth { get; set; }
+        public MeasurementModel Clearance { get; set; }
+        
         public int ColumnQuantity { get; set; }
         public int ColumnTypeId { get; set; }
-        public int ColumnSizeFeet { get; set; }
-        public int ColumnSizeInches { get; set; }
-        public int ColumnSpacingLength { get; set; }
+
+        public MeasurementModel ColumnSize { get; set; }
+        public MeasurementModel ColumnSpacingLength { get; set; }
+        
         public string ColumnSpacingNotes { get; set; }
         public int DeckStyleId { get; set; }
         public int? DeckColorId { get; set; }
-        public int DeckThicknessFeet { get; set; }
-        public int DeckthicknessInches { get; set; }
-        public int ImageId { get; set; }
+
+        public MeasurementModel DeckThickness { get; set; }
+        
+        public Guid? ImageId { get; set; }
         public int? ColorId { get; set; }
         public string ImagePath { get; set; }
-        public int FasciaHeightFeet { get; set; }
-        public int FasciaHeightInches { get; set; }
+
+        public MeasurementModel FasciaHeight { get; set; }
+        
         public int FasciaTypeId { get; set; }
         public int? FasciaColorId { get; set; }
         public int DrainageTypeId { get; set; }
@@ -52,14 +54,14 @@ namespace LaneBids.Models
         public int DesignLoadWindMph { get; set; }
         public int DesignLoadWindPsf { get; set; }
         public string DesignLoadNotes { get; set; }
-        public string DrawingSealed { get; set; }
+        public bool? DrawingSealed { get; set; }
         public string DrawingState { get; set; }
         public string DrawingCode { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
 
-        public ColumnLengthModel ColumnLengths { get; set; }
-        public ColumnLengthModel ColumnWidths { get; set; }
+        public ColumnsModel ColumnLengths { get; set; }
+        public ColumnsModel ColumnWidths { get; set; }
         
         
         public IList<SelectListItem> FasciaTypeList { get; set; }

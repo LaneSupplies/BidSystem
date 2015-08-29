@@ -222,8 +222,7 @@
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ColorModel.cs" />
-    <Compile Include="Models\ColumnLengthModel.cs" />
-    <Compile Include="Models\ColumnWidthsModel.cs" />
+    <Compile Include="Models\ColumnsModel.cs" />
     <Compile Include="Models\Column_Spacing_Lengths.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
@@ -293,6 +292,7 @@
     <Compile Include="Models\Measurement.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MeasurementModel.cs" />
     <Compile Include="Models\PhoneContactsModel.cs" />
     <Compile Include="Models\SalesPersonDetailsModel.cs" />
     <Compile Include="Models\Sales_Persons.cs">
@@ -316,12 +316,15 @@
     <Compile Include="Models\UserLoginProfile.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserRolesEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sources\AddressService.cs" />
+    <Compile Include="Sources\AdminServices.cs" />
     <Compile Include="Sources\BidServices.cs" />
     <Compile Include="Sources\CanopyServices.cs" />
     <Compile Include="Sources\CommonServices.cs" />
     <Compile Include="Sources\EnumUtil.cs" />
+    <Compile Include="Sources\HomeServices.cs" />
     <Compile Include="Sources\JsonNetResults.cs" />
     <Compile Include="Sources\UserServices.cs" />
   </ItemGroup>
@@ -1267,7 +1270,6 @@
     <Content Include="Views\Home\_ContactInfo.cshtml" />
     <Content Include="Views\Home\_Address.cshtml" />
     <Content Include="Views\Shared\_PopUpWindowLayout.cshtml" />
-    <Content Include="Views\Home\_AddSalesPerson.cshtml" />
     <Content Include="Views\Home\_AddSite.cshtml" />
     <Content Include="Views\Home\_AddShippingInfo.cshtml" />
     <Content Include="Views\Home\_AddFaciaColor.cshtml" />
@@ -1280,6 +1282,7 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Scripts\vendor\version.json" />
     <Content Include="Views\Home\BidView.cshtml" />
+    <Content Include="Views\Admin\AddSalesPerson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

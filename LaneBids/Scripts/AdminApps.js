@@ -33,8 +33,9 @@
 
         //Edit Data Type in Grid
         $scope.editTypeData = function(item) {
-            adminHttpService.editTypeData(item.ID, item.TypeDataEnum)
-                        .then(onEditDataType, onEditErrorDataType);
+            //adminHttpService.editTypeData(item.ID, item.TypeDataEnum)
+            //            .then(onEditDataType, onEditErrorDataType);
+            onEditDataType(item);
         }
 
         //Delete Data Type in Grid
@@ -48,6 +49,17 @@
             adminHttpService.updateTypeData(typeData)
                         .then(onUpdateDataType, onTypeDataError);
         }
+
+        //Add Sales Person
+        $scope.addSalesPerson = function (salesPerson) {
+            bidHttpService.addSalesPerson(salesPerson)
+                .then(onAddSalesPersonComplete, onBidError);
+        }
+
+        var onAddSalesPersonComplete = function (data) {
+            $scope.salesPerson = data;
+            $('.message-info').text('Successfully Saved Sales Person');
+        };
 
         adminHttpService.getTypeData("StructureType").then(onTypeDataComplete, onTypeDataError);
     };

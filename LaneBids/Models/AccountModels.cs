@@ -95,10 +95,6 @@ namespace LaneBids.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [Display(Name="Role")]
-        public string Role { get; set; }
-
-        [Required]
         [Display(Name="First Name")]
         public string FirstName { get; set; }
 
@@ -117,7 +113,7 @@ namespace LaneBids.Models
         
         private readonly List<LaneUserRoles> _userRoles;
 
-        public IEnumerable<SelectListItem> LaneUserRoleList { get; set; }
+        public UserRolesEnum LaneUserRole { get; set; }
         //{
         //    get { return new SelectList(_userRoles, "Id", "Name"); }
 

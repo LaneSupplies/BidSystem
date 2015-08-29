@@ -15,10 +15,11 @@ namespace LaneBids.Models
     public partial class Column_Spacing_Lengths
     {
         public System.Guid Column_Spacing_Length_ID { get; set; }
-        public int Canopy_ID { get; set; }
+        public System.Guid Canopy_ID { get; set; }
         public System.Guid Measurement_ID { get; set; }
         public int Sequence { get; set; }
     
+        public virtual Canopy Canopy { get; set; }
         public virtual Measurement Measurement { get; set; }
     }
 }

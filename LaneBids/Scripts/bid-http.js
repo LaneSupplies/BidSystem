@@ -64,22 +64,6 @@
                 });
         };
 
-        var addSalesPerson = function(data) {
-            return $http.post("/Home/AddSalesPerson/", data, {
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-                    transformRequest: transform
-                })
-                .success(function(response) {
-                    return response.data;
-                })
-                .catch(function(response) {
-                    console.log("Error adding sales person", response.status, response.data);
-                })
-                .finally(function() {
-                    console.log("Finished adding sales person");
-                });
-        };
-
         var addShippingInfo = function(data) {
             return $http.post("/Home/AddShipping/", data, {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
@@ -100,7 +84,6 @@
             getContacts: getContacts,
             getStateList: getStateList,
             addCustomer: addCustomer,
-            addSalesPerson: addSalesPerson,
             addSite: addSite,
             addShippingInfo: addShippingInfo
         };

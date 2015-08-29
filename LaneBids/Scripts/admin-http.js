@@ -61,11 +61,28 @@
                 });
         };
 
+        var addSalesPerson = function (data) {
+            return $http.post("/Admin/AddSalesPerson/", data, {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                transformRequest: transform
+            })
+                .success(function (response) {
+                    return response.data;
+                })
+                .catch(function (response) {
+                    console.log("Error adding sales person", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished adding sales person");
+                });
+        };
+
         return {
             getTypeData: getTypeData,
             editTypeData: editTypeData,
             updateTypeData: updateTypeData,
-            deleteTypeData: deleteTypeData
+            deleteTypeData: deleteTypeData,
+            addSalesPerson: addSalesPerson
         };
     };
 

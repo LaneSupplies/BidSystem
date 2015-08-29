@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using LaneBids.Models
+<!DOCTYPE html>
 <html lang="en" ng-app="@PageData["NgApp"]">
 <head>
     <meta charset="utf-8" />
@@ -80,7 +81,7 @@
                 </li>
             </ul>
             <br /><br />
-            @if (User.IsInRole("Administrator"))
+            @if (User.IsInRole(UserRolesEnum.Admin.ToString()))
             {
                 <div class="AdminFunctions">
                     <span class="label">Admin Links</span>

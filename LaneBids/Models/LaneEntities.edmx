@@ -177,7 +177,7 @@
             <PropertyRef Name="Column_Spacing_Length_ID" />
           </Key>
           <Property Name="Column_Spacing_Length_ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Canopy_ID" Type="int" Nullable="false" />
+          <Property Name="Canopy_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Measurement_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Sequence" Type="int" Nullable="false" />
         </EntityType>
@@ -186,7 +186,7 @@
             <PropertyRef Name="Column_Spacing_Width_ID" />
           </Key>
           <Property Name="Column_Spacing_Width_ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Canopy_ID" Type="int" Nullable="false" />
+          <Property Name="Canopy_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Measurement_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Sequence" Type="int" Nullable="false" />
         </EntityType>
@@ -641,6 +641,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Column_Spacing_Lengths_Canopy">
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="1" />
+          <End Role="Column_Spacing_Lengths" Type="Self.Column_Spacing_Lengths" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Canopies">
+              <PropertyRef Name="Canopy_ID" />
+            </Principal>
+            <Dependent Role="Column_Spacing_Lengths">
+              <PropertyRef Name="Canopy_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Column_Spacing_Lengths_Measurements">
           <End Role="Measurements" Type="Self.Measurements" Multiplicity="1" />
           <End Role="Column_Spacing_Lengths" Type="Self.Column_Spacing_Lengths" Multiplicity="*" />
@@ -650,6 +662,18 @@
             </Principal>
             <Dependent Role="Column_Spacing_Lengths">
               <PropertyRef Name="Measurement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Column_Spacing_Widths_Canopy">
+          <End Role="Canopies" Type="Self.Canopies" Multiplicity="1" />
+          <End Role="Column_Spacing_Widths" Type="Self.Column_Spacing_Widths" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Canopies">
+              <PropertyRef Name="Canopy_ID" />
+            </Principal>
+            <Dependent Role="Column_Spacing_Widths">
+              <PropertyRef Name="Canopy_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1111,9 +1135,17 @@
             <End Role="Colors" EntitySet="Colors" />
             <End Role="Canopies" EntitySet="Canopies" />
           </AssociationSet>
+          <AssociationSet Name="FK_Column_Spacing_Lengths_Canopy" Association="Self.FK_Column_Spacing_Lengths_Canopy">
+            <End Role="Canopies" EntitySet="Canopies" />
+            <End Role="Column_Spacing_Lengths" EntitySet="Column_Spacing_Lengths" />
+          </AssociationSet>
           <AssociationSet Name="FK_Column_Spacing_Lengths_Measurements" Association="Self.FK_Column_Spacing_Lengths_Measurements">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Column_Spacing_Lengths" EntitySet="Column_Spacing_Lengths" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Column_Spacing_Widths_Canopy" Association="Self.FK_Column_Spacing_Widths_Canopy">
+            <End Role="Canopies" EntitySet="Canopies" />
+            <End Role="Column_Spacing_Widths" EntitySet="Column_Spacing_Widths" />
           </AssociationSet>
           <AssociationSet Name="FK_Column_Spacing_Widths_Measurements" Association="Self.FK_Column_Spacing_Widths_Measurements">
             <End Role="Measurements" EntitySet="Measurements" />
@@ -1417,6 +1449,8 @@
           <NavigationProperty Name="Measurement9" Relationship="Self.FK_Canopies_Measurement_Size_Width" FromRole="Canopies" ToRole="Measurements" />
           <NavigationProperty Name="Color" Relationship="Self.FK_Colors_Canopy_1" FromRole="Canopies" ToRole="Colors" />
           <NavigationProperty Name="Color1" Relationship="Self.FK_Colors_Canopy_2" FromRole="Canopies" ToRole="Colors" />
+          <NavigationProperty Name="Column_Spacing_Lengths" Relationship="Self.FK_Column_Spacing_Lengths_Canopy" FromRole="Canopies" ToRole="Column_Spacing_Lengths" />
+          <NavigationProperty Name="Column_Spacing_Widths" Relationship="Self.FK_Column_Spacing_Widths_Canopy" FromRole="Canopies" ToRole="Column_Spacing_Widths" />
           <NavigationProperty Name="Column_Types" Relationship="Self.FK_Column_Types_Canopy" FromRole="Canopies" ToRole="Column_Types" />
           <NavigationProperty Name="Deck_Styles" Relationship="Self.FK_Deck_Styles_Canopy" FromRole="Canopies" ToRole="Deck_Styles" />
           <NavigationProperty Name="Deck_Types" Relationship="Self.FK_Deck_Type_Canopy" FromRole="Canopies" ToRole="Deck_Types" />
@@ -1442,9 +1476,10 @@
             <PropertyRef Name="Column_Spacing_Length_ID" />
           </Key>
           <Property Name="Column_Spacing_Length_ID" Type="Guid" Nullable="false" />
-          <Property Name="Canopy_ID" Type="Int32" Nullable="false" />
+          <Property Name="Canopy_ID" Type="Guid" Nullable="false" />
           <Property Name="Measurement_ID" Type="Guid" Nullable="false" />
           <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Canopy" Relationship="Self.FK_Column_Spacing_Lengths_Canopy" FromRole="Column_Spacing_Lengths" ToRole="Canopies" />
           <NavigationProperty Name="Measurement" Relationship="Self.FK_Column_Spacing_Lengths_Measurements" FromRole="Column_Spacing_Lengths" ToRole="Measurements" />
         </EntityType>
         <EntityType Name="Column_Spacing_Widths">
@@ -1452,9 +1487,10 @@
             <PropertyRef Name="Column_Spacing_Width_ID" />
           </Key>
           <Property Name="Column_Spacing_Width_ID" Type="Guid" Nullable="false" />
-          <Property Name="Canopy_ID" Type="Int32" Nullable="false" />
+          <Property Name="Canopy_ID" Type="Guid" Nullable="false" />
           <Property Name="Measurement_ID" Type="Guid" Nullable="false" />
           <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Canopy" Relationship="Self.FK_Column_Spacing_Widths_Canopy" FromRole="Column_Spacing_Widths" ToRole="Canopies" />
           <NavigationProperty Name="Measurement" Relationship="Self.FK_Column_Spacing_Widths_Measurements" FromRole="Column_Spacing_Widths" ToRole="Measurements" />
         </EntityType>
         <EntityType Name="Column_Types">
@@ -2057,6 +2093,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Column_Spacing_Lengths_Canopy">
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="1" />
+          <End Role="Column_Spacing_Lengths" Type="Self.Column_Spacing_Lengths" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Canopies">
+              <PropertyRef Name="Canopy_ID" />
+            </Principal>
+            <Dependent Role="Column_Spacing_Lengths">
+              <PropertyRef Name="Canopy_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Column_Spacing_Widths_Canopy">
+          <End Role="Canopies" Type="Self.Canopy" Multiplicity="1" />
+          <End Role="Column_Spacing_Widths" Type="Self.Column_Spacing_Widths" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Canopies">
+              <PropertyRef Name="Canopy_ID" />
+            </Principal>
+            <Dependent Role="Column_Spacing_Widths">
+              <PropertyRef Name="Canopy_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Column_Types_Canopy">
           <End Role="Column_Types" Type="Self.Column_Types" Multiplicity="0..1" />
           <End Role="Canopies" Type="Self.Canopy" Multiplicity="*" />
@@ -2376,6 +2436,14 @@
           <AssociationSet Name="FK_Colors_Canopy_2" Association="Self.FK_Colors_Canopy_2">
             <End Role="Colors" EntitySet="Colors" />
             <End Role="Canopies" EntitySet="Canopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Column_Spacing_Lengths_Canopy" Association="Self.FK_Column_Spacing_Lengths_Canopy">
+            <End Role="Canopies" EntitySet="Canopies" />
+            <End Role="Column_Spacing_Lengths" EntitySet="Column_Spacing_Lengths" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Column_Spacing_Widths_Canopy" Association="Self.FK_Column_Spacing_Widths_Canopy">
+            <End Role="Canopies" EntitySet="Canopies" />
+            <End Role="Column_Spacing_Widths" EntitySet="Column_Spacing_Widths" />
           </AssociationSet>
           <AssociationSet Name="FK_Column_Types_Canopy" Association="Self.FK_Column_Types_Canopy">
             <End Role="Column_Types" EntitySet="Column_Types" />

@@ -9,17 +9,20 @@ namespace LaneBids.Sources
     public class CommonServices
     {
 
-        public int MeasurementId(int feet, int inches)
+        public Guid GetMeasurementId(MeasurementModel measurement)
         {
             var entity = new LaneEntities();
-            var existing = entity.Measurements.Where(x => x.Feet == feet && x.Inches == inches);
+            var existing = entity.Measurements.Where(x => x.Feet == measurement.Feet && x.Inches == measurement.Inches && x.Fractions_ID == measurement.FractionId);
 
             if (existing.Any() && existing.FirstOrDefault() != null)
                 return existing.FirstOrDefault().Measurement_ID;
 
-            var newMeasurement = new Measurement();
-            newMeasurement.Feet = feet;
-            newMeasurement.Inches = inches;
+            var newMeasurement = new Measurement
+            {
+                Feet = measurement.Feet,
+                Inches = measurement.Inches,
+                Fractions_ID = measurement.FractionId
+            };
             entity.Measurements.Add(newMeasurement);
             entity.SaveChanges();
 

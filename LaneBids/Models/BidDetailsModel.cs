@@ -10,7 +10,7 @@ namespace LaneBids.Models
 {
     public class BidDetailsModel
     {
-        public int BidId { get; set; }
+        public Guid BidId { get; set; }
         public int RevisionNumber { get; set; }
 
         [Required(ErrorMessage = "You must choose a Structure Type")]
@@ -36,20 +36,28 @@ namespace LaneBids.Models
         public string ScopeTypeCode { get; set; }
         public string SelectedScopeTypeName { get; set; }
 
+        [Required(ErrorMessage = "You must choose a Company")]
+        public Guid CompanyId { get; set; }
+        public Company Company { get; set; }
+
         [Required(ErrorMessage = "You must choose a Customer")]
         public Guid CustomerId { get; set; }
         public Customer Customer { get; set; }
 
+        [Required(ErrorMessage = "You must choose a Contact Person")]
+        public Guid CustomerContactId { get; set; }
+        public Customer_Contact CustomerContact { get; set; }
+
         [Required(ErrorMessage = "You must choose a Sales Person")]
-        public int SalesPersonId { get; set; }
+        public Guid? SalesPersonId { get; set; }
         public SalesPersonDetailsModel SelectedSalesPerson { get; set; }
 
         [Required(ErrorMessage = "You must choose a Site")]
-        public int SiteId { get; set; }
+        public Guid? SiteId { get; set; }
         public SiteDetailsModel SelectedSite { get; set; }
 
 
-        public int ShippingId { get; set; }
+        public Guid? ShippingId { get; set; }
         public AddressModel SelectedShippingAddress { get; set; }
 
         public int BidNotesId { get; set; }
@@ -60,7 +68,6 @@ namespace LaneBids.Models
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
         public CustomerDetailsModel AddCustomerInfo { get; set; }
-        public SalesPersonDetailsModel AddSalesPersonDetails { get; set; }
         public SiteDetailsModel AddSiteDetails { get; set; }
         public ShippingInfoDetailsModel AddShippingInfoDetails { get; set; }
 
@@ -80,6 +87,11 @@ namespace LaneBids.Models
 
         public IList<SelectListItem> BidNoteList { get; set; }
         
-        public IList<SelectListItem> SiteList { get; set; } 
+        public IList<SelectListItem> SiteList { get; set; }
+
+        public IList<SelectListItem> CompanyList { get; set; }
+
+        public IList<SelectListItem> SalesPersonList { get; set; }
+
     }
 }
