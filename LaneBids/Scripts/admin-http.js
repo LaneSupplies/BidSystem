@@ -61,6 +61,22 @@
                 });
         };
 
+        var addNewDataType = function (data) {
+            return $http.post("/Admin/CreateTypeData/", data, {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                transformRequest: transform
+            })
+                .success(function (response) {
+                    return response.data;
+                })
+                .catch(function (response) {
+                    console.log("Error adding new data type", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished adding new data type");
+                });
+        };
+
         var addSalesPerson = function (data) {
             return $http.post("/Admin/AddSalesPerson/", data, {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
@@ -82,7 +98,8 @@
             editTypeData: editTypeData,
             updateTypeData: updateTypeData,
             deleteTypeData: deleteTypeData,
-            addSalesPerson: addSalesPerson
+            addSalesPerson: addSalesPerson,
+            addNewDataType: addNewDataType
         };
     };
 

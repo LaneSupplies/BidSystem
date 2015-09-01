@@ -2,15 +2,14 @@
 @{
     ViewBag.Title = "Maintenance";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    
+
 }
 
 <h2>Maintenance Page</h2>
-<br/>
+<br />
 <div ng-controller="MaintController">
+    <div class="message-info hide"></div>
     <!-- Structure Type Grid -->
-    
-
     <div ng-repeat="gridModel in AllTypeData.AllTypes" class="maintenance-type">
         <div class="caption">{{gridModel.Title}}</div>
 
@@ -40,10 +39,10 @@
                 </tr>
             </tbody>
         </table>
-        <a href="#" ng-click="addTypeData({{gridModel}})" >Add New</a>
+        <a href="#" ng-click="addTypeData({{gridModel}}, $index)">Add New</a>
     </div>
 
-        <!-- Edit Modal -->
+    <!-- Edit Modal -->
     <div id="typeDataModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document" ng-controller="MaintController">
             <div class="modal-content">
@@ -56,8 +55,8 @@
 
                 <div class="modal-body">
                     <form novalidate>
-                        <input type="hidden" id="TypeDataEnum" ng-model="typeData.TypeDataEnum" value="{{ typeData.TypeDataEnum }}"/>
-                        <input type="hidden" id="ID" ng-model="typeData.ID" value="{{ typeData.ID }}"/>
+                        <input type="hidden" id="TypeDataEnum" ng-model="typeData.TypeDataEnum" value="{{ typeData.TypeDataEnum }}" />
+                        <input type="hidden" id="ID" ng-model="typeData.ID" value="{{ typeData.ID }}" />
 
                         <div class="divLabel">
                             <label>ID:</label>
@@ -66,7 +65,7 @@
 
                         <div class="divLabel">
                             <label>Name:</label>
-                            <input type="text" id="Name" ng-model="typeData.Name" value="{{ typeData.Name }}"/>
+                            <input type="text" id="Name" ng-model="typeData.Name" value="{{ typeData.Name }}" />
                         </div>
 
                         <div class="divLabel" ng-show="typeData.Code">
@@ -92,22 +91,16 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="typeDataModalLabel">Add Data</h4>
+                    <h4 class="modal-title" id="addtypeDataModalLabel">Add Data</h4>
                 </div>
 
                 <div class="modal-body">
                     <form novalidate>
                         <input type="hidden" id="TypeDataEnum" ng-model="typeData.TypeDataEnum" value="{{ typeData.TypeDataEnum }}" />
-                        <input type="hidden" id="ID" ng-model="typeData.ID" value="{{ typeData.ID }}" />
-
-                        <div class="divLabel">
-                            <label>ID:</label>
-                            <div>{{ typeData.ID }}</div>
-                        </div>
 
                         <div class="divLabel">
                             <label>Name:</label>
-                            <input type="text" id="Name" ng-model="typeData.Name" value="{{ typeData.Name }}"/>
+                            <input type="text" id="Name" ng-model="typeData.Name" value="{{ typeData.Name }}" />
                         </div>
 
                         <div class="divLabel" ng-show="typeData.HasCode">
@@ -118,7 +111,7 @@
                 </div>
 
                 <div class="modal-footer button-list">
-                    <button type="button" ng-click="createTypeData(typeData)">Update</button>&nbsp;&nbsp;
+                    <button type="button" ng-click="createTypeData(typeData)">Add</button>&nbsp;&nbsp;
                     <button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
                 </div>
             </div>
@@ -127,7 +120,7 @@
 </div>
 
 @section Scripts {
-    
+
     @Scripts.Render("~/bundles/Admin")
 }
 

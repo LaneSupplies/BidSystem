@@ -661,8 +661,10 @@ td button {
 /* info and errors */
 .message-info {
     border: 1px solid;
+    box-shadow: 5px 5px 5px #888888;
     clear: both;
     padding: 10px 20px;
+    background-color: #a0a51b;
 }
 
 .message-error {

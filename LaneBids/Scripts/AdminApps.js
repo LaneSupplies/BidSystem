@@ -4,7 +4,8 @@
 
     var MaintController = function ($scope, adminHttpService) {
 
-        $scope.AllTypeData = [];
+        //$scope.AllTypeData = [];
+        $scope.DataTypeIndex = 0;
 
         var onTypeDataComplete = function(data) {
             $scope.AllTypeData = data;
@@ -16,7 +17,7 @@
 
         var onEditDataType = function (response) {
             $scope.typeData = response;
-            $('typeDataModalLabel').text(response.TypeName);
+            $('#typeDataModalLabel').text(response.TypeName);
             $("#typeDataModal").modal('show');
         };
 
@@ -30,6 +31,19 @@
             $("#typeDataModal").modal('hide');
             location.reload();
         }
+
+        var onAddNewDataTypeComplete = function (data) {
+            angular.copy(data.data, $scope.AllTypeData.AllTypes[$scope.DataTypeIndex].gridModel);
+            $('.message-info').text('Successfully Saved New Data type');
+            $('.message-info').toggle();
+            $('#addTypeDataModal').modal('hide');
+        };
+
+        var onAddSalesPersonComplete = function (data) {
+            $scope.salesPerson = data;
+            $('.message-info').text('Successfully Saved Sales Person');
+            $('.message-info').toggle();
+        };
 
         //Edit Data Type in Grid
         $scope.editTypeData = function(item) {
@@ -50,16 +64,25 @@
                         .then(onUpdateDataType, onTypeDataError);
         }
 
-        //Add Sales Person
-        $scope.addSalesPerson = function (salesPerson) {
-            bidHttpService.addSalesPerson(salesPerson)
-                .then(onAddSalesPersonComplete, onBidError);
+        //Add Data Type
+        $scope.addTypeData = function (item, index) {
+            $scope.DataTypeIndex = index;
+            $scope.typeData = item;
+            $('#addtypeDataModalLabel').text("Add " + item.Title);
+            $('#addTypeDataModal').modal('show');
         }
 
-        var onAddSalesPersonComplete = function (data) {
-            $scope.salesPerson = data;
-            $('.message-info').text('Successfully Saved Sales Person');
-        };
+        //Create New Type Data
+        $scope.createTypeData = function(item) {
+            adminHttpService.addNewDataType(item)
+                .then(onAddNewDataTypeComplete, onTypeDataError);
+        }
+
+        //Add Sales Person
+        $scope.addSalesPerson = function (salesPerson) {
+            adminHttpService.addSalesPerson(salesPerson)
+                .then(onAddSalesPersonComplete, onTypeDataError);
+        }
 
         adminHttpService.getTypeData("StructureType").then(onTypeDataComplete, onTypeDataError);
     };

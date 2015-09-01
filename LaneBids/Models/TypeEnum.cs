@@ -21,28 +21,32 @@ namespace LaneBids.Models
         [DescriptionAttribute("Bid Type")]
         BidType = 2,
 
-        [Display(Name = "Gutter Types")]
-        [DescriptionAttribute("Gutter Types")]
-        GutterTypes = 3,
+        [Display(Name = "Column Types")]
+        [DescriptionAttribute("Column Types")]
+        ColumnTypes = 3,
 
         [Display(Name = "Deck Styles")]
         [DescriptionAttribute("Deck Styles")]
         DeckStyles = 4,
 
+        [Display(Name = "Deck Types")]
+        [DescriptionAttribute("Deck Types")]
+        DeckTypes = 5,
+
         [Display(Name = "Drainage")]
         [DescriptionAttribute("Drainage")]
-        Drainage = 5,
+        Drainage = 6,
 
         [Display(Name = "Facia Types")]
         [DescriptionAttribute("Facia Types")]
-        FaciaTypes = 6,
+        FasciaTypes = 7,
 
         [Display(Name = "Job Types")]
         [DescriptionAttribute("Job Types")]
-        JobTypes = 7,
+        JobTypes = 8,
 
         [Display(Name = "Scope Types")]
         [DescriptionAttribute("Scope Types")]
-        ScopeTypes = 8
+        ScopeTypes = 9
     }
 }
