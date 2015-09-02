@@ -559,6 +559,32 @@ namespace LaneBids.Controllers
                         }).ToList()
                     };
                     break;
+                case TypeDataEnum.DeckTypes:
+                    var newDeckType = new Deck_Types
+                    {
+                        Name = model.Name,
+                        Created_By = WebSecurity.CurrentUserId,
+                        Create_Date = DateTime.Now
+                    };
+                    entities.Deck_Types.Add(newDeckType);
+                    entities.SaveChanges();
+
+                    gridModel = new TypeDataGridModel
+                    {
+                        Title = displayName,
+                        HasCode = false,
+                        TypeDataEnum = type,
+                        DataTypes = entities.Deck_Types.ToList().Select(t => new TypeDataModel
+                        {
+                            ID = t.Deck_Type_ID,
+                            Name = t.Name,
+                            Code = "",
+                            Create_Date = String.Format("{0:d}", t.Create_Date),
+                            FullName = UserServices.ConvertUserId(t.Created_By),
+                            TypeDataEnum = type
+                        }).ToList()
+                    };
+                    break;
                 case TypeDataEnum.Drainage:
                     var newDrainageType = new Drainage_Types
                     {
