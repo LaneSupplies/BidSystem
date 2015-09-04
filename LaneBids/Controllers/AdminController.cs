@@ -283,6 +283,24 @@ namespace LaneBids.Controllers
                         TypeDataEnum = type
                     }).FirstOrDefault();
                     break;
+                case TypeDataEnum.BidStatus:
+                    break;
+                case TypeDataEnum.BidType:
+                    break;
+                case TypeDataEnum.ColumnTypes:
+                    break;
+                case TypeDataEnum.DeckStyles:
+                    break;
+                case TypeDataEnum.DeckTypes:
+                    break;
+                case TypeDataEnum.Drainage:
+                    break;
+                case TypeDataEnum.FasciaTypes:
+                    break;
+                case TypeDataEnum.JobTypes:
+                    break;
+
+
             }
 
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -697,6 +715,11 @@ namespace LaneBids.Controllers
         #endregion
 
         #region Add Sales Person Page
+
+        public ActionResult SalesPerson()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult AddSalesPerson(SalesPersonDetailsModel salesPerson)

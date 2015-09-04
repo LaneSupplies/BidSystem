@@ -1282,7 +1282,9 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Scripts\vendor\version.json" />
     <Content Include="Views\Home\BidView.cshtml" />
-    <Content Include="Views\Admin\AddSalesPerson.cshtml" />
+    <Content Include="Views\Admin\SalesPerson.cshtml" />
+    <Content Include="Views\Admin\AddCompany.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

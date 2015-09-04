@@ -79,9 +79,24 @@
         }
 
         //Add Sales Person
-        $scope.addSalesPerson = function (salesPerson) {
-            adminHttpService.addSalesPerson(salesPerson)
-                .then(onAddSalesPersonComplete, onTypeDataError);
+        $scope.addSalesPerson = function () {
+            $('#addSalesPersonLabel').text("Add Sales Person");
+            $('#salesPersonModal').modal('show');
+
+            //adminHttpService.addSalesPerson(salesPerson)
+            //    .then(onAddSalesPersonComplete, onTypeDataError);
+        }
+
+        //Create Sales Person
+        $scope.createSalesPerson = function(salesPerson) {
+            
+        }
+
+        //Edit Sales Person
+        $scope.editSalesPerson = function(salesPerson) {
+            $scope.salesPerson = salesPerson;
+            $('#addSalesPersonLabel').text("Edit Sales Person");
+            $('#salesPersonModal').modal('show');
         }
 
         adminHttpService.getTypeData("StructureType").then(onTypeDataComplete, onTypeDataError);
