@@ -1,105 +1,113 @@
 ﻿@model LaneBids.Models.SalesPersonDetailsModel
 @{
-    ViewBag.Title = "Add Sales Person";
+    ViewBag.Title = "Sales Person";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>Sales Persons</h2>
+<br />
+<div ng-controller="SalesPersonController">
+    <div class="message-info hide"></div>
+    <div class="message-error" ng-show="error">{{error}}</div>
+    <br/>
+    <a href="#" ng-click="addSalesPerson()">Add Sales Person</a>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Code</th>
+            <th>Address</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="person in salesPersonList">
+            <td>{{person.Name}}</td>
+            <td>{{person.Code}}</td>
+            <td>{{person.Address}}</td>
+            <td><a href="#" ng-click="editSalesPerson(salesPerson)">Edit</a></td>
+        </tr>
+        </tbody>
+    </table>
 
-<div class="message-info"></div>
-<br/>
-<a href="#" ng-click="addSalesPerson()">Add Sales Person</a>
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Code</th>
-        <th>Address</th>
-        <th>Edit</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="salesPerson in salesPersonList">
-        <td>{{salesPerson.Name}}</td>
-        <td>{{salesPerson.Code}}</td>
-        <td>{{salesPerson.Address}}</td>
-        <td><a href="#" ng-click="editSalesPerson(salesPerson)">Edit</a></td>
-    </tr>
-    </tbody>
-</table>
+    <!-- Add Sales Person -->
+    <div id="salesPersonModal" class="modal fade" tabindex="-1" role="dialog" ng-model="salesPerson" aria-labelledby="addSalesPersonLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document" ng-controller="SalesPersonController">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="addSalesPersonLabel">Add Data</h4>
+                </div>
 
-<!-- Add Sales Person -->
-<div id="salesPersonModal" class="modal fade" tabindex="-1" role="dialog" ng-model="salesPerson" aria-labelledby="addSalesPersonLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document" ng-controller="MaintController">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="addSalesPersonLabel">Add Data</h4>
-            </div>
+                <div class="modal-body">
+                    <form novalidate>
+                        <div class="divLabel" ng-show="salesPerson.Code.length">
+                            <label>Code</label>
+                            <input type="text" id="salesCode" ng-model="salesPerson.Code"/>
+                        </div>
+                        <div class="divLabel">
+                            <label>First Name</label>
+                            <input type="text" id="salesFirstName" ng-model="salesPerson.FirstName"/>
+                        </div>
+                        <div class="divLabel">
+                            <label>Last Name</label>
+                            <input type="text" id="salesLastName" ng-model="salesPerson.LastName"/>
+                        </div>
+                        <div class="divLabel">
+                            <label>Email</label>
+                            <input type="text" id="salesEmail" ng-model="salesPerson.Email"/>
+                        </div>
+                        <div class="divLabel">
+                            <label>Company Name</label>
+                            <input type="text" id="salesCompanyName" ng-model="salesPerson.CompanyName"/>
+                        </div>
+                        <div class="divLabel">
+                            <label>Address Line 1</label>
+                            <input type="text" id="salesAddressLine1" ng-model="salesPerson.AddressLine1"/>
+                        </div>
+                        <div class="divLabel">
+                            <label>Address Line 2</label>
+                            <input type="text" id="salesAddressLine2" ng-model="salesPerson.AddressLine2"/>
+                        </div>
+                        <div class="divLabel">
+                            <label>City</label>
+                            <input type="text" id="salesCity" ng-model="salesPerson.City"/>
+                        </div>
+                        <div class="divLabel">
+                            <label>State</label>
+                            <select id="stateId" ng-model="salesPerson.State" ng-options="state.Value as state.Text for state in stateList"></select>
+                        </div>
+                        <div class="divLabel">
+                            <label>Zip</label>
+                            <input type="text" id="salesZip" ng-model="salesPerson.Zip"/>
+                        </div>
+                        <div class="divLabel">
+                            <table class="clearTable">
+                                <tr ng-repeat="numContract in salesPerson.PhoneNumbers.contacts">
+                                    <td data-title="Id">
+                                        <select id="contactId" ng-model="numContract.Id" ng-options="contact.Value as contact.Text for contact in contacts"></select>
+                                    </td>
+                                    <td data-title="Number">
+                                        <input type="text" ng-model="numContract.Number"/>
+                                    </td>
+                                    <td><a href="#" class="addImage" ng-click="addContact()"></a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
 
-            <div class="modal-body">
-                <form novalidate>
-                    <div class="divLabel" ng-show="salesPerson.Code.length">
-                        <label>Code</label>
-                        <input type="text" id="salesCode" ng-model="salesPerson.Code"/>
-                    </div>
-                    <div class="divLabel">
-                        <label>First Name</label>
-                        <input type="text" id="salesFirstName" ng-model="salesPerson.FirstName"/>
-                    </div>
-                    <div class="divLabel">
-                        <label>Last Name</label>
-                        <input type="text" id="salesLastName" ng-model="salesPerson.LastName"/>
-                    </div>
-                    <div class="divLabel">
-                        <label>Email</label>
-                        <input type="text" id="salesEmail" ng-model="salesPerson.Email"/>
-                    </div>
-                    <div class="divLabel">
-                        <label>Company Name</label>
-                        <input type="text" id="salesCompanyName" ng-model="salesPerson.CompanyName"/>
-                    </div>
-                    <div class="divLabel">
-                        <label>Address Line 1</label>
-                        <input type="text" id="salesAddressLine1" ng-model="salesPerson.AddressLine1"/>
-                    </div>
-                    <div class="divLabel">
-                        <label>Address Line 2</label>
-                        <input type="text" id="salesAddressLine2" ng-model="salesPerson.AddressLine2"/>
-                    </div>
-                    <div class="divLabel">
-                        <label>City</label>
-                        <input type="text" id="salesCity" ng-model="salesPerson.City"/>
-                    </div>
-                    <div class="divLabel">
-                        <label>State</label>
-                        <select id="stateId" ng-model="salesPerson.State" ng-options="state.Value as state.Text for state in stateList"></select>
-                    </div>
-                    <div class="divLabel">
-                        <label>Zip</label>
-                        <input type="text" id="salesZip" ng-model="salesPerson.Zip"/>
-                    </div>
-                    <div class="divLabel">
-                        <table>
-                            <tr ng-repeat="contact in salesPerson.PhoneContacts">
-                                <td>
-                                    <select id="contactId" ng-model="salesPerson.ContactId" ng-options="contact.Id as contact.Name for contact in contacts"></select>
-                                </td>
-                                <td>
-                                    <input type="text" id="salesNumber" ng-model="salesPerson.PhoneNumber"/>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </form>
-            </div>
-
-            <div class="modal-footer button-list">
-                <button type="button" ng-click="createSalesPerson(salesPerson)">Add</button>&nbsp;&nbsp;
-                <button type="button" ng-click="Cancel()">Cancel</button>
+                <div class="modal-footer button-list">
+                    <button type="button" ng-click="createSalesPerson(salesPerson)">Add</button>&nbsp;&nbsp;
+                    <button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/Admin")
+}

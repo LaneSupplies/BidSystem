@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    var app = angular.module('CanopyViewer', ['ngTouch']);
+    var app = angular.module('CanopyViewer');
 
     var CanopyController = function ($scope, $compile, canopyHttpService) {
         $scope.canopyDetail = {};

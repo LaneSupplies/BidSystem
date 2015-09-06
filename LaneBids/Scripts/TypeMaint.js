@@ -1,11 +1,15 @@
 ﻿(function() {
 
-    var app = angular.module('AdminService', ['ngTouch', 'ui.grid' ]);
+    var app = angular.module('AdminService');
 
-    var MaintController = function ($scope, adminHttpService) {
+    var TypeMaintController = function ($scope, adminHttpService) {
 
         //$scope.AllTypeData = [];
         $scope.DataTypeIndex = 0;
+
+        var onError = function (response) {
+            $scope.error = "There was an error. Error: " + response;
+        };
 
         var onTypeDataComplete = function(data) {
             $scope.AllTypeData = data;
@@ -37,12 +41,6 @@
             $('.message-info').text('Successfully Saved New Data type');
             $('.message-info').toggle();
             $('#addTypeDataModal').modal('hide');
-        };
-
-        var onAddSalesPersonComplete = function (data) {
-            $scope.salesPerson = data;
-            $('.message-info').text('Successfully Saved Sales Person');
-            $('.message-info').toggle();
         };
 
         //Edit Data Type in Grid
@@ -77,32 +75,11 @@
             adminHttpService.addNewDataType(item)
                 .then(onAddNewDataTypeComplete, onTypeDataError);
         }
-
-        //Add Sales Person
-        $scope.addSalesPerson = function () {
-            $('#addSalesPersonLabel').text("Add Sales Person");
-            $('#salesPersonModal').modal('show');
-
-            //adminHttpService.addSalesPerson(salesPerson)
-            //    .then(onAddSalesPersonComplete, onTypeDataError);
-        }
-
-        //Create Sales Person
-        $scope.createSalesPerson = function(salesPerson) {
-            
-        }
-
-        //Edit Sales Person
-        $scope.editSalesPerson = function(salesPerson) {
-            $scope.salesPerson = salesPerson;
-            $('#addSalesPersonLabel').text("Edit Sales Person");
-            $('#salesPersonModal').modal('show');
-        }
-
-        adminHttpService.getTypeData("StructureType").then(onTypeDataComplete, onTypeDataError);
+        
+        adminHttpService.getTypeData().then(onTypeDataComplete, onTypeDataError);
     };
-    
-    app.controller("MaintController", MaintController);
+
+    app.controller("TypeMaintController", TypeMaintController);
 
 }());
 

@@ -143,6 +143,9 @@ table tfoot {
         font-family: monospace;
     }
 
+.clearTable td {
+    border: none;
+}
 
 section#sectionBody {
     height: 600px;
@@ -650,17 +653,20 @@ td button {
 
 .message-error {
     clear: both;
-    color: #e80c4d;
+    background-color: #e80c4d;
+    box-shadow: 5px 5px 5px #888888;
     font-size: 1.1em;
     font-weight: bold;
-    margin: 20px 0 10px 0;
+    margin: 10px 20px;
 }
 
 .message-success {
-    color: #7ac0da;
+    clear: both;
+    background-color: #2f9f09;
+    box-shadow: 5px 5px 5px #888888;
     font-size: 1.3em;
     font-weight: bold;
-    margin: 20px 0 10px 0;
+    margin: 10px 20px;
 }
 
 /* styles for validation helpers */

@@ -31,9 +31,11 @@ namespace LaneBids
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/vendor/modernizr-*"));
 
+            //bundles.Add(new ScriptBundle("~/bundles/Admin").IncludeDirectory("~/Scripts", "*.js", false));
             bundles.Add(new ScriptBundle("~/bundles/Admin").Include(
-                "~/Scripts/AdminApps.js",
-                "~/Scripts/admin-http.js"));
+                "~/Scripts/admin-http.js",
+                "~/Scripts/TypeMaint.js",
+                "~/Scripts/SalesPerson.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Bid").Include(
                 "~/Scripts/BidApps.js",

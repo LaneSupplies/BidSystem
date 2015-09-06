@@ -7,7 +7,7 @@
 
 <h2>Maintenance Page</h2>
 <br />
-<div ng-controller="MaintController">
+<div ng-controller="TypeMaintController">
     <div class="message-info hide"></div>
     <!-- Structure Type Grid -->
     <div ng-repeat="gridModel in AllTypeData.AllTypes" class="maintenance-type">
@@ -44,7 +44,7 @@
 
     <!-- Edit Modal -->
     <div id="typeDataModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="typeDataModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document" ng-controller="MaintController">
+        <div class="modal-dialog" role="document" ng-controller="TypeMaintController">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -85,7 +85,7 @@
 
     <!-- Add Data Modal-->
     <div id="addTypeDataModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addTypeDataModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document" ng-controller="MaintController">
+        <div class="modal-dialog" role="document" ng-controller="TypeMaintController">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

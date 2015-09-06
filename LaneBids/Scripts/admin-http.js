@@ -1,12 +1,21 @@
 ﻿(function () {
+    var app = angular.module("AdminService", ['ngTouch', 'ui.grid']);
+    app.config(function ($httpProvider) {
+        $httpProvider.defaults.transformRequest = function (data) {
+            if (data === undefined) {
+                return data;
+            }
+            return $.param(data);
+        }
+    });
 
     var adminHttpService = function ($http) {
         var transform = function(data) {
             return $.param(data);
         };
 
-        var getTypeData = function(typeName) {
-            return $http.get("/Admin/TypeData/?type=" + typeName)
+        var getTypeData = function() {
+            return $http.get("/Admin/TypeData/")
                 .then(function(response) {
                     return response.data;
                 })
@@ -93,7 +102,35 @@
                 });
         };
 
+        var getContacts = function () {
+            return $http.get("/api/ContactTypes/")
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(function (response) {
+                    console.log("Contact List Error: ", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished getting contacts.");
+                });
+        };
+
+        var getStateList = function () {
+            return $http.get("/api/StateList/")
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(function (response) {
+                    console.log("State List Error: ", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished getting contacts.");
+                });
+        };
+
         return {
+            getStateList: getStateList,
+            getContacts: getContacts,
             getTypeData: getTypeData,
             editTypeData: editTypeData,
             updateTypeData: updateTypeData,
@@ -103,15 +140,7 @@
         };
     };
 
-    var appHttp = angular.module("AdminService");
-    appHttp.factory("adminHttpService", adminHttpService);
-
-    appHttp.config(function($httpProvider) {
-        $httpProvider.defaults.transformRequest = function(data) {
-            if (data === undefined) {
-                return data;
-            }
-            return $.param(data);
-        }
-    });
+    var module = angular.module("AdminService");
+    module.factory("adminHttpService", adminHttpService);
+    
 }());

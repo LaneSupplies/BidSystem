@@ -1,4 +1,6 @@
 ﻿(function () {
+    var app = angular.module("BidViewer", ['ngTouch']);
+
 
     var bidHttpService = function ($http) {
         var transform = function (data) {
@@ -89,15 +91,7 @@
         };
     };
 
-    var appHttp = angular.module("BidViewer");
-    appHttp.factory("bidHttpService", bidHttpService);
+    var module = angular.module("BidViewer");
+    module.factory("bidHttpService", bidHttpService);
 
-    //appHttp.config(function ($httpProvider) {
-    //    $httpProvider.defaults.transformRequest = function (data) {
-    //        if (data === undefined) {
-    //            return data;
-    //        }
-    //        return $.param(data);
-    //    }
-    //});
 }());

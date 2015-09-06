@@ -327,6 +327,8 @@
     <Compile Include="Sources\HomeServices.cs" />
     <Compile Include="Sources\JsonNetResults.cs" />
     <Compile Include="Sources\UserServices.cs" />
+    <Compile Include="WebAPI\ContactTypesController.cs" />
+    <Compile Include="WebAPI\StateListController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-responsive.css" />
@@ -408,7 +410,8 @@
       <DependentUpon>LaneEntities.edmx</DependentUpon>
       <LastGenOutput>LaneEntities.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\AdminApps.js" />
+    <Content Include="Scripts\SalesPerson.js" />
+    <Content Include="Scripts\TypeMaint.js" />
     <Content Include="Scripts\canopy-http.js" />
     <Content Include="Scripts\CanopyApps.js" />
     <Content Include="Scripts\bid-http.js" />

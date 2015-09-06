@@ -21,7 +21,7 @@ namespace LaneBids.Models
         public string PhoneNumber { get; set; }
         public int ContactId { get; set; }
         public AddressModel Address { get; set; }
-        public List<PhoneContactsModel> PhoneContacts { get; set; }
+        public PhoneContactsModel PhoneContacts { get; set; }
 
         public IList<SelectListItem> SalesPersonList { get; set; } 
     }
