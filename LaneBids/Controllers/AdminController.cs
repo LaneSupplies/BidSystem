@@ -731,6 +731,7 @@ namespace LaneBids.Controllers
                                            newSalesPerson.City + ", " +
                                            newSalesPerson.State + ", " +
                                            newSalesPerson.Zip;
+            newSalesPerson.Name = newSalesPerson.FirstName + " " + newSalesPerson.LastName;
 
             return Json(newSalesPerson, JsonRequestBehavior.AllowGet);
         }

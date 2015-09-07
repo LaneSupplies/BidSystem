@@ -21,6 +21,11 @@
             ]
         };
 
+        //Get Sales People List
+        var onSalesPeopleComplete = function(data) {
+            $scope.salesPersonList = data;
+        }
+
         //Get contact list
         var onContactListComplete = function (data) {
             $scope.contacts = data;
@@ -45,9 +50,9 @@
 
         var onAddSalesPersonComplete = function (data) {
             $scope.salesPersonList.push({
-                Name: data.Name,
-                Code: data.Code,
-                AddressString: data.AddressString
+                Name: data.data.Name,
+                Code: data.data.Code,
+                AddressString: data.data.AddressString
                 
             });
 
@@ -81,8 +86,7 @@
             $scope.salesPerson.PhoneContacts.Phones.push({});
         }
         
-        //adminHttpService.getContacts().then(onContactListComplete, onError);
-        //adminHttpService.getStateList().then(onStateListComplete, onError);
+        adminHttpService.getSalesPeople().then(onSalesPeopleComplete, onError);
     };
 
     app.controller("SalesPersonController", SalesPersonController);

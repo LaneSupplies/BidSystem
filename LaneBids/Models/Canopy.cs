@@ -83,7 +83,6 @@ namespace LaneBids.Models
         public Nullable<System.DateTime> Create_Date { get; set; }
         public Nullable<int> Modified_By { get; set; }
         public Nullable<System.DateTime> Modifed_Date { get; set; }
-        public string Property1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bid_Canopies> Bid_Canopies { get; set; }

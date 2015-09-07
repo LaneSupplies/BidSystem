@@ -1459,7 +1459,6 @@
           <NavigationProperty Name="Measurement11" Relationship="Self.FK_Fascia_Thickness_Canopy" FromRole="Canopies" ToRole="Measurements" />
           <NavigationProperty Name="Fascia_Types" Relationship="Self.FK_Fascia_Types_Canopy" FromRole="Canopies" ToRole="Fascia_Types" />
           <NavigationProperty Name="Image1" Relationship="Self.FK_Images_Canopy" FromRole="Canopies" ToRole="Images" />
-          <Property Name="Property1" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Color">
           <Key>

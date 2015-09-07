@@ -9,6 +9,7 @@ namespace LaneBids.Models
     public class SalesPersonDetailsModel
     {
         public Guid SalesPersonId { get; set; }
+        public string Name { get; set; }
         public string Code { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

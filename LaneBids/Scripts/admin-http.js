@@ -86,13 +86,26 @@
                 });
         };
 
+        var getSalesPeople = function () {
+            return $http.get("/api/SalesPerson/")
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(function (response) {
+                    console.log("Error adding sales person", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished adding sales person");
+                });
+        };
+
         var addSalesPerson = function (data) {
-            return $http.post("/Admin/AddSalesPerson/", data, {
+            return $http.post("/api/SalesPerson/", data, {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
                 transformRequest: transform
             })
                 .success(function (response) {
-                    return response.data;
+                    return response;
                 })
                 .catch(function (response) {
                     console.log("Error adding sales person", response.status, response.data);
@@ -135,8 +148,9 @@
             editTypeData: editTypeData,
             updateTypeData: updateTypeData,
             deleteTypeData: deleteTypeData,
+            addNewDataType: addNewDataType,
             addSalesPerson: addSalesPerson,
-            addNewDataType: addNewDataType
+            getSalesPeople: getSalesPeople
         };
     };
 
