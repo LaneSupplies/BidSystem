@@ -24,7 +24,7 @@
         <tr ng-repeat="person in salesPersonList">
             <td>{{person.Name}}</td>
             <td>{{person.Code}}</td>
-            <td>{{person.Address}}</td>
+            <td>{{person.AddressString}}</td>
             <td><a href="#" ng-click="editSalesPerson(salesPerson)">Edit</a></td>
         </tr>
         </tbody>
@@ -32,7 +32,7 @@
 
     <!-- Add Sales Person -->
     <div id="salesPersonModal" class="modal fade" tabindex="-1" role="dialog" ng-model="salesPerson" aria-labelledby="addSalesPersonLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document" ng-controller="SalesPersonController">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -77,7 +77,7 @@
                         </div>
                         <div class="divLabel">
                             <label>State</label>
-                            <select id="stateId" ng-model="salesPerson.State" ng-options="state.Value as state.Text for state in stateList"></select>
+                            <select  ng-model="salesPerson.State" ng-options="option.Value as option.Text for option in stateOptions"></select>
                         </div>
                         <div class="divLabel">
                             <label>Zip</label>
@@ -85,9 +85,9 @@
                         </div>
                         <div class="divLabel">
                             <table class="clearTable">
-                                <tr ng-repeat="numContract in salesPerson.PhoneNumbers.contacts">
+                                <tr ng-repeat="numContract in salesPerson.PhoneContacts.Phones">
                                     <td data-title="Id">
-                                        <select id="contactId" ng-model="numContract.Id" ng-options="contact.Value as contact.Text for contact in contacts"></select>
+                                        <select ng-init="numContract.Id = contacts[0].Value" ng-model="numContract.Id" ng-options="contact.Value as contact.Text for contact in contacts"></select>
                                     </td>
                                     <td data-title="Number">
                                         <input type="text" ng-model="numContract.Number"/>

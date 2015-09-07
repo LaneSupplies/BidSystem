@@ -5,13 +5,15 @@
     var SalesPersonController = function ($scope, adminHttpService) {
 
         $scope.salesPerson = {};
+        //$scope.salesPerson.PhoneContacts = [];
+        $scope.salesPersonList = [];
 
         var onError = function (response) {
             $scope.error = "There was an error. Error: " + response;
         };
 
-        $scope.salesPerson.PhoneNumbers = {
-            contacts: [
+        $scope.salesPerson.PhoneContacts = {
+            Phones: [
                 {
                     Id: '',
                     Number: ''
@@ -22,20 +24,31 @@
         //Get contact list
         var onContactListComplete = function (data) {
             $scope.contacts = data;
+            $scope.numContract = { Id: data[0].Value };
         };
 
         //Get state list
         var onStateListComplete = function (data) {
-            $scope.stateList = data;
+            $scope.stateOptions = data;
+            $scope.salesPerson = {
+                State: data[0].Value,
+                PhoneContacts: 
+                    {
+                        Phones: [
+                        {
+                            Id: '',
+                            Number: ''
+                        }]
+                    }
+            };
         };
 
         var onAddSalesPersonComplete = function (data) {
             $scope.salesPersonList.push({
-                salesPerson: [{
-                    Name: data.Name,
-                    Code: data.Code,
-                    Address: data.Address
-                }]
+                Name: data.Name,
+                Code: data.Code,
+                AddressString: data.AddressString
+                
             });
 
             $('.message-info').text('Successfully Saved Sales Person');
@@ -45,6 +58,8 @@
 
         //Add Sales Person
         $scope.addSalesPerson = function () {
+            adminHttpService.getContacts().then(onContactListComplete, onError);
+            adminHttpService.getStateList().then(onStateListComplete, onError);
             $('#addSalesPersonLabel').text("Add Sales Person");
             $('#salesPersonModal').modal('show');
         }
@@ -63,11 +78,11 @@
 
         //Add Contact Line
         $scope.addContact = function() {
-            $scope.salesPerson.PhoneNumbers.contacts.push({});
+            $scope.salesPerson.PhoneContacts.Phones.push({});
         }
         
-        adminHttpService.getContacts().then(onContactListComplete, onError);
-        adminHttpService.getStateList().then(onStateListComplete, onError);
+        //adminHttpService.getContacts().then(onContactListComplete, onError);
+        //adminHttpService.getStateList().then(onStateListComplete, onError);
     };
 
     app.controller("SalesPersonController", SalesPersonController);

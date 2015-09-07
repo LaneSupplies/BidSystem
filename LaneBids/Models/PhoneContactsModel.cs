@@ -8,7 +8,7 @@ namespace LaneBids.Models
 {
     public class PhoneContactsModel
     {
-        public IEnumerable<PersonContact> contact { get; set; }
+        public IEnumerable<PersonContact> Phones { get; set; }
     }
 
     public class PersonContact { 

@@ -724,7 +724,13 @@ namespace LaneBids.Controllers
         [HttpPost]
         public ActionResult AddSalesPerson(SalesPersonDetailsModel salesPerson)
         {
+
             var newSalesPerson = _services.AddSalesPerson(salesPerson);
+
+            newSalesPerson.AddressString = newSalesPerson.AddressLine1 + ", " +
+                                           newSalesPerson.City + ", " +
+                                           newSalesPerson.State + ", " +
+                                           newSalesPerson.Zip;
 
             return Json(newSalesPerson, JsonRequestBehavior.AllowGet);
         }

@@ -62,26 +62,33 @@ namespace LaneBids.Sources
                 Zip = salesPerson.Zip
             };
             entities.Addresses.Add(addAddress);
-
-            var contact = new Contact_Text
-            {
-                Text = salesPerson.PhoneNumber,
-                Contact_Type_ID = salesPerson.ContactId,
-                Create_Date = DateTime.Now,
-                Created_By = WebSecurity.CurrentUserId
-            };
-            entities.Contact_Text.Add(contact);
             entities.SaveChanges();
 
             var contactList = new List<Contact_Text>();
-            contactList.Add(contact);
+            if (salesPerson.PhoneContacts.Phones.Any())
+            {
+                foreach (var phoneContact in salesPerson.PhoneContacts.Phones)
+                {
+                    var contact = new Contact_Text
+                    {
+                        Text = phoneContact.Number,
+                        Contact_Type_ID = phoneContact.Id,
+                        Create_Date = DateTime.Now,
+                        Created_By = WebSecurity.CurrentUserId
+                    };
+
+                    entities.Contact_Text.Add(contact);
+                    entities.SaveChanges();
+                    contactList.Add(contact);
+                }
+            }
 
             var newSalesPerson = new Sales_Persons
             {
                 First_Name = salesPerson.FirstName,
                 Last_Name = salesPerson.LastName,
                 Address_ID = addAddress.Address_ID,
-                Contact_Text = contactList,
+                Contact_Text = contactList.Any() ? contactList : null,
                 Create_Date = DateTime.Now,
                 Created_By = WebSecurity.CurrentUserId,
                 Sales_Person_Code = salesPerson.FirstName.Substring(0,1) + salesPerson.LastName.Substring(0,1)

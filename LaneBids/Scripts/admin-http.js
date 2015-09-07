@@ -1,13 +1,13 @@
 ﻿(function () {
     var app = angular.module("AdminService", ['ngTouch', 'ui.grid']);
-    app.config(function ($httpProvider) {
-        $httpProvider.defaults.transformRequest = function (data) {
-            if (data === undefined) {
-                return data;
-            }
-            return $.param(data);
-        }
-    });
+    //app.config(function ($httpProvider) {
+    //    $httpProvider.defaults.transformRequest = function (data) {
+    //        if (data === undefined) {
+    //            return data;
+    //        }
+    //        return $.param(data);
+    //    }
+    //});
 
     var adminHttpService = function ($http) {
         var transform = function(data) {
