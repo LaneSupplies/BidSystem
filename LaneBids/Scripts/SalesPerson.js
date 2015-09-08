@@ -53,7 +53,6 @@
                 Name: data.data.Name,
                 Code: data.data.Code,
                 AddressString: data.data.AddressString
-                
             });
 
             $('.message-info').text('Successfully Saved Sales Person');
