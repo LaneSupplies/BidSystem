@@ -14,16 +14,11 @@ namespace LaneBids.WebAPI
         public AdminServices _services = new AdminServices();
 
         // GET api/<controller>
-        public IEnumerable<SalesPersonDetailsModel> Get()
+        public IEnumerable<Sales_Persons> Get()
         {
             var entities = new LaneEntities();
-            return entities.Sales_Persons.Select(s => new SalesPersonDetailsModel
-            {
-                Name = s.First_Name + " " + s.Last_Name,
-                Code = s.Sales_Person_Code,
-                AddressString =
-                    s.Address.Address_Line1 + ", " + s.Address.City + ", " + s.Address.State + ", " + s.Address.Zip
-            });
+            var person = entities.Sales_Persons.Select(x => x);
+            return person;
         }
 
         // GET api/<controller>/5
@@ -40,15 +35,9 @@ namespace LaneBids.WebAPI
         }
 
         // POST api/<controller>
-        public SalesPersonDetailsModel Post(SalesPersonDetailsModel model)
+        public Sales_Persons Post(SalesPersonDetailsModel model)
         {
             var newSalesPerson = _services.AddSalesPerson(model);
-
-            newSalesPerson.AddressString = newSalesPerson.AddressLine1 + ", " +
-                                           newSalesPerson.City + ", " +
-                                           newSalesPerson.State + ", " +
-                                           newSalesPerson.Zip;
-            newSalesPerson.Name = newSalesPerson.FirstName + " " + newSalesPerson.LastName;
 
             return newSalesPerson;
         }

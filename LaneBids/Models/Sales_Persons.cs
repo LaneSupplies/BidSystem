@@ -28,6 +28,7 @@ namespace LaneBids.Models
         public Nullable<System.Guid> Address_ID { get; set; }
         public Nullable<int> Created_By { get; set; }
         public Nullable<System.DateTime> Create_Date { get; set; }
+        public string Email { get; set; }
     
         public virtual Address Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

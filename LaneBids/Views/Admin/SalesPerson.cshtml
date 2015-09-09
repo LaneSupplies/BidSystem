@@ -22,9 +22,9 @@
         </thead>
         <tbody>
         <tr ng-repeat="person in salesPersonList">
-            <td>{{person.Name}}</td>
-            <td>{{person.Code}}</td>
-            <td>{{person.AddressString}}</td>
+            <td>{{person.First_Name}} {{person.Last_Name}}</td>
+            <td>{{person.Sales_Person_Code}}</td>
+            <td>{{person.Address.Address_Line1}}, {{person.Address.City}}, {{person.Address.State}}, {{person.Address.Zip}}</td>
             <td><a href="#" ng-click="editSalesPerson(salesPerson)">Edit</a></td>
         </tr>
         </tbody>

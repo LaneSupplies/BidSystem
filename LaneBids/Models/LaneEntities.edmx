@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LaneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LaneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity_Log">
           <Key>
             <PropertyRef Name="Activity_Log_ID" />
@@ -347,6 +347,7 @@
           <Property Name="Address_ID" Type="uniqueidentifier" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Scope_Types">
           <Key>
@@ -1260,8 +1261,7 @@
             <End Role="Bids" EntitySet="Bids" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LaneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1672,6 +1672,7 @@
           <NavigationProperty Name="Address" Relationship="Self.FK_Sales_Person_Address" FromRole="Sales_Persons" ToRole="Addresses" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Sales_Persons_Bids" FromRole="Sales_Persons" ToRole="Bids" />
           <NavigationProperty Name="Contact_Text" Relationship="Self.Sales_Person_Contact_Text" FromRole="Sales_Persons" ToRole="Contact_Text" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Scope_Types">
           <Key>
@@ -2876,6 +2877,7 @@
           <EntitySetMapping Name="Sales_Persons">
             <EntityTypeMapping TypeName="LaneModel.Sales_Persons">
               <MappingFragment StoreEntitySet="Sales_Persons">
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Sales_Person_ID" ColumnName="Sales_Person_ID" />
                 <ScalarProperty Name="Sales_Person_Code" ColumnName="Sales_Person_Code" />
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />

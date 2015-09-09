@@ -1,24 +1,13 @@
 
-delete from Bids
-delete from Bid_Notes
-delete from Bid_To_Notes
-delete from Canopies
-delete from Bid_Canopies
-delete from Column_Spacing_Lengths
-delete from Column_Spacing_Widths
-
-DBCC CHECKIDENT ('Bids', RESEED, 0)
-DBCC CHECKIDENT ('Canopies', RESEED, 0)
-DBCC CHECKIDENT ('Bid_Notes', RESEED, 0)
-DBCC CHECKIDENT ('Column_Spacing_Lengths', RESEED, 0)
-DBCC CHECKIDENT ('Column_Spacing_Widths', RESEED, 0)
+delete from Sales_Person_Contact_Text
+delete from Sales_Persons
+delete from Addresses where Address_ID in (select Address_ID from Sales_Persons)
+delete from Contact_Text where Contact_Text_ID in (select Contact_Text_ID from Sales_Person_Contact_Text)
 ------------------------------------------------------------
 
-select * from Bids
-select * from Bid_Notes
-select * from Bid_To_Notes
-select * from Canopies
-select * from Bid_Canopies
-select * from Column_Spacing_Lengths
-select * from Column_Spacing_Widths
+select * from Addresses
+select * from Contact_Text
+select * from Sales_Person_Contact_Text
+select * from Sales_Persons
+
 

@@ -50,7 +50,7 @@ namespace LaneBids.Sources
             return customer;
         }
 
-        public SalesPersonDetailsModel AddSalesPerson(SalesPersonDetailsModel salesPerson)
+        public Sales_Persons AddSalesPerson(SalesPersonDetailsModel salesPerson)
         {
             var entities = new LaneEntities();
             var addAddress = new Address
@@ -93,12 +93,10 @@ namespace LaneBids.Sources
                 Created_By = WebSecurity.CurrentUserId,
                 Sales_Person_Code = salesPerson.FirstName.Substring(0,1) + salesPerson.LastName.Substring(0,1)
             };
-            entities.Sales_Persons.Add(newSalesPerson);
+            var savedSalesPerson = entities.Sales_Persons.Add(newSalesPerson);
             entities.SaveChanges();
-            salesPerson.Code = newSalesPerson.Sales_Person_Code;
-            salesPerson.SalesPersonId = newSalesPerson.Sales_Person_ID;
             
-            return salesPerson;
+            return savedSalesPerson;
         }
     }
 }

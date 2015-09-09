@@ -19,6 +19,7 @@ namespace LaneBids.Models
         public string State { get; set; }
         public string Zip { get; set; }
         public string Country { get; set; }
+        public string Email { get; set; }
         public string AddressString { get; set; }
         public AddressModel Address { get; set; }
         public PhoneContactsModel PhoneContacts { get; set; }
