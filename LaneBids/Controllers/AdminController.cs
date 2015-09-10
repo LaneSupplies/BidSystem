@@ -721,20 +721,10 @@ namespace LaneBids.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult AddSalesPerson(SalesPersonDetailsModel salesPerson)
-        //{
-
-        //    var newSalesPerson = _services.AddSalesPerson(salesPerson);
-
-        //    newSalesPerson.AddressString = newSalesPerson.AddressLine1 + ", " +
-        //                                   newSalesPerson.City + ", " +
-        //                                   newSalesPerson.State + ", " +
-        //                                   newSalesPerson.Zip;
-        //    newSalesPerson.Name = newSalesPerson.FirstName + " " + newSalesPerson.LastName;
-
-        //    return Json(newSalesPerson, JsonRequestBehavior.AllowGet);
-        //}
+        public ActionResult Company()
+        {
+            return View();
+        }
 
         #endregion
 

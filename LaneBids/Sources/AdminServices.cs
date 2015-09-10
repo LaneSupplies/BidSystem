@@ -89,6 +89,7 @@ namespace LaneBids.Sources
                 Last_Name = salesPerson.LastName,
                 Address_ID = addAddress.Address_ID,
                 Contact_Text = contactList.Any() ? contactList : null,
+                Email = salesPerson.Email,
                 Create_Date = DateTime.Now,
                 Created_By = WebSecurity.CurrentUserId,
                 Sales_Person_Code = salesPerson.FirstName.Substring(0,1) + salesPerson.LastName.Substring(0,1)
@@ -97,6 +98,20 @@ namespace LaneBids.Sources
             entities.SaveChanges();
             
             return savedSalesPerson;
+        }
+
+        public CompanyModel AddCompany(CompanyModel company)
+        {
+            var entities = new LaneEntities();
+            var newCompany = new Company
+            {
+                CompanyName = company.Name,
+                Company_Code = company.CompanyCode
+            };
+
+            entities.Companies.Add(newCompany);
+            entities.SaveChanges();
+            return company;
         }
     }
 }

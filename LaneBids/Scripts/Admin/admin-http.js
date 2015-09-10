@@ -92,10 +92,10 @@
                     return response.data;
                 })
                 .catch(function (response) {
-                    console.log("Error adding sales person", response.status, response.data);
+                    console.log("Error getting persons", response.status, response.data);
                 })
                 .finally(function () {
-                    console.log("Finished adding sales person");
+                    console.log("Finished getting sales persons");
                 });
         };
 
@@ -141,6 +141,35 @@
                 });
         };
 
+        var getCompanies = function () {
+            return $http.get("/api/Company/")
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(function (response) {
+                    console.log("Error getting companies", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished getting companies");
+                });
+        };
+
+        var addCompany = function (data) {
+            return $http.post("/api/Company/", data, {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                transformRequest: transform
+            })
+                .success(function (response) {
+                    return response;
+                })
+                .catch(function (response) {
+                    console.log("Error adding company", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished adding company");
+                });
+        };
+
         return {
             getStateList: getStateList,
             getContacts: getContacts,
@@ -150,7 +179,9 @@
             deleteTypeData: deleteTypeData,
             addNewDataType: addNewDataType,
             addSalesPerson: addSalesPerson,
-            getSalesPeople: getSalesPeople
+            getSalesPeople: getSalesPeople,
+            getCompanies: getCompanies,
+            addCompany: addCompany
         };
     };
 

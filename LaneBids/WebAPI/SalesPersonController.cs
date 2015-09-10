@@ -14,10 +14,28 @@ namespace LaneBids.WebAPI
         public AdminServices _services = new AdminServices();
 
         // GET api/<controller>
-        public IEnumerable<Sales_Persons> Get()
+        public IEnumerable<SalesPersonDetailsModel> Get()
         {
             var entities = new LaneEntities();
-            var person = entities.Sales_Persons.Select(x => x);
+            var person = entities.Sales_Persons.Select(x => new SalesPersonDetailsModel
+            {
+                SalesPersonId = x.Sales_Person_ID,
+                Code = x.Sales_Person_Code,
+                FirstName = x.First_Name,
+                LastName = x.Last_Name,
+                AddressLine1 = x.Address.Address_Line1,
+                AddressLine2 = x.Address.Address_Line2,
+                City = x.Address.City,
+                State = x.Address.State,
+                Zip = x.Address.Zip,
+                PhoneContacts = new PhoneContactsModel {
+                    Phones = x.Contact_Text.Select(y => new PersonContact
+                    {
+                        Id = y.Contact_Type_ID,
+                        Number = y.Text
+                    }) },
+                Email = x.Email,
+            });
             return person;
         }
 
@@ -27,10 +45,24 @@ namespace LaneBids.WebAPI
             var entities = new LaneEntities();
             return entities.Sales_Persons.Where(x => x.Sales_Person_ID == id).Select(s => new SalesPersonDetailsModel
             {
-                Name = s.First_Name + " " + s.Last_Name,
+                SalesPersonId = s.Sales_Person_ID,
                 Code = s.Sales_Person_Code,
-                AddressString =
-                    s.Address.Address_Line1 + ", " + s.Address.City + ", " + s.Address.State + ", " + s.Address.Zip
+                FirstName = s.First_Name,
+                LastName = s.Last_Name,
+                AddressLine1 = s.Address.Address_Line1,
+                AddressLine2 = s.Address.Address_Line2,
+                City = s.Address.City,
+                State = s.Address.State,
+                Zip = s.Address.Zip,
+                PhoneContacts = new PhoneContactsModel
+                {
+                    Phones = s.Contact_Text.Select(y => new PersonContact
+                    {
+                        Id = y.Contact_Type_ID,
+                        Number = y.Text
+                    })
+                },
+                Email = s.Email,
             }).FirstOrDefault();
         }
 
