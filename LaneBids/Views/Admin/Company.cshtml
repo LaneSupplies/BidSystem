@@ -27,13 +27,13 @@
                     <a href="#" ng-click="editCompany({{company}})">Edit</a>
                 </td>
                 <td>
-                    <a href="#" ng-click="deleteCompany({{company}})">Delete</a>
+                    <a href="#" confirm="Are you sure you want to delete {{company.Name}}" ng-click="deleteCompany({{company}})">Delete</a>
                 </td>
             </tr>
         </tbody>
     </table>
 
-    <!-- Add Sales Person -->
+    <!-- Add Company -->
     <div id="companyModal" class="modal fade" tabindex="-1" role="dialog" ng-model="company" aria-labelledby="addCompanyLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

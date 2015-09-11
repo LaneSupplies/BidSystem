@@ -170,6 +170,38 @@
                 });
         };
 
+        var updateCompany = function (data) {
+            return $http.put("/api/Company/", data, {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                transformRequest: transform
+            })
+                .success(function (response) {
+                    return response;
+                })
+                .catch(function (response) {
+                    console.log("Error adding company", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished adding company");
+                });
+        };
+
+        var deleteCompany = function (data) {
+            return $http.delete("/api/Company/", data, {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                transformRequest: transform
+            })
+                .success(function (response) {
+                    return response;
+                })
+                .catch(function (response) {
+                    console.log("Error adding company", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished adding company");
+                });
+        };
+
         return {
             getStateList: getStateList,
             getContacts: getContacts,
@@ -181,7 +213,9 @@
             addSalesPerson: addSalesPerson,
             getSalesPeople: getSalesPeople,
             getCompanies: getCompanies,
-            addCompany: addCompany
+            addCompany: addCompany,
+            updateCompany: updateCompany,
+            deleteCompany: deleteCompany
         };
     };
 
