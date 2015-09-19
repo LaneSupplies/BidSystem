@@ -46,13 +46,29 @@ namespace LaneBids.WebAPI
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        public CompanyModel Put(Guid id, [FromBody]CompanyModel model)
         {
+            var entities = new LaneEntities();
+            var updateCompany = entities.Companies.FirstOrDefault(x => x.Company_ID == id);
+
+            if (updateCompany == null) return null;
+
+            updateCompany.CompanyName = model.Name;
+            updateCompany.Company_Code = model.CompanyCode;
+            entities.SaveChanges();
+            return model;
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        public string Delete(Guid id)
         {
+            var entities = new LaneEntities();
+            var deleteCompany = entities.Companies.FirstOrDefault(x => x.Company_ID == id);
+            if (deleteCompany == null) return "Error";
+
+            entities.Companies.Remove(deleteCompany);
+            entities.SaveChanges();
+            return "Success";
         }
     }
 }

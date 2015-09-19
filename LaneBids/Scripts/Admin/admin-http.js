@@ -171,7 +171,7 @@
         };
 
         var updateCompany = function (data) {
-            return $http.put("/api/Company/", data, {
+            return $http.put("/api/Company/" + data.CompanyId, data, {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
                 transformRequest: transform
             })
@@ -187,10 +187,7 @@
         };
 
         var deleteCompany = function (data) {
-            return $http.delete("/api/Company/", data, {
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-                transformRequest: transform
-            })
+            return $http.delete("/api/Company/" + data.CompanyId)
                 .success(function (response) {
                     return response;
                 })

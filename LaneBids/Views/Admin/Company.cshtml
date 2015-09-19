@@ -24,10 +24,10 @@
             <tr ng-repeat="company in companyList">
                 <td>{{company.Name}}</td>
                 <td>
-                    <a href="#" ng-click="editCompany({{company}})">Edit</a>
+                    <a href="#" ng-click="editCompany({{company}}, $index)">Edit</a>
                 </td>
                 <td>
-                    <a href="#" confirm="Are you sure you want to delete {{company.Name}}" ng-click="deleteCompany({{company}})">Delete</a>
+                    <a href="#" confirm="Are you sure you want to delete {{company.Name}}" ng-click="deleteCompany({{company}}, $index)">Delete</a>
                 </td>
             </tr>
         </tbody>
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="modal-footer button-list">
-                    <button type="button" ng-click="createCompany(company)">Add</button>&nbsp;&nbsp;
+                    <button type="button" ng-click="createUpdateCompany(company)">Add / Update</button>&nbsp;&nbsp;
                     <button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
                 </div>
             </div>

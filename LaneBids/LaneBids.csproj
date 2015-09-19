@@ -422,6 +422,7 @@
     <Content Include="Scripts\Admin\Company.js" />
     <Content Include="Scripts\Admin\SalesPerson.js" />
     <Content Include="Scripts\Admin\TypeMaint.js" />
+    <Content Include="Scripts\vendor\angular-confirm.js" />
     <Content Include="Scripts\vendor\angular-ui-ieshiv.js" />
     <Content Include="Scripts\vendor\angular-ui-ieshiv.min.js" />
     <Content Include="Scripts\vendor\angular-ui.js" />
