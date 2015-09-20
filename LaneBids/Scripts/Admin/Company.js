@@ -2,7 +2,7 @@
 
     var app = angular.module('AdminService');
 
-    var CompanyController = function ($scope, adminHttpService) {
+    var CompanyController = function ($scope, adminHttpService, prompt) {
 
         $scope.rowIndex = 0;
 
@@ -65,10 +65,28 @@
             $('#companyModal').modal('show');
         }
 
-        $scope.deleteCompany = function (company, index) {
-            $scope.rowIndex = index;
-            adminHttpService.deleteCompany(company).then(onDeleteComplete, onError);
-        }
+        $scope.deleteCompany = function(company, index) {
+            prompt({
+                "title": "Delete Company",
+                "message": "Are you sure you want to delete the company?",
+                "buttons": [
+                    {
+                        "label": "Yes",
+                        "cancel": false,
+                        "primary": false
+                    },
+                    {
+                        "label": "No",
+                        "cancel": true,
+                        "primary": true
+                    }
+                ]
+            }).then(function (result) {
+                $scope.rowIndex = index;
+                adminHttpService.deleteCompany(company).then(onDeleteComplete, onError);
+            });
+
+        };
 
         adminHttpService.getCompanies().then(onCompanyComplete, onError);
 

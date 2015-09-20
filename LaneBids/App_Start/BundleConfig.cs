@@ -17,9 +17,10 @@ namespace LaneBids
 
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
                 "~/Scripts/vendor/bootstrap.js",
-                "~/Scripts/vendor/angular.js")
-                .IncludeDirectory("~/Scripts/vendor/", "angular-*", true)
-                .IncludeDirectory("~/Scripts/vendor/", "ui-*", true));
+                "~/Scripts/vendor/angular.js",
+                "~/Scripts/vendor/angular-*",
+                "~/Scripts/vendor/angular-ui/ui-*"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                 "~/Scripts/vendor/jquery-ui-{version}.js"));

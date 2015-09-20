@@ -10,7 +10,7 @@ namespace LaneBids.Sources
 {
     public class AdminServices
     {
-        public CustomerDetailsModel AddCustomer(CustomerDetailsModel customer)
+        public ContactDetailsModel AddCustomer(ContactDetailsModel contact)
         {
             var entities = new LaneEntities();
             //var addAddress = new Address
@@ -39,7 +39,7 @@ namespace LaneBids.Sources
                 //First_Name = customer.FirstName,
                 //Last_Name = customer.LastName,
                 //Email = customer.Email,
-                //Company_Name = customer.CompanyName,
+                //Company_Name = customer.Company_Name,
                 //Address_ID = addAddress.Address_ID,
                 //Create_Date = DateTime.Now,
                 //Created_By = WebSecurity.CurrentUserId
@@ -47,7 +47,7 @@ namespace LaneBids.Sources
             //entities.Customers.Add(newCustomer);
             //entities.SaveChanges();
 
-            return customer;
+            return contact;
         }
 
         public Sales_Persons AddSalesPerson(SalesPersonDetailsModel salesPerson)
@@ -105,13 +105,40 @@ namespace LaneBids.Sources
             var entities = new LaneEntities();
             var newCompany = new Company
             {
-                CompanyName = company.Name,
+                Company_Name = company.Name,
                 Company_Code = company.CompanyCode
             };
 
             entities.Companies.Add(newCompany);
             entities.SaveChanges();
             return company;
+        }
+
+        public CustomerModel AddCustomer(CustomerModel customer)
+        {
+            var entities = new LaneEntities();
+            var newAddress = new Address
+            {
+                Address_Line1 = customer.AddressLine1,
+                Address_Line2 = customer.AddressLine2,
+                City = customer.City,
+                State = customer.State,
+                Zip = customer.Zip
+            };
+
+            entities.Addresses.Add(newAddress);
+            entities.SaveChanges();
+
+            var newCustomer = new Customer
+            {
+                Company_Region_Name = customer.RegionName,
+                Address_ID = newAddress.Address_ID,
+                Company_ID = customer.CompanyId
+            };
+
+            entities.Customers.Add(newCustomer);
+            entities.SaveChanges();
+            return customer;
         }
     }
 }

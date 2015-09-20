@@ -90,6 +90,9 @@ h5, h6 {
         text-decoration: none;
     }
 
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
 
 /* main layout
 ----------------------------------------------------------*/
@@ -224,10 +227,6 @@ header .content-wrapper {
         -webkit-transition: all 0.4s ease;
         -o-transition: all 0.4s ease;
         transition: all 0.4s ease;
-    }
-
-    .accordion li:last-child .menu-link {
-        border-bottom: 0;
     }
 
     .accordion li i {

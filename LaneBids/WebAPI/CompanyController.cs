@@ -11,7 +11,7 @@ namespace LaneBids.WebAPI
 {
     public class CompanyController : ApiController
     {
-        public AdminServices _services = new AdminServices();
+        private AdminServices _services = new AdminServices();
 
         // GET api/<controller>
         public IEnumerable<CompanyModel> Get()
@@ -21,7 +21,7 @@ namespace LaneBids.WebAPI
             {
                 CompanyId = _.Company_ID,
                 CompanyCode = _.Company_Code,
-                Name = _.CompanyName
+                Name = _.Company_Name
             });
         }
 
@@ -33,7 +33,7 @@ namespace LaneBids.WebAPI
             {
                 CompanyId = _.Company_ID,
                 CompanyCode = _.Company_Code,
-                Name = _.CompanyName
+                Name = _.Company_Name
             }).FirstOrDefault();
         }
 
@@ -53,7 +53,7 @@ namespace LaneBids.WebAPI
 
             if (updateCompany == null) return null;
 
-            updateCompany.CompanyName = model.Name;
+            updateCompany.Company_Name = model.Name;
             updateCompany.Company_Code = model.CompanyCode;
             entities.SaveChanges();
             return model;

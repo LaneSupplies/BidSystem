@@ -79,7 +79,7 @@ namespace LaneBids.Sources
             bid.CompanyList = _entities.Companies.ToList().Select(s => new SelectListItem
             {
                 Value = s.Company_ID.ToString(),
-                Text = s.CompanyName
+                Text = s.Company_Name
             }).ToList();
 
             //Sales Person Data

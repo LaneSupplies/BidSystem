@@ -236,6 +236,12 @@
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CompanyModel.cs" />
+    <Compile Include="Models\ContactDetailsModel.cs" />
+    <Compile Include="Models\AddressModel.cs" />
+    <Compile Include="Models\AdminMaintenanceModel.cs" />
+    <Compile Include="Models\BidDetailsModel.cs" />
+    <Compile Include="Models\BidSearchModel.cs" />
+    <Compile Include="Models\CanopyDetailsModel.cs" />
     <Compile Include="Models\Contact_Text.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
@@ -245,12 +251,7 @@
     <Compile Include="Models\Customer.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomerDetailsModel.cs" />
-    <Compile Include="Models\AddressModel.cs" />
-    <Compile Include="Models\AdminMaintenanceModel.cs" />
-    <Compile Include="Models\BidDetailsModel.cs" />
-    <Compile Include="Models\BidSearchModel.cs" />
-    <Compile Include="Models\CanopyDetailsModel.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\Customer_Contact.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
@@ -290,6 +291,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LaneEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Log.cs">
+      <DependentUpon>LaneEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Measurement.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
@@ -328,6 +332,7 @@
     <Compile Include="Sources\HomeServices.cs" />
     <Compile Include="Sources\JsonNetResults.cs" />
     <Compile Include="Sources\UserServices.cs" />
+    <Compile Include="WebAPI\CustomerController.cs" />
     <Compile Include="WebAPI\CompanyController.cs" />
     <Compile Include="WebAPI\ContactTypesController.cs" />
     <Compile Include="WebAPI\SalesPersonController.cs" />
@@ -422,7 +427,10 @@
     <Content Include="Scripts\Admin\Company.js" />
     <Content Include="Scripts\Admin\SalesPerson.js" />
     <Content Include="Scripts\Admin\TypeMaint.js" />
-    <Content Include="Scripts\vendor\angular-confirm.js" />
+    <Content Include="Scripts\vendor\angular-prompt.js" />
+    <Content Include="Scripts\vendor\angular-prompt.min.js" />
+    <Content Include="Scripts\vendor\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\vendor\angular-ui\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\vendor\angular-ui-ieshiv.js" />
     <Content Include="Scripts\vendor\angular-ui-ieshiv.min.js" />
     <Content Include="Scripts\vendor\angular-ui.js" />
@@ -1213,7 +1221,7 @@
     <Content Include="Scripts\vendor\modernizr-2.6.2.js" />
     <Content Include="Scripts\vendor\npm.js" />
     <Content Include="Scripts\vendor\scrollsaver.js" />
-    <Content Include="Scripts\vendor\ui-grid-unstable.js" />
+    <Content Include="Scripts\vendor\angular-ui\ui-grid-unstable.js" />
     <Content Include="Scripts\vendor\angular.min.js.map" />
     <Content Include="Scripts\vendor\bootstrap.min.js" />
     <Content Include="Scripts\vendor\angular-route.min.js.map" />
@@ -1231,7 +1239,7 @@
     <Content Include="Scripts\vendor\jquery-1.11.1.min.map" />
     <Content Include="Scripts\vendor\jquery.validate.min.js" />
     <Content Include="Scripts\Admin\admin-http.js" />
-    <Content Include="Scripts\vendor\ui-grid-unstable.min.js" />
+    <Content Include="Scripts\vendor\angular-ui\ui-grid-unstable.min.js" />
     <None Include="Scripts\vendor\_references.js" />
     <Content Include="Views\Admin\_StructureTypes.cshtml" />
     <Content Include="Web.config">

@@ -1,5 +1,5 @@
 ﻿(function () {
-    var app = angular.module("AdminService", ['ngTouch', 'ui.grid']);
+    var app = angular.module("AdminService", ['ngTouch', 'ui.grid', 'ui.bootstrap', 'cgPrompt']);
     //app.config(function ($httpProvider) {
     //    $httpProvider.defaults.transformRequest = function (data) {
     //        if (data === undefined) {
