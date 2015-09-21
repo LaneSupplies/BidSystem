@@ -726,6 +726,11 @@ namespace LaneBids.Controllers
             return View();
         }
 
+        public ActionResult Customer()
+        {
+            return View();
+        }
+
         #endregion
 
 

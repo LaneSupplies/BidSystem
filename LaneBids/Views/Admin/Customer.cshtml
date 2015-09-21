@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "AddCustomer";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Customer</h2>
+<br/>
+<div ng-controller="CustomerController">
+    <div class="message-info hide"></div>
+    <div class="message-error" ng-show="error">{{error}}</div>
+    <br/>
+    <button href="#" class="margin-bottom-10" ng-click="addCustomer()">Add Customer</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Customer Region</th>
+                <th>Address</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="customer in customerList">
+                <td>{{customer.Name}}</td>
+                <td>{{customer.AddressLine1}}, {{customer.City}}, {{customer.State}} {{customer.Zip}}</td>
+                <td>
+                    <a href="#" ng-click="editCustomer({{customer}}, $index)">Edit</a>
+                </td>
+                <td>
+                    <a href="#" ng-click="deleteCustomer({{customer}}, $index)">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Add Customer -->
+    <div id="customerModal" class="modal fade" tabindex="-1" role="dialog" ng-model="customer" aria-labelledby="addCustomerLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="addCustomerLabel">Add Customer</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form novalidate>
+                        <div class="divLabel">
+                            <label>Region Name</label>
+                            <input type="text" ng-model="customer.RegionName"/>
+                        </div>
+                        <div class="divLabel">
+                            <label>Address Line 1</label>
+                            <input type="text" ng-model="customer.AddressLine1"/>
+                        </div>
+                        <div class="divLabel">
+                            <label>Address Line 2</label>
+                            <input type="text" ng-model="customer.AddressLine2"/>
+                        </div>
+                        <div class="divLabel">
+                            <label>City</label>
+                            <input type="text" ng-model="customer.City"/>
+                        </div>
+                        <div class="divLabel">
+                            <label>State</label>
+                            <input type="text" ng-model="customer.State"/>
+                        </div>
+                        <div class="divLabel">
+                            <label>Zip</label>
+                            <input type="text" ng-model="customer.Zip"/>
+                        </div>
+                        <div class="divLabel">
+                            <label>Company</label>
+                            <select ng-model="customer.CompanyId" ng-options="company.Value as company.Text for company in companyList"></select>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer button-list">
+                    <button type="button" ng-click="createUpdateCustomer(customer)">Add / Update</button>&nbsp;&nbsp;
+                    <button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/Admin")
+}

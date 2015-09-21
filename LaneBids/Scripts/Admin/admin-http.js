@@ -13,7 +13,9 @@
         var transform = function(data) {
             return $.param(data);
         };
-
+        ////////////////////////
+        // Data Types //////////
+        ////////////////////////
         var getTypeData = function() {
             return $http.get("/Admin/TypeData/")
                 .then(function(response) {
@@ -86,6 +88,10 @@
                 });
         };
 
+
+        /////////////////////////
+        // Sales People /////////
+        /////////////////////////
         var getSalesPeople = function () {
             return $http.get("/api/SalesPerson/")
                 .then(function (response) {
@@ -114,7 +120,10 @@
                     console.log("Finished adding sales person");
                 });
         };
-
+        
+        ////////////////////////
+        // Contacts ///////////
+        ///////////////////////
         var getContacts = function () {
             return $http.get("/api/ContactTypes/")
                 .then(function (response) {
@@ -128,6 +137,9 @@
                 });
         };
 
+        /////////////////////
+        // State List ///////
+        ////////////////////
         var getStateList = function () {
             return $http.get("/api/StateList/")
                 .then(function (response) {
@@ -141,6 +153,9 @@
                 });
         };
 
+        /////////////////////
+        // Companies ////////
+        ////////////////////
         var getCompanies = function () {
             return $http.get("/api/Company/")
                 .then(function (response) {
@@ -199,6 +214,67 @@
                 });
         };
 
+        /////////////////////
+        // Customers ////////
+        ////////////////////
+        var getCustomers = function () {
+            return $http.get("/api/Customer/")
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(function (response) {
+                    console.log("Error getting customers", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished getting custgomers");
+                });
+        };
+
+        var addCustomer = function (data) {
+            return $http.post("/api/Customer/", data, {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                transformRequest: transform
+            })
+                .success(function (response) {
+                    return response;
+                })
+                .catch(function (response) {
+                    console.log("Error adding customer", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished adding customer");
+                });
+        };
+
+        var updateCustomer = function (data) {
+            return $http.put("/api/Customer/" + data.CustomerId, data, {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                transformRequest: transform
+            })
+                .success(function (response) {
+                    return response;
+                })
+                .catch(function (response) {
+                    console.log("Error adding customer", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished adding customer");
+                });
+        };
+
+        var deleteCustomer = function (data) {
+            return $http.delete("/api/Customer/" + data.CustomerId)
+                .success(function (response) {
+                    return response;
+                })
+                .catch(function (response) {
+                    console.log("Error adding company", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished adding company");
+                });
+        };
+
         return {
             getStateList: getStateList,
             getContacts: getContacts,
@@ -212,7 +288,11 @@
             getCompanies: getCompanies,
             addCompany: addCompany,
             updateCompany: updateCompany,
-            deleteCompany: deleteCompany
+            deleteCompany: deleteCompany,
+            getCustomers: getCustomers,
+            addCustomer: addCustomer,
+            updateCustomer: updateCustomer,
+            deleteCustomer: deleteCustomer
         };
     };
 
