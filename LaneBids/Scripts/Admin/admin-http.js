@@ -214,6 +214,19 @@
                 });
         };
 
+        var getCompanyList = function(data) {
+            return $http.get("/api/CompanyList/")
+                .then(function(response) {
+                    return response.data;
+                })
+                .catch(function(response) {
+                    console.log("Error getting company list", response.status, response.data);
+                })
+                .finally(function() {
+                    console.log("Finished getting company list");
+                });
+        }
+
         /////////////////////
         // Customers ////////
         ////////////////////
@@ -275,6 +288,19 @@
                 });
         };
 
+        var getCustomerList = function (data) {
+            return $http.get("/api/CustomerList/")
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(function (response) {
+                    console.log("Error getting customer list", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished getting customer list");
+                });
+        }
+
         return {
             getStateList: getStateList,
             getContacts: getContacts,
@@ -292,7 +318,9 @@
             getCustomers: getCustomers,
             addCustomer: addCustomer,
             updateCustomer: updateCustomer,
-            deleteCustomer: deleteCustomer
+            deleteCustomer: deleteCustomer,
+            getCompanyList: getCompanyList,
+            getCustomerList: getCustomerList
         };
     };
 

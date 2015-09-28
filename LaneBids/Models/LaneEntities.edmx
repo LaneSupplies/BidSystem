@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Activity_Log_ID" />
           </Key>
-          <Property Name="Activity_Log_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Activity_Log_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Computed" />
           <Property Name="Activity_Log_Date" Type="datetime" Nullable="false" />
           <Property Name="User_ID" Type="int" />
           <Property Name="Page" Type="varchar" MaxLength="40" />
@@ -20,7 +20,7 @@
           <Key>
             <PropertyRef Name="Address_ID" />
           </Key>
-          <Property Name="Address_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Address_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Address_Line1" Type="varchar" MaxLength="150" />
           <Property Name="Address_Line2" Type="varchar" MaxLength="150" />
           <Property Name="City" Type="varchar" MaxLength="100" />
@@ -40,7 +40,7 @@
           <Key>
             <PropertyRef Name="Bid_Note_ID" />
           </Key>
-          <Property Name="Bid_Note_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Bid_Note_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Notes" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
@@ -76,7 +76,7 @@
           <Key>
             <PropertyRef Name="Bid_ID" />
           </Key>
-          <Property Name="Bid_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Bid_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Revision_Number" Type="int" Nullable="false" />
           <Property Name="Bid_Code" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Structure_Type_ID" Type="int" Nullable="false" />
@@ -101,7 +101,7 @@
           <Key>
             <PropertyRef Name="Canopy_ID" />
           </Key>
-          <Property Name="Canopy_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Canopy_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Canopy_Code" Type="varchar" MaxLength="10" />
           <Property Name="Quantity" Type="int" />
           <Property Name="Size_Width_Measurement_ID" Type="uniqueidentifier" Nullable="false" />
@@ -176,7 +176,7 @@
           <Key>
             <PropertyRef Name="Column_Spacing_Length_ID" />
           </Key>
-          <Property Name="Column_Spacing_Length_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Column_Spacing_Length_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Canopy_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Measurement_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Sequence" Type="int" Nullable="false" />
@@ -185,7 +185,7 @@
           <Key>
             <PropertyRef Name="Column_Spacing_Width_ID" />
           </Key>
-          <Property Name="Column_Spacing_Width_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Column_Spacing_Width_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Canopy_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Measurement_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Sequence" Type="int" Nullable="false" />
@@ -203,7 +203,7 @@
           <Key>
             <PropertyRef Name="Company_ID" />
           </Key>
-          <Property Name="Company_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Company_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Company_Code" Type="varchar" MaxLength="10" />
           <Property Name="Company_Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -211,7 +211,7 @@
           <Key>
             <PropertyRef Name="Contact_Text_ID" />
           </Key>
-          <Property Name="Contact_Text_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Contact_Text_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Contact_Type_ID" Type="int" Nullable="false" />
           <Property Name="Text" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Created_By" Type="int" />
@@ -230,9 +230,9 @@
           <Key>
             <PropertyRef Name="Customer_ID" />
           </Key>
-          <Property Name="Customer_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Customer_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Company_ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Bid_Code" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Bid_Code" Type="varchar" MaxLength="7" />
           <Property Name="Sales_Code" Type="varchar" MaxLength="7" />
           <Property Name="Company_Region_Name" Type="varchar" MaxLength="100" />
           <Property Name="Address_ID" Type="uniqueidentifier" />
@@ -243,7 +243,7 @@
           <Key>
             <PropertyRef Name="Customer_Contact_ID" />
           </Key>
-          <Property Name="Customer_Contact_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Customer_Contact_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Customer_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="First_Name" Type="varchar" MaxLength="75" />
           <Property Name="Last_Name" Type="varchar" MaxLength="75" />
@@ -304,7 +304,7 @@
           <Key>
             <PropertyRef Name="Image_ID" />
           </Key>
-          <Property Name="Image_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Image_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Image_Path" Type="varchar" MaxLength="100" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
@@ -342,7 +342,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Measurement_ID" />
           </Key>
-          <Property Name="Measurement_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Measurement_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Feet" Type="int" />
           <Property Name="Inches" Type="int" />
           <Property Name="Fractions_ID" Type="int" />
@@ -359,7 +359,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Sales_Person_ID" />
           </Key>
-          <Property Name="Sales_Person_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Sales_Person_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Sales_Person_Code" Type="varchar" MaxLength="5" />
           <Property Name="First_Name" Type="varchar" MaxLength="75" />
           <Property Name="Last_Name" Type="varchar" MaxLength="75" />
@@ -382,7 +382,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Shipping_ID" />
           </Key>
-          <Property Name="Shipping_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Shipping_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" MaxLength="75" />
           <Property Name="Address_ID" Type="uniqueidentifier" />
         </EntityType>
@@ -390,7 +390,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Site_ID" />
           </Key>
-          <Property Name="Site_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Site_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Main_Name" Type="varchar" MaxLength="5" />
           <Property Name="Sub_Name" Type="varchar" MaxLength="5" />
           <Property Name="Main_Name_Prefix" Type="varchar" MaxLength="3" />
@@ -1316,7 +1316,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Activity_Log_ID" />
           </Key>
-          <Property Name="Activity_Log_ID" Type="Guid" Nullable="false" />
+          <Property Name="Activity_Log_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="Activity_Log_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="User_ID" Type="Int32" />
           <Property Name="Page" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
@@ -1327,7 +1327,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Address_ID" />
           </Key>
-          <Property Name="Address_ID" Type="Guid" Nullable="false" />
+          <Property Name="Address_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Address_Line1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Address_Line2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -1351,7 +1351,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Bid_Note_ID" />
           </Key>
-          <Property Name="Bid_Note_ID" Type="Guid" Nullable="false" />
+          <Property Name="Bid_Note_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
@@ -1382,7 +1382,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Bid_ID" />
           </Key>
-          <Property Name="Bid_ID" Type="Guid" Nullable="false" />
+          <Property Name="Bid_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Revision_Number" Type="Int32" Nullable="false" />
           <Property Name="Bid_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Structure_Type_ID" Type="Int32" Nullable="false" />
@@ -1421,7 +1421,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Canopy_ID" />
           </Key>
-          <Property Name="Canopy_ID" Type="Guid" Nullable="false" />
+          <Property Name="Canopy_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Canopy_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="Size_Width_Measurement_ID" Type="Guid" Nullable="false" />
@@ -1522,7 +1522,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Column_Spacing_Length_ID" />
           </Key>
-          <Property Name="Column_Spacing_Length_ID" Type="Guid" Nullable="false" />
+          <Property Name="Column_Spacing_Length_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Canopy_ID" Type="Guid" Nullable="false" />
           <Property Name="Measurement_ID" Type="Guid" Nullable="false" />
           <Property Name="Sequence" Type="Int32" Nullable="false" />
@@ -1533,7 +1533,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Column_Spacing_Width_ID" />
           </Key>
-          <Property Name="Column_Spacing_Width_ID" Type="Guid" Nullable="false" />
+          <Property Name="Column_Spacing_Width_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Canopy_ID" Type="Guid" Nullable="false" />
           <Property Name="Measurement_ID" Type="Guid" Nullable="false" />
           <Property Name="Sequence" Type="Int32" Nullable="false" />
@@ -1554,7 +1554,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Company_ID" />
           </Key>
-          <Property Name="Company_ID" Type="Guid" Nullable="false" />
+          <Property Name="Company_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Company_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Company_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Company_ID_Bids" FromRole="Company" ToRole="Bids" />
@@ -1564,7 +1564,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Contact_Text_ID" />
           </Key>
-          <Property Name="Contact_Text_ID" Type="Guid" Nullable="false" />
+          <Property Name="Contact_Text_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Contact_Type_ID" Type="Int32" Nullable="false" />
           <Property Name="Text" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Created_By" Type="Int32" />
@@ -1587,9 +1587,9 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Customer_ID" />
           </Key>
-          <Property Name="Customer_ID" Type="Guid" Nullable="false" />
+          <Property Name="Customer_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Company_ID" Type="Guid" Nullable="false" />
-          <Property Name="Bid_Code" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bid_Code" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="Sales_Code" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="Company_Region_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Address_ID" Type="Guid" />
@@ -1605,7 +1605,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Customer_Contact_ID" />
           </Key>
-          <Property Name="Customer_Contact_ID" Type="Guid" Nullable="false" />
+          <Property Name="Customer_Contact_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Customer_ID" Type="Guid" Nullable="false" />
           <Property Name="First_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <Property Name="Last_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
@@ -1665,7 +1665,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Image_ID" />
           </Key>
-          <Property Name="Image_ID" Type="Guid" Nullable="false" />
+          <Property Name="Image_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Image_Path" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
@@ -1687,7 +1687,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Measurement_ID" />
           </Key>
-          <Property Name="Measurement_ID" Type="Guid" Nullable="false" />
+          <Property Name="Measurement_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Feet" Type="Int32" />
           <Property Name="Inches" Type="Int32" />
           <Property Name="Fractions_ID" Type="Int32" />
@@ -1711,7 +1711,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Sales_Person_ID" />
           </Key>
-          <Property Name="Sales_Person_ID" Type="Guid" Nullable="false" />
+          <Property Name="Sales_Person_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Sales_Person_Code" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="First_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <Property Name="Last_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
@@ -1738,7 +1738,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Shipping_ID" />
           </Key>
-          <Property Name="Shipping_ID" Type="Guid" Nullable="false" />
+          <Property Name="Shipping_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <Property Name="Address_ID" Type="Guid" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Alternate_Shipping_Info_Bids" FromRole="Shipping_Info" ToRole="Bids" />
@@ -1749,7 +1749,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Site_ID" />
           </Key>
-          <Property Name="Site_ID" Type="Guid" Nullable="false" />
+          <Property Name="Site_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Main_Name" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="Sub_Name" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="Main_Name_Prefix" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />

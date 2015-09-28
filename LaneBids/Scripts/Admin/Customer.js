@@ -93,7 +93,7 @@
 
         };
 
-        adminHttpService.getCompanies().then(onCompanyComplete, onError);
+        adminHttpService.getCompanyList().then(onCompanyComplete, onError);
         adminHttpService.getCustomers().then(onCustomerComplete, onError);
 
     };

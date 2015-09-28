@@ -19,6 +19,5 @@ namespace LaneBids.Models
         public string Zip { get; set; }
         public string CompanyName { get; set; }
         public Guid CompanyId { get; set; }
-        public IEnumerable<Company> CompanyList { get; set; }
     }
 }

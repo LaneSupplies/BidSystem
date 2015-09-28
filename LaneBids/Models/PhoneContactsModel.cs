@@ -11,8 +11,9 @@ namespace LaneBids.Models
         public IEnumerable<PersonContact> Phones { get; set; }
     }
 
-    public class PersonContact { 
+    public class PersonContact {
+        public Guid? ContactId { get; set; }
         public string Number { get; set; }
-        public int Id { get; set; }
+        public int TypeId { get; set; }
     }
 }

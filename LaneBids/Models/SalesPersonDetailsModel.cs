@@ -13,6 +13,7 @@ namespace LaneBids.Models
         public string Code { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public Guid? AddressId { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string City { get; set; }
@@ -21,7 +22,6 @@ namespace LaneBids.Models
         public string Country { get; set; }
         public string Email { get; set; }
         public string AddressString { get; set; }
-        public AddressModel Address { get; set; }
         public PhoneContactsModel PhoneContacts { get; set; }
 
         public IList<SelectListItem> SalesPersonList { get; set; } 

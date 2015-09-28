@@ -31,8 +31,9 @@ namespace LaneBids.WebAPI
                 PhoneContacts = new PhoneContactsModel {
                     Phones = x.Contact_Text.Select(y => new PersonContact
                     {
-                        Id = y.Contact_Type_ID,
-                        Number = y.Text
+                        TypeId = y.Contact_Type_ID,
+                        Number = y.Text,
+                        ContactId = y.Contact_Text_ID
                     }) },
                 Email = x.Email,
             });
@@ -58,7 +59,8 @@ namespace LaneBids.WebAPI
                 {
                     Phones = s.Contact_Text.Select(y => new PersonContact
                     {
-                        Id = y.Contact_Type_ID,
+                        ContactId = y.Contact_Text_ID,
+                        TypeId = y.Contact_Type_ID,
                         Number = y.Text
                     })
                 },

@@ -332,9 +332,11 @@
     <Compile Include="Sources\HomeServices.cs" />
     <Compile Include="Sources\JsonNetResults.cs" />
     <Compile Include="Sources\UserServices.cs" />
+    <Compile Include="WebAPI\CompanyListController.cs" />
     <Compile Include="WebAPI\CustomerController.cs" />
     <Compile Include="WebAPI\CompanyController.cs" />
     <Compile Include="WebAPI\ContactTypesController.cs" />
+    <Compile Include="WebAPI\CustomerListController.cs" />
     <Compile Include="WebAPI\SalesPersonController.cs" />
     <Compile Include="WebAPI\StateListController.cs" />
   </ItemGroup>
