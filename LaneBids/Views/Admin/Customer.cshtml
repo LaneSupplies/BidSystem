@@ -14,15 +14,17 @@
 
     <table>
         <thead>
-            <tr>
-                <th>Customer Region</th>
-                <th>Address</th>
-                <th></th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>Company</th>
+            <th>Customer Region</th>
+            <th>Address</th>
+            <th></th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
             <tr ng-repeat="customer in customerList">
+                <td>{{customer.CompanyName}}</td>
                 <td>{{customer.RegionName}}</td>
                 <td>{{customer.AddressLine1}}, {{customer.City}}, {{customer.State}} {{customer.Zip}}</td>
                 <td>
