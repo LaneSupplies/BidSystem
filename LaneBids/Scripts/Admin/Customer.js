@@ -10,7 +10,25 @@
             $scope.error = "There was an error. Error: " + response;
         };
 
-        
+        //Get Common Lists
+        var onCommonLists = function(data) {
+            $scope.stateList = data.States;
+            $scope.contactTypes = data.ContactTypes;
+            $scope.numContract = { Id: "1" };
+            $scope.customer = {
+                State: data.States[0].Value,
+                CompanyId: $scope.companyList[0].CompanyId,
+                PhoneContacts: {
+                    Phones: [
+                        {
+                            Id: '',
+                            Number: ''
+                        }
+                    ]
+                }
+            }
+        }
+
         //Get Customer List
         var onCustomerComplete = function(data) {
             $scope.customerList = data;
@@ -19,6 +37,7 @@
         //Get Company List
         var onCompanyComplete = function (data) {
             $scope.companyList = data;
+            adminHttpService.getLists().then(onCommonLists, onError);
         }
 
         var onAddCustomerComplete = function (data) {
@@ -93,9 +112,8 @@
 
         };
 
-        adminHttpService.getCompanyList().then(onCompanyComplete, onError);
+        adminHttpService.getCompanies().then(onCompanyComplete, onError);
         adminHttpService.getCustomers().then(onCustomerComplete, onError);
-
     };
 
     app.controller("CustomerController", CustomerController);

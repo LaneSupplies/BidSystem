@@ -29,17 +29,20 @@ namespace LaneBids.Sources
             {
                 foreach (var phoneContact in salesPerson.PhoneContacts.Phones)
                 {
-                    var contact = new Contact_Text
+                    if (phoneContact.Number != null)
                     {
-                        Text = phoneContact.Number,
-                        Contact_Type_ID = phoneContact.TypeId,
-                        Create_Date = DateTime.Now,
-                        Created_By = WebSecurity.CurrentUserId
-                    };
+                        var contact = new Contact_Text
+                        {
+                            Text = phoneContact.Number,
+                            Contact_Type_ID = phoneContact.TypeId,
+                            Create_Date = DateTime.Now,
+                            Created_By = WebSecurity.CurrentUserId
+                        };
 
-                    entities.Contact_Text.Add(contact);
-                    entities.SaveChanges();
-                    contactList.Add(contact);
+                        entities.Contact_Text.Add(contact);
+                        entities.SaveChanges();
+                        contactList.Add(contact);
+                    }
                 }
             }
 

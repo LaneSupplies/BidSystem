@@ -73,7 +73,7 @@
                         </div>
                         <div class="divLabel">
                             <label>State</label>
-                            <select  ng-model="salesPerson.State" ng-options="option.Value as option.Text for option in stateOptions"></select>
+                            <select  ng-model="salesPerson.State" ng-options="option.Value as option.Text for option in stateList"></select>
                         </div>
                         <div class="divLabel">
                             <label>Zip</label>
@@ -83,7 +83,7 @@
                             <table class="clearTable">
                                 <tr ng-repeat="numContract in salesPerson.PhoneContacts.Phones">
                                     <td data-title="Id">
-                                        <select ng-init="numContract.Id = contacts[0].Value" ng-model="numContract.Id" ng-options="contact.Value as contact.Text for contact in contacts"></select>
+                                        <select ng-init="numContract.Id = contacts[0].Value" ng-model="numContract.Id" ng-options="contact.Value as contact.Text for contact in contactTypes"></select>
                                     </td>
                                     <td data-title="Number">
                                         <input type="text" ng-model="numContract.Number"/>

@@ -13,6 +13,23 @@
         var transform = function(data) {
             return $.param(data);
         };
+
+        ///////////////////////////////////
+        // Create Contact Lists ///////////
+        ///////////////////////////////////
+        var getLists = function () {
+            return $http.get("/api/CreateContactLists/")
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(function (response) {
+                    console.log("List Error: ", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished getting lists.");
+                });
+        };
+
         ////////////////////////
         // Data Types //////////
         ////////////////////////
@@ -121,38 +138,6 @@
                 });
         };
         
-        ////////////////////////
-        // Contacts ///////////
-        ///////////////////////
-        var getContacts = function () {
-            return $http.get("/api/ContactTypes/")
-                .then(function (response) {
-                    return response.data;
-                })
-                .catch(function (response) {
-                    console.log("Contact List Error: ", response.status, response.data);
-                })
-                .finally(function () {
-                    console.log("Finished getting contacts.");
-                });
-        };
-
-        /////////////////////
-        // State List ///////
-        ////////////////////
-        var getStateList = function () {
-            return $http.get("/api/StateList/")
-                .then(function (response) {
-                    return response.data;
-                })
-                .catch(function (response) {
-                    console.log("State List Error: ", response.status, response.data);
-                })
-                .finally(function () {
-                    console.log("Finished getting contacts.");
-                });
-        };
-
         /////////////////////
         // Companies ////////
         ////////////////////
@@ -214,18 +199,18 @@
                 });
         };
 
-        var getCompanyList = function(data) {
-            return $http.get("/api/CompanyList/")
-                .then(function(response) {
-                    return response.data;
-                })
-                .catch(function(response) {
-                    console.log("Error getting company list", response.status, response.data);
-                })
-                .finally(function() {
-                    console.log("Finished getting company list");
-                });
-        }
+        //var getCompanyList = function(data) {
+        //    return $http.get("/api/CompanyList/")
+        //        .then(function(response) {
+        //            return response.data;
+        //        })
+        //        .catch(function(response) {
+        //            console.log("Error getting company list", response.status, response.data);
+        //        })
+        //        .finally(function() {
+        //            console.log("Finished getting company list");
+        //        });
+        //}
 
         /////////////////////
         // Customers ////////
@@ -239,7 +224,7 @@
                     console.log("Error getting customers", response.status, response.data);
                 })
                 .finally(function () {
-                    console.log("Finished getting custgomers");
+                    console.log("Finished getting customers");
                 });
         };
 
@@ -288,22 +273,21 @@
                 });
         };
 
-        var getCustomerList = function (data) {
-            return $http.get("/api/CustomerList/")
-                .then(function (response) {
-                    return response.data;
-                })
-                .catch(function (response) {
-                    console.log("Error getting customer list", response.status, response.data);
-                })
-                .finally(function () {
-                    console.log("Finished getting customer list");
-                });
-        }
+        //var getCustomerList = function (data) {
+        //    return $http.get("/api/CustomerList/")
+        //        .then(function (response) {
+        //            return response.data;
+        //        })
+        //        .catch(function (response) {
+        //            console.log("Error getting customer list", response.status, response.data);
+        //        })
+        //        .finally(function () {
+        //            console.log("Finished getting customer list");
+        //        });
+        //}
 
         return {
-            getStateList: getStateList,
-            getContacts: getContacts,
+            getLists: getLists,
             getTypeData: getTypeData,
             editTypeData: editTypeData,
             updateTypeData: updateTypeData,
@@ -318,9 +302,9 @@
             getCustomers: getCustomers,
             addCustomer: addCustomer,
             updateCustomer: updateCustomer,
-            deleteCustomer: deleteCustomer,
-            getCompanyList: getCompanyList,
-            getCustomerList: getCustomerList
+            deleteCustomer: deleteCustomer
+            //getCompanyList: getCompanyList,
+            //getCustomerList: getCustomerList
         };
     };
 

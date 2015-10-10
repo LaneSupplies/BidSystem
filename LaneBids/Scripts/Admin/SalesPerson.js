@@ -26,27 +26,23 @@
             $scope.salesPersonList = data;
         }
 
-        //Get contact list
-        var onContactListComplete = function (data) {
-            $scope.contacts = data;
-            $scope.numContract = { Id: data[0].Value };
-        };
-
-        //Get state list
-        var onStateListComplete = function (data) {
-            $scope.stateOptions = data;
+        //Get Common Lists
+        var onCommonLists = function (data) {
+            $scope.stateList = data.States;
+            $scope.contactTypes = data.ContactTypes;
+            $scope.numContract = { Id: "1" };
             $scope.salesPerson = {
-                State: data[0].Value,
-                PhoneContacts: 
-                    {
-                        Phones: [
+                State: data.States[0].Value,
+                PhoneContacts: {
+                    Phones: [
                         {
                             Id: '',
                             Number: ''
-                        }]
-                    }
-            };
-        };
+                        }
+                    ]
+                }
+            }
+        }
 
         var onAddSalesPersonComplete = function (data) {
             $scope.salesPersonList.push({
@@ -62,8 +58,7 @@
 
         //Add Sales Person
         $scope.addSalesPerson = function () {
-            adminHttpService.getContacts().then(onContactListComplete, onError);
-            adminHttpService.getStateList().then(onStateListComplete, onError);
+            adminHttpService.getLists().then(onCommonLists, onError);
             $('#addSalesPersonLabel').text("Add Sales Person");
             $('#salesPersonModal').modal('show');
         }

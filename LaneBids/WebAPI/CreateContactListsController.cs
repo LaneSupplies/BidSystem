@@ -4,21 +4,28 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
 using LaneBids.Models;
+using LaneBids.Sources;
 
 namespace LaneBids.WebAPI
 {
-    public class CompanyListController : ApiController
+    public class CreateContactListsController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<CompanyModel> Get()
+        public CreateContactListModel Get()
         {
             var entities = new LaneEntities();
-            return entities.Companies.Select(_ => new CompanyModel
+            var contactList = entities.Contact_Types.ToList().Select(s => new SelectListItem
             {
-                CompanyId = _.Company_ID,
-                Name = _.Company_Name
+                Text = s.Name,
+                Value = s.Contact_Type_ID.ToString()
             });
+            return new CreateContactListModel
+            {
+                States = AddressService.States,
+                ContactTypes = contactList
+            };
         }
 
         // GET api/<controller>/5

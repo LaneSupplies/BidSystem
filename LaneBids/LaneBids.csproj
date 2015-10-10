@@ -248,6 +248,7 @@
     <Compile Include="Models\Contact_Types.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CreateContactListModel.cs" />
     <Compile Include="Models\Customer.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
@@ -332,13 +333,11 @@
     <Compile Include="Sources\HomeServices.cs" />
     <Compile Include="Sources\JsonNetResults.cs" />
     <Compile Include="Sources\UserServices.cs" />
-    <Compile Include="WebAPI\CompanyListController.cs" />
     <Compile Include="WebAPI\CustomerController.cs" />
     <Compile Include="WebAPI\CompanyController.cs" />
     <Compile Include="WebAPI\ContactTypesController.cs" />
-    <Compile Include="WebAPI\CustomerListController.cs" />
     <Compile Include="WebAPI\SalesPersonController.cs" />
-    <Compile Include="WebAPI\StateListController.cs" />
+    <Compile Include="WebAPI\CreateContactListsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\angular-ui.css" />

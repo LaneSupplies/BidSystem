@@ -8,7 +8,7 @@ namespace LaneBids.Sources
 {
     public class AddressService
     {
-        public static List<SelectListItem> States = new List<SelectListItem>
+        public static IEnumerable<SelectListItem> States = new List<SelectListItem>
         {
             new SelectListItem {Text = "Alabama", Value = "AL"},
             new SelectListItem {Text = "Alaska", Value = "AK"},
