@@ -1,4 +1,6 @@
 ﻿(function () {
+    var app = angular.module("BidViewer", ['ngTouch']);
+
 
     var bidHttpService = function ($http) {
         var transform = function (data) {
@@ -80,24 +82,31 @@
                 });
         };
 
+        var getSalesPeople = function () {
+            return $http.get("/api/SalesPerson/")
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(function (response) {
+                    console.log("Error adding sales person", response.status, response.data);
+                })
+                .finally(function () {
+                    console.log("Finished adding sales person");
+                });
+        };
+
+
         return {
             getContacts: getContacts,
             getStateList: getStateList,
             addCustomer: addCustomer,
             addSite: addSite,
-            addShippingInfo: addShippingInfo
+            addShippingInfo: addShippingInfo,
+            getSalesPeople: getSalesPeople
         };
     };
 
-    var appHttp = angular.module("BidViewer");
-    appHttp.factory("bidHttpService", bidHttpService);
+    var module = angular.module("BidViewer");
+    module.factory("bidHttpService", bidHttpService);
 
-    //appHttp.config(function ($httpProvider) {
-    //    $httpProvider.defaults.transformRequest = function (data) {
-    //        if (data === undefined) {
-    //            return data;
-    //        }
-    //        return $.param(data);
-    //    }
-    //});
 }());

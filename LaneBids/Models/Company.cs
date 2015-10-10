@@ -18,13 +18,16 @@ namespace LaneBids.Models
         public Company()
         {
             this.Bids = new HashSet<Bid>();
+            this.Customers = new HashSet<Customer>();
         }
     
         public System.Guid Company_ID { get; set; }
         public string Company_Code { get; set; }
-        public string CompanyName { get; set; }
+        public string Company_Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bid> Bids { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Customer> Customers { get; set; }
     }
 }

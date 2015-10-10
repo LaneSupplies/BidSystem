@@ -19,7 +19,7 @@ namespace LaneBids
                 "~/Scripts/vendor/bootstrap.js",
                 "~/Scripts/vendor/angular.js",
                 "~/Scripts/vendor/angular-*",
-                "~/Scripts/vendor/ui-grid-unstable.js"
+                "~/Scripts/vendor/angular-ui/ui-*"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
@@ -31,17 +31,17 @@ namespace LaneBids
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/vendor/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/Admin").Include(
-                "~/Scripts/AdminApps.js",
-                "~/Scripts/admin-http.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/Admin").IncludeDirectory("~/Scripts", "*.js", false));
+            bundles.Add(new ScriptBundle("~/bundles/Admin").IncludeDirectory(
+                "~/Scripts/Admin/", "*.js", false));
 
             bundles.Add(new ScriptBundle("~/bundles/Bid").Include(
-                "~/Scripts/BidApps.js",
-                "~/Scripts/bid-http.js"));
+                "~/Scripts/Home/BidApps.js",
+                "~/Scripts/Home/bid-http.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Canopy").Include(
-                "~/Scripts/CanopyApps.js",
-                "~/Scripts/canopy-http.js"));
+                "~/Scripts/Home/CanopyApps.js",
+                "~/Scripts/Home/canopy-http.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/site.css",

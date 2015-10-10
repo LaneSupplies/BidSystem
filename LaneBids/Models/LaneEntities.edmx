@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Activity_Log_ID" />
           </Key>
-          <Property Name="Activity_Log_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Activity_Log_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Computed" />
           <Property Name="Activity_Log_Date" Type="datetime" Nullable="false" />
           <Property Name="User_ID" Type="int" />
           <Property Name="Page" Type="varchar" MaxLength="40" />
@@ -20,7 +20,7 @@
           <Key>
             <PropertyRef Name="Address_ID" />
           </Key>
-          <Property Name="Address_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Address_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Address_Line1" Type="varchar" MaxLength="150" />
           <Property Name="Address_Line2" Type="varchar" MaxLength="150" />
           <Property Name="City" Type="varchar" MaxLength="100" />
@@ -40,7 +40,7 @@
           <Key>
             <PropertyRef Name="Bid_Note_ID" />
           </Key>
-          <Property Name="Bid_Note_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Bid_Note_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Notes" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
@@ -76,7 +76,7 @@
           <Key>
             <PropertyRef Name="Bid_ID" />
           </Key>
-          <Property Name="Bid_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Bid_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Revision_Number" Type="int" Nullable="false" />
           <Property Name="Bid_Code" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Structure_Type_ID" Type="int" Nullable="false" />
@@ -101,7 +101,7 @@
           <Key>
             <PropertyRef Name="Canopy_ID" />
           </Key>
-          <Property Name="Canopy_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Canopy_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Canopy_Code" Type="varchar" MaxLength="10" />
           <Property Name="Quantity" Type="int" />
           <Property Name="Size_Width_Measurement_ID" Type="uniqueidentifier" Nullable="false" />
@@ -176,7 +176,7 @@
           <Key>
             <PropertyRef Name="Column_Spacing_Length_ID" />
           </Key>
-          <Property Name="Column_Spacing_Length_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Column_Spacing_Length_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Canopy_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Measurement_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Sequence" Type="int" Nullable="false" />
@@ -185,7 +185,7 @@
           <Key>
             <PropertyRef Name="Column_Spacing_Width_ID" />
           </Key>
-          <Property Name="Column_Spacing_Width_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Column_Spacing_Width_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Canopy_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Measurement_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Sequence" Type="int" Nullable="false" />
@@ -203,15 +203,15 @@
           <Key>
             <PropertyRef Name="Company_ID" />
           </Key>
-          <Property Name="Company_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Company_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Company_Code" Type="varchar" MaxLength="10" />
-          <Property Name="CompanyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Company_Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Contact_Text">
           <Key>
             <PropertyRef Name="Contact_Text_ID" />
           </Key>
-          <Property Name="Contact_Text_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Contact_Text_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Contact_Type_ID" Type="int" Nullable="false" />
           <Property Name="Text" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Created_By" Type="int" />
@@ -230,9 +230,9 @@
           <Key>
             <PropertyRef Name="Customer_ID" />
           </Key>
-          <Property Name="Customer_ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Company_ID" Type="int" Nullable="false" />
-          <Property Name="Bid_Code" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Customer_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Company_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Bid_Code" Type="varchar" MaxLength="7" />
           <Property Name="Sales_Code" Type="varchar" MaxLength="7" />
           <Property Name="Company_Region_Name" Type="varchar" MaxLength="100" />
           <Property Name="Address_ID" Type="uniqueidentifier" />
@@ -243,7 +243,7 @@
           <Key>
             <PropertyRef Name="Customer_Contact_ID" />
           </Key>
-          <Property Name="Customer_Contact_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Customer_Contact_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Customer_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="First_Name" Type="varchar" MaxLength="75" />
           <Property Name="Last_Name" Type="varchar" MaxLength="75" />
@@ -304,7 +304,7 @@
           <Key>
             <PropertyRef Name="Image_ID" />
           </Key>
-          <Property Name="Image_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Image_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Image_Path" Type="varchar" MaxLength="100" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
@@ -319,11 +319,30 @@
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Logger" />
+            <PropertyRef Name="Message" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Thread" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Level" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Logger" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="4000" Nullable="false" />
+          <Property Name="Exception" Type="varchar" MaxLength="2000" />
+        </EntityType>
         <EntityType Name="Measurements">
           <Key>
             <PropertyRef Name="Measurement_ID" />
           </Key>
-          <Property Name="Measurement_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Measurement_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Feet" Type="int" />
           <Property Name="Inches" Type="int" />
           <Property Name="Fractions_ID" Type="int" />
@@ -340,10 +359,11 @@
           <Key>
             <PropertyRef Name="Sales_Person_ID" />
           </Key>
-          <Property Name="Sales_Person_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Sales_Person_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Sales_Person_Code" Type="varchar" MaxLength="5" />
           <Property Name="First_Name" Type="varchar" MaxLength="75" />
           <Property Name="Last_Name" Type="varchar" MaxLength="75" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="Address_ID" Type="uniqueidentifier" />
           <Property Name="Created_By" Type="int" />
           <Property Name="Create_Date" Type="datetime" />
@@ -362,7 +382,7 @@
           <Key>
             <PropertyRef Name="Shipping_ID" />
           </Key>
-          <Property Name="Shipping_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Shipping_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" MaxLength="75" />
           <Property Name="Address_ID" Type="uniqueidentifier" />
         </EntityType>
@@ -370,7 +390,7 @@
           <Key>
             <PropertyRef Name="Site_ID" />
           </Key>
-          <Property Name="Site_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Site_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Main_Name" Type="varchar" MaxLength="5" />
           <Property Name="Sub_Name" Type="varchar" MaxLength="5" />
           <Property Name="Main_Name_Prefix" Type="varchar" MaxLength="3" />
@@ -737,6 +757,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Customer_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Company_ID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Company_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Customer_Contact_Bids">
           <End Role="Customer_Contact" Type="Self.Customer_Contact" Multiplicity="1" />
           <End Role="Bids" Type="Self.Bids" Multiplicity="*" />
@@ -1055,6 +1087,17 @@
           <EntitySet Name="Sites" EntityType="Self.Sites" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Structure_Types" EntityType="Self.Structure_Types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Log].[Id] AS [Id], 
+    [Log].[Date] AS [Date], 
+    [Log].[Thread] AS [Thread], 
+    [Log].[Level] AS [Level], 
+    [Log].[Logger] AS [Logger], 
+    [Log].[Message] AS [Message], 
+    [Log].[Exception] AS [Exception]
+    FROM [dbo].[Log] AS [Log]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Alternate_Shipping_Info_Bids" Association="Self.FK_Alternate_Shipping_Info_Bids">
             <End Role="Shipping_Info" EntitySet="Shipping_Info" />
             <End Role="Bids" EntitySet="Bids" />
@@ -1167,6 +1210,10 @@
             <End Role="Addresses" EntitySet="Addresses" />
             <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
+          <AssociationSet Name="FK_Customer_Company" Association="Self.FK_Customer_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
           <AssociationSet Name="FK_Customer_Contact_Bids" Association="Self.FK_Customer_Contact_Bids">
             <End Role="Customer_Contact" EntitySet="Customer_Contact" />
             <End Role="Bids" EntitySet="Bids" />
@@ -1269,7 +1316,7 @@
           <Key>
             <PropertyRef Name="Activity_Log_ID" />
           </Key>
-          <Property Name="Activity_Log_ID" Type="Guid" Nullable="false" />
+          <Property Name="Activity_Log_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="Activity_Log_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="User_ID" Type="Int32" />
           <Property Name="Page" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
@@ -1280,7 +1327,7 @@
           <Key>
             <PropertyRef Name="Address_ID" />
           </Key>
-          <Property Name="Address_ID" Type="Guid" Nullable="false" />
+          <Property Name="Address_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Address_Line1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Address_Line2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -1304,7 +1351,7 @@
           <Key>
             <PropertyRef Name="Bid_Note_ID" />
           </Key>
-          <Property Name="Bid_Note_ID" Type="Guid" Nullable="false" />
+          <Property Name="Bid_Note_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
@@ -1335,7 +1382,7 @@
           <Key>
             <PropertyRef Name="Bid_ID" />
           </Key>
-          <Property Name="Bid_ID" Type="Guid" Nullable="false" />
+          <Property Name="Bid_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Revision_Number" Type="Int32" Nullable="false" />
           <Property Name="Bid_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Structure_Type_ID" Type="Int32" Nullable="false" />
@@ -1374,7 +1421,7 @@
           <Key>
             <PropertyRef Name="Canopy_ID" />
           </Key>
-          <Property Name="Canopy_ID" Type="Guid" Nullable="false" />
+          <Property Name="Canopy_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Canopy_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="Size_Width_Measurement_ID" Type="Guid" Nullable="false" />
@@ -1475,7 +1522,7 @@
           <Key>
             <PropertyRef Name="Column_Spacing_Length_ID" />
           </Key>
-          <Property Name="Column_Spacing_Length_ID" Type="Guid" Nullable="false" />
+          <Property Name="Column_Spacing_Length_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Canopy_ID" Type="Guid" Nullable="false" />
           <Property Name="Measurement_ID" Type="Guid" Nullable="false" />
           <Property Name="Sequence" Type="Int32" Nullable="false" />
@@ -1486,7 +1533,7 @@
           <Key>
             <PropertyRef Name="Column_Spacing_Width_ID" />
           </Key>
-          <Property Name="Column_Spacing_Width_ID" Type="Guid" Nullable="false" />
+          <Property Name="Column_Spacing_Width_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Canopy_ID" Type="Guid" Nullable="false" />
           <Property Name="Measurement_ID" Type="Guid" Nullable="false" />
           <Property Name="Sequence" Type="Int32" Nullable="false" />
@@ -1507,16 +1554,17 @@
           <Key>
             <PropertyRef Name="Company_ID" />
           </Key>
-          <Property Name="Company_ID" Type="Guid" Nullable="false" />
+          <Property Name="Company_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Company_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Company_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Company_ID_Bids" FromRole="Company" ToRole="Bids" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Company" FromRole="Company" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Contact_Text">
           <Key>
             <PropertyRef Name="Contact_Text_ID" />
           </Key>
-          <Property Name="Contact_Text_ID" Type="Guid" Nullable="false" />
+          <Property Name="Contact_Text_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Contact_Type_ID" Type="Int32" Nullable="false" />
           <Property Name="Text" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Created_By" Type="Int32" />
@@ -1539,9 +1587,9 @@
           <Key>
             <PropertyRef Name="Customer_ID" />
           </Key>
-          <Property Name="Customer_ID" Type="Guid" Nullable="false" />
-          <Property Name="Company_ID" Type="Int32" Nullable="false" />
-          <Property Name="Bid_Code" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Customer_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_ID" Type="Guid" Nullable="false" />
+          <Property Name="Bid_Code" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="Sales_Code" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="Company_Region_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Address_ID" Type="Guid" />
@@ -1549,6 +1597,7 @@
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Address" Relationship="Self.FK_Customer_Addresses" FromRole="Customer" ToRole="Addresses" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Bids_Customer" FromRole="Customer" ToRole="Bids" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Customer_Company" FromRole="Customer" ToRole="Company" />
           <NavigationProperty Name="Customer_Contact" Relationship="Self.FK_Customer_Contact_Customer" FromRole="Customer" ToRole="Customer_Contact" />
           <NavigationProperty Name="Contact_Text" Relationship="Self.Customer_Contact_Text" FromRole="Customer" ToRole="Contact_Text" />
         </EntityType>
@@ -1556,7 +1605,7 @@
           <Key>
             <PropertyRef Name="Customer_Contact_ID" />
           </Key>
-          <Property Name="Customer_Contact_ID" Type="Guid" Nullable="false" />
+          <Property Name="Customer_Contact_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Customer_ID" Type="Guid" Nullable="false" />
           <Property Name="First_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <Property Name="Last_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
@@ -1616,7 +1665,7 @@
           <Key>
             <PropertyRef Name="Image_ID" />
           </Key>
-          <Property Name="Image_ID" Type="Guid" Nullable="false" />
+          <Property Name="Image_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Image_Path" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
@@ -1638,7 +1687,7 @@
           <Key>
             <PropertyRef Name="Measurement_ID" />
           </Key>
-          <Property Name="Measurement_ID" Type="Guid" Nullable="false" />
+          <Property Name="Measurement_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Feet" Type="Int32" />
           <Property Name="Inches" Type="Int32" />
           <Property Name="Fractions_ID" Type="Int32" />
@@ -1662,10 +1711,11 @@
           <Key>
             <PropertyRef Name="Sales_Person_ID" />
           </Key>
-          <Property Name="Sales_Person_ID" Type="Guid" Nullable="false" />
+          <Property Name="Sales_Person_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Sales_Person_Code" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="First_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <Property Name="Last_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Address_ID" Type="Guid" />
           <Property Name="Created_By" Type="Int32" />
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
@@ -1688,7 +1738,7 @@
           <Key>
             <PropertyRef Name="Shipping_ID" />
           </Key>
-          <Property Name="Shipping_ID" Type="Guid" Nullable="false" />
+          <Property Name="Shipping_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <Property Name="Address_ID" Type="Guid" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Alternate_Shipping_Info_Bids" FromRole="Shipping_Info" ToRole="Bids" />
@@ -1699,7 +1749,7 @@
           <Key>
             <PropertyRef Name="Site_ID" />
           </Key>
-          <Property Name="Site_ID" Type="Guid" Nullable="false" />
+          <Property Name="Site_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Main_Name" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="Sub_Name" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="Main_Name_Prefix" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
@@ -1732,6 +1782,23 @@
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Logger" />
+            <PropertyRef Name="Message" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Thread" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Logger" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Exception" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Customer_Addresses">
           <End Role="Addresses" Type="Self.Address" Multiplicity="0..1" />
@@ -2237,6 +2304,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Customer_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Company_ID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Company_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Contact_Text_Contact_Types">
           <End Role="Contact_Types" Type="Self.Contact_Types" Multiplicity="1" />
           <End Role="Contact_Text" Type="Self.Contact_Text" Multiplicity="*" />
@@ -2317,6 +2396,7 @@
           <EntitySet Name="Sites" EntityType="Self.Site" />
           <EntitySet Name="Structure_Types" EntityType="Self.Structure_Types" />
           <EntitySet Name="UserLoginProfiles" EntityType="LaneModel.UserLoginProfile" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
           <AssociationSet Name="FK_Customer_Addresses" Association="Self.FK_Customer_Addresses">
             <End Role="Addresses" EntitySet="Addresses" />
             <End Role="Customer" EntitySet="Customers" />
@@ -2484,6 +2564,10 @@
           <AssociationSet Name="FK_Column_Spacing_Widths_Measurements" Association="Self.FK_Column_Spacing_Widths_Measurements">
             <End Role="Measurements" EntitySet="Measurements" />
             <End Role="Column_Spacing_Widths" EntitySet="Column_Spacing_Widths" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Company" Association="Self.FK_Customer_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="FK_Contact_Text_Contact_Types" Association="Self.FK_Contact_Text_Contact_Types">
             <End Role="Contact_Types" EntitySet="Contact_Types" />
@@ -2744,7 +2828,7 @@
               <MappingFragment StoreEntitySet="Company">
                 <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
                 <ScalarProperty Name="Company_Code" ColumnName="Company_Code" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2880,6 +2964,7 @@
                 <ScalarProperty Name="Sales_Person_Code" ColumnName="Sales_Person_Code" />
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
                 <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Address_ID" ColumnName="Address_ID" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />
                 <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
@@ -2941,6 +3026,19 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="LaneModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Thread" ColumnName="Thread" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Logger" ColumnName="Logger" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

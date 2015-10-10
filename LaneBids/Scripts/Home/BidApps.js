@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    var app = angular.module('BidViewer', ['ngTouch']);
+    var app = angular.module('BidViewer');
 
     var bidController = function ($scope, bidHttpService) {
 

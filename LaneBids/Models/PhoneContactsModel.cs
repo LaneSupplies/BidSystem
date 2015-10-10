@@ -8,8 +8,12 @@ namespace LaneBids.Models
 {
     public class PhoneContactsModel
     {
-        public String PhoneNumber { get; set; }
-        public Int32 ContactId { get; set; }
-        public IEnumerable<SelectListItem> ContactTypeList { get; set; } 
+        public IEnumerable<PersonContact> Phones { get; set; }
+    }
+
+    public class PersonContact {
+        public Guid? ContactId { get; set; }
+        public string Number { get; set; }
+        public int TypeId { get; set; }
     }
 }

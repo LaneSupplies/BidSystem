@@ -30,71 +30,7 @@
     </header>
     <br />
     <section id="sectionBody">
-        <div id="leftMenu">
-            <ul id="accordion" class="accordion">
-                <li>
-                    <div class="menu-link"><i class="fa fa-database"></i>Canopy<i class="fa fa-chevron-down"></i></div>
-                    <ul class="menu-submenu">
-                        <li><a href="/Home/Bid/Canopy">Add</a></li>
-                        <li><a href="/Home/BidSearch/Canopy">Change</a></li>
-                        <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
-                        <li><a href="/Home/Bid/Canopy/BidToOrder">Bid-To-Order</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="menu-link"><i class="fa fa-code"></i>Kiosk<i class="fa fa-chevron-down"></i></div>
-                    <ul class="menu-submenu">
-                        <li><a href="/Home/Bid/Kiosk">Add</a></li>
-                        <li><a href="/Home/BidSearch/Kiosk">Change</a></li>
-                        <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
-                        <li><a href="/Home/Bid/Kiosk/BidToOrder">Bid-To-Order</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="menu-link"><i class="fa fa-mobile"></i>CBSS<i class="fa fa-chevron-down"></i></div>
-                    <ul class="menu-submenu">
-                        <li><a href="/Home/Bid/CBSS">Add</a></li>
-                        <li><a href="/Home/BidSearch/CBSS">Change</a></li>
-                        <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
-                        <li><a href="/Home/Bid/CBSS/BidToOrder">Bid-To-Order</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="menu-link"><i class="fa fa-globe"></i>CBAC<i class="fa fa-chevron-down"></i></div>
-                    <ul class="menu-submenu">
-                        <li><a href="/Home/Bid/CBAC">Add</a></li>
-                        <li><a href="/Home/BidSearch/CBAC">Change</a></li>
-                        <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
-                        <li><a href="/Home/Bid/CBAC/BidToOrder">Bid-To-Order</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="menu-link"><i class="fa fa-globe"></i>Misc Other<i class="fa fa-chevron-down"></i></div>
-                    <ul class="menu-submenu">
-                        <li><a href="/Home/Bid/Misc">Add</a></li>
-                        <li><a href="/Home/BidSearch/Misc">Change</a></li>
-                        <li><a href="/Home/BidSearch">Delete / Void / Delete</a></li>
-                        <li><a href="/Home/Bid/Misc/BidToOrder">Bid-To-Order</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <br /><br />
-            @if (User.IsInRole(UserRolesEnum.Admin.ToString()))
-            {
-                <div class="AdminFunctions">
-                    <span class="label">Admin Links</span>
-                    <br />
-                    <ul class="AdminLinks">
-                        <li>
-                            <a href="/Admin/CreateUser">Create New User</a>
-                        </li>
-                        <li>
-                            <a href="/Admin/Maintenance">Admin Maintenance</a>
-                        </li>
-                    </ul>
-                </div>
-            }
-        </div>
+        @Html.Partial("_Menu")
         <div id="divBody">
             @RenderSection("featured", required: false)
             <div class="main-body">

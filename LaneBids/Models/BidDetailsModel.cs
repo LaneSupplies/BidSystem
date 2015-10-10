@@ -67,7 +67,7 @@ namespace LaneBids.Models
         public int CanopyId { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
-        public CustomerDetailsModel AddCustomerInfo { get; set; }
+        public ContactDetailsModel AddContactInfo { get; set; }
         public SiteDetailsModel AddSiteDetails { get; set; }
         public ShippingInfoDetailsModel AddShippingInfoDetails { get; set; }
 

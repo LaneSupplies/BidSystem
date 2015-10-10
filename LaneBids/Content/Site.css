@@ -90,6 +90,9 @@ h5, h6 {
         text-decoration: none;
     }
 
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
 
 /* main layout
 ----------------------------------------------------------*/
@@ -97,25 +100,6 @@ h5, h6 {
     margin: 0 auto;
     height: 60px;
 }
-
-/*section {
-    width: 80%;
-    height: 200px;
-    background: aqua;
-    margin: auto;
-    padding: 10px;
-}
-div#one {
-    width: 15%;
-    height: 200px;
-    background: red;
-    float: left;
-}
-div#two {
-    margin-left: 15%;
-    height: 200px;
-    background: black;
-}*/
 
 /* Table Layout */
 
@@ -162,6 +146,9 @@ table tfoot {
         font-family: monospace;
     }
 
+.clearTable td {
+    border: none;
+}
 
 section#sectionBody {
     height: 600px;
@@ -240,10 +227,6 @@ header .content-wrapper {
         -webkit-transition: all 0.4s ease;
         -o-transition: all 0.4s ease;
         transition: all 0.4s ease;
-    }
-
-    .accordion li:last-child .menu-link {
-        border-bottom: 0;
     }
 
     .accordion li i {
@@ -669,17 +652,20 @@ td button {
 
 .message-error {
     clear: both;
-    color: #e80c4d;
+    background-color: #e80c4d;
+    box-shadow: 5px 5px 5px #888888;
     font-size: 1.1em;
     font-weight: bold;
-    margin: 20px 0 10px 0;
+    margin: 10px 20px;
 }
 
 .message-success {
-    color: #7ac0da;
+    clear: both;
+    background-color: #2f9f09;
+    box-shadow: 5px 5px 5px #888888;
     font-size: 1.3em;
     font-weight: bold;
-    margin: 20px 0 10px 0;
+    margin: 10px 20px;
 }
 
 /* styles for validation helpers */

@@ -25,6 +25,7 @@ namespace LaneBids.Models
         public string Sales_Person_Code { get; set; }
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
+        public string Email { get; set; }
         public Nullable<System.Guid> Address_ID { get; set; }
         public Nullable<int> Created_By { get; set; }
         public Nullable<System.DateTime> Create_Date { get; set; }
