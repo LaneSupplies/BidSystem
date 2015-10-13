@@ -6,118 +6,133 @@
     PageData["NgController"] = "BidController";
 }
 
+<div class="main-body" ng-controller="BidController">
+    <h2>Add Bid</h2>
 
-<h2>Add Bid</h2>
+    @using (Html.BeginForm("Canopy", "Home", FormMethod.Post, new {enctype = "multipart/form-data"}))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
-@using (Html.BeginForm("Canopy", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+        <fieldset ng-init="addDefaultsSelectBidPage()">
+            @Html.HiddenFor(m => m.BidId)
+            @Html.HiddenFor(m => m.CanopyId)
+            <div class="divLabel">
+                <label>Revision Number:</label>
+                @Model.RevisionNumber
+            </div>
 
-    <fieldset ng-init="addDefaultsSelectBidPage()">
-        @Html.HiddenFor(m => m.BidId)
-        @Html.HiddenFor(m => m.CanopyId)
-        <div class="divLabel">
-            <label>Revision Number:</label>
-            @Model.RevisionNumber
-        </div>
+            <div class="divLabel">
+                <label>Structure Type:</label>
+                @Html.DropDownListFor(d => d.StructureId, Model.StructureList)
+                @Html.ValidationMessageFor(v => v.StructureId, null, new {@class = "errorMessage"})
+            </div>
 
-        <div class="divLabel">
-            <label>Structure Type:</label>
-            @Html.DropDownListFor(d => d.StructureId, Model.StructureList)
-            @Html.ValidationMessageFor(v => v.StructureId, null, new { @class = "errorMessage" })
-        </div>
+            <div class="divLabel">
+                <label>Bid Status:</label>
+                @Html.DropDownListFor(model => model.BidStatusId, Model.BidStatusList)
+                @Html.ValidationMessageFor(v => v.BidStatusId, null, new {@class = "errorMessage"})
+            </div>
 
-        <div class="divLabel">
-            <label>Bid Status:</label>
-            @Html.DropDownListFor(model => model.BidStatusId, Model.BidStatusList)
-            @Html.ValidationMessageFor(v => v.BidStatusId, null, new { @class = "errorMessage" })
-        </div>
+            <div class="divLabel">
+                <label>Job Type:</label>
+                @Html.DropDownListFor(model => model.JobTypeId, Model.JobTypeList)
+                @Html.ValidationMessageFor(v => v.JobTypeId, null, new {@class = "errorMessage"})
+            </div>
 
-        <div class="divLabel">
-            <label>Job Type:</label>
-            @Html.DropDownListFor(model => model.JobTypeId, Model.JobTypeList)
-            @Html.ValidationMessageFor(v => v.JobTypeId, null, new { @class = "errorMessage" })
-        </div>
+            <div class="divLabel">
+                <label>Scope Types:</label>
+                @Html.DropDownListFor(model => model.ScopeTypeId, Model.ScopeTypeList)
+                @Html.ValidationMessageFor(v => v.ScopeTypeId, null, new {@class = "errorMessage"})
+            </div>
 
-        <div class="divLabel">
-            <label>Scope Types:</label>
-            @Html.DropDownListFor(model => model.ScopeTypeId, Model.ScopeTypeList)
-            @Html.ValidationMessageFor(v => v.ScopeTypeId, null, new { @class = "errorMessage" })
-        </div>
+            <div class="divLabel">
+                <label>Bid Types:</label>
+                @Html.DropDownListFor(model => model.BidTypeId, Model.BidTypeList)
+                @Html.ValidationMessageFor(v => v.BidTypeId, null, new {@class = "errorMessage"})
+            </div>
 
-        <div class="divLabel">
-            <label>Bid Types:</label>
-            @Html.DropDownListFor(model => model.BidTypeId, Model.BidTypeList)
-            @Html.ValidationMessageFor(v => v.BidTypeId, null, new { @class = "errorMessage" })
-        </div>
+            <div class="divLabel">
+                <label>Company:</label>
+                @Html.DropDownListFor(model => model.CompanyId, Model.CompanyList)
+                @Html.ValidationMessageFor(v => v.CompanyId, null, new {@class = "errorMessage"})
+            </div>
 
-        <div>
-            @Html.Partial("_AddCustomer", Model.AddContactInfo)
-        </div>
+            <div class="divLabel">
+                <label>Company:</label>
+                @Html.DropDownListFor(model => model.CustomerId, Model.CustomerList)
+                @Html.ValidationMessageFor(v => v.CustomerId, null, new { @class = "errorMessage" })
+            </div>
 
-        <div>
-            @Html.Partial("_AddSalesPerson", Model.AddSalesPersonDetails)
-        </div>
+            <div>
+                @Html.Partial("_AddCustomerContact", Model)
+            </div>
 
-        <div>
-            @Html.Partial("_AddSite", Model.AddSiteDetails)
-        </div>
+            <div class="divLabel">
+                <label>Sales Person:</label>
+                @Html.DropDownListFor(model => model.SalesPersonId, Model.SalesPersonList)
+                @Html.ValidationMessageFor(v => v.SalesPersonId, null, new { @class = "errorMessage" })
+            </div>
 
-        <div>
-            @Html.Partial("_AddShippingInfo", Model.AddShippingInfoDetails)
-        </div>
+            <div>
+                @Html.Partial("_AddSite", Model.AddSiteDetails)
+            </div>
 
-        <div class="divLabel">
-            <label>Bid Notes:</label>
-            @Html.TextAreaFor(model => model.BidNotesText)
-        </div>
+            <div>
+                @Html.Partial("_AddShippingInfo", Model.AddShippingInfoDetails)
+            </div>
 
-        <div class="divLabel">
-            <label>Create By:</label>
-            @if (String.IsNullOrEmpty(Model.CreatedBy))
-            {
-                @User.Identity.Name
-            }
-            else
-            {
-                @Model.CreatedBy
-            }
-        </div>
+            <div class="divLabel">
+                <label>Bid Notes:</label>
+                @Html.TextAreaFor(model => model.BidNotesText)
+            </div>
 
-        <div class="divLabel">
-            <label>Last Modfied By:</label>
-            @if (String.IsNullOrEmpty(Model.CreatedBy))
-            {
-                @User.Identity.Name
-            }
-            else
-            {
-                @Model.ModifiedBy
-            }
-        </div>
+            <div class="divLabel">
+                <label>Create By:</label>
+                @if (String.IsNullOrEmpty(Model.CreatedBy))
+                {
+                    @User.Identity.Name
+                }
+                else
+                {
+                    @Model.CreatedBy
+                }
+            </div>
 
-        <br />
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}
-@section Scripts {
-    @Scripts.Render("~/bundles/Bid")
-    @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
-        
-        $(document).ready(function () {
-            setTimeout(function() {
-                $("#contactId option[value='?']").remove();
-                $("#stateId option[value='?']").remove();
-                $("#contactId option[value='1']").attr("selected", true);
-                $("#stateId option[value='1']").attr("selected", true);
-            }, 1000);
+            <div class="divLabel">
+                <label>Last Modfied By:</label>
+                @if (String.IsNullOrEmpty(Model.CreatedBy))
+                {
+                    @User.Identity.Name
+                }
+                else
+                {
+                    @Model.ModifiedBy
+                }
+            </div>
 
-        });
-    
-    </script>
-    
-}
+            <br/>
+            <p>
+                <input type="submit" value="Create"/>
+            </p>
+        </fieldset>
+    }
+</div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/Bid")
+        @Scripts.Render("~/bundles/jqueryval")
+        @*<script type="text/javascript">
+
+            $(document).ready(function () {
+                setTimeout(function () {
+                    $("#contactId option[value='?']").remove();
+                    $("#stateId option[value='?']").remove();
+                    $("#contactId option[value='1']").attr("selected", true);
+                    $("#stateId option[value='1']").attr("selected", true);
+                }, 1000);
+
+            });
+
+        </script>*@
+
+    }

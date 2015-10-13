@@ -71,27 +71,19 @@ namespace LaneBids.Models
         public SiteDetailsModel AddSiteDetails { get; set; }
         public ShippingInfoDetailsModel AddShippingInfoDetails { get; set; }
 
-        public IList<SelectListItem> StructureList { get; set; }
-
-        public IList<SelectListItem> ScopeTypeList { get; set; }
-
-        public IList<SelectListItem> AddressesList { get; set; }
-
-        public IList<SelectListItem> ShippingList { get; set; }
-
-        public IList<SelectListItem> BidStatusList { get; set; }
-
-        public IList<SelectListItem> BidTypeList { get; set; }
-
-        public IList<SelectListItem> JobTypeList { get; set; }
-
-        public IList<SelectListItem> BidNoteList { get; set; }
-        
-        public IList<SelectListItem> SiteList { get; set; }
-
-        public IList<SelectListItem> CompanyList { get; set; }
-
-        public IList<SelectListItem> SalesPersonList { get; set; }
+        public IEnumerable<SelectListItem> ContactTypesList { get; set; }
+        public IEnumerable<SelectListItem> StructureList { get; set; }
+        public IEnumerable<SelectListItem> ScopeTypeList { get; set; }
+        public IEnumerable<SelectListItem> AddressesList { get; set; }
+        public IEnumerable<SelectListItem> ShippingList { get; set; }
+        public IEnumerable<SelectListItem> BidStatusList { get; set; }
+        public IEnumerable<SelectListItem> BidTypeList { get; set; }
+        public IEnumerable<SelectListItem> JobTypeList { get; set; }
+        public IEnumerable<SelectListItem> BidNoteList { get; set; }
+        public IEnumerable<SelectListItem> SiteList { get; set; }
+        public IEnumerable<SelectListItem> CompanyList { get; set; }
+        public IEnumerable<SelectListItem> CustomerList { get; set; }
+        public IEnumerable<SelectListItem> SalesPersonList { get; set; }
 
     }
 }

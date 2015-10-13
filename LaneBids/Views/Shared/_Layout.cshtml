@@ -1,6 +1,6 @@
 ﻿@using LaneBids.Models
 <!DOCTYPE html>
-<html lang="en" ng-app="@PageData["NgApp"]">
+<html lang="en" ng-app="HomeService">
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title - Lane Supplies</title>
@@ -35,9 +35,7 @@
         @Html.Partial("_Menu")
         <div id="divBody">
             @RenderSection("featured", required: false)
-            <div class="main-body" ng-controller="@PageData["NgController"]">
-                @RenderBody()
-            </div>
+            @RenderBody()
         </div>
     </section>
 

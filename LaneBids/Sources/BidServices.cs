@@ -69,10 +69,16 @@ namespace LaneBids.Sources
             }).ToList();
 
             //Contact Types
-            var contactTypeList = _entities.Contact_Types.ToList().Select(s => new SelectListItem
+            bid.ContactTypesList = _entities.Contact_Types.ToList().Select(s => new SelectListItem
             {
                 Value = s.Contact_Type_ID.ToString(),
                 Text = s.Name
+            });
+
+            bid.CustomerList = _entities.Customers.ToList().Select(s => new SelectListItem
+            {
+                Value = s.Customer_ID.ToString(),
+                Text = s.Company_Region_Name
             });
 
             //Company Data

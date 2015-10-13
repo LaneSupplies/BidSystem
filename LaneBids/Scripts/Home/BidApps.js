@@ -1,24 +1,31 @@
 ﻿(function () {
 
-    var app = angular.module('BidViewer');
+    var app = angular.module('HomeService');
 
-    var bidController = function ($scope, bidHttpService) {
+    var bidController = function ($scope, homeHttpService, prompt) {
 
         var onBidError = function (response) {
             $scope.error = "Error getting data.";
         };
 
-        //Get contact list
-        var onContactListComplete = function (data) {
-            $scope.contacts = data;
-            
-        };
-
-        //Get state list
-        var onStateListComplete = function (data) {
-            $scope.stateList = data;
-            
-        };
+        //Get Common Lists
+        var onCommonLists = function (data) {
+            $scope.stateList = data.States;
+            $scope.contacts = data.ContactTypes;
+            $scope.numContract = { Id: "1" };
+            $scope.bid = {
+                State: data.States[0].Value,
+                CompanyId: $scope.companyList[0].CompanyId,
+                PhoneContacts: {
+                    Phones: [
+                        {
+                            Id: '',
+                            Number: ''
+                        }
+                    ]
+                }
+            }
+        }
 
         //Set default dropdowns in bids page
         $scope.addDefaultsSelectBidPage = function() {
@@ -49,7 +56,7 @@
         }
 
         $scope.addCustomer = function(customer) {
-            bidHttpService.addCustomer(customer)
+            homeHttpService.addCustomer(customer)
                 .then(onAddCustomerComplete, onBidError);
         }
 
@@ -66,7 +73,7 @@
         }
 
         $scope.addSite = function (site) {
-            bidHttpService.addSite(site)
+            homeHttpService.addSite(site)
                 .then(onAddSiteComplete, onBidError);
         }
 
@@ -83,7 +90,7 @@
         }
 
         $scope.addShippingInfo = function (site) {
-            bidHttpService.addShippingInfo(site)
+            homeHttpService.addShippingInfo(site)
                 .then(onAddShippingInfoComplete, onBidError);
         }
 
@@ -94,8 +101,7 @@
             $("#divAddShipping").modal("hide");
         };
 
-        bidHttpService.getContacts().then(onContactListComplete, onBidError);
-        bidHttpService.getStateList().then(onStateListComplete, onBidError);
+        homeHttpService.getLists().then(onCommonLists, onBidError);
     };
 
     app.controller("BidController", bidController);
