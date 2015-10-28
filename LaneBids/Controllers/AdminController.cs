@@ -267,7 +267,8 @@ namespace LaneBids.Controllers
         {
             var entities = new LaneEntities();
             var model = new TypeDataModel();
-
+            if (string.IsNullOrEmpty(typeName))
+                return null;
             var type = (TypeDataEnum) Enum.Parse(typeof (TypeDataEnum), typeName);
             var intId = Convert.ToInt32(id);
 
