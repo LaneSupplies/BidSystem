@@ -39,8 +39,8 @@
         </div>
     </section>
 
-    @RenderSection("Scripts", required: false)
 
+    <script src="~/Scripts/Home/home-http.js"></script>
     <script>
         $(function () {
             var Accordion = function (el, multiple) {
@@ -69,6 +69,7 @@
             var accordion = new Accordion($('#accordion'), false);
         });
     </script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
-

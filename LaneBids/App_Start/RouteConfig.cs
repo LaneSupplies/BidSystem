@@ -14,6 +14,17 @@ namespace LaneBids
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+               name: "Home",
+               url: "{controller}/{action}/{type}",
+               defaults: new
+               {
+                   controller = "Home",
+                   action = "Customer",
+                   type = UrlParameter.Optional
+               }
+               );
+
+            routes.MapRoute(
                 name: "MaintenanceEdit",
                 url: "{controller}/{action}/{id}/{typeName}",
                 defaults: new
@@ -24,28 +35,6 @@ namespace LaneBids
                     typeName = UrlParameter.Optional
                 }
                 );
-
-            routes.MapRoute(
-                name: "Maintenance",
-                url: "{controller}/{action}/{type}",
-                defaults: new
-                {
-                    controller = "Admin",
-                    action = "TypeData",
-                    type = UrlParameter.Optional
-                }
-                );
-
-            routes.MapRoute(
-               name: "Home",
-               url: "{controller}/{action}/{type}",
-               defaults: new
-               {
-                   controller = "Home",
-                   action = "Customer",
-                   type = UrlParameter.Optional
-               }
-               );
 
             routes.MapRoute(
                 name: "Default",

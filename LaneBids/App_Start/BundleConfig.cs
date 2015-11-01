@@ -36,12 +36,10 @@ namespace LaneBids
                 "~/Scripts/Admin/", "*.js", false));
 
             bundles.Add(new ScriptBundle("~/bundles/Bid").Include(
-                "~/Scripts/Home/BidApps.js",
-                "~/Scripts/Home/bid-http.js"));
+                "~/Scripts/Home/BidApps.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Canopy").Include(
-                "~/Scripts/Home/CanopyApps.js",
-                "~/Scripts/Home/canopy-http.js"));
+                "~/Scripts/Home/CanopyApps.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/site.css",

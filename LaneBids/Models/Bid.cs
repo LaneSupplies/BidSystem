@@ -28,9 +28,9 @@ namespace LaneBids.Models
         public int Job_Type_ID { get; set; }
         public int Scope_Type_ID { get; set; }
         public int Bid_Type_ID { get; set; }
-        public System.Guid Company_ID { get; set; }
-        public System.Guid Customer_ID { get; set; }
-        public System.Guid Customer_Contact_ID { get; set; }
+        public System.Guid? Company_ID { get; set; }
+        public System.Guid? Customer_ID { get; set; }
+        public System.Guid? Customer_Contact_ID { get; set; }
         public Nullable<System.Guid> Sales_Person_ID { get; set; }
         public Nullable<System.Guid> Site_ID { get; set; }
         public Nullable<System.Guid> Shipping_ID { get; set; }

@@ -24,68 +24,57 @@
 
             <div class="divLabel">
                 <label>Structure Type:</label>
-                @Html.DropDownListFor(d => d.StructureId, Model.StructureList)
+                @Html.DropDownListFor(m => m.StructureId, Model.StructureList)
                 @Html.ValidationMessageFor(v => v.StructureId, null, new {@class = "errorMessage"})
             </div>
 
             <div class="divLabel">
                 <label>Bid Status:</label>
-                @Html.DropDownListFor(model => model.BidStatusId, Model.BidStatusList)
+                @Html.DropDownListFor(m => m.BidStatusId, Model.BidStatusList)
                 @Html.ValidationMessageFor(v => v.BidStatusId, null, new {@class = "errorMessage"})
             </div>
 
             <div class="divLabel">
                 <label>Job Type:</label>
-                @Html.DropDownListFor(model => model.JobTypeId, Model.JobTypeList)
+                @Html.DropDownListFor(m => m.JobTypeId, Model.JobTypeList)
                 @Html.ValidationMessageFor(v => v.JobTypeId, null, new {@class = "errorMessage"})
             </div>
 
             <div class="divLabel">
                 <label>Scope Types:</label>
-                @Html.DropDownListFor(model => model.ScopeTypeId, Model.ScopeTypeList)
+                @Html.DropDownListFor(m => m.ScopeTypeId, Model.ScopeTypeList)
                 @Html.ValidationMessageFor(v => v.ScopeTypeId, null, new {@class = "errorMessage"})
             </div>
 
             <div class="divLabel">
                 <label>Bid Types:</label>
-                @Html.DropDownListFor(model => model.BidTypeId, Model.BidTypeList)
+                @Html.DropDownListFor(m => m.BidTypeId, Model.BidTypeList)
                 @Html.ValidationMessageFor(v => v.BidTypeId, null, new {@class = "errorMessage"})
             </div>
 
             <div class="divLabel">
-                <label>Company:</label>
-                @Html.DropDownListFor(model => model.CompanyId, Model.CompanyList)
+                <label>Customer:</label>
+                @Html.DropDownListFor(m => m.CustomerId, Model.CustomerList)
                 @Html.ValidationMessageFor(v => v.CompanyId, null, new {@class = "errorMessage"})
             </div>
 
-            <div class="divLabel">
-                <label>Company:</label>
-                @Html.DropDownListFor(model => model.CustomerId, Model.CustomerList)
-                @Html.ValidationMessageFor(v => v.CustomerId, null, new { @class = "errorMessage" })
-            </div>
-
-            <div>
-                @Html.Partial("_AddCustomerContact", Model)
-            </div>
-
-            <div class="divLabel">
+            @*<div class="divLabel">
                 <label>Sales Person:</label>
-                @Html.DropDownListFor(model => model.SalesPersonId, Model.SalesPersonList)
+                @Html.DropDownListFor(m => m.SalesPersonId, Model.SalesPersonList)
                 @Html.ValidationMessageFor(v => v.SalesPersonId, null, new { @class = "errorMessage" })
             </div>
 
             <div>
-                
                 @Html.Partial("_AddSite", Model.AddSiteDetails)
             </div>
 
             <div>
                 @Html.Partial("_AddShippingInfo", Model.AddShippingInfoDetails)
-            </div>
+            </div>*@
 
             <div class="divLabel">
                 <label>Bid Notes:</label>
-                @Html.TextAreaFor(model => model.BidNotesText)
+                @Html.TextAreaFor(m => m.BidNotesText)
             </div>
 
             <div class="divLabel">
@@ -122,18 +111,5 @@
     @section Scripts {
         @Scripts.Render("~/bundles/Bid")
         @Scripts.Render("~/bundles/jqueryval")
-        @*<script type="text/javascript">
-
-            $(document).ready(function () {
-                setTimeout(function () {
-                    $("#contactId option[value='?']").remove();
-                    $("#stateId option[value='?']").remove();
-                    $("#contactId option[value='1']").attr("selected", true);
-                    $("#stateId option[value='1']").attr("selected", true);
-                }, 1000);
-
-            });
-
-        </script>*@
 
     }
