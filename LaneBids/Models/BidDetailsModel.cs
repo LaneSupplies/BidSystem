@@ -37,15 +37,15 @@ namespace LaneBids.Models
         public string SelectedScopeTypeName { get; set; }
 
         [Required(ErrorMessage = "You must choose a Company")]
-        public Guid CompanyId { get; set; }
+        public Guid? CompanyId { get; set; }
         public Company Company { get; set; }
 
         [Required(ErrorMessage = "You must choose a Customer")]
-        public Guid CustomerId { get; set; }
+        public Guid? CustomerId { get; set; }
         public Customer Customer { get; set; }
 
         [Required(ErrorMessage = "You must choose a Contact Person")]
-        public Guid CustomerContactId { get; set; }
+        public Guid? CustomerContactId { get; set; }
         public Customer_Contact CustomerContact { get; set; }
 
         [Required(ErrorMessage = "You must choose a Sales Person")]
@@ -71,26 +71,18 @@ namespace LaneBids.Models
         public SiteDetailsModel AddSiteDetails { get; set; }
         public ShippingInfoDetailsModel AddShippingInfoDetails { get; set; }
 
+        public IList<SelectListItem> ContactTypesList { get; set; }
         public IList<SelectListItem> StructureList { get; set; }
-
         public IList<SelectListItem> ScopeTypeList { get; set; }
-
         public IList<SelectListItem> AddressesList { get; set; }
-
         public IList<SelectListItem> ShippingList { get; set; }
-
         public IList<SelectListItem> BidStatusList { get; set; }
-
         public IList<SelectListItem> BidTypeList { get; set; }
-
         public IList<SelectListItem> JobTypeList { get; set; }
-
         public IList<SelectListItem> BidNoteList { get; set; }
-        
         public IList<SelectListItem> SiteList { get; set; }
-
         public IList<SelectListItem> CompanyList { get; set; }
-
+        public IList<SelectListItem> CustomerList { get; set; }
         public IList<SelectListItem> SalesPersonList { get; set; }
 
     }

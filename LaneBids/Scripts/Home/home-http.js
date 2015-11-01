@@ -1,36 +1,26 @@
 ﻿(function () {
-    var app = angular.module("BidViewer", ['ngTouch']);
+    var app = angular.module("HomeService", ['ngTouch', 'ui.grid', 'ui.bootstrap', 'cgPrompt']);
 
 
-    var bidHttpService = function ($http) {
+    var homeHttpService = function ($http) {
         var transform = function (data) {
-            console.log($.param(data));
+            //console.log($.param(data));
             return $.param(data);
         };
 
-        var getContacts = function () {
-            return $http.get("/Home/ContactList/")
+        ///////////////////////////////////
+        // Create Contact Lists ///////////
+        ///////////////////////////////////
+        var getLists = function () {
+            return $http.get("/api/CreateContactLists/")
                 .then(function (response) {
                     return response.data;
                 })
                 .catch(function (response) {
-                    console.log("Contact List Error: ", response.status, response.data);
+                    console.log("List Error: ", response.status, response.data);
                 })
                 .finally(function () {
-                    console.log("Finished getting contacts.");
-                });
-        };
-
-        var getStateList = function () {
-            return $http.get("/Home/StateList/")
-                .then(function (response) {
-                    return response.data;
-                })
-                .catch(function (response) {
-                    console.log("State List Error: ", response.status, response.data);
-                })
-                .finally(function () {
-                    console.log("Finished getting contacts.");
+                    console.log("Finished getting lists.");
                 });
         };
 
@@ -95,18 +85,33 @@
                 });
         };
 
-
+        var createCanopy = function (data) {
+            return $http.post('/Home/InsertCanopy/', data, {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                transformRequest: transform
+            })
+            .success(function (response) {
+                return response.data;
+            })
+            .catch(function (response) {
+                console.log("Error adding canopy", response.status, response.data);
+            })
+            .finally(function () {
+                console.log("Finished adding canopy");
+            });
+        }
+        
         return {
-            getContacts: getContacts,
-            getStateList: getStateList,
+            getLists: getLists,
             addCustomer: addCustomer,
             addSite: addSite,
             addShippingInfo: addShippingInfo,
-            getSalesPeople: getSalesPeople
+            getSalesPeople: getSalesPeople,
+            createCanopy: createCanopy
         };
     };
 
-    var module = angular.module("BidViewer");
-    module.factory("bidHttpService", bidHttpService);
+    var module = angular.module("HomeService");
+    module.factory("homeHttpService", homeHttpService);
 
 }());

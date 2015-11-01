@@ -1,46 +1,47 @@
 ﻿(function () {
 
-    var app = angular.module('BidViewer');
+    var app = angular.module('HomeService');
 
-    var bidController = function ($scope, bidHttpService) {
+    var bidController = function ($scope, homeHttpService, prompt) {
 
         var onBidError = function (response) {
             $scope.error = "Error getting data.";
         };
 
-        //Get contact list
-        var onContactListComplete = function (data) {
-            $scope.contacts = data;
-            
-        };
-
-        //Get state list
-        var onStateListComplete = function (data) {
-            $scope.stateList = data;
-            
-        };
+        //Get Common Lists
+        var onCommonLists = function (data) {
+            $scope.stateList = data.States;
+            $scope.contacts = data.ContactTypes;
+            $scope.numContract = { Id: "1" };
+            $scope.bid = {
+                State: data.States[0].Value,
+                PhoneContacts: {
+                    Phones: [
+                        {
+                            Id: '',
+                            Number: ''
+                        }
+                    ]
+                }
+            }
+            $scope.initialize();
+        }
 
         //Set default dropdowns in bids page
-        $scope.addDefaultsSelectBidPage = function() {
-            var defaultStructureType = "<option value='None' selected > -- Select Structure -- </option>";
-            var defaultBidStatus = "<option value='None' selected > -- Select Status -- </option>";
-            var defaultJobType = "<option value='None' selected > -- Select Job Type -- </option>";
-            var defaultScopeType = "<option value='None' selected > -- Select Scope Type -- </option>";
-            var defaultBidType = "<option value='None' selected > -- Select Bid Type -- </option>";
-            var defaultCustomer = "<option value='None' selected > -- Select Customer -- </option>";
-            var defaultSalesPerson = "<option value='None' selected > -- Select Sales Person -- </option>";
-            var defaultSite = "<option value='None' selected > -- Select Site -- </option>";
-            var defaultShipping = "<option value='None' selected > -- Select Shipping Info -- </option>";
-
-            $("#StructureId").append(defaultStructureType);
-            $("#BidStatusId").append(defaultBidStatus);
-            $("#JobTypeId").append(defaultJobType);
-            $("#ScopeTypeId").append(defaultScopeType);
-            $("#BidTypeId").append(defaultBidType);
-            $("#CustomerId").append(defaultCustomer);
-            $("#SalesPersonId").append(defaultSalesPerson);
-            $("#ShippingId").append(defaultShipping);
-            $("#SiteId").append(defaultSite);
+        $scope.initialize = function () {
+            $('select').each(function () {
+                var selection = $(this);
+                var hasSelection = false;
+                selection.find('option').each(function (index, element) {
+                    if ($(element).is("[selected]")) {
+                        hasSelection = true;
+                        return true;
+                    }
+                });
+                if (!hasSelection) {
+                    selection.val('None').prop('selected', 'selected');
+                }
+            });
         }
 
         //Add Customer
@@ -49,7 +50,7 @@
         }
 
         $scope.addCustomer = function(customer) {
-            bidHttpService.addCustomer(customer)
+            homeHttpService.addCustomer(customer)
                 .then(onAddCustomerComplete, onBidError);
         }
 
@@ -66,7 +67,7 @@
         }
 
         $scope.addSite = function (site) {
-            bidHttpService.addSite(site)
+            homeHttpService.addSite(site)
                 .then(onAddSiteComplete, onBidError);
         }
 
@@ -83,7 +84,7 @@
         }
 
         $scope.addShippingInfo = function (site) {
-            bidHttpService.addShippingInfo(site)
+            homeHttpService.addShippingInfo(site)
                 .then(onAddShippingInfoComplete, onBidError);
         }
 
@@ -94,8 +95,7 @@
             $("#divAddShipping").modal("hide");
         };
 
-        bidHttpService.getContacts().then(onContactListComplete, onBidError);
-        bidHttpService.getStateList().then(onStateListComplete, onBidError);
+        homeHttpService.getLists().then(onCommonLists, onBidError);
     };
 
     app.controller("BidController", bidController);

@@ -437,9 +437,8 @@
     <Content Include="Scripts\vendor\angular-ui-ieshiv.min.js" />
     <Content Include="Scripts\vendor\angular-ui.js" />
     <Content Include="Scripts\vendor\angular-ui.min.js" />
-    <Content Include="Scripts\Home\canopy-http.js" />
     <Content Include="Scripts\Home\CanopyApps.js" />
-    <Content Include="Scripts\Home\bid-http.js" />
+    <Content Include="Scripts\Home\home-http.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-et.js" />
@@ -1296,7 +1295,7 @@
     <Content Include="Views\Admin\_FasciaTypes.cshtml" />
     <Content Include="Views\Admin\_Drainage.cshtml" />
     <Content Include="Views\Home\BidSearch.cshtml" />
-    <Content Include="Views\Home\_AddCustomer.cshtml" />
+    <Content Include="Views\Home\_AddCustomerContact.cshtml" />
     <Content Include="Views\Home\_ContactInfo.cshtml" />
     <Content Include="Views\Home\_Address.cshtml" />
     <Content Include="Views\Shared\_PopUpWindowLayout.cshtml" />
