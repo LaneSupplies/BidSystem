@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Activity_Log_ID" />
           </Key>
-          <Property Name="Activity_Log_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="Activity_Log_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Activity_Log_Date" Type="datetime" Nullable="false" />
           <Property Name="User_ID" Type="int" />
           <Property Name="Page" Type="varchar" MaxLength="40" />
@@ -21,6 +21,7 @@
             <PropertyRef Name="Address_ID" />
           </Key>
           <Property Name="Address_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Company_ID" Type="uniqueidentifier" />
           <Property Name="Address_Line1" Type="varchar" MaxLength="150" />
           <Property Name="Address_Line2" Type="varchar" MaxLength="150" />
           <Property Name="City" Type="varchar" MaxLength="100" />
@@ -101,7 +102,7 @@
           <Key>
             <PropertyRef Name="Canopy_ID" />
           </Key>
-          <Property Name="Canopy_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Canopy_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Canopy_Code" Type="varchar" MaxLength="10" />
           <Property Name="Quantity" Type="int" />
           <Property Name="Size_Width_Measurement_ID" Type="uniqueidentifier" Nullable="false" />
@@ -383,6 +384,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
             <PropertyRef Name="Shipping_ID" />
           </Key>
           <Property Name="Shipping_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Company_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="75" />
           <Property Name="Address_ID" Type="uniqueidentifier" />
         </EntityType>
@@ -391,6 +393,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
             <PropertyRef Name="Site_ID" />
           </Key>
           <Property Name="Site_ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Company_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Main_Name" Type="varchar" MaxLength="5" />
           <Property Name="Sub_Name" Type="varchar" MaxLength="5" />
           <Property Name="Main_Name_Prefix" Type="varchar" MaxLength="3" />
@@ -1021,6 +1024,18 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Sites_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Sites" Type="Self.Sites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Company_ID" />
+            </Principal>
+            <Dependent Role="Sites">
+              <PropertyRef Name="Company_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Special_Shipping_Info_Bids">
           <End Role="Shipping_Info" Type="Self.Shipping_Info" Multiplicity="0..1" />
           <End Role="Bids" Type="Self.Bids" Multiplicity="*" />
@@ -1298,6 +1313,10 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
             <End Role="Sites" EntitySet="Sites" />
             <End Role="Bids" EntitySet="Bids" />
           </AssociationSet>
+          <AssociationSet Name="FK_Sites_Company" Association="Self.FK_Sites_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Sites" EntitySet="Sites" />
+          </AssociationSet>
           <AssociationSet Name="FK_Special_Shipping_Info_Bids" Association="Self.FK_Special_Shipping_Info_Bids">
             <End Role="Shipping_Info" EntitySet="Shipping_Info" />
             <End Role="Bids" EntitySet="Bids" />
@@ -1316,7 +1335,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Activity_Log_ID" />
           </Key>
-          <Property Name="Activity_Log_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Activity_Log_ID" Type="Guid" Nullable="false" />
           <Property Name="Activity_Log_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="User_ID" Type="Int32" />
           <Property Name="Page" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
@@ -1328,6 +1347,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
             <PropertyRef Name="Address_ID" />
           </Key>
           <Property Name="Address_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_ID" Type="Guid" />
           <Property Name="Address_Line1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Address_Line2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -1421,7 +1441,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Key>
             <PropertyRef Name="Canopy_ID" />
           </Key>
-          <Property Name="Canopy_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Canopy_ID" Type="Guid" Nullable="false" />
           <Property Name="Canopy_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="Size_Width_Measurement_ID" Type="Guid" Nullable="false" />
@@ -1559,6 +1579,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Property Name="Company_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Company_ID_Bids" FromRole="Company" ToRole="Bids" />
           <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Company" FromRole="Company" ToRole="Customer" />
+          <NavigationProperty Name="Sites" Relationship="Self.FK_Sites_Company" FromRole="Company" ToRole="Sites" />
         </EntityType>
         <EntityType Name="Contact_Text">
           <Key>
@@ -1739,6 +1760,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
             <PropertyRef Name="Shipping_ID" />
           </Key>
           <Property Name="Shipping_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_ID" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <Property Name="Address_ID" Type="Guid" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Alternate_Shipping_Info_Bids" FromRole="Shipping_Info" ToRole="Bids" />
@@ -1750,6 +1772,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
             <PropertyRef Name="Site_ID" />
           </Key>
           <Property Name="Site_ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_ID" Type="Guid" Nullable="false" />
           <Property Name="Main_Name" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="Sub_Name" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="Main_Name_Prefix" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
@@ -1761,6 +1784,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Address" Relationship="Self.FK_Sites_Addresses" FromRole="Sites" ToRole="Addresses" />
           <NavigationProperty Name="Bids" Relationship="Self.FK_Sites_Bids" FromRole="Sites" ToRole="Bids" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Sites_Company" FromRole="Sites" ToRole="Company" />
         </EntityType>
         <EntityType Name="Structure_Types">
           <Key>
@@ -2316,6 +2340,18 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Sites_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Sites" Type="Self.Site" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Company_ID" />
+            </Principal>
+            <Dependent Role="Sites">
+              <PropertyRef Name="Company_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Contact_Text_Contact_Types">
           <End Role="Contact_Types" Type="Self.Contact_Types" Multiplicity="1" />
           <End Role="Contact_Text" Type="Self.Contact_Text" Multiplicity="*" />
@@ -2395,7 +2431,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <EntitySet Name="Shipping_Info" EntityType="Self.Shipping_Info" />
           <EntitySet Name="Sites" EntityType="Self.Site" />
           <EntitySet Name="Structure_Types" EntityType="Self.Structure_Types" />
-          <EntitySet Name="UserLoginProfiles" EntityType="LaneModel.UserLoginProfile" />
+          <EntitySet Name="UserLoginProfiles1" EntityType="LaneModel.UserLoginProfile" />
           <EntitySet Name="Logs" EntityType="Self.Log" />
           <AssociationSet Name="FK_Customer_Addresses" Association="Self.FK_Customer_Addresses">
             <End Role="Addresses" EntitySet="Addresses" />
@@ -2569,6 +2605,10 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
             <End Role="Company" EntitySet="Companies" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
+          <AssociationSet Name="FK_Sites_Company" Association="Self.FK_Sites_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Sites" EntitySet="Sites" />
+          </AssociationSet>
           <AssociationSet Name="FK_Contact_Text_Contact_Types" Association="Self.FK_Contact_Text_Contact_Types">
             <End Role="Contact_Types" EntitySet="Contact_Types" />
             <End Role="Contact_Text" EntitySet="Contact_Text" />
@@ -2642,6 +2682,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
             <EntityTypeMapping TypeName="LaneModel.Address">
               <MappingFragment StoreEntitySet="Addresses">
                 <ScalarProperty Name="Address_ID" ColumnName="Address_ID" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
                 <ScalarProperty Name="Address_Line1" ColumnName="Address_Line1" />
                 <ScalarProperty Name="Address_Line2" ColumnName="Address_Line2" />
                 <ScalarProperty Name="City" ColumnName="City" />
@@ -2986,6 +3027,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
             <EntityTypeMapping TypeName="LaneModel.Shipping_Info">
               <MappingFragment StoreEntitySet="Shipping_Info">
                 <ScalarProperty Name="Shipping_ID" ColumnName="Shipping_ID" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Address_ID" ColumnName="Address_ID" />
               </MappingFragment>
@@ -2995,6 +3037,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
             <EntityTypeMapping TypeName="LaneModel.Site">
               <MappingFragment StoreEntitySet="Sites">
                 <ScalarProperty Name="Site_ID" ColumnName="Site_ID" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
                 <ScalarProperty Name="Main_Name" ColumnName="Main_Name" />
                 <ScalarProperty Name="Sub_Name" ColumnName="Sub_Name" />
                 <ScalarProperty Name="Main_Name_Prefix" ColumnName="Main_Name_Prefix" />
@@ -3017,7 +3060,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserLoginProfiles">
+          <EntitySetMapping Name="UserLoginProfiles1">
             <EntityTypeMapping TypeName="LaneModel.UserLoginProfile">
               <MappingFragment StoreEntitySet="UserProfile">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />

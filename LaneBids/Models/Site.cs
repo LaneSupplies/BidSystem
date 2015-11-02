@@ -21,6 +21,7 @@ namespace LaneBids.Models
         }
     
         public System.Guid Site_ID { get; set; }
+        public System.Guid Company_ID { get; set; }
         public string Main_Name { get; set; }
         public string Sub_Name { get; set; }
         public string Main_Name_Prefix { get; set; }
@@ -34,5 +35,6 @@ namespace LaneBids.Models
         public virtual Address Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bid> Bids { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

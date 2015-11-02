@@ -19,6 +19,7 @@ namespace LaneBids.Models
         {
             this.Bids = new HashSet<Bid>();
             this.Customers = new HashSet<Customer>();
+            this.Sites = new HashSet<Site>();
         }
     
         public System.Guid Company_ID { get; set; }
@@ -29,5 +30,7 @@ namespace LaneBids.Models
         public virtual ICollection<Bid> Bids { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Site> Sites { get; set; }
     }
 }

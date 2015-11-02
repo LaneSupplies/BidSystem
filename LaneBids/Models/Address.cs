@@ -23,6 +23,7 @@ namespace LaneBids.Models
         }
     
         public System.Guid Address_ID { get; set; }
+        public Nullable<System.Guid> Company_ID { get; set; }
         public string Address_Line1 { get; set; }
         public string Address_Line2 { get; set; }
         public string City { get; set; }
