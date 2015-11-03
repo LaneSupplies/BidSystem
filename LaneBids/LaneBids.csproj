@@ -319,7 +319,7 @@
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TypeEnum.cs" />
-    <Compile Include="Models\UserLoginProfiles.cs">
+    <Compile Include="Models\UserLoginProfile.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserRolesEnum.cs" />

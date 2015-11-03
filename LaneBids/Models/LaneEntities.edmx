@@ -2431,7 +2431,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
           <EntitySet Name="Shipping_Info" EntityType="Self.Shipping_Info" />
           <EntitySet Name="Sites" EntityType="Self.Site" />
           <EntitySet Name="Structure_Types" EntityType="Self.Structure_Types" />
-          <EntitySet Name="UserLoginProfiles1" EntityType="LaneModel.UserLoginProfile" />
+          <EntitySet Name="UserLoginProfile" EntityType="LaneModel.UserLoginProfile" />
           <EntitySet Name="Logs" EntityType="Self.Log" />
           <AssociationSet Name="FK_Customer_Addresses" Association="Self.FK_Customer_Addresses">
             <End Role="Addresses" EntitySet="Addresses" />
@@ -3060,7 +3060,7 @@ warning 6002: The table/view 'Lane.dbo.Log' does not have a primary key defined.
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserLoginProfiles1">
+          <EntitySetMapping Name="UserLoginProfile">
             <EntityTypeMapping TypeName="LaneModel.UserLoginProfile">
               <MappingFragment StoreEntitySet="UserProfile">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />

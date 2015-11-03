@@ -95,7 +95,7 @@ namespace LaneBids.Controllers
         {
             var entities = new LaneEntities();
             var model = new RegisterModel();
-            var user = entities.UserLoginProfiles.FirstOrDefault(x => x.UserId == WebSecurity.CurrentUserId);
+            var user = entities.UserLoginProfile.FirstOrDefault(x => x.UserId == WebSecurity.CurrentUserId);
             model.FirstName = user.FirstName;
             model.LastName = user.LastName;
             model.Email = user.Email;

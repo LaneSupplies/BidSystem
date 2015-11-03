@@ -57,7 +57,7 @@ namespace LaneBids.Models
         public virtual DbSet<Shipping_Info> Shipping_Info { get; set; }
         public virtual DbSet<Site> Sites { get; set; }
         public virtual DbSet<Structure_Types> Structure_Types { get; set; }
-        public virtual DbSet<UserLoginProfile> UserLoginProfiles1 { get; set; }
+        public virtual DbSet<UserLoginProfile> UserLoginProfile { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
     
         public virtual ObjectResult<BidSearch_Result> BidSearch(Nullable<System.Guid> bidId, Nullable<int> structTypeId, Nullable<System.Guid> siteId, Nullable<int> bidStatusId, Nullable<int> jobTypeId)
