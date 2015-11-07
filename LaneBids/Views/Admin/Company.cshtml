@@ -4,18 +4,18 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Company</h2>
+<h2>Corporate ID</h2>
 <br/>
 <div ng-controller="CompanyController">
     <div class="message-info hide"></div>
     <div class="message-error" ng-show="error">{{error}}</div>
     <br/>
-    <button href="#" class="margin-bottom-10" ng-click="addCompany()">Add Company</button>
+    <button href="#" class="margin-bottom-10" ng-click="addCompany()">Add Corporate ID</button>
 
     <table>
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Corporate ID</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -41,13 +41,13 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="addCompanyLabel">Add Company</h4>
+                    <h4 class="modal-title" id="addCompanyLabel">Add Corporate ID</h4>
                 </div>
 
                 <div class="modal-body">
                     <form novalidate>
                         <div class="divLabel">
-                            <label>Company Name</label>
+                            <label>Corporate ID</label>
                             <input type="text" ng-model="company.Name" />
                         </div>
                     </form>

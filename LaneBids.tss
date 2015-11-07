@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArrayOfArrayOfString>
+    <ArrayOfString>
+      <string>C:\inetpub\wwwroot\LaneBids\LaneBids\Views\Admin\Customer.cshtml</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\inetpub\wwwroot\LaneBids\LaneBids\Views\Shared\_Menu.cshtml</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\inetpub\wwwroot\LaneBids\LaneBids\Views\Admin\Company.cshtml</string>
+    </ArrayOfString>
+  </ArrayOfArrayOfString>
+</ArrayOfArrayOfArrayOfString>
