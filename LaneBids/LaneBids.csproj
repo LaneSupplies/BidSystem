@@ -1243,7 +1243,6 @@
     <Content Include="Scripts\Admin\admin-http.js" />
     <Content Include="Scripts\vendor\angular-ui\ui-grid-unstable.min.js" />
     <None Include="Scripts\vendor\_references.js" />
-    <Content Include="Views\Admin\_StructureTypes.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1286,15 +1285,6 @@
     <Content Include="Views\Home\Canopy.cshtml" />
     <Content Include="Views\Home\Bid.cshtml" />
     <Content Include="Views\Admin\Maintenance.cshtml" />
-    <Content Include="Views\Admin\_BidTypes.cshtml" />
-    <Content Include="Views\Admin\_BidStatus.cshtml" />
-    <Content Include="Views\Admin\_JobTypes.cshtml" />
-    <Content Include="Views\Admin\_ScopeTypes.cshtml" />
-    <Content Include="Views\Admin\_ColumnTypes.cshtml" />
-    <Content Include="Views\Admin\_ColumnShapes.cshtml" />
-    <Content Include="Views\Admin\_DeckStyles.cshtml" />
-    <Content Include="Views\Admin\_FasciaTypes.cshtml" />
-    <Content Include="Views\Admin\_Drainage.cshtml" />
     <Content Include="Views\Home\BidSearch.cshtml" />
     <Content Include="Views\Home\_AddCustomer.cshtml" />
     <Content Include="Views\Home\_Address.cshtml" />
