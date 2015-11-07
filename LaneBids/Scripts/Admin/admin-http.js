@@ -18,7 +18,7 @@
         // Create Contact Lists ///////////
         ///////////////////////////////////
         var getLists = function () {
-            return $http.get("/api/CreateContactLists/")
+            return $http.get("/api/CommonLists/")
                 .then(function (response) {
                     return response.data;
                 })

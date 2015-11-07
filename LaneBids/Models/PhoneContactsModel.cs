@@ -12,7 +12,7 @@ namespace LaneBids.Models
     }
 
     public class PersonContact {
-        public Guid? ContactId { get; set; }
+        public Guid? Id { get; set; }
         public string Number { get; set; }
         public int TypeId { get; set; }
     }

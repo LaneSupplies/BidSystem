@@ -10,18 +10,26 @@
             $scope.error = "There was an error. Error: " + response;
         };
 
+        $scope.customer = {};
+        $scope.customer.PhoneContacts = {
+            Phones: [
+                {
+                    TypeId: '',
+                    Number: ''
+                }
+            ]
+        };
+
         //Get Common Lists
         var onCommonLists = function(data) {
             $scope.stateList = data.States;
             $scope.contactTypes = data.ContactTypes;
-            $scope.numContract = { Id: "1" };
+            $scope.numContract = { TypeId: "1" };
             $scope.customer = {
-                State: data.States[0].Value,
-                CompanyId: $scope.companyList[0].CompanyId,
                 PhoneContacts: {
                     Phones: [
                         {
-                            Id: '',
+                            TypeId: '',
                             Number: ''
                         }
                     ]
@@ -89,6 +97,11 @@
             $('#customerModal').modal('show');
         }
 
+        //Add Contact Line
+        $scope.addContact = function () {
+            $scope.customer.PhoneContacts.Phones.push({});
+        }
+
         $scope.deleteCustomer = function(customer, index) {
             prompt({
                 "title": "Delete Customer",
@@ -111,6 +124,12 @@
             });
 
         };
+
+        $scope.showOther = function (ev) {
+            if (ev === "other") {
+                $(".other").toggle();
+            }
+        }
 
         adminHttpService.getCompanies().then(onCompanyComplete, onError);
         adminHttpService.getCustomers().then(onCustomerComplete, onError);

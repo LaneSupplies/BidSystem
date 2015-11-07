@@ -16,7 +16,7 @@
         <thead>
         <tr>
             <th>Company</th>
-            <th>Customer Region</th>
+            <th>Name</th>
             <th>Address</th>
             <th></th>
             <th></th>
@@ -51,20 +51,20 @@
                 <div class="modal-body">
                     <form novalidate>
                         <div class="divLabel">
-                            <label>Region Name</label>
-                            <input type="text" ng-model="customer.RegionName"/>
+                            <label>Name</label>
+                            <input type="text" ng-model="customer.RegionName" />
                         </div>
                         <div class="divLabel">
                             <label>Address Line 1</label>
-                            <input type="text" ng-model="customer.AddressLine1"/>
+                            <input type="text" ng-model="customer.AddressLine1" />
                         </div>
                         <div class="divLabel">
                             <label>Address Line 2</label>
-                            <input type="text" ng-model="customer.AddressLine2"/>
+                            <input type="text" ng-model="customer.AddressLine2" />
                         </div>
                         <div class="divLabel">
                             <label>City</label>
-                            <input type="text" ng-model="customer.City"/>
+                            <input type="text" ng-model="customer.City" />
                         </div>
                         <div class="divLabel">
                             <label>State</label>
@@ -72,17 +72,25 @@
                         </div>
                         <div class="divLabel">
                             <label>Zip</label>
-                            <input type="text" ng-model="customer.Zip"/>
+                            <input type="text" ng-model="customer.Zip" />
                         </div>
                         <div class="divLabel">
                             <label>Company</label>
-                            <select ng-model="customer.CompanyId" ng-options="company.CompanyId as company.Name for company in companyList"></select>
+                            <select ng-model="customer.CompanyId" ng-change="showOther(customer.CompanyId)">
+                                <option ng-repeat="company in companyList">{{company.Name}}</option>
+                                <option value="other">Other</option>
+                            </select>
                         </div>
+                        <div class="divLabel other hide">
+                            <label>Company Name</label>
+                            <input type="text" ng-model="customer.CompanyName"/>
+                        </div>
+
                         <div class="divLabel">
                             <table class="clearTable">
                                 <tr ng-repeat="numContract in customer.PhoneContacts.Phones">
-                                    <td data-title="Id">
-                                        <select ng-init="numContract.Id = contacts[0].Value" ng-model="numContract.Id" ng-options="contact.Value as contact.Text for contact in contactTypes"></select>
+                                    <td data-title="TypeId">
+                                        <select ng-model="numContract.TypeId" ng-options="contact.Value as contact.Text for contact in contactTypes"></select>
                                     </td>
                                     <td data-title="Number">
                                         <input type="text" ng-model="customer.Number" />

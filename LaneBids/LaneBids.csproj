@@ -248,7 +248,7 @@
     <Compile Include="Models\Contact_Types.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CreateContactListModel.cs" />
+    <Compile Include="Models\CommonListModel.cs" />
     <Compile Include="Models\Customer.cs">
       <DependentUpon>LaneEntities.tt</DependentUpon>
     </Compile>
@@ -337,7 +337,7 @@
     <Compile Include="WebAPI\CompanyController.cs" />
     <Compile Include="WebAPI\ContactTypesController.cs" />
     <Compile Include="WebAPI\SalesPersonController.cs" />
-    <Compile Include="WebAPI\CreateContactListsController.cs" />
+    <Compile Include="WebAPI\CommonListsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\angular-ui.css" />
@@ -1297,7 +1297,6 @@
     <Content Include="Views\Admin\_Drainage.cshtml" />
     <Content Include="Views\Home\BidSearch.cshtml" />
     <Content Include="Views\Home\_AddCustomer.cshtml" />
-    <Content Include="Views\Home\_ContactInfo.cshtml" />
     <Content Include="Views\Home\_Address.cshtml" />
     <Content Include="Views\Shared\_PopUpWindowLayout.cshtml" />
     <Content Include="Views\Home\_AddSite.cshtml" />

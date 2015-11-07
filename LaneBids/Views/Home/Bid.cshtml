@@ -53,14 +53,6 @@
         </div>
 
         <div>
-            @Html.Partial("_AddCustomer", Model.AddContactInfo)
-        </div>
-
-        <div>
-            @Html.Partial("_AddSalesPerson", Model.AddSalesPersonDetails)
-        </div>
-
-        <div>
             @Html.Partial("_AddSite", Model.AddSiteDetails)
         </div>
 
@@ -106,18 +98,4 @@
 @section Scripts {
     @Scripts.Render("~/bundles/Bid")
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
-        
-        $(document).ready(function () {
-            setTimeout(function() {
-                $("#contactId option[value='?']").remove();
-                $("#stateId option[value='?']").remove();
-                $("#contactId option[value='1']").attr("selected", true);
-                $("#stateId option[value='1']").attr("selected", true);
-            }, 1000);
-
-        });
-    
-    </script>
-    
 }

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace LaneBids.Models
 {
-    public class CreateContactListModel
+    public class CommonListModel
     {
         public IEnumerable<SelectListItem> States { get; set; }
         public IEnumerable<SelectListItem> ContactTypes { get; set; }

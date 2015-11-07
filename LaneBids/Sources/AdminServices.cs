@@ -88,10 +88,10 @@ namespace LaneBids.Sources
                 var contactList = salPern.Contact_Text.ToList();
                 foreach (var phoneContact in salesPerson.PhoneContacts.Phones)
                 {
-                    if (phoneContact.ContactId != null)
+                    if (phoneContact.Id != null)
                     {
                         var updateContact =
-                            entities.Contact_Text.FirstOrDefault(_ => _.Contact_Text_ID == phoneContact.ContactId);
+                            entities.Contact_Text.FirstOrDefault(_ => _.Contact_Text_ID == phoneContact.Id);
                         if (updateContact != null)
                         {
                             updateContact.Contact_Type_ID = phoneContact.TypeId;
@@ -161,6 +161,19 @@ namespace LaneBids.Sources
 
             entities.Addresses.Add(newAddress);
             entities.SaveChanges();
+
+
+            if (!string.IsNullOrEmpty(customer.CompanyName))
+            {
+                var company = new Company
+                {
+                    Company_Name = customer.CompanyName
+                };
+
+                entities.Companies.Add(company);
+                entities.SaveChanges();
+                customer.CompanyId = company.Company_ID;
+            }
 
             var newCustomer = new Customer
             {

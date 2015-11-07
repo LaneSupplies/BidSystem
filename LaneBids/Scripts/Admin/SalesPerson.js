@@ -15,7 +15,7 @@
         $scope.salesPerson.PhoneContacts = {
             Phones: [
                 {
-                    Id: '',
+                    TypeId: '',
                     Number: ''
                 }
             ]
@@ -30,13 +30,12 @@
         var onCommonLists = function (data) {
             $scope.stateList = data.States;
             $scope.contactTypes = data.ContactTypes;
-            $scope.numContract = { Id: "1" };
+            $scope.numContract = { TypeId: "1" };
             $scope.salesPerson = {
-                State: data.States[0].Value,
                 PhoneContacts: {
                     Phones: [
                         {
-                            Id: '',
+                            TypeId: '',
                             Number: ''
                         }
                     ]

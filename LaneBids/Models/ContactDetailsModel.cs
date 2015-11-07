@@ -19,8 +19,6 @@ namespace LaneBids.Models
         public string State { get; set; }
         public string Zip { get; set; }
         public string Country { get; set; }
-        public string PhoneNumber { get; set; }
-        public Int32 ContactId { get; set; }
 
         public AddressModel Address { get; set; }
         public PhoneContactsModel PhoneContacts { get; set; }
